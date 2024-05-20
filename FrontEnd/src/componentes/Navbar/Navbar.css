@@ -1,0 +1,23 @@
+.navbar-centrado{
+    display: flex;
+    justify-content: center;
+}
+.boton-reserva{
+    color: black;
+    border-color: violet;
+    --bs-btn-color: #a7249c;
+    --bs-btn-border-color: #a7249c;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #a7249c;
+    --bs-btn-hover-border-color: #a7249c;
+    --bs-btn-focus-shadow-rgb: 25, 135, 84;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #a7249c;
+    --bs-btn-active-border-color: #a7249c;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #a7249c;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #a7249c;
+    --bs-gradient: none;
+}
+
