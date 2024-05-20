@@ -1,25 +1,73 @@
 .background {
-    background-image: url('../../assets/images/fondo.png'); 
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
+   background-color: #FCEBF2;
     width: 100vw;
     height: 100vh; 
     display: flex;
-    justify-content: center;
+    
+    justify-content: left;
     align-items: center;
+    overflow-y: scroll;
+    
+  }
+.Frase-background{
+  margin-left: 10%;
+  
+}
+  .prueba{
+    height: 100px;
+    width: 100px;
+    background-color: red;
   }
 
 
 
 
+
+
+.herr-von-muellerhoff-regular {
+  font-family: "Herr Von Muellerhoff", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+
   
-  .Frase-background{
-    text-align: center;
+  .Frase-background h1{
+    text-align: left;
+    justify-content: left;
+    color: rgb(0, 0, 0);
+    height: auto;
+    font-size: 80px;
+    font-family: "Playfair Display", serif;
+  }
+  .Frase-background h2{
+    text-align: left;
+    justify-content: left;
+    color: #E9AF4A;
+    height: auto;
+    font-size: 80px;
+    font-family: "Herr Von Muellerhoff", cursive;
+
+  }
+
+
+
+  
+  .Frase-background p {
+    color: rgb(0, 0, 0);
+    font-size: 20px;
     margin-bottom: 10%;
-    color: white;
-    font-size: 60px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Urbanist", sans-serif;
+
   }
 
+  .containergoblal{
+    display: block;
+    margin-left: 2%;  
+    margin-bottom: 7%;
   
+  }
+  .prueba{
+    color: red;
+  }

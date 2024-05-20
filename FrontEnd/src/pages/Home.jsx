@@ -6,9 +6,10 @@ export const Home = () => {
 
   return (
     <>
-    <div>
-        hola home
-    </div>
+      <div>
+        <Navbar></Navbar>
+        <Background></Background>
+      </div>
 
     </>
   );

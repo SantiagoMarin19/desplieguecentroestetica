@@ -1,7 +1,10 @@
 .navbar-centrado{
     display: flex;
     justify-content: center;
+    
+
 }
+
 .boton-reserva{
     color: black;
     border-color: violet;
@@ -20,4 +23,5 @@
     --bs-btn-disabled-border-color: #a7249c;
     --bs-gradient: none;
 }
+
 
