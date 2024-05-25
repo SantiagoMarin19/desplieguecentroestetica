@@ -1,10 +1,19 @@
 body{
-    background-color: #FCEBF2;
+    background-color: beige;
+    margin: 0 auto;
     padding: 0 auto;
-    width: 0 auto;
 }
 
+.contenedor{
+    width: 100%;
+    background-color: azure;
+}
 
-.all{
-    
+button{
+    background-color: transparent;
+    border-color: transparent;
+    column-gap: 3em;
+    columns: 3;
+    text-align: justify;
+
 }
