@@ -11,9 +11,9 @@ export const Home = () => {
     <>
    <Promociones></Promociones>
         <Navbar></Navbar>
-       
+
         <Background></Background>
-     
+        
 
     </>
   );

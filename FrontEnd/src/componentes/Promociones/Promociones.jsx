@@ -6,8 +6,8 @@ import "./Promociones.css";
 export const Promociones = () => {
     return (
 
-        <div className='Promociones'>
-          COMBO DEL MES :CEJAS MAS LIFTING DE  PESTAÑA
+        <div className='Promociones'><marquee><b>COMBO DEL MES: CEJAS MAS, LIFTING DE  PESTAÑA</b></marquee>
+          
         </div>
     );
 }

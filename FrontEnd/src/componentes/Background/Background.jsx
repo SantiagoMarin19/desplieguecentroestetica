@@ -43,7 +43,11 @@ export const Background = () => {
 
 
 
-
+<div className='acercade'>
+En <b>Natalia Salazar</b>, creemos que realzar tu mirada y tu sonrisa es el secreto para sentirte más bella y segura de ti misma. 
+Nuestros tratamientos destán diseñados para resaltar tu mirada, definir tus rasgos y dejar que tu sonrisa resplandezca. 
+Déjate consentir en nuestro oasis de belleza y encuentra tu resplandor interior.
+</div>
 
             </div>
             <div className='prueba' > </div>
