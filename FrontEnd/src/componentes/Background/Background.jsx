@@ -1,6 +1,11 @@
 import React from 'react';
 import './Background.css';
 import imagenrostro from "../../assets/images/fondo.png";
+import imagencompleta from "../../assets/images/completo.png";
+import imagencejas from "../../assets/images/cejas.png";
+import imagenlifting from "../../assets/images/lifting.png";
+import imagenmaquillaje from "../../assets/images/maquillaje.png";
+import imagenlifcejas from "../../assets/images/pestañas.png"
 
 export const Background = () => {
     return (
@@ -30,7 +35,7 @@ export const Background = () => {
 
 
                     <div className='foto'>
-                        <img className="img-rostro" src={imagenrostro} />
+                    <img className="img-rostro" src={imagenrostro} />
                     </div>
 
                     <i class='bx bxl-instagram-alt icono_grande'> </i>
@@ -50,8 +55,22 @@ Déjate consentir en nuestro oasis de belleza y encuentra tu resplandor interior
 </div>
 
             </div>
-            <div className='prueba' > </div>
-
+            <div className='fraseservicios'>
+                <strong>Renueva tu bienestar, descubre tu belleza</strong></div>
+                <div className='imgservices'>
+                <img className="img-completa" src={imagencompleta} />
+                <div className='todoimg'>
+                <div className='oa'>
+                <img className="img-cejas" src={imagencejas} />
+                <img className="img-maquillaje" src={imagenmaquillaje} />
+                </div>
+                <div className='oaa'>
+                <img className="img-lifting" src={imagenlifting} />
+                <img className="img-lifcejas" src={imagenlifcejas} />
+                </div>
+                </div>
+                </div>
+                
             <div className="background">
                 <div className='containergoblal'>
                     <div className='Frase-background'>

@@ -15,12 +15,6 @@
 
 }
 
-.prueba {
-  height: 100px;
-  width: 100px;
-  background-color: red;
-}
-
 .img-rostro {
   width: 100vh;
   height: auto;
@@ -118,9 +112,7 @@
   font-size: 2em;
 
 }
-.prueba {
-  color: red;
-}
+
 
 .acercade {
   font-family: "Urbanist", sans-serif;
@@ -129,4 +121,45 @@
   margin-bottom: 5%;
   margin-left: 25%;
   margin-right: 25%;
+  text-align: justify;
+}
+
+
+.imgservices {
+  display: flex;
+  justify-content: center;
+}
+
+.img-completa {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.img-cejas{
+  margin: 5px;
+}
+
+.img-lifting{
+  margin: 5px;
+}
+
+.img-maquillaje{
+  margin: 5px;
+  border-top-right-radius: 20px;
+}
+
+.img-lifcejas{
+  margin: 5px;
+  border-bottom-right-radius: 20px;
+}
+
+.fraseservicios {
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-size: 30px;
+  margin-top: 5%;
+  margin-bottom: 3%;
+  margin-left: 25%;
+  margin-right: 25%;
+  color: #422A3C;
 }
