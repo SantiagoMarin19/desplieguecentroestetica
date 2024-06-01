@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Background.css';
-import imagenrostro from "../../assets/images/fondo.png";
+
 
 export const Background = () => {
+
+
     return (
 
         <div className='conteinergeneral'>
@@ -21,8 +23,10 @@ export const Background = () => {
                             </h1>
                         </div>
                         <div className='Frase-background' >
-                            <p> ¡Haz de tu peinado una parte importante para la expresión de tu identidad! <br></br>
-                                ¡Nuestros peluqueros autorizados se asegurarán de que obtengas el estilo exacto que deseas!</p>
+                            <p> En nuestro centro de estética facial, te invitamos a descubrir una experiencia
+                                 única donde tu rostro se convierte en lienzo y nuestras manos expertas en pinceles. <br></br>
+                                Con dedicación y profesionalismo, nuestro equipo de especialistas en cuidado facial 
+                                está comprometido en resaltar tu belleza natural, en cada línea, en cada gesto. .</p>
 
                         </div>
                         <button type="button" class="btn btn-primary boton">AGENDAR  AHORA</button>
@@ -30,11 +34,9 @@ export const Background = () => {
 
 
                     <div className='foto'>
-                        <img className="img-rostro" src={imagenrostro} />
                     </div>
 
-                    <i class='bx bxl-instagram-alt icono_grande'> </i>
-                    <i class='bx bxl-facebook-circle icono_grande' > </i>
+                
                 </div>
 
 
