@@ -1,0 +1,67 @@
+body{
+    background-color: #ffffff;
+    margin: 0 auto;
+    padding: 0;
+    justify-content: center;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+ }
+
+ .banner{
+    background-color: #FCEBF2;
+    width: 100%;
+    padding: 4rem;
+    display: grid;
+    justify-items: center
+}
+
+.titulo{
+    width: 30%;
+    text-align: center;
+}
+
+.titulo_conten h3{
+    margin-left: 50px;
+    margin-top: 10px;
+    height: 20px;
+    font-size: 23px;
+    font-weight: 700;
+    }
+
+.titulo h1{
+    margin: 10px;
+}
+
+.titulo h2 {
+    color: #422A3C;
+    font-weight: 700;
+}
+
+.informacion{
+    color: #422A3C;
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    width: 45%;
+    text-align: center;
+}
+
+ .politicas{
+    width: 100%;
+    text-align: justify;
+ }
+
+li{
+    list-style-type:symbols();
+    color:#C98695;
+}
+
+.contenido_info{
+    width: 60%;
+    margin: 5%;
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+}
