@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Background.css';
-
+import imagenrostro from "../../assets/images/fondo.png";
 
 export const Background = () => {
 
@@ -34,6 +34,7 @@ export const Background = () => {
 
 
                     <div className='foto'>
+                        <img className="img-rostro" src={imagenrostro} />
                     </div>
 
                 
@@ -52,8 +53,22 @@ Déjate consentir en nuestro oasis de belleza y encuentra tu resplandor interior
 </div>
 
             </div>
-            <div className='prueba' > </div>
-
+            <div className='fraseservicios'>
+                <strong>Renueva tu bienestar, descubre tu belleza</strong></div>
+                <div className='imgservices'>
+                <img className="img-completa" src={imagencompleta} />
+                <div className='todoimg'>
+                <div className='oa'>
+                <img className="img-cejas" src={imagencejas} />
+                <img className="img-maquillaje" src={imagenmaquillaje} />
+                </div>
+                <div className='oaa'>
+                <img className="img-lifting" src={imagenlifting} />
+                <img className="img-lifcejas" src={imagenlifcejas} />
+                </div>
+                </div>
+                </div>
+                
             <div className="background">
                 <div className='containergoblal'>
                     <div className='Frase-background'>
