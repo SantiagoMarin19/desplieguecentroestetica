@@ -163,3 +163,20 @@
   margin-right: 25%;
   color: #422A3C;
 }
+
+.btn-servicios {
+background-color: transparent;
+padding-right: 50px;
+padding-left: 50px;
+border-radius: 2px;
+border-color: black;
+border-width: thin;
+font-size: 20px;
+font-family: 'Urbanist';
+}
+
+.redirigirserv {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}

@@ -35,7 +35,7 @@ export const Background = () => {
 
 
                     <div className='foto'>
-                    <img className="img-rostro" src={imagenrostro} />
+                        <img className="img-rostro" src={imagenrostro} />
                     </div>
 
                     <i class='bx bxl-instagram-alt icono_grande'> </i>
@@ -48,29 +48,30 @@ export const Background = () => {
 
 
 
-<div className='acercade'>
-En <b>Natalia Salazar</b>, creemos que realzar tu mirada y tu sonrisa es el secreto para sentirte más bella y segura de ti misma. 
-Nuestros tratamientos destán diseñados para resaltar tu mirada, definir tus rasgos y dejar que tu sonrisa resplandezca. 
-Déjate consentir en nuestro oasis de belleza y encuentra tu resplandor interior.
-</div>
+                <div className='acercade'>
+                    En <b>Natalia Salazar</b>, creemos que realzar tu mirada y tu sonrisa es el secreto para sentirte más bella y segura de ti misma.
+                    Nuestros tratamientos destán diseñados para resaltar tu mirada, definir tus rasgos y dejar que tu sonrisa resplandezca.
+                    Déjate consentir en nuestro oasis de belleza y encuentra tu resplandor interior.
+                </div>
 
             </div>
             <div className='fraseservicios'>
                 <strong>Renueva tu bienestar, descubre tu belleza</strong></div>
-                <div className='imgservices'>
+            <div className='imgservices'>
                 <img className="img-completa" src={imagencompleta} />
+
                 <div className='todoimg'>
-                <div className='oa'>
-                <img className="img-cejas" src={imagencejas} />
-                <img className="img-maquillaje" src={imagenmaquillaje} />
+                    <img className="img-cejas" src={imagencejas} />
+                    <img className="img-maquillaje" src={imagenmaquillaje} />
+                    <img className="img-lifting" src={imagenlifting} />
+                    <img className="img-lifcejas" src={imagenlifcejas} />
                 </div>
-                <div className='oaa'>
-                <img className="img-lifting" src={imagenlifting} />
-                <img className="img-lifcejas" src={imagenlifcejas} />
-                </div>
-                </div>
-                </div>
-                
+            </div>
+            <div className='redirigirserv'>
+                <button type="button" class="btn-servicios">
+                    SERVICIOS
+                </button>
+            </div>
             <div className="background">
                 <div className='containergoblal'>
                     <div className='Frase-background'>
