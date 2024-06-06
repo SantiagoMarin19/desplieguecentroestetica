@@ -1,12 +1,12 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Home from './pages/Home';
+import Servicios from './pages/Servicios';
 
 
 
 function App() {
   return (
-   <Home></Home>
+   <Servicios></Servicios>
   );
 }
 
