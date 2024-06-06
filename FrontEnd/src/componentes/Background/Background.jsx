@@ -61,10 +61,16 @@ export const Background = () => {
                 <img className="img-completa" src={imagencompleta} />
 
                 <div className='todoimg'>
+                    <div className='imgarriba'>
                     <img className="img-cejas" src={imagencejas} />
                     <img className="img-maquillaje" src={imagenmaquillaje} />
+                    </div>
+
+                    <div className='imgabajo'>
                     <img className="img-lifting" src={imagenlifting} />
                     <img className="img-lifcejas" src={imagenlifcejas} />
+                    </div>
+
                 </div>
             </div>
             <div className='redirigirserv'>
