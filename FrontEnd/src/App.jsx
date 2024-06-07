@@ -11,7 +11,7 @@ import { DiseñoYDH } from "./componentes/Servicio_detalle/Diseñodepilacionenhe
 function App() {
   return (
    
-     <DiseñoYDH/>
+     <LaminadoC/>
 
    
   );
