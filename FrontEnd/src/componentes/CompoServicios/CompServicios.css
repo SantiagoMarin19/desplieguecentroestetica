@@ -1,22 +1,36 @@
-.imgdeservicios {
+/* .imgdeservicios {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: center;
     flex-wrap: nowrap;
+} */
+
+.imgarriba {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.imgabajo {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .imgmicro {
-    width: 15%;
-    height: 550px;
+    width: 20%;
+    height: 400px;
 }
 .imgcej{
-    width: 15%;
-    height: 550px;
+    width: 20%;
+    height: 400px;
 }
 .imgpes {
-    width: 15%;
-    height: 550px;
+    width: 20%;
+    height: 400px;
 }
 .imgcom {
     width: 15%;

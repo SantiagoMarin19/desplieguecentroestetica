@@ -8,10 +8,15 @@ import com from "../../assets/images/com.png"
 export const CompServicios = () => {
     return (
         <div className='imgdeservicios'>
+           <div className='titservic'>Nuestros servicios</div>
+        <div className='imgarriba'>
         <img className='imgmicro' src={micro}></img>
         <img className='imgcej' src={cej}></img>
+        </div>
+        <div className='imgabajo'>
         <img className='imgpes' src={pes}></img>
         <img className='imgcom' src={com}></img>
+        </div>
         </div>
                 // <div className='imgdeservicios'>
                 // <div className='imgmicro' src={micro}>HOLAAA</div>
