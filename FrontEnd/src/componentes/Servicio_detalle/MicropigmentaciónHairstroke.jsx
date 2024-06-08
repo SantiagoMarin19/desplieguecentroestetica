@@ -12,8 +12,7 @@ export const MicropigmentacionHS = () => {
                 </div>
                 <div className='detalle'>
                     <h3>Nuestro Metodo</h3>
-                    <p>Esta técnica utiliza productos especializados que levantan y enrulean tus pestañas, logrando que luzcan más largas, rizadas y definidas. 
-                        El resultado es una mirada más abierta, expresiva y cautivadora. Nuestros expertos te guiarán en el cuidado y mantenimiento para que puedas disfrutar de unas pestañas perfectas durante más tiempo. Sumérgete en esta transformación sutil pero impactante.</p>
+                    <p>Esta técnica utiliza productos especializados que levantan y enrulean tus pestañas, logrando que luzcan más largas, rizadas y definidas. El resultado es una mirada más abierta, expresiva y cautivadora. Nuestros expertos te guiarán en el cuidado y mantenimiento para que puedas disfrutar de unas pestañas perfectas durante más tiempo. Sumérgete en esta transformación sutil pero impactante.</p>
                 </div>
 
                 <div className='contenido_botones'>
