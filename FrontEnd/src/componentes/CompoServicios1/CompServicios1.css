@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.apartadoCejas {
+display: flex;
+justify-content: center;
+    position: relative;
+}
+
+.apartadoCejas img {
+    width: 10%;
+    height: 10%;
+}
+
+.apartadoCejas p {
+    position: absolute;
+    top: 0;
+}
+
+p {
+    color: white;
+    font-size: xx-large;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.mitadeso {
+    display: flex;
+    justify-content: space-around;
+}

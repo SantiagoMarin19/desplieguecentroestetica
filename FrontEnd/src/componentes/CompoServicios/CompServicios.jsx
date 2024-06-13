@@ -5,7 +5,7 @@ import cej from "../../assets/images/cej.png"
 import pes from "../../assets/images/pes.png"
 import com from "../../assets/images/com.png"
 
-export const CompServicios = () => {
+export const CompServicios1 = () => {
     return (
         <div className='imgdeservicios'>
            <div className='titservic'>Nuestros servicios</div>
