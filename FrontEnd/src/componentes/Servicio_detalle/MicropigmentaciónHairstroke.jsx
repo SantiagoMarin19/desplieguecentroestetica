@@ -1,6 +1,6 @@
 import react from 'react';
-import './Laminadodecejas.css';
-import laminadodecejas from "../../assets/images/laminadodecejas.png";
+import './servicios.css';
+import Hairstroke from "../../assets/images/Hairstroke.png";
 
 export const MicropigmentacionHS = () => {
     return (
@@ -18,7 +18,7 @@ export const MicropigmentacionHS = () => {
                 <div className='contenido_botones'>
                 <div className='informacion'>
                     <p>60 Minutos</p>
-                    <p>$300.000</p>
+                    <p>$500.000</p>
                     </div>
 
                     <div className='botonera'>
@@ -28,7 +28,7 @@ export const MicropigmentacionHS = () => {
                     </div>
                     </div>
                 <div className='imagen'>
-                  <img className='imagen' src={laminadodecejas}/>
+                  <img className='imagen' src={Hairstroke}/>
                    </div>
         </div>
         

@@ -1,6 +1,6 @@
 import react from 'react';
-import './Laminadodecejas.css';
-import laminadodecejas from "../../assets/images/laminadodecejas.png";
+import './servicios.css';
+import diseñodepilacionysombreado from "../../assets/images/diseñodepilacionysombreado.png";
 
 export const DiseñoDYS = () => {
     return (
@@ -20,7 +20,7 @@ export const DiseñoDYS = () => {
                 <div className='contenido_botones'>
                 <div className='informacion'>
                     <p>60 Minutos</p>
-                    <p>$300.000</p>
+                    <p>$29.000</p>
                     </div>
 
                     <div className='botonera'>
@@ -30,7 +30,7 @@ export const DiseñoDYS = () => {
                     </div>
                     </div>
                 <div className='imagen'>
-                  <img className='imagen' src={laminadodecejas}/>
+                  <img className='imagen' src={diseñodepilacionysombreado}/>
                    </div>
         </div>
         

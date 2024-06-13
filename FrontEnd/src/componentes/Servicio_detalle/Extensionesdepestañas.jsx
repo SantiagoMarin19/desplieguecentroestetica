@@ -1,6 +1,6 @@
 import react from 'react';
-import './Laminadodecejas.css';
-import laminadodecejas from "../../assets/images/laminadodecejas.png";
+import './servicios.css';
+import extensionesdepestaña from "../../assets/images/extensionesdepestaña.png";
 
 export const ExtensionesDP = () => {
     return (
@@ -8,17 +8,18 @@ export const ExtensionesDP = () => {
 
             <div className='contenido'>
                 <div className='titulo'>
-                <h1>Lifting De Pestañas</h1>
+                <h1>Extensiones De Pestañas</h1>
                 </div>
                 <div className='detalle'>
                     <h3>Nuestro Metodo</h3>
-                    <p>Esta técnica utiliza productos especializados que levantan y enrulean tus pestañas, logrando que luzcan más largas, rizadas y definidas. El resultado es una mirada más abierta, expresiva y cautivadora. Nuestros expertos te guiarán en el cuidado y mantenimiento para que puedas disfrutar de unas pestañas perfectas durante más tiempo. Sumérgete en esta transformación sutil pero impactante.</p>
+                    <p>Mediante técnicas profesionales y productos de alta calidad, nuestros expertos aplicarán delicadamente cada extensión, logrando un resultado natural y realzado. 
+                        Las extensiones se adhieren de forma segura a tus pestañas, proporcionando un efecto alargado, curvado y espectacular. Despierta tu mirada y luce unas pestañas impresionantes, sin necesidad de maquillaje.</p>
                 </div>
 
                 <div className='contenido_botones'>
                 <div className='informacion'>
                     <p>60 Minutos</p>
-                    <p>$300.000</p>
+                    <p>$120.000</p>
                     </div>
 
                     <div className='botonera'>
@@ -28,7 +29,7 @@ export const ExtensionesDP = () => {
                     </div>
                     </div>
                 <div className='imagen'>
-                  <img className='imagen' src={laminadodecejas}/>
+                  <img className='imagen' src={extensionesdepestaña}/>
                    </div>
         </div>
         

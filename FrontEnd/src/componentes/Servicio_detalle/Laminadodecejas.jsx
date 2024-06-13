@@ -1,5 +1,5 @@
 import react from 'react';
-import './Laminadodecejas.css';
+import './servicios.css';
 import laminadodecejas from "../../assets/images/laminadodecejas.png";
 
 export const LaminadoC = () => {
@@ -19,7 +19,7 @@ export const LaminadoC = () => {
                 <div className='contenido_botones'>
                 <div className='informacion'>
                     <p>60 Minutos</p>
-                    <p>$300.000</p>
+                    <p>$80.000</p>
                     </div>
 
                     <div className='botonera'>

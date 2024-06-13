@@ -1,6 +1,6 @@
 import react from 'react';
-import './Laminadodecejas.css';
-import laminadodecejas from "../../assets/images/laminadodecejas.png";
+import './servicios.css';
+import micropigmentaciondecejas from "../../assets/images/micropigmentaciondecejas.png";
 
 export const MicropigmentacionDC = () => {
     return (
@@ -18,7 +18,7 @@ export const MicropigmentacionDC = () => {
                 <div className='contenido_botones'>
                 <div className='informacion'>
                     <p>60 Minutos</p>
-                    <p>$300.000</p>
+                    <p>$350.000</p>
                     </div>
 
                     <div className='botonera'>
@@ -28,7 +28,7 @@ export const MicropigmentacionDC = () => {
                     </div>
                     </div>
                 <div className='imagen'>
-                  <img className='imagen' src={laminadodecejas}/>
+                  <img className='imagen' src={micropigmentaciondecejas}/>
                    </div>
         </div>
         
