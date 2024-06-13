@@ -1,12 +1,12 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Servicios from './pages/Servicios';
+import Servicios1 from './pages/Servicios1';
 
 
 
 function App() {
   return (
-   <Servicios></Servicios>
+   <Servicios1></Servicios1>
   );
 }
 
