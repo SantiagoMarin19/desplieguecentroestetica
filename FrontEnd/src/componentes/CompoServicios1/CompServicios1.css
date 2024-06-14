@@ -5,27 +5,23 @@
 }
 
 .apartadoCejas {
-display: flex;
-justify-content: center;
-    position: relative;
+    background-image: url(C:\Users\SENA\Documents\GitHub1\Cento-de-estetica-facial\FrontEnd\src\assets\images\ojos.png);
+    background-repeat: no-repeat;
+    filter: brightness(0.5);
 }
-
-.apartadoCejas img {
-    width: 10%;
-    height: 10%;
+.apartado1 {
+    background-image: url(C:\Users\SENA\Documents\GitHub1\Cento-de-estetica-facial\FrontEnd\src\assets\images\cej.png);
+    background-repeat: no-repeat;
 }
-
-.apartadoCejas p {
-    position: absolute;
-    top: 0;
+.apartado2 {
+    background-image: url(C:\Users\SENA\Documents\GitHub1\Cento-de-estetica-facial\FrontEnd\src\assets\images\completo.png);
+    background-repeat: no-repeat;
+}
+.apartado3 {
+    background-image: url(C:\Users\SENA\Documents\GitHub1\Cento-de-estetica-facial\FrontEnd\src\assets\images\cejas.png);
+    background-repeat: no-repeat;
 }
 
 p {
     color: white;
-    font-size: xx-large;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-.mitadeso {
-    display: flex;
-    justify-content: space-around;
 }
