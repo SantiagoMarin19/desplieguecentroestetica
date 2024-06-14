@@ -31,14 +31,17 @@ export const Background = () => {
                             <p> En nuestro centro de estética facial, te invitamos a descubrir una experiencia
                                 única donde tu rostro se convierte en lienzo y nuestras manos expertas en pinceles. <br></br>
                                 Con dedicación y profesionalismo, nuestro equipo de especialistas en cuidado facial
-                                está comprometido en resaltar tu belleza natural, en cada línea, en cada gesto. .</p>
+                                está comprometido en resaltar tu belleza natural, en cada línea, en cada gesto. .
+                            </p>
 
                         </div>
+
                         <button type="button" class="btn btn-primary boton">AGENDAR  AHORA</button>
                     </div>
 
 
                     <div className='foto'>
+                        <img className="img-lifcejas" src={imagenlifcejas} />
                     </div>
 
 
@@ -73,7 +76,7 @@ export const Background = () => {
                     </div>
                 </div>
                 <div className='bottoncentrado'>
-                    <button type="button" class="btn btn-outline-dark botton_centrado">SERVICIOS</button></div>
+                    <button type="button" class="buttonservi">SERVICIOS</button></div>
 
             </div>
 
@@ -82,16 +85,17 @@ export const Background = () => {
 
 
             <div className="backgroundtercero">
-                <div className='containergoblal'>
 
 
-                    <div className="enunciados">
 
-                        <h2>¿Te gustaría separar una cita? <br></br>Te invito a conocer nuestros términos y condiciones de servicio para el año 2024.</h2>
+                <div className="enunciados">
 
-                        <h3>Si prefiere reservar su cita en persona, no dude en pasar por nuestra ubicación: Calle 33b #7-53 .</h3>
+                    <h2>¿Te gustaría separar una cita? <br></br>Te invito a conocer nuestros términos y condiciones de servicio para el año 2024.</h2>
 
-                    </div>
+                    <h3>Si prefiere reservar su cita en persona, no dude en pasar por nuestra ubicación: Calle 33b #7-53 .</h3>
+
+                </div>
+                <div className="mapa">
 
                     <iframe
                         title="mapa-google"
@@ -103,28 +107,15 @@ export const Background = () => {
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
                     ></iframe>
-
-
-                    <button type="button" class="btn btn-outline-dark botton_centrado">CONOCE MAS</button>
-
                 </div>
 
+                <button type="button">CONOCE MAS</button>
+
+
             </div>
-
-
-
-
-
-
+           
 
         </div>
-
-
-
-
-
-
-
 
     )
 

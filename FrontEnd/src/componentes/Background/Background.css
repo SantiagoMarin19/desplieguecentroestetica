@@ -40,17 +40,25 @@
 .foto {
   width: 700px;
   height: 700px;
-  overflow: hidden;
-  border-radius: 100%;
+ 
 
 }
 
 .foto img {
-  width: 100%;
-  height: auto;
-  display: block;
+  width: 90%;
+
+}
+.enunciados{
+justify-content: center;
 }
 
+
+.buttonservi{
+  justify-content: center;
+  align-items: center;
+  background-color:white;
+
+}
 
 .boton {
   margin-left: 40% !important;
@@ -94,13 +102,12 @@
 
 .bottoncentrado{
   display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  margin-bottom: 50px;
 }
 
-.bottoncentrado button {
-  justify-content: center;
-  align-items: center;
-  
-}
+
 
 
 
