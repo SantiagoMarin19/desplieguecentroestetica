@@ -5,23 +5,51 @@
 }
 
 .apartadoCejas {
-    background-image: url(C:\Users\SENA\Documents\GitHub1\Cento-de-estetica-facial\FrontEnd\src\assets\images\ojos.png);
+    display: flex;
+    justify-content: center;
     background-repeat: no-repeat;
-    filter: brightness(0.5);
+    position: relative;
+    
 }
 .apartado1 {
-    background-image: url(C:\Users\SENA\Documents\GitHub1\Cento-de-estetica-facial\FrontEnd\src\assets\images\cej.png);
+    display: flex;
+    background-repeat: no-repeat;
+    width: 400px;
     background-repeat: no-repeat;
 }
 .apartado2 {
-    background-image: url(C:\Users\SENA\Documents\GitHub1\Cento-de-estetica-facial\FrontEnd\src\assets\images\completo.png);
+    display: flex;
+    background-repeat: no-repeat;
+    width: 400px;
     background-repeat: no-repeat;
 }
 .apartado3 {
-    background-image: url(C:\Users\SENA\Documents\GitHub1\Cento-de-estetica-facial\FrontEnd\src\assets\images\cejas.png);
+    display: flex;
+    background-repeat: no-repeat;
+    width: 400px;
     background-repeat: no-repeat;
 }
 
-p {
-    color: white;
+.p1 {
+    display: flex;
+    justify-content: center;
+    color: rgb(0, 0, 0);
+    position: absolute;
+}
+.p2 {
+    color: rgb(0, 0, 0); 
+    position: absolute; 
+}
+.p3 {
+    color: rgb(0, 0, 0);
+    position: absolute;
+}
+.p4 {
+    color: rgb(0, 0, 0);
+    position: absolute;
+}
+
+.mitadeso {
+    display: flex;
+    justify-content: center;
 }
