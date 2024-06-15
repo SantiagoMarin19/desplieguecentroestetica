@@ -5,7 +5,7 @@ import "./CompServicios1.css"
 import imagencompleta from "../../assets/images/completo.png";
 import cejas1 from "../../assets/images/ojos.png"
 import imagencejas from "../../assets/images/cejas.png";
-import sombr from "../../assets/images/cejsom.jpg";
+import sombreado from "../../assets/images/cejsom.png";
 
 export const CompServicios1 = () => {
     return (
@@ -18,8 +18,8 @@ export const CompServicios1 = () => {
 
             <div className='mitadeso'>
                 <div className='apartado1'>
-                <img className='imgpes' src={sombr}>Diseño-Depilación y Sombreado</img>
-                    <p className='p2'></p>
+                <img className='imgpes' src={sombreado}></img>
+                    <p className='p2'>Diseño-Depilación y Sombreado</p>
                     </div>
                 
                 
