@@ -9,7 +9,8 @@ export const Servicios1 = () => {
         <>
     <Promociones></Promociones>
     <Navbar></Navbar>
-        <CompServicios1></CompServicios1>        
+        <CompServicios1></CompServicios1>    
+        <Piedepagina></Piedepagina>    
         </>
        
     )
