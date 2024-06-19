@@ -31,8 +31,7 @@ export const Navbar = () => {
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="pages" href="#">CONTACTANOS</a>
                         </li>
-                        <i class='bx bxl-instagram-alt icono_grande'> </i>
-                        <i class='bx bxl-facebook-circle icono_grande' > </i>
+                      
 
 
 

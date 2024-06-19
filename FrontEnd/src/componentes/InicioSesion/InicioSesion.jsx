@@ -1,10 +1,7 @@
 // Importa React y los hooks necesarios
 import React, { useEffect, useState } from "react";
-import Modal from "react-bootstrap/Modal";
 import { NavLink, useNavigate } from "react-router-dom";
-import "./InicioSesion.css";
-import { Registro } from "../Registro/Registro";
-import { useAuth } from "../../context/AuthContext";
+import "./InicioSesion";
 
 // Define y exporta el componente
 export const InicioSesion = ({ showIn, handleCloseIn }) => {
