@@ -11,18 +11,15 @@ import {  LiftingDP} from "./componentes/Servicio_detalle/Liftingdepestañas";
 import { MicropigmentacionDC } from "./componentes/Servicio_detalle/MicropigmentaciondeCejas";
 import { MicropigmentacionDL } from "./componentes/Servicio_detalle/Micropigmentaciondelabios";
 import { MicropigmentacionHS } from "./componentes/Servicio_detalle/MicropigmentaciónHairstroke";
-import {ComboHyLifting } from "./componentes/Servicio_detalle/ComboHenna+Lifiting";
-import {  ComboSyLifting} from "./componentes/Servicio_detalle/Combosombreadio+lifting";
 
 
 
 function App() {
   return (
-   
-     <MicropigmentacionHS/>
-
-
-   
+    
+      <MicropigmentacionHS/>
+  
+  
   );
 };
 

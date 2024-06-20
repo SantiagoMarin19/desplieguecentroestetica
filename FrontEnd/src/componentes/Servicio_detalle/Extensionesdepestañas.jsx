@@ -25,9 +25,9 @@ export const ExtensionesDP = () => {
                     <div className='botonera'>
                     <button id='boton'>Reservar Ahora</button>
                     </div>
-                   
                     </div>
                     </div>
+                    
                 <div className='imagen'>
                   <img className='imagen' src={extensionesdepestaña}/>
                    </div>

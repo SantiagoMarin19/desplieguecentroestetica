@@ -12,8 +12,8 @@ export const DiseñoYDH = () => {
                 </div>
                 <div className='detalle'>
                     <h3>Nuestro Metodo</h3>
-                    <p>Nuestro servicio de Diseño de Depilación en Henna de cejas logra resaltar tus rasgos de manera equilibrada y armoniosa. El uso de la henna aporta profundidad y definición a tus cejas, dándoles un aspecto sofisticado y natural. Confía en nuestros expertos para obtener unas cejas perfectamente diseñadas que enmarquen tu mirada con elegancia.
-ón, creando un look sofisticado y natural. Confía en nuestros expertos para obtener cejas perfectas que enmarquen tu mirada con elegancia.</p>
+                    <p>Nuestro servicio de Diseño de Depilación en Henna de cejas logra resaltar tus rasgos de manera equilibrada y armoniosa. 
+                        El uso de la henna aporta profundidad y definición a tus cejas, dándoles un aspecto sofisticado y natural. Confía en nuestros expertos para obtener unas cejas perfectamente diseñadas que enmarquen tu mirada con elegancia.</p>
                 </div>
 
                 <div className='contenido_botones'>
