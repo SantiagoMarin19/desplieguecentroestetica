@@ -3,27 +3,51 @@ import "./CompServicios.css"
 import micro from "../../assets/images/Micro.png"
 import cej from "../../assets/images/cej.png"
 import pes from "../../assets/images/pes.png"
-import com from "../../assets/images/com.png"
+import combo from "../../assets/images/combo.png"
 
-export const CompServicios1 = () => {
+export const CompServicios = () => {
     return (
-        <div className='imgdeservicios'>
-           <div className='titservic'>Nuestros servicios</div>
-        <div className='imgarriba'>
-        <img className='imgmicro' src={micro}></img>
-        <img className='imgcej' src={cej}></img>
+        <div className='todo'>
+
+            <div className='titservic'>Nuestros servicios</div>
+
+            <div className='cont1'>
+                <img className="img-pestañas" src={pes} />
+                <div className='apartado1'>
+                <div className='titpes'>PESTAÑAS</div>
+                <div className='contenido1'>En el apartado de pestañas podemos ofrecerte gran variedad de servicios, entre estos Lifting de pestañas, extensiones de pestañas.</div>
+                <button>Reservar</button>
+                </div>
+            </div>
+
+            <div className='cont2'>
+                <img className="img-cejas" src={cej} />
+                <div className='apartado2'>
+                <div className='titcej'>CEJAS</div>
+                <div className='contenido2'>En el apartado de pestañas podemos ofrecerte gran variedad de servicios, entre estos Lifting de pestañas, extensiones de pestañas.</div>
+                <button>Reservar</button>
+                </div>
+            </div>
+
+            <div className='cont3'>
+                <img className="img-micro" src={micro} />
+                <div className='apartado3'>
+                <div className='titmic'>MICROPIGMENTACIÓN</div>
+                <div className='contenido3'>En el apartado de pestañas podemos ofrecerte gran variedad de servicios, entre estos Lifting de pestañas, extensiones de pestañas.</div>
+                <button>Reservar</button>
+                </div>
+            </div>
+
+            <div className='cont4'>
+                <img className="img-combo" src={combo} />
+                <div className='apartado4'>
+                <div className='titcom'>COMBOS</div>
+                <div className='contenido4'>En el apartado de pestañas podemos ofrecerte gran variedad de servicios, entre estos Lifting de pestañas, extensiones de pestañas.</div>
+                <button>Reservar</button>
+                </div>
+            </div>
+
         </div>
-        <div className='imgabajo'>
-        <img className='imgpes' src={pes}></img>
-        <img className='imgcom' src={com}></img>
-        </div>
-        </div>
-                // <div className='imgdeservicios'>
-                // <div className='imgmicro' src={micro}>HOLAAA</div>
-                // <div className='imgcej' src={cej}><div className='text1'>xd</div></div>
-                // <div className='imgpes' src={pes}>xd</div>
-                // <div className='imgcom' src={com}>xd</div>
-                // </div>
     );
 }
 

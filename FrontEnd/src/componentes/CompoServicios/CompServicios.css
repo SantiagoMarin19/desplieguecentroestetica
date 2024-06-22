@@ -1,75 +1,41 @@
-/* .imgdeservicios {
+.cont1 {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    flex-wrap: nowrap;
-} */
+    padding: 50px;
 
-.imgarriba {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.imgabajo {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.imgmicro {
-    width: 20%;
-    height: 400px;
-}
-.imgcej{
-    width: 20%;
-    height: 400px;
-}
-.imgpes {
-    width: 20%;
-    height: 400px;
-}
-.imgcom {
-    width: 15%;
-}
-/* .imgmicro {
-    background-image: url("../../assets/images/Micro.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    padding: 15%;
-    color: white;
-    }
-    .imgcej {
-        background-image: url("../../assets/images/cej.png");
-        background-repeat: no-repeat;
-        background-size: contain;
-        padding: 15%;
-        color: white;
+    .apartado1 {
+        padding: 20px;
+        .titpes {
+            display: flex;
+            justify-content: center;
+            font-size: 45px;
         }
-        .imgpes {
-            background-image: url("../../assets/images/pes.png");
-            background-repeat: no-repeat;
-            background-size: contain;
-    padding: 15%;
-    color: white;
-            }
-            .imgcom {
-                background-image: url("../../assets/images/com.png");
-                background-repeat: no-repeat;
-                background-size: contain;
-    padding: 15%;
-    color: white;
-                }
-
-    .imgdeservicios {
-        display: flex;
-        flex-direction: row;
-        flex-grow: rowgrow;
-        align-content: center;
-        justify-content: center;
-        align-items: center;
-        padding: 10%;
-    } */
+        .contenido1 {
+            font-size: 35px;
+            padding: 20px;
+        }
+        button {
+            border: 0;
+            border-radius: 10px;
+            font-size: 35px;
+            padding-left: 50px;
+            padding-right: 50px;
+            background-color: #C98695;
+        }
+    }
+}
+.cont2 {
+    display: flex;
+    flex-direction:row-reverse;
+    padding: 50px;
+}
+.cont3 {
+    display: flex;
+    flex-direction: row;
+    padding: 50px;
+}
+.cont4 {
+    display: flex;
+    flex-direction:row-reverse;
+    padding: 50px;
+}
