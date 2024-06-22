@@ -88,14 +88,6 @@ body{
 }
 
 .botonera{
-    width: 30%;
     text-align: center;
     padding: 25px;
 }
-
-button :hover{
-    background-color: #B66E7A;
-    color: white;
-    width: 40%;
-}
-

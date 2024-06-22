@@ -18,7 +18,9 @@ export const ExtensionesDP = () => {
 
                 <div className='contenido_botones'>
                 <div className='informacion'>
+                    <h4>Tiempo</h4>
                     <p>60 Minutos</p>
+                    <h4>Tiempo</h4>
                     <p>$120.000</p>
                     </div>
 

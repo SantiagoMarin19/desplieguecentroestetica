@@ -5,7 +5,7 @@ import Background from './componentes/Background/Background';
 import  { Politicases } from './componentes/Politicas/Politicas';
 import {Piedepagina} from './componentes/Footer/footer';
 import { LaminadoC } from "./componentes/Servicio_detalle/Laminadodecejas";
-import { DiseñoYDH } from "./componentes/Servicio_detalle/Diseñodepilacionenhenna";
+import { Cejas } from "./componentes/Servicio_detalle/Serviciocejas";
 import {  ExtensionesDP} from "./componentes/Servicio_detalle/Extensionesdepestañas";
 import {  LiftingDP} from "./componentes/Servicio_detalle/Liftingdepestañas";
 import { MicropigmentacionDC } from "./componentes/Servicio_detalle/MicropigmentaciondeCejas";
@@ -19,7 +19,7 @@ import {  ComboSyLifting} from "./componentes/Servicio_detalle/Combosombreadio+l
 function App() {
   return (
    
-     <MicropigmentacionHS/>
+     <Cejas/>
 
 
    
