@@ -3,7 +3,7 @@ import "./CompServicios.css"
 import micro from "../../assets/images/Micro.png"
 import cej from "../../assets/images/cej.png"
 import pes from "../../assets/images/pes.png"
-import combo from "../../assets/images/combo.png"
+import combo from "../../assets/images/com.png"
 
 export const CompServicios = () => {
     return (
@@ -39,7 +39,7 @@ export const CompServicios = () => {
             </div>
 
             <div className='cont4'>
-                <img className="img-combo" src={combo} />
+                <img className="img-com" src={combo} />
                 <div className='apartado4'>
                 <div className='titcom'>COMBOS</div>
                 <div className='contenido4'>En el apartado de pestañas podemos ofrecerte gran variedad de servicios, entre estos Lifting de pestañas, extensiones de pestañas.</div>

@@ -14,10 +14,15 @@
 
     .apartado1 {
         padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         .titpes {
             display: flex;
             justify-content: center;
             font-size: 45px;
+            font-family: 'DM Sans';
+            -webkit-text-stroke-width: thin;
         }
         .contenido1 {
             font-size: 35px;
@@ -35,6 +40,7 @@
         .btn1 {
             display: flex;
             justify-content: center;
+            font-family: 'Poppins';
         }
     }
 }
@@ -42,6 +48,37 @@
     display: flex;
     flex-direction:row-reverse;
     padding: 50px;
+    .apartado2 {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .titcej {
+            display: flex;
+            justify-content: center;
+            font-size: 45px;
+            font-family: 'DM Sans';
+            -webkit-text-stroke-width: thin;
+        }
+        .contenido2 {
+            font-size: 35px;
+            padding: 20px;
+            text-align: justify;
+        }
+        button {
+            border: 0;
+            border-radius: 10px;
+            font-size: 35px;
+            padding-left: 50px;
+            padding-right: 50px;
+            background-color: #C98695;
+        }
+        .btn2 {
+            display: flex;
+            justify-content: center;
+            font-family: 'Poppins';
+        }
+    }
 }
 .cont3 {
     display: flex;
@@ -49,10 +86,15 @@
     padding: 50px;
     .apartado3 {
         padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         .titmic {
             display: flex;
             justify-content: center;
             font-size: 45px;
+            font-family: 'DM Sans';
+            -webkit-text-stroke-width: thin;
         }
         .contenido3 {
             font-size: 35px;
@@ -69,6 +111,7 @@
         .btn3 {
             display: flex;
             justify-content: center;
+            font-family: 'Poppins';
         }
     }
 }
@@ -76,5 +119,36 @@
     display: flex;
     flex-direction:row-reverse;
     padding: 50px;
+    .apartado4 {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .titcom {
+            display: flex;
+            justify-content: center;
+            font-size: 45px;
+            font-family: 'DM Sans';
+            -webkit-text-stroke-width: thin;
+        }
+        .contenido4 {
+            font-size: 35px;
+            padding: 20px;
+            text-align: justify;
+        }
+        button {
+            border: 0;
+            border-radius: 10px;
+            font-size: 35px;
+            padding-left: 50px;
+            padding-right: 50px;
+            background-color: #C98695;
+        }
+        .btn4 {
+            display: flex;
+            justify-content: center;
+            font-family: 'Poppins';
+        }
+    }
 }
 
