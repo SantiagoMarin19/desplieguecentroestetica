@@ -1,26 +1,26 @@
 import react from 'react';
 import './servicios.css';
-import hennacejas from "../../assets/images/hennacejas.png";
-import laminadodecejas from "../../assets/images/laminadodecejas.png";
-import sombreadoceja from "../../assets/images/sombreadoceja.png"
+import microlabios from "../../assets/images/microlabios.png";
+import microcejas from "../../assets/images/microcejas.png";
+import hairstroke from "../../assets/images/hairstroke.png"
 
-export const Cejas = () => {
+export const Micropigmentacion = () => {
     return (
 
         <div className='contenedor_total'>
             <div className='banneer'>
-                <h1>Cejas</h1>
+                <h1>Micropigmentacion</h1>
             </div>
 
             <div className='content_total'> 
                 <div className='contenido'>
                 <div className='titulo'>
-                    <h1>Diseño y  Depilación en Henna</h1>
+                    <h1>Micropigmentación  Hair-Stroke</h1>
                     </div>
                     
                     <div className='contenid_detalle'>
                         <div className='detalle'>
-                            <p> El uso de la henna aporta profundidad y definición a tus cejas, dándoles un aspecto sofisticado y natural.</p>
+                            <p> A través de técnicas precisas, se logra una forma equilibrada y armoniosa que resalta tus rasgos. El sombreado de cejas añade profundidad y definición, creando un look sofisticado y natural. </p>
                             <div className='botones'>
                         <button id='boton'>Reservar Ahora</button>
                         </div>
@@ -40,7 +40,7 @@ export const Cejas = () => {
                             </div>
                         
                         <div className='imagen'>
-                            <img className='imagen' src={laminadodecejas}/>
+                            <img className='imagen' src={hairstroke}/>
                             </div>
                             </div>
                             </div>
@@ -49,12 +49,11 @@ export const Cejas = () => {
                                             
                 <div className='contenido'>
                     <div className='titulo'>
-                        <h1>Diseño Depilación y Sombreado</h1>
+                        <h1>micropigmentación de Labios</h1>
                         </div>
                         <div className='contenid_detalle'>
                         <div className='detalle'>
-                            <p>A través de técnicas precisas, se logra una forma equilibrada y armoniosa que resalta tus rasgos. 
-                        El sombreado de cejas añade profundidad y definición, creando un look sofisticado y natural. </p>
+                            <p>La Micropigmentación de Labios es un tratamiento de alta precisión que define y resalta tus labios de manera natural y duradera. </p>
                         <div className='botones'>
                         <button id='boton'>Reservar Ahora</button>
                         </div>
@@ -74,7 +73,7 @@ export const Cejas = () => {
                             </div>
                         
                         <div className='imagen'>
-                            <img className='imagen' src={laminadodecejas}/>
+                            <img className='imagen' src={microlabios}/>
                             </div>
                             </div>
                             </div>
@@ -82,12 +81,11 @@ export const Cejas = () => {
                             
             <div className='contenido'>
                 <div className='titulo'>
-                    <h1>Laminado De Cejas</h1>
+                    <h1>Micropigmentacion de Cejas </h1>
                     </div>
                     <div className='contenid_detalle'>
                     <div className='detalle'>
-                        <p>Esta técnica utiliza productos especiales que suavizan y fijan el vello, logrando un resultado liso y uniformemente distribuido. 
-                        El laminado realza tus rasgos, abriendo y enmarcando tu mirada de forma armónica. </p>
+                        <p>La Micropigmentación de Cejas es una técnica avanzada que permite diseñar y definir tus cejas de manera duradera y natural. </p>
                         
                     <div className='botones'>
                         <button id='boton'>Reservar Ahora</button>
@@ -108,7 +106,7 @@ export const Cejas = () => {
                             </div>
                         
                         <div className='imagen'>
-                            <img className='imagen' src={laminadodecejas}/>
+                            <img className='imagen' src={microcejas}/>
                             </div>
                             </div>
 
