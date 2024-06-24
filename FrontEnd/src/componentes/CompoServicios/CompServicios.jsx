@@ -4,50 +4,55 @@ import micro from "../../assets/images/Micro.png"
 import cej from "../../assets/images/cej.png"
 import pes from "../../assets/images/pes.png"
 import combo from "../../assets/images/com.png"
+import tit from "../../assets/images/nuse.png"
 
 export const CompServicios = () => {
     return (
         <div className='todo'>
-
-            <div className='titservic'><b>Nuestros servicios</b></div>
-
-            <div className='cont1'>
-                <img className="img-pestañas" src={pes} />
-                <div className='apartado1'>
-                <div className='titpes'>PESTAÑAS</div>
-                <div className='contenido1'>En el apartado de pestañas podemos ofrecerte gran variedad de servicios, entre estos Lifting de pestañas, extensiones de pestañas.</div>
-                <div className='btn1'><button>Reservar</button></div>
+            <div className='partarriba'>
+                <div className='titservic'>
+                    <h1>Nuestros servicios</h1>
+                </div>
+                <div className='imgcar'>
+                    <img className="img-tit" src={tit} />
                 </div>
             </div>
-
-            <div className='cont2'>
-                <img className="img-cejas" src={cej} />
-                <div className='apartado2'>
-                <div className='titcej'>CEJAS</div>
-                <div className='contenido2'>En el apartado de pestañas podemos ofrecerte gran variedad de servicios, entre estos Lifting de pestañas, extensiones de pestañas.</div>
-                <div className='btn2'><button>Reservar</button></div>
+            <div className='medio'>
+                <h3> Servicio Cejas</h3>
+                <div className='sercej'>
+                <div className='concej1'>
+                <img className="img-cej" src={cej} />
+                <h5>Diseño-Depilación y sombreado</h5>
+                <h5><b>$49.00</b></h5>
                 </div>
-            </div>
-
-            <div className='cont3'>
-                <img className="img-micro" src={micro} />
-                <div className='apartado3'>
-                <div className='titmic'>MICROPIGMENTACIÓN</div>
-                <div className='contenido3'>En el apartado de pestañas podemos ofrecerte gran variedad de servicios, entre estos Lifting de pestañas, extensiones de pestañas.</div>
-                <div className='btn3'><button>Reservar</button></div>
+                <div className='concej1'>
+                <img className="img-cej" src={cej} />
+                <h5>Diseño-Depilación y sombreado</h5>
+                <h5><b>$49.00</b></h5>
                 </div>
-            </div>
-
-            <div className='cont4'>
-                <img className="img-com" src={combo} />
-                <div className='apartado4'>
-                <div className='titcom'>COMBOS</div>
-                <div className='contenido4'>En el apartado de pestañas podemos ofrecerte gran variedad de servicios, entre estos Lifting de pestañas, extensiones de pestañas.</div>
-                <div className='btn4'><button>Reservar</button></div>
+                <div className='concej1'>
+                <img className="img-cej" src={cej} />
+                <h5>Diseño-Depilación y sombreado</h5>
+                <h5><b>$49.00</b></h5>
                 </div>
-            </div>
+                </div>
 
-        </div>
+                <h3> Servicio Pestaña</h3>
+                <div className='serpes'>
+                <div className='concej1'>
+                <img className="img-cej" src={cej} />
+                <h5>Diseño-Depilación y sombreado</h5>
+                <h5><b>$49.00</b></h5>
+                </div>
+                <div className='concej1'>
+                <img className="img-cej" src={cej} />
+                <h5>Diseño-Depilación y sombreado</h5>
+                <h5><b>$49.00</b></h5>
+                </div>
+                </div>
+
+                </div>
+                </div>
     );
 }
 
