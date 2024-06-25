@@ -6,20 +6,20 @@ body {
     background-color: #FCEBF2;
     position: relative;
     text-align: center;
-    padding: 2rem; /* Ajusta el padding según sea necesario */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agrega sombra para destacar el banner */
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Estilos generales */
-.banneer h1{
+.banneer h1 {
     font-size: 80px;
     color: #422A3C;
     font-weight: 700;
 }
 
-.content_total{
+.content_total {
     padding: 4rem;
-    width: 100%;   
+    width: 100%;
 }
 
 .titulo h1 {
@@ -39,14 +39,14 @@ body {
     font-size: 22px;
 }
 
-.botontyp{
+.botontyp {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     width: 50%;
 }
 
-.botones{
+.botones {
     background-color: #B66E7A;
     width: 20%;
     text-align: center;
@@ -54,44 +54,71 @@ body {
     padding: 2px;
 }
 
-
-button{
+button {
     color: #FFFFFF;
     font-family: "Playfair Display", serif;
-
 }
 
-.imagen {  
+.imagen {
     display: flex;
-    justify-content: flex-end;   
+    justify-content: flex-end;
 }
 
 .contenid_detalle {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-  }
+}
 
+.content_boton {
+    padding: 35px;
+}
 
-  
-  
-  .titulo,
-  .detalle {
+.titulo,
+.detalle {
     width: 50%;
     text-align: left;
-  }
-  
-  .imagen {
-    width: 50%;
+}
+
+.imagen {
+    width: 70%;
     display: flex;
     justify-content: flex-end;
-  }
-  
-  .imagen img {
-    max-width: 200%;
+}
+
+.imagen img {
+    max-width: 100%;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 15px 18px rgba(0, 0, 0, 0.1);
-  }
-  
+}
 
+
+.imagen p {
+    text-align: right;
+    font-family: "Manrope", sans-serif;
+    font-size: 18px;
+    color: #666666;
+    margin-top: 10px;
+    margin-right: 20px;
+    font-style: italic;
+    max-width: 90%;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.leyenda {
+    font-family: "Manrope", sans-serif;
+    font-size: 18px;
+    color: #ffffff;
+    margin-top: 10px;
+    font-style: italic;
+    background-color: #B66E7A;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    width: 70%;
+}

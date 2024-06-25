@@ -1,7 +1,5 @@
 import react from 'react';
 import './servicios.css';
-import lidtingdepestañas from "../../assets/images/microlabios.png";
-import extensiondepestañas from "../../assets/images/extensiondepestañas.png";
 
 
 export const Pestañas = () => {
