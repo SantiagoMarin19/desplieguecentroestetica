@@ -25,7 +25,9 @@ export const CompServicios = () => {
                 <img className="img-cej" src={cej} />
                 <h5>Diseño-Depilación y sombreado</h5>
                 <h5><b>$49.00</b></h5>
+                <NavLink to="/politicas">
                 <button>Reservar</button>
+                </Navlink>
                 </div>
                 <div className='concej1'>
                 <img className="img-cej" src={cej} />

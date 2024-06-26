@@ -13,12 +13,12 @@ export const Piedepagina = () => {
                 <i class='bx bxl-facebook-circle iconos_grandes'></i></h3>
             </div>
             
-            <div className='contenedor'>
+            <div className='contenedorif'>
                 <div className='izquierda'>
                     <h3>Explorar</h3>
-                    <button>Inicio </button>
-                    <button>Acerca De</button>
-                    <button>Servicios</button>
+                    <p>Inicio </p>
+                    <p>Acerca De</p>
+                    <p>Servicios</p>
                     </div>
                     
                     <div className='centro'>
@@ -28,8 +28,8 @@ export const Piedepagina = () => {
                         
                         <div className='derecha'>
                             <h3>Contacto</h3>
-                            <p><b>Dirección:</b>Mariendalsvej 50D 2 2000 Frederiksberg.</p>
-                            <p><b>Gmail:</b>support@servicemarket.com</p>
+                            <p><b>Dirección:</b>Calle 33b #7-53.</p>
+                            <p><b>Gmail:</b>nataliasalazarartist@gmail.com</p>
                             </div>
                             </div>
                             
