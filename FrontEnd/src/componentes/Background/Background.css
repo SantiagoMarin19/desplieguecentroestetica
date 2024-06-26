@@ -9,6 +9,25 @@
   overflow-y: scroll;
 
 }
+body {
+  overflow-x: hidden; /* Oculta la barra de desplazamiento horizontal */
+}
+
+
+.backgroundtercero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-image: url(../../assets/images/fondo3.png);
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.20);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 
 .Frase-background {
   margin-left: 10%;
@@ -21,19 +40,31 @@
 
 }
 
+
 .foto {
-  width: 700px;
-  height: 700px;
-  overflow: hidden;
-  border-radius: 100%;
-  
-}
-.foto img {
-  width: 100%;
-  height: auto;
-  display: block;
+  width: 800px; 
+  height: 900px; 
+  overflow: hidden; 
 }
 
+.foto img {
+  max-width: 100%; 
+  height: 900px; 
+  display: block; 
+}
+
+.enunciados{
+justify-content: center;
+font-family: "Urbanist", sans-serif;
+}
+
+
+.buttonservi{
+  justify-content: center;
+  align-items: center;
+  background-color:white;
+
+}
 
 .boton {
   margin-left: 40% !important;
@@ -56,6 +87,30 @@
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #BF6A8C;
   --bs-btn-disabled-border-color: #BF6A8C;
+}
+
+.servicios{
+  --bs-btn-color: #000000;
+  --bs-btn-bg: #BF6A8C;
+  --bs-btn-border-color: #BF6A8C;
+  --bs-btn-hover-color: #ff0000;
+  --bs-btn-hover-bg: #BF6A8C;
+  --bs-btn-hover-border-color: #BF6A8C;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: #ff0000;
+  --bs-btn-active-bg: #BF6A8C;
+  --bs-btn-active-border-color: #BF6A8C;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #ff0000;
+  --bs-btn-disabled-bg: #BF6A8C;
+  --bs-btn-disabled-border-color: #BF6A8C;
+}
+
+.bottoncentrado{
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  margin-bottom: 50px;
 }
 
 
@@ -97,6 +152,7 @@
   color: rgb(0, 0, 0);
   font-size: 20px;
   margin-bottom: 10%;
+  width: 70%;
   font-family: "Urbanist", sans-serif;
 
 }
@@ -108,7 +164,7 @@
 
 }
 
-.icono_grande{ 
+.icono_grande {
   font-size: 2em;
 
 }
@@ -132,30 +188,33 @@
 
 .img-completa {
   border-top-left-radius: 20px;
+  margin-top: 3px;
   border-bottom-left-radius: 20px;
+  width: auto;
+  height: 600px;
 }
 
-.img-cejas{
+.img-cejas {
   margin: 5px;
 }
 
-.img-lifting{
+.img-lifting {
   margin: 5px;
 }
 
-.img-maquillaje{
+.img-maquillaje {
   margin: 5px;
   border-top-right-radius: 20px;
 }
 
-.img-lifcejas{
+.img-lifcejas {
   margin: 5px;
   border-bottom-right-radius: 20px;
 }
 
 .fraseservicios {
   text-align: center;
-  font-family: "Playfair Display", serif;
+  font-family: "Urbanist", sans-serif;
   font-size: 30px;
   margin-top: 5%;
   margin-bottom: 3%;

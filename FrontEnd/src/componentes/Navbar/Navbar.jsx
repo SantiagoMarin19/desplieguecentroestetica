@@ -31,7 +31,8 @@ export const Navbar = () => {
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="pages" href="#">CONTACTANOS</a>
                         </li>
-                       
+                      
+
 
 
                     </ul>

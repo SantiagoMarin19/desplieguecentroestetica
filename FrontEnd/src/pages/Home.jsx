@@ -9,13 +9,13 @@ export const Home = () => {
 
   return (
     <>
-    <Promociones></Promociones>
-     <Navbar></Navbar>
-       
-   <Background></Background>
+   <Promociones></Promociones>
+        <Navbar></Navbar>
 
-       
+        <Background></Background>
         
+        
+
     </>
   );
 };
