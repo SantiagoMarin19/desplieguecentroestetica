@@ -6,6 +6,7 @@ import  { Politicases } from './componentes/Politicas/Politicas';
 import {Piedepagina} from './componentes/Footer/footer';
 import {  Pestañas} from "./componentes/Servicio_detalle/serviciopestañas";
 import {Cejas} from "./componentes/Servicio_detalle/Serviciocejas"
+import { Micropigmentacion } from "./componentes/Servicio_detalle/serviciomicropigmentacion";
 
 
 function App() {

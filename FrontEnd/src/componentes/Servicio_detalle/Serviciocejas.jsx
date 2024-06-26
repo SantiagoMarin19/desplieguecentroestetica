@@ -8,7 +8,7 @@ export const Cejas = () => {
     return (
         <div className='contenedor_total'>
             <div className='banneer'>
-                <h1>Cejas</h1>
+                <h1> Servicio Cejas</h1>
             </div>
 
             <div className='content_total'> 
