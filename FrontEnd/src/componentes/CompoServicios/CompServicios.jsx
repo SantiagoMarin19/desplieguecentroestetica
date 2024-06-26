@@ -5,6 +5,7 @@ import cej from "../../assets/images/cej.png"
 import pes from "../../assets/images/pes.png"
 import combo from "../../assets/images/com.png"
 import tit from "../../assets/images/nuse.png"
+import ModalAcceder from "../ModalAcceder/ModalAcceder"
 
 export const CompServicios = () => {
     return (
