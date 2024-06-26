@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import './Background.css';
 import imagencompleta from "../../assets/images/completo.png";
 import imagencejas from "../../assets/images/cejas.png";
@@ -6,7 +7,8 @@ import imagenlifting from "../../assets/images/lifting.png";
 import imagenmaquillaje from "../../assets/images/maquillaje.png";
 import imagenlifcejas from "../../assets/images/pestañas.png"
 import imagenfondo from "../../assets/images/imagen_fondo.jpg"
-import imagencejashenna from "../../assets/images/cejas_henna.jpg"
+import imagencejashenna from "../../assets/images/cejas_henna.jpg";
+
 
 
 export const Background = () => {
@@ -107,7 +109,9 @@ export const Background = () => {
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
                     ></iframe>
+                      <NavLink to="/politicas">
                     <button type="button">CONOCE MAS</button>
+                </NavLink>
                 </div>
 
 

@@ -8,7 +8,6 @@ body{
 
  .footer{
     width: 100%;
-    position: absolute;
     bottom: 0;
     height: 1rem;
  }
@@ -21,17 +20,20 @@ body{
     width: 100%;
     margin: 10px;
     padding: 1px;
+  }
 
+  button{
+    color: #000000;
   }
   
   .contenedorup {
-    padding: 1px;
     background-color: #FCEBF2;
-    color: #ffffff;
     color: #000000;
-    display:flex;
+    display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    align-content: stretch;
+    flex-direction: row-reverse;
   }
 
  .izquierda{
@@ -39,12 +41,16 @@ body{
     flex-direction: column;
  }
 
-.contenedor{
+ .izquierda p{
+  color: #000000;
+ }
+
+
+.contenedorif{
     background-color: #FCEBF2;
     color: #000000;
-    padding: 3rem;
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-around; 
     margin-right: auto;
     margin-left: auto;
     box-sizing: border-box;
