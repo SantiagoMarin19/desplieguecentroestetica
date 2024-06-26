@@ -4,6 +4,9 @@
     
 
 }
+.Promociones{
+    color: #a7249c;
+}
 
 .boton-reserva{
     color: black;
@@ -22,6 +25,15 @@
     --bs-btn-disabled-bg: transparent;
     --bs-btn-disabled-border-color: #a7249c;
     --bs-gradient: none;
+}   
+
+.navbar{
+    background-color: #e9cbd5 !important;
+    
+}
+.navbar a {
+    
+    margin-right: 30px;
 }
 
 

@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.apartadoCejas {
+    display: flex;
+    justify-content: center;
+    background-repeat: no-repeat;
+    position: relative;
+    padding-top: 40px;
+    
+    
+}
+.apartado1 {
+    display: flex;
+    background-repeat: no-repeat;
+    width: 400px;
+
+    
+    img {
+        height: 400px;
+        width: 400px;
+        filter: brightness(0.5);
+        border-radius: 20px;
+        padding: 10px;
+    }
+}
+.apartado2 {
+    display: flex;
+    background-repeat: no-repeat;
+    width: 400px;
+
+    img {
+        width: 400px;
+        height: 400px;
+        filter: brightness(0.5);
+        border-radius: 20px;
+        padding: 10px;
+    }
+}
+.apartado3 {
+    display: flex;
+    background-repeat: no-repeat;
+    width: 400px;
+
+    img {
+        width: 400px;
+        height: 400px;
+        filter: brightness(0.5);
+        border-radius: 20px;
+        padding: 10px;
+    }
+}
+
+.p1 {
+    color: rgb(255 255 255);
+    position: absolute;
+    padding-top: 120px;
+    font-size: -webkit-xxx-large;
+
+}
+.p2 {
+    color: rgb(255 255 255);
+    position: absolute;
+    padding-top: 350px;
+    font-size: medium;
+    padding-left: 20px;
+}
+.p3 {
+    color: rgb(255 255 255);
+    position: absolute;
+    padding-top: 350px;
+    font-size: medium;
+    padding-left: 20px;
+}
+.p4 {
+    color: rgb(255 255 255);
+    position: absolute;
+    padding-top: 350px;
+    font-size: medium;
+    padding-left: 20px;
+}
+
+.mitadeso {
+    display: flex;
+    justify-content: center;
+}
+
+.imgpes {
+    width: 40%;
+}

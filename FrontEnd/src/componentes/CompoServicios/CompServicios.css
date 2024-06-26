@@ -1,0 +1,101 @@
+.partarriba {
+    display: flex;
+    align-items: center;
+    background-color: #FCEBF2;
+}
+.imgcar {
+    display: flex;
+    justify-content: end;
+}
+
+.titservic{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    
+}
+.imgcar{
+    display: flex;
+    width: 50%;
+    justify-content: end;
+}
+
+h3 {
+    padding-top: 5%;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.sercej {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.serpes {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.sermic {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.sercom {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.concej1 {
+    background-color: #FCEBF2;
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.conpes1 {
+    background-color: #FCEBF2;
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.conmic1 {
+    background-color: #FCEBF2;
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.concom1 {
+    background-color: #FCEBF2;
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.img-cej {
+    width: 100%;
+    height: 80%;
+}
+h5 {
+    padding: 10px;
+}
+button {
+    margin: 0;
+    border: 0;
+    background-color: #C98695;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+}

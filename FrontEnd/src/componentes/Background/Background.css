@@ -1,24 +1,62 @@
 .background {
-   background-color: #FCEBF2;
-    width: 100vw;
-    height: 100vh; 
-    display: flex;
-    
-    justify-content: left;
-    align-items: center;
-    overflow-y: scroll;
-    
-  }
-.Frase-background{
+  background-color: #FCEBF2;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+
+  justify-content: left;
+  align-items: center;
+  overflow-y: scroll;
+
+}
+
+.Frase-background {
   margin-left: 10%;
+
+}
+
+.img-rostro {
+  width: 100vh;
+  height: auto;
+
+}
+
+.foto {
+  width: 700px;
+  height: 700px;
+  overflow: hidden;
+  border-radius: 100%;
   
 }
-  .prueba{
-    height: 100px;
-    width: 100px;
-    background-color: red;
-  }
+.foto img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
+
+.boton {
+  margin-left: 40% !important;
+  background-color: #C98695;
+  font-size: 20px;
+}
+
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #BF6A8C;
+  --bs-btn-border-color: #BF6A8C;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #BF6A8C;
+  --bs-btn-hover-border-color: #BF6A8C;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #BF6A8C;
+  --bs-btn-active-border-color: #BF6A8C;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #BF6A8C;
+  --bs-btn-disabled-border-color: #BF6A8C;
+}
 
 
 
@@ -32,42 +70,113 @@
 
 
 
-  
-  .Frase-background h1{
-    text-align: left;
-    justify-content: left;
-    color: rgb(0, 0, 0);
-    height: auto;
-    font-size: 80px;
-    font-family: "Playfair Display", serif;
-  }
-  .Frase-background h2{
-    text-align: left;
-    justify-content: left;
-    color: #E9AF4A;
-    height: auto;
-    font-size: 80px;
-    font-family: "Herr Von Muellerhoff", cursive;
 
-  }
+.Frase-background h1 {
+  text-align: left;
+  justify-content: left;
+  color: rgb(0, 0, 0);
+  height: auto;
+  font-size: 80px;
+  font-family: "Playfair Display", serif;
+}
+
+.Frase-background h2 {
+  text-align: left;
+  justify-content: left;
+  color: #E9AF4A;
+  height: auto;
+  font-size: 80px;
+  font-family: "Herr Von Muellerhoff", cursive;
+
+}
 
 
 
-  
-  .Frase-background p {
-    color: rgb(0, 0, 0);
-    font-size: 20px;
-    margin-bottom: 10%;
-    font-family: "Urbanist", sans-serif;
 
-  }
+.Frase-background p {
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+  margin-bottom: 10%;
+  font-family: "Urbanist", sans-serif;
 
-  .containergoblal{
-    display: block;
-    margin-left: 2%;  
-    margin-bottom: 7%;
-  
-  }
-  .prueba{
-    color: red;
-  }
+}
+
+.containergoblal {
+  display: block;
+  margin-left: 2%;
+  margin-bottom: 7%;
+
+}
+
+.icono_grande{ 
+  font-size: 2em;
+
+}
+
+
+.acercade {
+  font-family: "Urbanist", sans-serif;
+  font-size: 30px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 25%;
+  margin-right: 25%;
+  text-align: justify;
+}
+
+
+.imgservices {
+  display: flex;
+  justify-content: center;
+}
+
+.img-completa {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.img-cejas{
+  margin: 5px;
+}
+
+.img-lifting{
+  margin: 5px;
+}
+
+.img-maquillaje{
+  margin: 5px;
+  border-top-right-radius: 20px;
+}
+
+.img-lifcejas{
+  margin: 5px;
+  border-bottom-right-radius: 20px;
+}
+
+.fraseservicios {
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-size: 30px;
+  margin-top: 5%;
+  margin-bottom: 3%;
+  margin-left: 25%;
+  margin-right: 25%;
+  color: #422A3C;
+}
+
+.btn-servicios {
+background-color: transparent;
+padding-right: 50px;
+padding-left: 50px;
+border-radius: 2px;
+border-color: black;
+border-width: thin;
+font-size: 20px;
+font-family: 'Urbanist';
+}
+
+.redirigirserv {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
