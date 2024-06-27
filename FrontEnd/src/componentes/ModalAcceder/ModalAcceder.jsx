@@ -1,25 +1,38 @@
 import React from 'react';
+import "./ModalAcceder.css"
 import deco from "../../assets/images/decoración.png"
-
+import decor from "../../assets/images/decor.png"
+import o from "../../assets/images/OR.png"
 
 export const ModalAcceder=() => {
 return (
     <div className='todoingreso'>
-<div className='titini'>Ingresa tus datos</div>
-<div className='subtit'>Por favor complete los campos a continuación:</div>
-<div className='datos'>
+        <div className='all'>
+<div className='titini'>Ingresa tus Datos</div>
+<div className='subtit'>Complete los campos a continuación</div>
+
 
 <div className='datos'>
-    <input type="text" placeholder="Ingrese su nombre"/>
-    <input type="text" placeholder="Ingrese su correo"/>
-    <input type="text" placeholder="Ingrese su teléfono"/>
-    <button>Agendar</button>
-    <img className="img-dec" src={deco} />
+    <input type="text" name='email' placeholder = "Ingrese su nombre"/>
+    <input type="text" name='correo' placeholder = "Ingrese su correo"/>
+    <input type="text" name='telefono' placeholder = "Ingrese su teléfono"/>
+    <div className='botoningreso'><button type='submit'><b>Agendar</b></button></div>
+</div>
+
+<div className='decoraciones'>
+<div className='deco1'><img className="img-dec" src={deco} /></div>
+<div className='deco2'><img className="img-o" src={o} /></div>
+<div className='deco3'><img className="img-decor" src={decor} /></div>
+</div>
+
+<div className='lodeabajo'>
+<div className='acclog'>No tienes cuenta?</div>
+<div className='accreg'>Registrate</div>
 </div>
 
 </div>
-
 </div>
+
 );
 }
 

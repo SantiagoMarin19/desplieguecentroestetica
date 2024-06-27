@@ -9,8 +9,7 @@ import {  Pestañas} from "./componentes/Servicio_detalle/serviciopestañas";
 import {Cejas} from "./componentes/Servicio_detalle/Serviciocejas"
 import { Micropigmentacion } from "./componentes/Servicio_detalle/serviciomicropigmentacion";
 import { Condiciones } from "./pages/Terminos";
-
-
+import {Acceder} from './pages/Acceder';
 
 
 
@@ -23,6 +22,7 @@ function App() {
       <Route path="/inicio" element={<InicioSesion />} />
       <Route path='/Politicas' element={<Condiciones />} />
       <Route path='/Politicas' element={<Condiciones />} />
+      <Route path='/Ingresar' element={<Acceder/>}/>
       
       
  

@@ -1,11 +1,10 @@
 import React from 'react';
 import "./CompServicios.css"
-import micro from "../../assets/images/Micro.png"
 import cej from "../../assets/images/cej.png"
-import pes from "../../assets/images/pes.png"
-import combo from "../../assets/images/com.png"
 import tit from "../../assets/images/nuse.png"
 import ModalAcceder from "../ModalAcceder/ModalAcceder"
+import { NavLink } from "react-router-dom";
+
 
 export const CompServicios = () => {
     return (
@@ -27,7 +26,7 @@ export const CompServicios = () => {
                 <h5><b>$49.00</b></h5>
                 <NavLink to="/politicas">
                 <button>Reservar</button>
-                </Navlink>
+                </NavLink>
                 </div>
                 <div className='concej1'>
                 <img className="img-cej" src={cej} />
