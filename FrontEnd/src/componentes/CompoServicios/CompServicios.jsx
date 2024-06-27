@@ -1,5 +1,6 @@
 import React from 'react';
 import "./CompServicios.css"
+import { NavLink } from 'react-router-dom';
 import micro from "../../assets/images/Micro.png"
 import cej from "../../assets/images/cej.png"
 import pes from "../../assets/images/pes.png"
@@ -24,21 +25,22 @@ export const CompServicios = () => {
                 <img className="img-cej" src={cej} />
                 <h5>Diseño-Depilación y sombreado</h5>
                 <h5><b>$49.00</b></h5>
-                <NavLink to="/politicas">
-                <button>Reservar</button>
-                </Navlink>
+                <div className='butonSs'>
+                <NavLink to ="/ServicioCjas"> <button>Reservar</button></NavLink> </div>
                 </div>
                 <div className='concej1'>
                 <img className="img-cej" src={cej} />
                 <h5>Diseño-Depilación y sombreado</h5>
                 <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
+                <div className='butonSs'>
+                <NavLink to ="/ServicioCjas"> <button>Reservar</button></NavLink> </div>
                 </div>
                 <div className='concej1'>
                 <img className="img-cej" src={cej} />
                 <h5>Diseño-Depilación y sombreado</h5>
                 <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
+                <div className='butonSs'>
+                <NavLink to ="/ServicioCjas"> <button>Reservar</button></NavLink> </div>
                 </div>
                 </div>
 
@@ -48,13 +50,15 @@ export const CompServicios = () => {
                 <img className="img-pes" src={cej} />
                 <h5>Diseño-Depilación y sombreado</h5>
                 <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
+                <div className='butonSs'>
+                <NavLink to ="/ServicioPestañas"> <button>Reservar</button></NavLink> </div>
                 </div>
                 <div className='conpes1'>
                 <img className="img-pes" src={cej} />
                 <h5>Diseño-Depilación y sombreado</h5>
                 <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
+                <div className='butonSs'>
+                <NavLink to ="/ServicioPestañas"> <button>Reservar</button></NavLink> </div>
                 </div>
                 </div>
 
@@ -64,19 +68,22 @@ export const CompServicios = () => {
                 <img className="img-mic" src={cej} />
                 <h5>Micropigmentacion Hair Stroke </h5>
                 <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
+                <div className='butonSs'>
+                <NavLink to ="/ServicioMcion"> <button>Reservar</button></NavLink> </div>
                 </div>
                 <div className='conmic1'>
                 <img className="img-mic" src={cej} />
                 <h5>Diseño Depilación en Henna </h5>
                 <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
+                <div className='butonSs'>
+                <NavLink to ="/ServicioMcion"> <button>Reservar</button></NavLink> </div>
                 </div>
                 <div className='conmic1'>
                 <img className="img-mic" src={cej} />
                 <h5>Micropigmentacion de Cejas </h5>
                 <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
+                <div className='butonSs'>
+                <NavLink to ="/ServicioMcion"> <button>Reservar</button></NavLink> </div>
                 </div>
                 </div>
 
@@ -86,25 +93,29 @@ export const CompServicios = () => {
                 <img className="img-com" src={cej} />
                 <h5>Diseño depilacion en henna + lifting de pestañas </h5>
                 <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
+                <div className='butonSs'>
+                <NavLink to =""> <button>Reservar</button></NavLink></div>
                 </div>
                 <div className='concom1'>
                 <img className="img-com" src={cej} />
                 <h5>laminacion de cejas+ extensiones de pestañas </h5>
                 <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
+                <div className='butonSs'>
+                <NavLink to =""> <button>Reservar</button></NavLink></div>
                 </div>
                 <div className='concom1'>
                 <img className="img-com" src={cej} />
                 <h5>Diseño depilacion y sombreado + lifting de pestañas </h5>
                 <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
+                <div className='butonSs'>
+                <NavLink to =""> <button>Reservar</button></NavLink></div>
                 </div>
                 <div className='concom1'>
                 <img className="img-com" src={cej} />
                 <h5>laminacion de cejas+ Lifting de pestañas </h5>
                 <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
+                <div className='butonSs'>
+                <NavLink to =""> <button>Reservar</button></NavLink></div>
                 </div>
                 </div>
 

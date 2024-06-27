@@ -31,7 +31,9 @@ export const Navbar = () => {
                                 CITAS
                             </NavLink>
                         </li>
+                        < hr  className = "linea" />
                     </ul>
+                  
                 </div>
             </div>
         </nav>

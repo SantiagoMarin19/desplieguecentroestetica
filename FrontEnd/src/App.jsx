@@ -9,6 +9,7 @@ import {  Pestañas} from "./componentes/Servicio_detalle/serviciopestañas";
 import {Cejas} from "./componentes/Servicio_detalle/Serviciocejas"
 import { Micropigmentacion } from "./componentes/Servicio_detalle/serviciomicropigmentacion";
 import { Condiciones } from "./pages/Terminos";
+import { ComboSyLifting } from "./componentes/Servicio_detalle/Combosombreadio+lifting";
 
 
 
@@ -23,6 +24,10 @@ function App() {
       <Route path="/inicio" element={<InicioSesion />} />
       <Route path='/Politicas' element={<Condiciones />} />
       <Route path='/Politicas' element={<Condiciones />} />
+      <Route path='/ServicioCjas' element={<Cejas/>}/>
+      <Route path='/ServicioPestañas' element={<Pestañas/>}/>
+      <Route path='/ServicioMcion' element={<Micropigmentacion/>}/>
+      <Route path='/ComboCejas1' element={<ComboSyLifting/>}/>
       
       
  

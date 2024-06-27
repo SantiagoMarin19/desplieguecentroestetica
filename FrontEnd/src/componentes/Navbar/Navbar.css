@@ -1,12 +1,12 @@
 .navbar-centrado{
     display: flex;
     justify-content: center;
-    
+}
 
-}
 .Promociones{
-    color: #a7249c;
+    color: hsl(305, 65%, 40%);
 }
+
 
 .boton-reserva{
     color: black;
@@ -28,11 +28,10 @@
 }   
 
 .navbar{
-    background-color: #e9cbd5 !important;
-    
+    background-color: #FCEBF2 !important;
 }
-.navbar a {
-    
+
+.navbar a {  
     margin-right: 30px;
 }
 

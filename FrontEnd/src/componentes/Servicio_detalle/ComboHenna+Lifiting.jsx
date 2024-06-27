@@ -1,6 +1,6 @@
 import react from 'react';
-import extensionesdepestaña from "../../assets/images/diseñopilacionenhenna.png";
-import liftingdepestañas from "../../assets/images/liftingdepestañas.png";
+import extensionpestaña from "../../assets/images/extensionpestaña.png";
+import {lidtingdepestañas } from "../../assets/images/lidtingdepestañas.png";
 import "./combos.css"
 
 export const ComboHyLifting = () => {
@@ -9,7 +9,7 @@ export const ComboHyLifting = () => {
             <div className='encabezado'>
                 <h1>Diseño depilacion en henna + lifting de pestañas </h1>
             </div>
-            <div className='subtitulo'>
+            <div className='subtituloCmbos'>
                 <h2>Nuestro Metodo:</h2>
             </div>
 
@@ -24,7 +24,7 @@ export const ComboHyLifting = () => {
                     </ul></div>
 
                     <div className='picture'>
-                        <img className='picture1' src={extensionesdepestaña}/>
+                        <img className='picture1' src={extensionpestaña}/>
                         </div>
                     </div>
 
@@ -38,7 +38,7 @@ export const ComboHyLifting = () => {
                         </ul></div>
 
                         <div className='picture'>
-                        <img className='picture2' src={liftingdepestañas}/>
+                        <img className='picture2' src={lidtingdepestañas}/>
                         </div>
                     </div>
                     </div> 
