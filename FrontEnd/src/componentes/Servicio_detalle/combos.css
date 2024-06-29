@@ -5,7 +5,6 @@ body{
 
 .encabezado{
     padding: 3rem;
-    width: 100%;
     text-align: center;
     color: #422A3C;
     font-weight: 700;
@@ -13,61 +12,62 @@ body{
     box-shadow: 0 15px 18px rgba(0, 0, 0, 0.1);
 }
 .subtituloCmbos{
-    padding: 2rem;
-    margin: 10px;
+margin-top: 100px;
+margin-bottom: 10px;
+padding: 1rem;
 }
+
 .subtituloCmbos h2{
   color: #B66E7A;
   text-align: left;  
 }
 
+.contenedor_contenido{
+    width: 100%;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgb(243, 242, 242);
+}
 
 
 .contenido_combo1{
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    margin: 15px;
-    
+    margin-bottom: 30px;
+    border-radius: 10px;
+    background-color: #fff;
 }
 
 .contenido_combo1 li{
-    width: 70%;
     color: black;
     text-align: justify;
     font-family: "Manrope", sans-serif;
-    font-weight: normal;
-    font-style: normal;
-    text-align: justify;
     font-size: 20px;
+    width: 50%;
+   margin: 20px;
 }
 
 .contenido_combo2{
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    margin: 15px;
 }
 
 .contenido_combo2 li{
-    width: 70%;
     color: black;
-    text-align:justify;
     font-family: "Manrope", sans-serif;
-    font-weight: normal;
-    font-style: normal;
     text-align: justify;
     font-size: 20px;
+    width: 50%;
+   margin: 20px;
 }
 
 .picture img {
-    max-width: 100%;
-    height: auto;
-    box-shadow: 0 15px 18px rgba(0, 0, 0, 0.1);
+    max-width: 100%;  /* Ensures images scale down */
+    height: auto;       /* Maintains aspect ratio */
+    border-radius: 10px; /* Maintains rounded corners */
+    object-fit: cover;  /* Images will crop to fill container */
+  }
+  
+
+.conten_h3{
+    width: 100%;
 }
 
 .conten_h3 h3{
@@ -82,12 +82,12 @@ body{
     align-items: flex-start;
 }
 
-.informacion{
-    width: 30%;
-    display: flex;
-}
 
-.botonera{
+.btn_reservar{
+    color: #000000;
+    background-color: #B66E7A;
+    border: #FCEBF2;
+    border-radius: 10px;
     text-align: center;
     padding: 25px;
 }
