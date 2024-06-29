@@ -6,8 +6,7 @@ export const Acceder = () => {
 
   return (
     <>
-   <ModalAcceder></ModalAcceder>
-
+   <ModalAcceder/>
         
         
 

@@ -8,7 +8,7 @@ export const ModalAcceder=() => {
 return (
     <div className='todoingreso'>
         <div className='all'>
-<div className='titini'>Ingresa tus Datos</div>
+<div className='titini'><b>Ingresa tus Datos</b></div>
 <div className='subtit'>Complete los campos a continuación</div>
 
 
