@@ -61,6 +61,7 @@ input {
     margin-bottom: 10px;
     padding: 10px;
     font-family: system-ui;
+    padding-right: 20px;
 }
 b {
     font-family: sans-serif;
@@ -74,14 +75,20 @@ b {
 }
 .cont1 {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 .cont2 {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .bx {
     font-size: 20px;
-
+transform: translateX(-22px);
+color: rgb(150, 150, 150);
+cursor: pointer;
 }

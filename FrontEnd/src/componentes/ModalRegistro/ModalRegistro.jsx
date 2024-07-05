@@ -1,6 +1,8 @@
 import React from 'react';
 import 'boxicons'
+import 'boxicons/css/boxicons.min.css';
 import "./ModalRegistro.css"
+import "../mostrarcontraseña"
 import deco from "../../assets/images/decoración.png"
 import decor from "../../assets/images/decor.png"
 import o from "../../assets/images/OR.png"
@@ -15,11 +17,14 @@ return (
 
 <div className='datos'>
     <div className='cont1'>
-        <i className='bx bx-show'/>
-    <input type="password" name='contraseña' placeholder = "Contraseña"/></div>
+       
+    <input type="password" name='contraseña' id="Input1" placeholder = "Contraseña"/>
+    <i className='bx bx-show'/></div>
     <div className='cont2'>
+    
     <input type="password" name='repcontraseña' placeholder = "Confirmar contraseña"/>
-    <box-icon name='show' color='#D9D9D9' ></box-icon></div>
+    <i className='bx bx-show'/>
+    </div>
     <div className='botoningreso'><button type='submit'><b>Registrarse</b></button></div>
 </div>
 
@@ -34,9 +39,7 @@ return (
 <div className='accini'>Iniciar sesión</div>
 </div>
 
-<script>
-    
-</script>
+
 
 </div>
 </div>

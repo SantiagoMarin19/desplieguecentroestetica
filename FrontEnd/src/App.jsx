@@ -24,7 +24,7 @@ function App() {
       <Route path='/Politicas' element={<Condiciones />} />
       <Route path='/Politicas' element={<Condiciones />} />
       <Route path='/Ingresar' element={<Acceder/>}/>
-      <Route path='/Hola' element={<Registro/>}/>
+      <Route path='/Nuevo' element={<Registro/>}/>
       
       
  
