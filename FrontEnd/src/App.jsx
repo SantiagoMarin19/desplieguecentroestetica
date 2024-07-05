@@ -10,6 +10,7 @@ import {Cejas} from "./componentes/Servicio_detalle/Serviciocejas"
 import { Micropigmentacion } from "./componentes/Servicio_detalle/serviciomicropigmentacion";
 import { Condiciones } from "./pages/Terminos";
 import {Acceder} from './pages/Acceder';
+import { Registro } from "./pages/Registro";
 
 
 
@@ -23,6 +24,7 @@ function App() {
       <Route path='/Politicas' element={<Condiciones />} />
       <Route path='/Politicas' element={<Condiciones />} />
       <Route path='/Ingresar' element={<Acceder/>}/>
+      <Route path='/Hola' element={<Registro/>}/>
       
       
  
