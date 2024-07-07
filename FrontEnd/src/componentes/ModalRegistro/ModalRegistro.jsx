@@ -22,7 +22,7 @@ return (
     <i className='bx bx-show'/></div>
     <div className='cont2'>
     
-    <input type="password" name='repcontraseña' placeholder = "Confirmar contraseña"/>
+    <input type="password" name='repcontraseña'  id="Input" placeholder = "Confirmar contraseña"/>
     <i className='bx bx-show'/>
     </div>
     <div className='botoningreso'><button type='submit'><b>Registrarse</b></button></div>
