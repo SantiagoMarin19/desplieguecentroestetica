@@ -3,6 +3,7 @@ import "./ModalAcceder.css"
 import deco from "../../assets/images/decoración.png"
 import decor from "../../assets/images/decor.png"
 import o from "../../assets/images/OR.png"
+import { NavLink } from 'react-router-dom';
 
 export const ModalAcceder=() => {
 return (
@@ -27,7 +28,7 @@ return (
 
 <div className='lodeabajo'>
 <div className='acclog'>No tienes cuenta?</div>
-<div className='accreg'>Registrate</div>
+<NavLink to="/registro"><div className='accreg'>Registrate</div></NavLink>
 </div>
 
 </div>
