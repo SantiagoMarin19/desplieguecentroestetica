@@ -31,6 +31,11 @@ export const Navbar = () => {
                                 CITAS
                             </NavLink>
                         </li>
+                        <li className="nav-item">
+                            <NavLink to="/Ingresar" className="nav-link" activeClassName="active">
+                                Iniciar Sesion
+                            </NavLink>
+                        </li>
 
                         
                       
@@ -38,6 +43,7 @@ export const Navbar = () => {
 
 
                     </ul>
+                  
                 </div>
             </div>
         </nav>

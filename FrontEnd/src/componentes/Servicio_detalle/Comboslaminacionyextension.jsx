@@ -1,6 +1,6 @@
 import react from 'react';
-import diseñodepilacionysombreado from "../../assets/images/diseñodepilacionysombreado.png";
-import liftingdepestañas from "../../assets/images/liftingdepestañas.png";
+import sombreadoceja from "../../assets/images/sombreadoceja.png";
+import lidtingdepestañas from "../../assets/images/lidtingdepestañas.png";
 import "./combos.css"
 
 export const ComboSyLifting = () => {
@@ -9,7 +9,7 @@ export const ComboSyLifting = () => {
             <div className='encabezado'>
                 <h1>laminacion de cejas+ extensiones de pestañas   </h1>
             </div>
-            <div className='subtitulo'>
+            <div className='subtituloCmbos'>
                 <h2>Nuestro Metodo:</h2>
             </div>
 
@@ -25,7 +25,7 @@ export const ComboSyLifting = () => {
                     </div>
 
                     <div className='picture'>
-                        <img className='picture1' src={diseñodepilacionysombreado}/>
+                        <img className='picture1' src={sombreadoceja}/>
                         </div>
                     </div>
 
@@ -39,20 +39,25 @@ export const ComboSyLifting = () => {
                         </ul></div>
 
                         <div className='picture'>
-                        <img className='picture2' src={liftingdepestañas}/>
+                        <img className='picture2' src={lidtingdepestañas}/>
                         </div>
                     </div>
                     </div> 
 
-                    <div className='contenido_botones'>
-                    <div className='informacion'>
-                        <p>120 Minutos</p>
-                        <p>$120.000</p>
-                        </div>
-                        
-                        <div className='botonera'>
-                            <button id='boton'>Reservar Ahora</button>
+                    <div className='content_boton'>     
+                    <div className='botones'>
+                                <button id='boton'>Reservar Ahora</button>
                             </div>
+                                <div className='botontyp'>  
+                                    <div className='tiempo'>
+                                        <h4>Tiempo</h4>
+                                        <p>60 Minutos</p>
+                                    </div>
+                                    <div className='precio'>
+                                        <h4>Precio</h4>
+                                        <p>$120.000</p>
+                                    </div>
+                                </div>
                             </div>
         </div>
     

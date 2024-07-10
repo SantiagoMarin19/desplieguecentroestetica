@@ -1,8 +1,10 @@
 import react from 'react';
 import './servicios.css';
 import microlabios from "../../assets/images/microlabios.png";
+import  hairstroke  from "../../assets/images/Hairstroke.png";
 import microcejas from "../../assets/images/microcejas.png";
-import hairstroke from "../../assets/images/Hairstroke.png";
+
+
 
 export const Micropigmentacion = () => {
     return (
