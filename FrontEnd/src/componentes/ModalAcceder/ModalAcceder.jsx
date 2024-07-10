@@ -4,16 +4,27 @@ import deco from "../../assets/images/decoración.png"
 import decor from "../../assets/images/decor.png"
 import o from "../../assets/images/OR.png"
 import { NavLink } from 'react-router-dom';
+import "../ModalAcceder"
 
 export const ModalAcceder=() => {
 return (
     <div className='todoingreso'>
         <div className='all'>
-<div className='titini'><b>Ingresa tus Datos</b></div>
-<div className='subtit'>Complete los campos a continuación</div>
 
 
-<div className='datos'>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAcceder" data-bs-whatever="@mdo">Open modal for @mdo</button>
+
+
+<div class="modal fade" id="modalAcceder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div className='titini'>Ingresa tus Datos</div>
+    <div className='subtit'>Complete los campos a continuación</div>
+      <div className='datos'>
     <input type="text" name='email' placeholder = "Ingrese su nombre"/>
     <input type="text" name='correo' placeholder = "Ingrese su correo"/>
     <input type="text" name='telefono' placeholder = "Ingrese su teléfono"/>
@@ -31,6 +42,11 @@ return (
 <NavLink to="/registro"><div className='accreg'>Registrate</div></NavLink>
 </div>
 
+</div>
+
+      </div>
+    </div>
+  </div>
 </div>
 </div>
 
