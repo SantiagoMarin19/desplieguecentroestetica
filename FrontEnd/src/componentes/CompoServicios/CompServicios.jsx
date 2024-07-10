@@ -94,21 +94,21 @@ export const CompServicios = () => {
                 <h5>Diseño depilacion en henna + lifting de pestañas </h5>
                 <h5><b>$49.00</b></h5>
                 <div className='butonSs'>
-                <NavLink to =""> <button>Reservar</button></NavLink></div>
+                <NavLink to ="/ComboHennayLifting"> <button>Reservar</button></NavLink></div>
                 </div>
                 <div className='concom1'>
                 <img className="img-com" src={cej} />
                 <h5>laminacion de cejas+ extensiones de pestañas </h5>
                 <h5><b>$49.00</b></h5>
                 <div className='butonSs'>
-                <NavLink to =""> <button>Reservar</button></NavLink></div>
+                <NavLink to ="/ComboLaminacionyExtension"> <button>Reservar</button></NavLink></div>
                 </div>
                 <div className='concom1'>
                 <img className="img-com" src={cej} />
                 <h5>Diseño depilacion y sombreado + lifting de pestañas </h5>
                 <h5><b>$49.00</b></h5>
                 <div className='butonSs'>
-                <NavLink to =""> <button>Reservar</button></NavLink></div>
+                <NavLink to ="/ComboDiseñoyLifting"> <button>Reservar</button></NavLink></div>
                 </div>
                 <div className='concom1'>
                 <img className="img-com" src={cej} />

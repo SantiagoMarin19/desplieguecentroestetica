@@ -1,6 +1,6 @@
 import react from 'react';
 import extensionpestaña from "../../assets/images/extensionpestaña.png";
-import {lidtingdepestañas } from "../../assets/images/lidtingdepestañas.png";
+import lidtingdepestañas  from "../../assets/images/lidtingdepestañas.png";
 import "./combos.css"
 
 export const ComboHyLifting = () => {
@@ -47,7 +47,7 @@ export const ComboHyLifting = () => {
                     <div className='botones'>
                                 <button id='boton'>Reservar Ahora</button>
                             </div>
-                                <div className='botontyp'>  
+                                <div className='combobotontyp'>  
                                     <div className='tiempo'>
                                         <h4>Tiempo</h4>
                                         <p>60 Minutos</p>
