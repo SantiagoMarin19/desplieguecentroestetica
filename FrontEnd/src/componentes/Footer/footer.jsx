@@ -13,12 +13,12 @@ export const Piedepagina = () => {
                 <i class='bx bxl-facebook-circle iconos_grandes'></i></h3>
             </div>
             
-            <div className='contenedor'>
+            <div className='contenedorif'>
                 <div className='izquierda'>
                     <h3>Explorar</h3>
-                    <button>Inicio </button>
-                    <button>Acerca De</button>
-                    <button>Servicios</button>
+                    <p>Inicio </p>
+                    <p>Acerca De</p>
+                    <p>Servicios</p>
                     </div>
                     
                     <div className='centro'>

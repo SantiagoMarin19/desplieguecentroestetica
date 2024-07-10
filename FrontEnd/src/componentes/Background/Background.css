@@ -1,14 +1,15 @@
+
+
 .background {
   background-color: #FCEBF2;
   width: 100vw;
   height: 100vh;
   display: flex;
-
   justify-content: left;
   align-items: center;
   overflow-y: scroll;
-
 }
+
 body {
   overflow-x: hidden; /* Oculta la barra de desplazamiento horizontal */
 }
@@ -18,7 +19,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
   background-image: url(../../assets/images/fondo3.png);
   width: 100vw;
   height: 100vh;
@@ -26,6 +26,8 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  box-sizing: border-box; /* Asegura que el padding no incremente el tamaño total */
+  padding: 50px; /* Añadido para espacio interior */
 }
 
 
@@ -55,8 +57,24 @@ body {
 
 .enunciados{
 justify-content: center;
-font-family: "Urbanist", sans-serif;
+text-align: center; /* Centra los enunciados */
+color: #422A3C;
+font-weight: 700;
+font-family: "Playfair Display", serif;
+margin-bottom: 40px; /* Espacio inferior */
+width: 50%;
 }
+
+.enunciados h2 {
+  font-size: 36px; /* Tamaño del título principal */
+  margin-bottom: 20px; /* Espacio inferior */
+  }
+  
+  .enunciados h3 {
+  font-size: 24px; /* Tamaño del subtítulo */
+  margin-bottom: 30px; /* Espacio inferior */
+  color: #fff;
+  }
 
 
 .buttonservi{
@@ -112,8 +130,47 @@ font-family: "Urbanist", sans-serif;
   margin-top: 100px;
   margin-bottom: 50px;
 }
+.mapa {
+  text-align: center; /* Centra el mapa y el botón */
+  margin-top: 30px; /* Espacio superior */
+  }
 
+  .mapa iframe {
+    width: 100%; /* Ajusta el ancho del mapa */
+    max-width: 800px; /* Límite máximo de ancho */
+    height: 450px; /* Altura fija */
+    border: none; /* Sin borde al iframe */
+    border-radius: 10px; /* Borde redondeado */
+    margin-bottom: 20px; /* Espacio inferior */
+    }
 
+.mapa button {
+      background-color: #ffffff; /* Color de fondo del botón */
+      color: #BF6A8C; /* Color del texto del botón */
+     border: none; /* Sin borde */
+      padding: 10px 20px; /* Espaciado interno */
+      font-size: 18px; /* Tamaño de fuente */
+      cursor: pointer; /* Cursor de puntero */
+      transition: background-color 0.3s ease; /* Transición suave */
+      }
+
+.mapa button:hover {
+  background-color: rgba(255, 255, 255, 0.8); /* Cambia el fondo al pasar el mouse */
+ }
+
+ @media (max-width: 768px) {
+ .enunciados h2 {
+ font-size: 28px; /* Ajuste para pantallas más pequeñas */
+ }
+  
+.enunciados h3 {
+ font-size: 20px; /* Ajuste para pantallas más pequeñas */
+ }
+  
+.mapa iframe {
+  height: 300px; /* Ajuste de altura para pantallas pequeñas */
+ }
+  }
 
 
 
@@ -221,4 +278,21 @@ font-family: "Urbanist", sans-serif;
   margin-left: 25%;
   margin-right: 25%;
   color: #422A3C;
+}
+
+.btn-servicios {
+background-color: transparent;
+padding-right: 50px;
+padding-left: 50px;
+border-radius: 2px;
+border-color: black;
+border-width: thin;
+font-size: 20px;
+font-family: 'Urbanist';
+}
+
+.redirigirserv {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
 }

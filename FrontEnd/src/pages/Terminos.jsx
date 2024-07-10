@@ -1,16 +1,19 @@
 import React, { useContext, useState } from "react";
 import { Navbar } from "../componentes/Navbar/Navbar";
 import {Promociones} from "../componentes/Promociones/Promociones"
-import {CompServicios} from "../componentes/CompoServicios/CompServicios"
+import {Politicases} from "../componentes/Politicas/Politicas"
+import {Piedepagina} from "../componentes/Footer/footer"
 
-export const Servicios = () => {
+export const Condiciones = () => {
     return (
         <>
     <Promociones></Promociones>
     <Navbar></Navbar>
-        <CompServicios></CompServicios>
+        <Politicases></Politicases>    
+        <Piedepagina/>    
+      
         </>
+       
     )
 }
-export default Servicios;
-
+export default Condiciones;
