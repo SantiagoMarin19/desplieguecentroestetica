@@ -61,7 +61,7 @@ input {
     margin-bottom: 10px;
     padding: 10px;
     font-family: system-ui;
-    padding-right: 20px;
+    padding-right: 270px;
 }
 b {
     font-family: sans-serif;
@@ -83,13 +83,12 @@ b {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
 }
 .cont3 {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+
 }
 
 .bx {
@@ -101,4 +100,17 @@ cursor: pointer;
 
 .holaxs {
     transform: translateX(-10px);
+}
+
+.bx-show:before {
+    content: "\ec0c";
+transform: translateX(-22px);
+}
+.bx-hide::before {
+    content: "\ec0c";
+transform: translateX(-22px);
+}
+
+.Input1{
+    padding-right: 58%;
 }

@@ -16,6 +16,7 @@ import { Recuperar } from "./pages/Recuperar"
 import { Recuperar2 } from "./pages/Recuperar2"
 import { Recuperar3 } from "./pages/Recuperar3"
 import { Recuperar4 } from "./pages/Recuperar4"
+import { Agendar } from "./pages/Agendar"
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
       <Route path='/Recover2' element={<Recuperar2/>}/>
       <Route path='/Recover3' element={<Recuperar3/>}/>
       <Route path='/Recover4' element={<Recuperar4/>}/>
-
+      <Route path='/Agendarcita' element={<Agendar/>}/>
     </Routes>
   </Router>
   );

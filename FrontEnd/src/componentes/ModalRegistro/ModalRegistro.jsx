@@ -12,19 +12,22 @@ return (
     <div className='todoingreso'>
         <div className='all'>
 
-        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div className="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabIndex="-1">
+  <div className="modal-dialog modal-dialog-centered">
+    <div className="modal-content">
+      <div className="modal-header">
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-      <div className='titini'>Ingresa tus Datos</div>
+      <div className="modal-body">
+      <div className='titini'>Iniciar sesión</div>
     <div className='subtit'>Complete los campos a continuación</div>
       <div className='datos'>
-    <input type="text" name='email' placeholder = "Ingrese su nombre"/>
-    <input type="text" name='correo' placeholder = "Ingrese su correo"/>
-    <input type="text" name='telefono' placeholder = "Ingrese su teléfono"/>
+    <input type="text" name='correo' id='Inputmail1' placeholder= "Ingrese su correo"/>
+    <div className='cont2'>
+    <input type="password" name='contraseña' id="Input1" placeholder = "Contraseña" />
+    <i className='bx bx-show'/>
+    </div>
+
     <div className='botoningreso'><button type='submit'><b>Agendar</b></button></div>
 </div>
 
@@ -36,7 +39,7 @@ return (
 
 <div className='lodeabajo'>
 <div className='acclog'>No tienes cuenta?</div>
-<button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Registrarme</button>
+<button className="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Registrarme</button>
 </div>
       </div>
 
@@ -44,33 +47,28 @@ return (
     </div>
   </div>
 </div>
-<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 2</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div className="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabIndex="-1">
+  <div className="modal-dialog modal-dialog-centered">
+    <div className="modal-content">
+      <div className="modal-header">
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div className="modal-body">
         
       <div className='titini'>Registrarse</div>
 <div className='subtit'>Complete los campos a continuación</div>
 
 
 <div className='datos'>
-
-<div className='cont1'>
-    <input type="text" name='email' id="Input0" placeholder = "Email" className='holaxs'/>
-    </div>
-
+<input type="text" name='correo' id='Inputmail2' placeholder= "Ingrese su correo"/>
     <div className='cont2'>
-    <input type="password" name='contraseña' id="Input1" placeholder = "Contraseña" />
+    <input type="password" name='contraseña' id="Input2" placeholder = "Contraseña" />
     <i className='bx bx-show'/>
     </div>
 
     <div className='cont3'>
     
-    <input type="password" name='repcontraseña'  id="Input" placeholder = "Confirmar contraseña"/>
+    <input type="password" name='repcontraseña'  id="Input3" placeholder = "Confirmar contraseña"/>
     <i className='bx bx-show'/>
     </div>
     <div className='botoningreso'><button type='submit'><b>Registrarse</b></button></div>
@@ -84,17 +82,14 @@ return (
 
 <div className='lodeabajo'>
 <div className='acclog'>ya tienes cuenta?</div>
-<div className='accini'>Iniciar sesión</div>
+<button className="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Iniciar sesión</button>
 </div>
 
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to first</button>
       </div>
     </div>
   </div>
 </div>
-<button class="btn btn-principal" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Open first modal</button>
+<button className="btn btn-principal" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Iniciar sesión</button>
 
 </div>
 </div>

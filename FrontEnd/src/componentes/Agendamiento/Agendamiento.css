@@ -1,0 +1,60 @@
+body { background-color: rgb(255, 255, 255) }
+
+.escprof {
+    font-size: 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+select {
+    font-size: 20px;
+}
+
+option {
+    font-size: 20px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 15px;
+    font-size: 20px;
+    word-wrap: break-word;
+}
+
+.todoingreso {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.escogerprof {
+    display: flex;
+    flex-direction: column;
+}
+
+.partetabla {
+    display: flex;
+    flex-direction: column;
+}
+.colorros {
+    background-color: #FCEBF2;
+
+}
+
+select {
+    border-color:  #FCEBF2;
+
+}
+
+.helloxd {
+    height: 100vh;
+}
+
+
+/*sirve para que no se deborde el texto (word-wrap: break-word); */

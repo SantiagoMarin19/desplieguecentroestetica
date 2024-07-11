@@ -12,7 +12,7 @@ return (
         <div className='all'>
 
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAcceder" data-bs-whatever="@mdo">Open modal for @mdo</button>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAcceder" data-bs-whatever="@mdo">Iniciar sesión</button>
 
 
 <div class="modal fade" id="modalAcceder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
