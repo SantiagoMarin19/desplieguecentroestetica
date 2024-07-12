@@ -56,5 +56,8 @@ select {
     height: 100vh;
 }
 
+button {
+    color: black;
+}
 
 /*sirve para que no se deborde el texto (word-wrap: break-word); */

@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./Agendamiento.css"
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css';
 
 
 export const Agendamiento = () => {
+
+    const [date, setDate] = useState (new Date ());
+    const onChange = date => {
+        setDate(date)
+    }
+
     return (
         
         <div className='todoingreso'>
@@ -49,7 +57,9 @@ export const Agendamiento = () => {
                 </div>
             </div>
             <div className='partright'>
-                Holaaaa
+                
+            <Calendar onChange={onChange} value={date}></Calendar>
+                {console.log(date)}
             </div>
 
         </div>
