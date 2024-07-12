@@ -13,6 +13,7 @@ import { ComboHeyLifting } from "./pages/ComboC-Henna+Lifing";
 import { ComboSombrayLifiting } from "./pages/comboC-Sombreado+Lifitng";
 import {Combolamiyextension} from "./pages/ComboP-Lamc+Extension"
 import { Combolaminylif } from "./pages/ComboP-Lamc+Lifting";
+import { Pantalladcarga } from './componentes/Animación/Carga';
 
 
 
@@ -34,6 +35,13 @@ function App() {
       <Route path='/Combosombreadoylifting' element={<ComboSombrayLifiting/>}/>
       <Route path='/ComboLaminacionyExtension' element={<Combolamiyextension/>}/>
       <Route path='/ComboLaminacionyLifting' element={<Combolaminylif/>}/>
+      <Route path='/Carga' element={<Pantalladcarga/>}/>
+      <Pantalladcarga /> {/* Asegúrate de que Pantalladcarga esté montado en el nivel adecuado */}
+            <Switch>
+                <Route exact path="/" component={CompServicios} />
+                <Route path="/ComboHennayLifting" component={ComboHyLifting} />
+               </Switch>
+    
       
       
  
