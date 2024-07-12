@@ -34,6 +34,8 @@ button {
     display: flex;
     justify-content: center;
     font-family: sans-serif;
+    color: gray;
+    align-items: center;
 }
 .all {
     display: flex;
@@ -72,3 +74,26 @@ b {
     text-decoration: underline;
     padding: 5px;
 }
+
+.modal-header {
+    border-bottom: none;
+}
+a {
+    color: gray;
+}
+
+.btn-primary {
+    color: gray;
+    background-color: transparent;
+    display: contents;
+    --bs-btn-hover-color: gray;
+}
+.btn-principal:hover {
+    background-color: #BA7894;
+    
+  
+}
+
+  .btn-principal {
+        background-color: #BA7894;
+    }

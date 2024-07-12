@@ -4,6 +4,7 @@ import deco from "../../assets/images/decoración.png"
 import decor from "../../assets/images/decor.png"
 import o from "../../assets/images/OR.png"
 import { NavLink } from 'react-router-dom';
+import "../ModalAcceder"
 
 export const ModalAcceder = () => {
     return (

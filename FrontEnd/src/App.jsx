@@ -21,17 +21,19 @@ import { Micropigmentacion } from "./componentes/Servicio_detalle/serviciomicro"
 import { Condiciones } from "./pages/Terminos";
 import { ComboSyLifting } from "./componentes/Servicio_detalle/Combosombreadio+lifting";
 import { Recuperar4 } from "./pages/Recuperar4"
-import LoginUser from './pages/Login';
+import { Agendar } from "./pages/Agendar"
 import SignUp from './pages/SignUp';
+import LoginUser from './pages/Login';
+
 
 function App() {
   return (
     <Router>
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/servicios" element={<Servicios />} />
         <Route path="/inicio" element={<InicioSesion />} />
-        <Route path='/Politicas' element={<Condiciones />} />
         <Route path='/Politicas' element={<Condiciones />} />
         <Route path='/Ingresar' element={<Acceder />} />
         <Route path='/registro' element={<Registro />} />
@@ -45,16 +47,16 @@ function App() {
         <Route path='/ComboCejas1' element={<ComboSyLifting />} />
         <Route path='/Recover4' element={<Recuperar4 />} />
         <Route path='/DB' element={<AppDataBase />} />
-
-        <Route path="/" element={<Home />} />
-        <Route path='/loginsupa' element={<LoginUser />} />
-        <Route path='/Registrar' element={<SignUp />} />
+        <Route path='/Agendarcita' element={<Agendar/>}/>
+        <Route path='/loginsupa' element={<LoginUser/>} />
+        <Route path='/Registrar' element={<SignUp/>} />
         <Route path='/DB' element={<AppDataBase />} />
 
 
 
       </Routes>
     </Router>
+
   );
 
 }

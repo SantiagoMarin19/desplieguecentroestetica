@@ -84,8 +84,7 @@ const SignUp = () => {
 
 
       </form>
-      Ya tienes una cuenta
-      ?<Link to='/loginsupa'>Login</Link> 
+      Ya tienes una?<Link to='/loginsupa'>Login</Link> 
     </div>
   )
 }
