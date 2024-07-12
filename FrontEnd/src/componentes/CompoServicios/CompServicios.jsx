@@ -26,21 +26,21 @@ export const CompServicios = () => {
                 <h5>Diseño-Depilación y sombreado</h5>
                 <h5><b>$49.00</b></h5>
                 <div className='butonSs'>
-                <NavLink to ="/ServicioCjas"> <button>Reservar</button></NavLink> </div>
+                <NavLink to ="/ServicioCejas"> <button>Reservar</button></NavLink> </div>
                 </div>
                 <div className='concej1'>
                 <img className="img-cej" src={cej} />
                 <h5>Diseño-Depilación y sombreado</h5>
                 <h5><b>$49.00</b></h5>
                 <div className='butonSs'>
-                <NavLink to ="/ServicioCjas"> <button>Reservar</button></NavLink> </div>
+                <NavLink to ="/ServicioCejas"> <button>Reservar</button></NavLink> </div>
                 </div>
                 <div className='concej1'>
                 <img className="img-cej" src={cej} />
                 <h5>Diseño-Depilación y sombreado</h5>
                 <h5><b>$49.00</b></h5>
                 <div className='butonSs'>
-                <NavLink to ="/ServicioCjas"> <button>Reservar</button></NavLink> </div>
+                <NavLink to ="/ServicioCejas"> <button>Reservar</button></NavLink> </div>
                 </div>
                 </div>
 
@@ -69,21 +69,21 @@ export const CompServicios = () => {
                 <h5>Micropigmentacion Hair Stroke </h5>
                 <h5><b>$49.00</b></h5>
                 <div className='butonSs'>
-                <NavLink to ="/ServicioMcion"> <button>Reservar</button></NavLink> </div>
+                <NavLink to ="/ServicioMicropigmentacion"> <button>Reservar</button></NavLink> </div>
                 </div>
                 <div className='conmic1'>
                 <img className="img-mic" src={cej} />
                 <h5>Diseño Depilación en Henna </h5>
                 <h5><b>$49.00</b></h5>
                 <div className='butonSs'>
-                <NavLink to ="/ServicioMcion"> <button>Reservar</button></NavLink> </div>
+                <NavLink to ="/ServicioMicropigmentacion"> <button>Reservar</button></NavLink> </div>
                 </div>
                 <div className='conmic1'>
                 <img className="img-mic" src={cej} />
                 <h5>Micropigmentacion de Cejas </h5>
                 <h5><b>$49.00</b></h5>
                 <div className='butonSs'>
-                <NavLink to ="/ServicioMcion"> <button>Reservar</button></NavLink> </div>
+                <NavLink to ="/ServicioMicropigmentacion"> <button>Reservar</button></NavLink> </div>
                 </div>
                 </div>
 
@@ -108,14 +108,14 @@ export const CompServicios = () => {
                 <h5>Diseño depilacion y sombreado + lifting de pestañas </h5>
                 <h5><b>$49.00</b></h5>
                 <div className='butonSs'>
-                <NavLink to ="/ComboDiseñoyLifting"> <button>Reservar</button></NavLink></div>
+                <NavLink to ="/Combosombreadoylifting"> <button>Reservar</button></NavLink></div>
                 </div>
                 <div className='concom1'>
                 <img className="img-com" src={cej} />
                 <h5>laminacion de cejas+ Lifting de pestañas </h5>
                 <h5><b>$49.00</b></h5>
                 <div className='butonSs'>
-                <NavLink to =""> <button>Reservar</button></NavLink></div>
+                <NavLink to ="/ComboLaminacionyLifting"> <button>Reservar</button></NavLink></div>
                 </div>
                 </div>
 

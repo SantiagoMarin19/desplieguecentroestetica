@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Navbar } from "../componentes/Navbar/Navbar";
 import { Promociones } from "../componentes/Promociones/Promociones";
-import {ComboSyLifting} from "../componentes/Servicio_detalle/Comboslaminacionyextension";
+import {ComboSyLifting} from "../componentes/Servicio_detalle/Combosombreadio+lifting";
 
 
 
-export const Combolamyexon= () => {
+export const ComboSombrayLifiting = () => {
 
   return (
     <>
@@ -19,4 +19,4 @@ export const Combolamyexon= () => {
   );
 };
 
-export default Combolamyexon;
+export default ComboSombrayLifiting;

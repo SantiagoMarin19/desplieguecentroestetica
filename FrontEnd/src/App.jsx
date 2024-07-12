@@ -9,9 +9,10 @@ import { ServicioPestañas} from "./pages/ServicioP";
 import {ServicioCjas} from "./pages/ServicioC"
 import { ServicioMcion } from "./pages/ServicioM";
 import { Condiciones } from "./pages/Terminos";
-import { ComboHeyLifting } from "./pages/ComboCejas1";
-import { Combodepylif } from "./pages/comboDyL";
-import {Combolamyexon} from "./pages/ComboLayExp"
+import { ComboHeyLifting } from "./pages/ComboC-Henna+Lifing";
+import { ComboSombrayLifiting } from "./pages/comboC-Sombreado+Lifitng";
+import {Combolamiyextension} from "./pages/ComboP-Lamc+Extension"
+import { Combolaminylif } from "./pages/ComboP-Lamc+Lifting";
 
 
 
@@ -30,8 +31,9 @@ function App() {
       <Route path='/ServicioPestañas' element={<ServicioPestañas/>}/>
       <Route path='/ServicioMicropigmentacion' element={<ServicioMcion/>}/>
       <Route path='/ComboHennayLifting' element={<ComboHeyLifting/>}/>
-      <Route path='/ComboDiseñoyLifting' element={<Combodepylif/>}/>
-      <Route path='/ComboLaminacionyExtension' element={<Combolamyexon/>}/>
+      <Route path='/Combosombreadoylifting' element={<ComboSombrayLifiting/>}/>
+      <Route path='/ComboLaminacionyExtension' element={<Combolamiyextension/>}/>
+      <Route path='/ComboLaminacionyLifting' element={<Combolaminylif/>}/>
       
       
  
