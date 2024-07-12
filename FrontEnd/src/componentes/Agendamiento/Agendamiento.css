@@ -60,4 +60,7 @@ button {
     color: black;
 }
 
+.partright {
+    display: flex;
+}
 /*sirve para que no se deborde el texto (word-wrap: break-word); */

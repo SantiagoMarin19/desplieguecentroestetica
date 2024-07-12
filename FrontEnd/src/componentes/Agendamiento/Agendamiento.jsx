@@ -6,13 +6,30 @@ import 'react-calendar/dist/Calendar.css';
 
 export const Agendamiento = () => {
 
-    const [date, setDate] = useState (new Date ());
+    const [date, setDate] = useState(new Date());
+
     const onChange = date => {
-        setDate(date)
+        setDate(date);
+    };
+
+    const tileContent = ({ date, view }) => {
+        if (view === 'month') {
+            return (
+                <p>
+                    {date.getDate()} {date.toLocaleDateString('default', { month: 'short' })} {date.getFullYear()}
+                </p>
+            )
+        }
     }
 
+    const [selectedHora, setSelectedHora] = useState('--Escoge hora--');
+
+    const handleHoraChange = event => {
+        setSelectedHora(event.target.options[event.target.selectedIndex].text);
+    };
+
     return (
-        
+
         <div className='todoingreso'>
 
             <div className='partleft'>
@@ -32,7 +49,7 @@ export const Agendamiento = () => {
 
                     <table>
                         <tr>
-                            <td colSpan={2} className='colorros'>fecha que va a escoger</td>
+                            <td colSpan={2} className='colorros'>{date.getDate()} {date.toLocaleDateString('default', { month: 'short' })} {date.getFullYear()} - {selectedHora}</td>
                         </tr>
                         <tr>
                             <th>Profesional</th>
@@ -57,9 +74,23 @@ export const Agendamiento = () => {
                 </div>
             </div>
             <div className='partright'>
-                
-            <Calendar onChange={onChange} value={date}></Calendar>
+                <Calendar onChange={onChange} value={date}  ></Calendar>
                 {console.log(date)}
+
+                <div className='escogerhora'>
+                    <form action='#' method='post'>
+                        <label className='eschor' form="esc">Escoge una hora</label>
+                        <p>{date.getDate()} {date.toLocaleDateString('default', { month: 'short' })} {date.getFullYear()}</p>
+                        <select name='hora' id="hor" onChange={handleHoraChange} select={selectedHora}>
+                            <option>--Escoge hora--</option>
+                            <option value="hor1">9:00 - 10:00 am</option>
+                            <option value="hor2">10:00 - 11:00 am</option>
+                            <option value="hor3">2:00 - 3:00 pm</option>
+                            <option value="hor3">3:00 - 4:00 pm</option>
+                        </select>
+                    </form>
+                </div>
+
             </div>
 
         </div>
