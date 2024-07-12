@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import supabase from "./supabaseconfig"; 
+import supabase from './supabaseconfig'; 
 
 export function AppDataBase() {
   const [cliente, setCliente] = useState([]);
@@ -23,3 +23,4 @@ export function AppDataBase() {
   );
 }
 
+export default AppDataBase;
