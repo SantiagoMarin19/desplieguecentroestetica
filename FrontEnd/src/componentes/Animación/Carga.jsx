@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from "react";
-import "./Carga.css";
-import { useHistory } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useLoading } from './Loadingcontext';
+import './Carga.css';
 
-export const Pantalladcarga = () => {
-    const [loading, setLoading] = useState(true);
-    const history = useHistory();
+export const Pageloader = () => {
+    const { loading, setLoading } = useLoading();
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 8000); // Tiempo de carga simulado de 8 segundos
+        let timer;
+        if (loading) {
+            timer = setTimeout(() => {
+                setLoading(false);
+            }, 800); // Tiempo de carga simulado de 2 segundos
+        }
 
-        // Cleanup function
         return () => clearTimeout(timer);
-    }, [history.location.pathname]); // Ejecutar efecto cuando cambia la ubicación
+    }, [loading, setLoading]);
 
     return (
         <div className={`loader ${loading ? 'visible' : 'hidden'}`}>
