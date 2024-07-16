@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./Agendamiento.css"
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
+import { NavLink } from 'react-router-dom';
 
 
 export const Agendamiento = () => {
@@ -68,7 +69,7 @@ export const Agendamiento = () => {
                             <td>cuanto toca pagar</td>
                         </tr>
                         <tr>
-                            <td colSpan={2} className='colorros'>Reservar</td>
+                            <td colSpan={2} className='colorros'><NavLink><button className='botonreservar'>Reservar</button></NavLink></td>
                         </tr>
                     </table>
                 </div>
