@@ -11,12 +11,15 @@ import imagencejashenna from "../../assets/images/cejas_henna.jpg";
 
 
 
-export const Background = () => {
+export const Background = ({token}) => {
 
 
     return (
+        
 
-        <div className='conteinergeneral'>
+        <div className='conteinergeneral'>  
+       <div>
+        <h1>Bienvenido {token.user.user_metadata.full_name} </h1></div> 
             <div className='iconos'>
                 <div className="background">
                     <div className='containergoblal'>

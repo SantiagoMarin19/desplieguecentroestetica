@@ -56,5 +56,15 @@ select {
     height: 100vh;
 }
 
+<<<<<<< HEAD
 
+=======
+button {
+    color: black;
+}
+
+.partright {
+    display: flex;
+}
+>>>>>>> origin/David
 /*sirve para que no se deborde el texto (word-wrap: break-word); */

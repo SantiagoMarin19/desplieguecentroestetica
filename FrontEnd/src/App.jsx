@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState , useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -27,11 +27,38 @@ import LoginUser from './pages/Login';
 
 
 function App() {
+  const [token,setToken]=useState(false)
+
+  if(token){
+    sessionStorage.setItem('token',JSON.stringify(token))
+  }
+
+  useEffect(() => {
+    if(sessionStorage.getItem('token')){
+      let data = JSON.parse(sessionStorage.getItem('token'))
+      setToken(data)
+    }
+    
+  }, [])
+  
+
+
+
+
+
+
   return (
     <Router>
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        {token?<Route path={"/"} element={<Home token={token}/>} />:""}
+        <Route path={'/loginsupa'}element={<LoginUser setToken={setToken}/>} />
+        <Route path='/Registrar' element={<SignUp/>} />
+
+
+
+
+
         <Route path="/servicios" element={<Servicios />} />
         <Route path="/inicio" element={<InicioSesion />} />
         <Route path='/Politicas' element={<Condiciones />} />
@@ -51,9 +78,7 @@ function App() {
 
 
 
-        <Route path='/loginsupa' element={<LoginUser/>} />
-        <Route path='/Registrar' element={<SignUp/>} />
-
+     
       </Routes>
     </Router>
 
