@@ -72,6 +72,14 @@ const ModalRegistro = () => {
     }
   }
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
   return (
     <div className='todoingreso'>
       <div className='all'>
@@ -120,7 +128,7 @@ const ModalRegistro = () => {
                 <form onSubmit={handleSubmit}>
                   <div className='datos'>
                     <input type="text" name='fullName' id='InputName' placeholder="Nombre completo" value={formData.fullName} onChange={handleChange} />
-                    <input type="text" name='correo' id='Inputmail2' placeholder="Ingrese su correo" value={formData.email} onChange={handleChange} />
+                    <input type="text" name='email' id='Inputmail2' placeholder="Ingrese su correo" value={formData.email} onChange={handleChange} />
                     <div className='cont2'>
                       <input type="password" name='password' id="Input2" placeholder="Contraseña" value={formData.password} onChange={handleChange} />
                       <i className='bx bx-show' />

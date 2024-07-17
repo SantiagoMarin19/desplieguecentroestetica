@@ -46,13 +46,13 @@ function App() {
         <Route path='/ServicioMcion' element={<Micropigmentacion />} />
         <Route path='/ComboCejas1' element={<ComboSyLifting />} />
         <Route path='/Recover4' element={<Recuperar4 />} />
-        <Route path='/DB' element={<AppDataBase />} />
+        <Route path='/pruebabasededatos' element={<AppDataBase />} />
         <Route path='/Agendarcita' element={<Agendar/>}/>
+
+
+
         <Route path='/loginsupa' element={<LoginUser/>} />
         <Route path='/Registrar' element={<SignUp/>} />
-        <Route path='/DB' element={<AppDataBase />} />
-
-
 
       </Routes>
     </Router>
