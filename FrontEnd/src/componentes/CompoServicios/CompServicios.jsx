@@ -2,7 +2,6 @@ import React from 'react';
 import "./CompServicios.css"
 import cej from "../../assets/images/cej.png"
 import tit from "../../assets/images/nuse.png"
-import ModalAcceder from "../ModalAcceder/ModalAcceder"
 import { NavLink } from "react-router-dom";
 
 
