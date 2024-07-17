@@ -49,10 +49,13 @@ export const Navbar = () => {
       <div className='titini'>Iniciar sesión</div>
     <div className='subtit'>Complete los campos a continuación</div>
       <div className='datos'>
+   
+   
     <input type="text" name='correo' id='Inputmail1' placeholder= "Ingrese su correo"/>
-    <div className='cont2'>
+
     <input type="password" name='contraseña' id="Input1" placeholder = "Contraseña" />
-    <i className='bx bx-show'/>
+    <span className='password1'><i className='bx bx-show'/></span>
+
     </div>
 
     <div className='botoningreso'><button type='submit'><b>Agendar</b></button></div>
@@ -88,16 +91,16 @@ export const Navbar = () => {
 
 <div className='datos'>
 <input type="text" name='correo' id='Inputmail2' placeholder= "Ingrese su correo"/>
-    <div className='cont2'>
+  
     <input type="password" name='contraseña' id="Input2" placeholder = "Contraseña" />
-    <i className='bx bx-show'/>
-    </div>
+    <span className='password2'><i className='bx bx-show'/></span>
+    
 
-    <div className='cont3'>
+
     
     <input type="password" name='repcontraseña'  id="Input3" placeholder = "Confirmar contraseña"/>
-    <i className='bx bx-show'/>
-    </div>
+    <span className='password3'><i className='bx bx-show'/></span>
+
     <div className='botoningreso'><button type='submit'><b>Registrarse</b></button></div>
 </div>
 
@@ -117,8 +120,6 @@ export const Navbar = () => {
   </div>
 </div>
 <button className="btn btn-principal" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Iniciar sesión</button>
-
-</div>
 
                         </li>
                     </ul>
