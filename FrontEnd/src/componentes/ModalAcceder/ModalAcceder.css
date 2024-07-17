@@ -1,0 +1,99 @@
+* {
+    padding: 0;
+    margin: 0;
+
+}
+
+.todoingreso {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.datos {
+    display: flex;
+    flex-direction: column;
+}
+.botoningreso {
+    background-color: #BA7894;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+button {
+    font-family: sans-serif;
+}
+
+.decoraciones {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+.lodeabajo {
+    display: flex;
+    justify-content: center;
+    font-family: sans-serif;
+    color: gray;
+    align-items: center;
+}
+.all {
+    display: flex;
+    flex-direction: column;
+    width: 22.5%;
+}
+
+.titini {
+    font-size: xx-large;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+}
+.subtit {
+    font-size: large;
+    display: flex;
+    justify-content: center;
+    font-family: system-ui;
+    color: gray;
+    padding-bottom: 5%;
+}
+
+input {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-family: system-ui;
+}
+b {
+    font-family: sans-serif;
+}
+.acclog {
+    padding: 5px;
+}
+.accreg {
+    text-decoration: underline;
+    padding: 5px;
+}
+
+.modal-header {
+    border-bottom: none;
+}
+a {
+    color: gray;
+}
+
+.btn-primary {
+    color: gray;
+    background-color: transparent;
+    display: contents;
+    --bs-btn-hover-color: gray;
+}
+.btn-principal:hover {
+    background-color: #BA7894;
+    
+  
+}
+
+  .btn-principal {
+        background-color: #BA7894;
+    }

@@ -24,6 +24,8 @@ h3 {
     padding-top: 5%;
     text-align: center;
     padding-bottom: 20px;
+    font-family: fangsong;
+    font-size: 6vh;
 }
 
 .sercej {
@@ -56,6 +58,10 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 20px;
+    width: 20%;
+    word-wrap: break-word;
+    font-family: 'Urbanist';
 }
 .conpes1 {
     background-color: #FCEBF2;
@@ -64,6 +70,10 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 20px;
+    width: 20%;
+    word-wrap: break-word;
+    font-family: 'Urbanist';
 }
 .conmic1 {
     background-color: #FCEBF2;
@@ -72,6 +82,10 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 20px;
+    width: 20%;
+    word-wrap: break-word;
+    font-family: 'Urbanist';
 }
 .concom1 {
     background-color: #FCEBF2;
@@ -80,9 +94,25 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 20px;
+    width: 20%;
+    word-wrap: break-word;
+    font-family: 'Urbanist';
 }
 
 .img-cej {
+    width: 100%;
+    height: 80%;
+}
+.img-pes {
+    width: 100%;
+    height: 80%;
+}
+.img-mic {
+    width: 100%;
+    height: 80%;
+}
+.img-com {
     width: 100%;
     height: 80%;
 }
@@ -90,8 +120,13 @@ h3 {
 h5 {
     padding: 10px;
 }
-
-.butonSs{
+h1 {
+    width: 30%;
+    font-size: 10vh;
+    font-family: auto;
+    -webkit-text-stroke-width: medium;
+}
+button {
     margin: 0;
     border: 0;
     background-color: #C98695;
@@ -100,4 +135,37 @@ h5 {
     padding-left: 20px;
     padding-bottom: 10px;
     padding-right: 20px;
+}
+
+@media (max-width: 885px) {
+    h5 {
+        font-size: 10px;
+    }
+    h3 {
+        font-size: 3vh;
+    }
+    button {
+        padding-top: 0;
+        padding-left: 0;
+        padding-bottom: 0;
+        padding-right: 0;
+        font-size: 15px;
+    }
+}
+@media (max-width: 1315px) {
+    h1 {
+        width: 15%;
+        font-size: 4vh;
+        font-family: auto;
+        -webkit-text-stroke-width: medium;
+        word-wrap: break-word;
+    }
+
+}
+@media (max-width: 1050) {
+    img.img-tit {
+        width: 0px;
+        height: 0px;
+    }
+
 }

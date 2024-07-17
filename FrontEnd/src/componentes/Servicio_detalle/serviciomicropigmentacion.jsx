@@ -102,3 +102,4 @@ export const Micropigmentacion = () => {
         </div>
     );
 };
+export default Micropigmentacion;
