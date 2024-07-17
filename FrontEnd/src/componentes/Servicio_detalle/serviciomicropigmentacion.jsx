@@ -32,7 +32,7 @@ export const Micropigmentacion = () => {
                             </div>
                         </div>
                         <div className='botones'>
-                            <button>Reservar Ahora</button>
+                        <button className='ReservarS'>Reservar Ahora</button>
                         </div>
                     </div>
                     <div className='imagen-contenedor'>
@@ -61,7 +61,7 @@ export const Micropigmentacion = () => {
                             </div>
                         </div>
                         <div className='botones'>
-                            <button>Reservar Ahora</button>
+                        <button className='ReservarS'>Reservar Ahora</button>
                         </div>
                     </div>
                     <div className='imagen-contenedor'>
@@ -90,7 +90,7 @@ export const Micropigmentacion = () => {
                             </div>
                         </div>
                         <div className='botones'>
-                            <button>Reservar Ahora</button>
+                        <button className='ReservarS'>Reservar Ahora</button>
                         </div>
                     </div>
                     <div className='imagen-contenedor'>
