@@ -5,12 +5,13 @@ import {Promociones} from "../componentes/Promociones/Promociones";
 
 
 
-export const Home = () => {
+export const Home = ({token}) => {
 
   return (
     <>
    <Promociones></Promociones>
         <Navbar></Navbar>
+        <h1>Bienvenido {token && token.user.user_metadata.full_name}</h1>
 
         <Background></Background>
         

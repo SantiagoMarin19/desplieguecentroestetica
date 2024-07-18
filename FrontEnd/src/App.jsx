@@ -27,7 +27,7 @@ import LoginUser from './pages/Login';
 
 
 function App() {
-  const [token,setToken]=useState(false)
+  const [token, setToken] = useState(false)
 
   if(token){
     sessionStorage.setItem('token',JSON.stringify(token))
@@ -51,7 +51,7 @@ function App() {
     <Router>
 
       <Routes>
-        {token?<Route path={"/"} element={<Home token={token}/>} />:""}
+        <Route path="/" element={<Home token={token}/>} />
         <Route path={'/loginsupa'}element={<LoginUser setToken={setToken}/>} />
         <Route path='/Registrar' element={<SignUp/>} />
 

@@ -11,20 +11,20 @@ import imagencejashenna from "../../assets/images/cejas_henna.jpg";
 
 
 
-export const Background = ({token}) => {
-
+export const Background = () => {
 
     return (
-        
 
-        <div className='conteinergeneral'>  
-       <div>
-        <h1>Bienvenido {token.user.user_metadata.full_name} </h1></div> 
+
+
+
+        <div className='conteinergeneral'>
+
             <div className='iconos'>
                 <div className="background">
                     <div className='containergoblal'>
                         <div className='Frase-background'>
-                            <h2>
+                            <h2 className='frase'>
                                 Se la mejor parte de ti
                             </h2>
                         </div>
@@ -39,16 +39,19 @@ export const Background = ({token}) => {
                                 única donde tu rostro se convierte en lienzo y nuestras manos expertas en pinceles. <br></br>
                                 Con dedicación y profesionalismo, nuestro equipo de especialistas en cuidado facial
                                 está comprometido en resaltar tu belleza natural, en cada línea, en cada gesto. .
+
+                             
+
                             </p>
 
                         </div>
 
-                        <button type="button" class="btn btn-primary boton">AGENDAR  AHORA</button>
+                        <button type="button" className="btn btn-primary boton">AGENDAR  AHORA</button>
                     </div>
 
 
                     <div className='foto'>
-                        <img  src={imagenfondo} />
+                        <img src={imagenfondo} />
                     </div>
 
 
@@ -83,7 +86,7 @@ export const Background = ({token}) => {
                     </div>
                 </div>
                 <div className='bottoncentrado'>
-                    <button type="button" class="buttonservi">SERVICIOS</button></div>
+                    <button type="button" className="buttonservi">SERVICIOS</button></div>
 
             </div>
 
@@ -112,15 +115,15 @@ export const Background = ({token}) => {
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
                     ></iframe>
-                      <NavLink to="/politicas">
-                    <button type="button">CONOCE MAS</button>
-                </NavLink>
+                    <NavLink to="/politicas">
+                        <button type="button">CONOCE MAS</button>
+                    </NavLink>
                 </div>
 
 
 
             </div>
-           
+
 
         </div>
 
