@@ -1,12 +1,18 @@
+
 import React, { useState } from 'react';
 import './Agendamiento.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { NavLink } from 'react-router-dom';
 
+const getDiaSemana = (date) => {
+    const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    return diasSemana[date.getDay()];
+};
+
 export const Agendamiento = () => {
     const [date, setDate] = useState(new Date());
-    const [selectedHora, setSelectedHora] = useState('--Escoge hora--');
+    const [selectedHora, setSelectedHora] = useState('');
 
     const onChange = (date) => {
         setDate(date);
@@ -43,8 +49,7 @@ export const Agendamiento = () => {
                         <thead>
                             <tr>
                                 <th colSpan={2} className='colorros'>
-                                    {date.getDate()} {date.toLocaleDateString('default', { month: 'short' })}{' '}
-                                    {date.getFullYear()} - {selectedHora}
+                                    {date.getDate()} {date.toLocaleDateString('default', { month: 'short' })} {date.getFullYear()} - {selectedHora}
                                 </th>
                             </tr>
                             <tr>
@@ -84,16 +89,16 @@ export const Agendamiento = () => {
                             Escoge una hora
                         </label>
                         <p>
-                            {date.getDate()} {date.toLocaleDateString('default', { month: 'short' })}{' '}
-                            {date.getFullYear()}
+                            {getDiaSemana(date)} {date.getDate()} {date.toLocaleDateString('default', { month: 'short' })} {date.getFullYear()}
                         </p>
                         <select name='hora' id='hor' onChange={handleHoraChange} value={selectedHora}>
-                            <option>--Escoge hora--</option>
-                            <option value='hor1'>9:00 - 10:00 am</option>
-                            <option value='hor2'>10:00 - 11:00 am</option>
-                            <option value='hor3'>2:00 - 3:00 pm</option>
-                            <option value='hor4'>3:00 - 4:00 pm</option>
-                        </select>
+                <option>--Escoge hora--</option>
+                <option value='hor1'>9:00 - 10:00 am</option>
+                <option value='hor2'>10:00 - 11:00 am</option>
+                <option value='hor3'>2:00 - 3:00 pm</option>
+                <option value='hor4'>3:00 - 4:00 pm</option>
+            </select>
+            <p>Hora seleccionada: {selectedHora}</p>
                     </form>
                 </div>
             </div>
