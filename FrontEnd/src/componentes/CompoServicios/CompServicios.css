@@ -240,7 +240,7 @@ body{
     color: #C98695;
     font-weight: 700;
     cursor: pointer;
-    border-radius: 50px;
+    border-radius: 20px;
     position: relative;
     z-index: 2;
     overflow: hidden;
