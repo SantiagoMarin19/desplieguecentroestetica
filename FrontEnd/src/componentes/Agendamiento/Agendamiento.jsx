@@ -27,7 +27,7 @@ export const Agendamiento = () => {
         const today = new Date();
         return (
             (view === 'month' && date < today && !isSameDay(date, today)) || // Disable dates before today
-            (date.getDay() === 0) // Disable Sundays
+            (date.getDay() === 1) // Disable monday
         );
     };
     
