@@ -23,10 +23,23 @@ export const Agendamiento = () => {
     };
 
     const tileDisabled = ({ date, view }) => {
-        // Disable all Mondays
-        return view === 'month' && date.getDay() === 0; // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+        // Disable dates before today or Sundays
+        const today = new Date();
+        return (
+            (view === 'month' && date < today && !isSameDay(date, today)) || // Disable dates before today
+            (date.getDay() === 0) // Disable Sundays
+        );
     };
-
+    
+    // Helper function to check if two dates represent the same day
+    const isSameDay = (date1, date2) => {
+        return (
+            date1.getDate() === date2.getDate() &&
+            date1.getMonth() === date2.getMonth() &&
+            date1.getFullYear() === date2.getFullYear()
+        );
+    };
+    
     return (
         <div className='todoingreso'>
             <div className='partleft'>
@@ -67,7 +80,7 @@ export const Agendamiento = () => {
                                 <th>Costo</th>
                             </tr>
                             <tr>
-                                <td>duracion del procedimiento</td>
+                                <td>{selectedHora}</td>
                                 <td>cuanto toca pagar</td>
                             </tr>
                             <tr>
@@ -82,7 +95,11 @@ export const Agendamiento = () => {
                 </div>
             </div>
             <div className='partright'>
-                <Calendar onChange={onChange} value={date} tileDisabled={tileDisabled} />
+                <Calendar
+                    onChange={onChange}
+                    value={date}
+                    tileDisabled={tileDisabled}
+                />
                 <div className='escogerhora'>
                     <form action='#' method='post'>
                         <label className='eschor' htmlFor='hor'>
@@ -92,13 +109,13 @@ export const Agendamiento = () => {
                             {getDiaSemana(date)} {date.getDate()} {date.toLocaleDateString('default', { month: 'short' })} {date.getFullYear()}
                         </p>
                         <select name='hora' id='hor' onChange={handleHoraChange} value={selectedHora}>
-                <option>--Escoge hora--</option>
-                <option value='hor1'>9:00 - 10:00 am</option>
-                <option value='hor2'>10:00 - 11:00 am</option>
-                <option value='hor3'>2:00 - 3:00 pm</option>
-                <option value='hor4'>3:00 - 4:00 pm</option>
-            </select>
-            <p>Hora seleccionada: {selectedHora}</p>
+                            <option>--Escoge hora--</option>
+                            <option value='hor1'>9:00 - 10:00 am</option>
+                            <option value='hor2'>10:00 - 11:00 am</option>
+                            <option value='hor3'>2:00 - 3:00 pm</option>
+                            <option value='hor4'>3:00 - 4:00 pm</option>
+                            
+                        </select>
                     </form>
                 </div>
             </div>
