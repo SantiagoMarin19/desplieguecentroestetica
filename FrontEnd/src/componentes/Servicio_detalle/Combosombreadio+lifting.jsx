@@ -45,7 +45,7 @@ export const ComboSyLifting = () => {
                     </div> 
 
                     <div className='content_boton'>   
-                                <div className='botontyp'>  
+                                <div className='combobotontyp'>  
                                     <div className='tiempo'>
                                         <h4>Tiempo</h4>
                                         <p>60 Minutos</p>

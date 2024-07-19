@@ -1,5 +1,8 @@
 import React from 'react';
 import "./Agendamiento.css"
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css';
+import { NavLink } from 'react-router-dom';
 
 
 export const Agendamiento = () => {

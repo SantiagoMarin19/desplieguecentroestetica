@@ -1,26 +1,51 @@
-.partarriba {
+body{
+    background-color: #FFFFFF;
+    margin: auto;
+    padding: auto;
+}
+
+.Bannerserviciosg {
     display: flex;
     align-items: center;
     background-color: #FCEBF2;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .imgcar {
     display: flex;
     justify-content: end;
 }
 
-.titservic{
+.tituloserviciosg {
     width: 50%;
     display: flex;
     justify-content: center;
-    
 }
-.imgcar{
+
+.tituloserviciosg h1 {
+    font-size: 100px;
+    color: #422A3C;
+    font-weight: 700;
+    width: 50%;
+}
+
+.Titulo_Servicio_Cejas h3 {
+    font-size: 50px;
+    color: #422A3C;
+}
+
+.Titulo_Servicio_Cejas {
+    width: 100%;
+    padding: 1rem;
+}
+
+.imgcar {
     display: flex;
     width: 50%;
     justify-content: end;
 }
 
-h3 {
+.secciones_servicios h3 {
     padding-top: 5%;
     text-align: center;
     padding-bottom: 20px;
@@ -28,30 +53,49 @@ h3 {
     font-size: 6vh;
 }
 
-.sercej {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
-.serpes {
+.serviciodcejas {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
-.sermic {
+.serviciosdetc h5, .serviciosdetp h5 , .serviciosdm h5, .serviciodecom h5 {
+    font-family: "Manrope", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    text-align: center;
+
+}
+
+.serviciodpestañas {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
-.sercom {
+.serviciodmicropig {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
-.concej1 {
+.serviciodecom {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.serviciocombo h5 {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.serviciocombo h5 b {
+    color: #C98695;
+}
+
+.serviciosdetc {
     background-color: #FCEBF2;
     padding: 30px;
     border-radius: 20px;
@@ -63,7 +107,8 @@ h3 {
     word-wrap: break-word;
     font-family: 'Urbanist';
 }
-.conpes1 {
+
+.serviciosdetp {
     background-color: #FCEBF2;
     padding: 30px;
     border-radius: 20px;
@@ -75,7 +120,8 @@ h3 {
     word-wrap: break-word;
     font-family: 'Urbanist';
 }
-.conmic1 {
+
+.serviciosdm {
     background-color: #FCEBF2;
     padding: 30px;
     border-radius: 20px;
@@ -87,7 +133,8 @@ h3 {
     word-wrap: break-word;
     font-family: 'Urbanist';
 }
-.concom1 {
+
+.serviciocombo, .serviciosdetc, .serviciosdetp, .serviciosdm {
     background-color: #FCEBF2;
     padding: 30px;
     border-radius: 20px;
@@ -98,61 +145,141 @@ h3 {
     width: 20%;
     word-wrap: break-word;
     font-family: 'Urbanist';
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.serviciocombo:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.serviciosdetc:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.serviciosdetp:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.serviciosdm:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.serviciosdm h5 {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.serviciosdm h5 b {
+    color: #C98695;
+}
+
+.serviciosdetp h5 {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.serviciosdetp h5 b {
+    color: #C98695;
+}
+
+
+.serviciosdetc h5 {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.serviciosdetc h5 b {
+    color: #C98695;
+}
+
+.img-com {
+    width: 80%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
 }
 
 .img-cej {
     width: 100%;
     height: 80%;
 }
-<<<<<<< HEAD
+
 .img-pes {
     width: 100%;
     height: 80%;
 }
+
 .img-mic {
     width: 100%;
     height: 80%;
 }
+
 .img-com {
     width: 100%;
     height: 80%;
 }
-=======
->>>>>>> origin/Natalia
 
-h5 {
+.concej1 h5 {
     padding: 10px;
 }
-<<<<<<< HEAD
-h1 {
-    width: 30%;
-    font-size: 10vh;
-    font-family: auto;
-    -webkit-text-stroke-width: medium;
-}
-button {
-=======
 
-.butonSs{
->>>>>>> origin/Natalia
-    margin: 0;
-    border: 0;
-    background-color: #C98695;
-    border-radius: 10px;
-    padding-top: 10px;
-    padding-left: 20px;
-    padding-bottom: 10px;
-    padding-right: 20px;
-}
+
+
+.button_s{
+    padding: 12px 25px;
+    background: #fff;
+    border: 1px solid #C98695;
+    color: #C98695;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 20px;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    transition: all 0.5s ease;
+  }
+
+  
+  .button_s::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #C98695;
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    border-radius: 50%;
+    z-index: -1;
+    transition: all 0.5s ease;
+  }
+
+  .button_s:hover {
+    color: #fff;
+  }
+  .button_s:hover::after {
+    bottom: 0;
+    border-radius: 0;
+  }
+  
 
 @media (max-width: 885px) {
     h5 {
         font-size: 10px;
     }
+
     h3 {
         font-size: 3vh;
     }
-    button {
+
+    .butonSs {
         padding-top: 0;
         padding-left: 0;
         padding-bottom: 0;
@@ -160,6 +287,7 @@ button {
         font-size: 15px;
     }
 }
+
 @media (max-width: 1315px) {
     h1 {
         width: 15%;
@@ -170,6 +298,7 @@ button {
     }
 
 }
+
 @media (max-width: 1050) {
     img.img-tit {
         width: 0px;

@@ -3,14 +3,14 @@ import { Navbar } from "../componentes/Navbar/Navbar";
 import {Promociones} from "../componentes/Promociones/Promociones"
 import {Pestañas} from "../componentes/Servicio_detalle/serviciopestañas"
 
-export const Pestañas = () => {
+export const ServicioPestañas = () => {
     return (
         <>
     <Promociones></Promociones>
     <Navbar></Navbar>
-        <serviciopestañas></serviciopestañas>
+        <Pestañas></Pestañas>
         </>
     )
 }
-export default Pestañas;
+export default ServicioPestañas;
 

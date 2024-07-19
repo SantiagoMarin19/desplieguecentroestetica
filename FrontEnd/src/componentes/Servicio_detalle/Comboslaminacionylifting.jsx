@@ -1,13 +1,13 @@
 import react from 'react';
-import extensionpestaña from "../../assets/images/extensionpestaña.png";
-import lidtingdepestañas  from "../../assets/images/lidtingdepestañas.png";
+import sombreadoceja from "../../assets/images/sombreadoceja.png";
+import lidtingdepestañas from "../../assets/images/lidtingdepestañas.png";
 import "./combos.css"
 
-export const ComboHyLifting = () => {
+export const ComboSyLifting = () => {
     return (
         <div className='contenedorcombo'>
             <div className='encabezado'>
-                <h1>Diseño depilacion en henna + lifting de pestañas </h1>
+                <h1>laminacion de cejas+ Lifting de Pestañas  </h1>
             </div>
             <div className='subtituloCmbos'>
                 <h2>Nuestro Metodo:</h2>
@@ -16,15 +16,16 @@ export const ComboHyLifting = () => {
             <div className='contenedor_contenido'>
                 <div className='contenido_combo1'>
                     <div className='conten_h3'>
-                    <h3>Diseño de depilación en henna:</h3>
+                    <h3>Laminación de cejas:</h3>
                     <ul>
-                        <li>Análisis de la forma y estructura de las cejas para un diseño personalizado.</li>
-                        <li>Aplicación de tinte de henna para teñir y definir las cejas.</li>
-                        <li>Perfilado y moldeado de la forma de las cejas con técnica de hilo o pinzas.</li>
-                    </ul></div>
+                        <li>Alisamiento y modelado de las cejas para conseguir un efecto uniforme y natural.</li>
+                        <li>Aplicación de un tratamiento con queratina que alisa, fija y nutre las cejas.</li>
+                        <li>Resultado duradero (hasta 6-8 semanas).</li>
+                    </ul>
+                    </div>
 
                     <div className='picture'>
-                        <img className='picture1' src={extensionpestaña}/>
+                        <img className='picture1' src={sombreadoceja}/>
                         </div>
                     </div>
 

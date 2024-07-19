@@ -1,5 +1,7 @@
-import React, { useState , useEffect } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -21,6 +23,7 @@ import { Condiciones } from "./pages/Terminos";
 import { ComboSyLifting } from "./componentes/Servicio_detalle/Combosombreadio+lifting";
 import { Recuperar4 } from "./pages/Recuperar4"
 import { Agendar } from "./pages/Agendar"
+
 import SignUp from './pages/SignUp';
 import LoginUser from './pages/Login';
 
@@ -28,60 +31,71 @@ import LoginUser from './pages/Login';
 function App() {
   const [token, setToken] = useState(false)
 
-  if(token){
-    sessionStorage.setItem('token',JSON.stringify(token))
+  if (token) {
+    sessionStorage.setItem('token', JSON.stringify(token))
   }
 
   useEffect(() => {
-    if(sessionStorage.getItem('token')){
+    if (sessionStorage.getItem('token')) {
       let data = JSON.parse(sessionStorage.getItem('token'))
       setToken(data)
     }
-    
+
   }, [])
+
+
   
+  import { LoadingProvider, useLoading } from './componentes/Animación/Loadingcontext';
+
+  function Main() {
+    const { setLoading } = useLoading();
+    const location = useLocation();
+
+    useEffect(() => {
+      setLoading(true);
+    }, [location, setLoading]);
+
+    return (
+      <>
+        <Pageloader />
+        <Routes>
+          <Route path="/" element={<Home token={token} />} />
+          <Route path={'/loginsupa'} element={<LoginUser setToken={setToken} />} />
+          <Route path='/Registrar' element={<SignUp />} />
 
 
+          <Route path="/servicios" element={<Servicios />} />
+          <Route path="/inicio" element={<InicioSesion />} />
+          <Route path="/politicas" element={<Condiciones />} />
+          <Route path="/serviciocejas" element={<ServicioCjas />} />
+          <Route path="/serviciopestañas" element={<ServicioPestañas />} />
+          <Route path="/serviciomicropigmentacion" element={<ServicioMcion />} />
+          <Route path="/combohennaylifting" element={<ComboHeyLifting />} />
+          <Route path="/combosombreadoylifting" element={<ComboSombrayLifiting />} />
+          <Route path="/combolaminacionyextension" element={<Combolamiyextension />} />
+          <Route path="/combolaminacionylifting" element={<Combolaminylif />} />
+          <Route path="/inicio" element={<InicioSesion />} />
+          <Route path='/Ingresar' element={<Acceder />} />
+          <Route path='/registro' element={<Registro />} />
+          <Route path='/register' element={<RegistroCheck />} />
+          <Route path='/Recover' element={<Recuperar />} />
+          <Route path='/Recover2' element={<Recuperar2 />} />
+          <Route path='/Recover3' element={<Recuperar3 />} />
+          <Route path='/Recover4' element={<Recuperar4 />} />
+          <Route path='/Agendarcita' element={<Agendar />} />
+        </Routes>
+      </>
+    );
+  }
 
+  function App() {
+    return (
+      <LoadingProvider>
+        <Router>
+          <Main />
+        </Router>
+      </LoadingProvider>
+    );
+  }
 
-
-
-  return (
-    <Router>
-
-      <Routes>
-        <Route path="/" element={<Home token={token}/>} />
-        <Route path={'/loginsupa'}element={<LoginUser setToken={setToken}/>} />
-        <Route path='/Registrar' element={<SignUp/>} />
-
-
-
-
-
-        <Route path="/servicios" element={<Servicios />} />
-        <Route path="/inicio" element={<InicioSesion />} />
-        <Route path='/Politicas' element={<Condiciones />} />
-        <Route path='/Ingresar' element={<Acceder />} />
-        <Route path='/registro' element={<Registro />} />
-        <Route path='/register' element={<RegistroCheck />} />
-        <Route path='/Recover' element={<Recuperar />} />
-        <Route path='/Recover2' element={<Recuperar2 />} />
-        <Route path='/Recover3' element={<Recuperar3 />} />
-        <Route path='/ServicioCjas' element={<Cejas />} />
-        <Route path='/ServicioPestañas' element={<Pestañas />} />
-        <Route path='/ServicioMcion' element={<Micropigmentacion />} />
-        <Route path='/ComboCejas1' element={<ComboSyLifting />} />
-        <Route path='/Recover4' element={<Recuperar4 />} />
-        <Route path='/Agendarcita' element={<Agendar/>}/>
-
-
-
-     
-      </Routes>
-    </Router>
-
-  );
-
-}
-
-export default App;
+  export default App;

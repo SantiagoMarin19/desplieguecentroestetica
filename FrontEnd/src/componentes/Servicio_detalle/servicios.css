@@ -6,107 +6,103 @@ body {
     background-color: #FCEBF2;
     position: relative;
     text-align: center;
-    padding: 2rem;
+    padding: 3rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilos generales */
 .banneer h1 {
     font-size: 80px;
     color: #422A3C;
     font-weight: 700;
 }
 
+.contenedor_total {
+    height: 100vh;
+    margin: 0;
+}
+
 .content_total {
     padding: 4rem;
+    margin: 0 auto;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.tarjeta {
+    display: flex;
+    flex-wrap: wrap;
     width: 100%;
+    margin-bottom: 2rem;
+    justify-content: center;
 }
 
-.titulo h1 {
-    text-align: left;
+.contenido_ds {
+    width: 50%;
+    padding-right: 2rem;
+}
+
+.titulo_ds h1 {
+    font-size: 50px;
+    font-weight: 700;
+    margin-bottom: 10px;
     color: #422A3C;
-    margin-bottom: 1rem;
-    font-size: 60px;
 }
 
-.detalle {
+.detalle_ds {
     font-family: "Manrope", sans-serif;
     font-weight: normal;
     font-style: normal;
     text-align: justify;
     margin-bottom: 1rem;
-    width: 50%;
     font-size: 22px;
+    width: 70%;
+}
+
+.precio_ds,
+.tiempo_ds {
+    font-size: 18px;
+    color: #666666;
+}
+
+.botones {
+    margin-top: 1rem;
+}
+
+.ReservarS {
+    background-color: #B66E7A;
+    color: #FFFFFF;
+    font-family: "Playfair Display", serif;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 50%;
 }
 
 .botontyp {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 20px;
     width: 50%;
 }
 
-.botones {
-    background-color: #B66E7A;
-    width: 20%;
-    text-align: center;
-    border-radius: 15px;
-    padding: 2px;
-}
-
-button {
-    color: #FFFFFF;
-    font-family: "Playfair Display", serif;
+.imagen-contenedor {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .imagen {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.contenid_detalle {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.content_boton {
-    padding: 35px;
-}
-
-.titulo,
-.detalle {
-    width: 50%;
-    text-align: left;
-}
-
-.imagen {
-    width: 70%;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.imagen img {
     max-width: 100%;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 15px 18px rgba(0, 0, 0, 0.1);
-}
-
-
-.imagen p {
-    text-align: right;
-    font-family: "Manrope", sans-serif;
-    font-size: 18px;
-    color: #666666;
-    margin-top: 10px;
-    margin-right: 20px;
-    font-style: italic;
-    max-width: 90%;
-    background-color: #f9f9f9;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .leyenda {
@@ -119,6 +115,4 @@ button {
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: inline-block;
-    width: 70%;
 }

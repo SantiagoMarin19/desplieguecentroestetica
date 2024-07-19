@@ -3,14 +3,14 @@ import { Navbar } from "../componentes/Navbar/Navbar";
 import {Promociones} from "../componentes/Promociones/Promociones"
 import {Micropigmentacion} from "../componentes/Servicio_detalle/serviciomicropigmentacion"
 
-export const Micropigmentacion = () => {
+export const ServicioMcion = () => {
     return (
         <>
     <Promociones></Promociones>
     <Navbar></Navbar>
-        <Serviciocejas></Serviciocejas>
+        <Micropigmentacion></Micropigmentacion>
         </>
     )
 }
-export default Micropigmentacion;
+export default ServicioMcion;
 
