@@ -10,18 +10,25 @@ import o from "../../assets/images/OR.png"
 
 export const Navbar = () => {
     return (
+        
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
+            
             <div className="container-fluid">
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse navbar-centrado" id="navbarNav">
                     <ul className="navbar-nav">
+                  
                         <li className="nav-item">
-                            <NavLink exact to="/" className="nav-link" activeClassName="active">
+                         
+                        </li>
+                        <li className="nav-item">
+                            <NavLink to="/" className="nav-link" activeClassName="active">
                                 HOME
                             </NavLink>
                         </li>
+
                         <li className="nav-item">
                             <NavLink to="/servicios" className="nav-link" activeClassName="active">
                                 SERVICIOS
@@ -122,7 +129,19 @@ export const Navbar = () => {
 <button className="btn btn-principal" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Iniciar sesión</button>
 
                         </li>
+                        <li className="nav-item">
+                            <NavLink to="/loginsupa" className="nav-link" activeClassName="active">
+                                Iniciar Sesion
+                            </NavLink>
+                        </li>
+
+
+
+
+
+
                     </ul>
+
                 </div>
             </div>
         </nav>
