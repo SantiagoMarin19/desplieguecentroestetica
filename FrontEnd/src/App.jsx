@@ -13,7 +13,6 @@ import { RegistroCheck } from "./pages/RegistroCheck"
 import { Recuperar } from "./pages/Recuperar"
 import { Recuperar2 } from "./pages/Recuperar2"
 import { Recuperar3 } from "./pages/Recuperar3"
-import { AppDataBase } from "./supabase/appdatabase"
 import { Piedepagina } from './componentes/Footer/footer';
 import { Pestañas } from "./componentes/Servicio_detalle/serviciopestañas";
 import { Cejas } from "./componentes/Servicio_detalle/Serviciocejas"
@@ -73,7 +72,6 @@ function App() {
         <Route path='/ServicioMcion' element={<Micropigmentacion />} />
         <Route path='/ComboCejas1' element={<ComboSyLifting />} />
         <Route path='/Recover4' element={<Recuperar4 />} />
-        <Route path='/pruebabasededatos' element={<AppDataBase />} />
         <Route path='/Agendarcita' element={<Agendar/>}/>
 
 

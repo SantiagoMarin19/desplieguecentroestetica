@@ -26,6 +26,7 @@ export const Navbar = () => {
                         <li className="nav-item">
                             <NavLink to="/servicios" className="nav-link" activeClassName="active">
                                 SERVICIOS
+
                             </NavLink>
                         </li>
                         <li className="nav-item">

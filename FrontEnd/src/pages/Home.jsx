@@ -11,8 +11,10 @@ export const Home = ({token}) => {
     <>
    <Promociones></Promociones>
         <Navbar></Navbar>
-        <h1>Bienvenido {token && token.user.user_metadata.full_name}</h1>
-
+        <div className="user">        
+         <i class='bx bxs-user-circle'>{token && token.user.user_metadata.full_name}</i>
+        </div>
+ 
         <Background></Background>
         
         
