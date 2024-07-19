@@ -39,26 +39,6 @@ export const Agendamiento = () => {
             date1.getFullYear() === date2.getFullYear()
         );
     };
-    const enviarCorreo = async () => {
-        try {
-            const response = await fetch('/enviar-correo', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({})
-            });
-    
-            if (response.ok) {
-                alert('Correo enviado exitosamente.');
-            } else {
-                alert('Hubo un problema al enviar el correo.');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Hubo un problema al enviar el correo.');
-        }
-    };
     
     return (
         <div className='todoingreso'>
@@ -106,7 +86,7 @@ export const Agendamiento = () => {
                             <tr>
                                 <td colSpan={2} className='colorros'>
                                     <NavLink to='#'>
-                                        <button className='botonreservar' onClick={enviarCorreo} >Reservar</button>
+                                        <button className='botonreservar'>Reservar</button>
                                     </NavLink>
                                 </td>
                             </tr>
