@@ -6,7 +6,9 @@ import "./Promociones.css";
 export const Promociones = () => {
     return (
 
-        <div className='Promociones'><marquee><b>Diseño depilacion en henna + lifting de pestañas </b></marquee>
+        <div className='Promociones'><marquee><b> DISEÑO DEPILACION EN HENNA + LIFTING DE PESTAÑAS   </b></marquee>
+
+        
           
         </div>
     );

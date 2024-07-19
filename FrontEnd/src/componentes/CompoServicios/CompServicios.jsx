@@ -1,12 +1,14 @@
 import React from 'react';
 import "./CompServicios.css"
 import { NavLink } from 'react-router-dom';
+import ScrollToTopOnMount from '../Servicio_detalle/Scrolltop';
 
 
 export const CompServicios = () => {
     return (
 
         <div className='componenteServs'>
+                  <ScrollToTopOnMount />
             <div className='Bannerserviciosg'>
                 <div className='tituloserviciosg'>
                     <h1>Nuestros servicios</h1>

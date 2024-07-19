@@ -1,29 +1,34 @@
-
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes , useLocation } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
 import Home from './pages/Home';
-import Servicios from './pages/Servicios';
+
 import { InicioSesion } from './componentes/InicioSesion/InicioSesion';
 import { Acceder } from './pages/Acceder';
+
+import {Servicios} from './pages/Servicios';
+import { ServicioPestañas } from "./pages/ServicioP";
+import { ServicioCjas } from "./pages/ServicioC";
+import { ServicioMcion } from "./pages/ServicioM";
+import { Condiciones } from "./pages/Terminos";
+import { ComboHeyLifting } from "./pages/ComboC-Henna+Lifing";
+import { ComboSombrayLifiting } from "./pages/comboC-Sombreado+Lifitng";
+import { Combolamiyextension } from "./pages/ComboP-Lamc+Extension";
+import { Combolaminylif } from "./pages/ComboP-Lamc+Lifting";
+import { Pageloader } from './componentes/Animación/Carga';
 import { Registro } from "./pages/Registro";
 import { RegistroCheck } from "./pages/RegistroCheck"
 import { Recuperar } from "./pages/Recuperar"
 import { Recuperar2 } from "./pages/Recuperar2"
 import { Recuperar3 } from "./pages/Recuperar3"
-import { Piedepagina } from './componentes/Footer/footer';
-import { Pestañas } from "./componentes/Servicio_detalle/serviciopestañas";
-import { Cejas } from "./componentes/Servicio_detalle/Serviciocejas"
-import { Micropigmentacion } from "./componentes/Servicio_detalle/serviciomicro";
-import { Condiciones } from "./pages/Terminos";
-import { ComboSyLifting } from "./componentes/Servicio_detalle/Combosombreadio+lifting";
+
 import { Recuperar4 } from "./pages/Recuperar4"
 import { Agendar } from "./pages/Agendar"
-
+import { LoadingProvider, useLoading } from './componentes/Animación/Loadingcontext';
 import SignUp from './pages/SignUp';
 import LoginUser from './pages/Login';
 
@@ -44,8 +49,12 @@ function App() {
   }, [])
 
 
-  
-  import { LoadingProvider, useLoading } from './componentes/Animación/Loadingcontext';
+
+
+
+
+
+ 
 
   function Main() {
     const { setLoading } = useLoading();
@@ -55,6 +64,7 @@ function App() {
       setLoading(true);
     }, [location, setLoading]);
 
+
     return (
       <>
         <Pageloader />
@@ -62,8 +72,6 @@ function App() {
           <Route path="/" element={<Home token={token} />} />
           <Route path={'/loginsupa'} element={<LoginUser setToken={setToken} />} />
           <Route path='/Registrar' element={<SignUp />} />
-
-
           <Route path="/servicios" element={<Servicios />} />
           <Route path="/inicio" element={<InicioSesion />} />
           <Route path="/politicas" element={<Condiciones />} />
@@ -88,7 +96,6 @@ function App() {
     );
   }
 
-  function App() {
     return (
       <LoadingProvider>
         <Router>
@@ -96,6 +103,6 @@ function App() {
         </Router>
       </LoadingProvider>
     );
-  }
+}
 
   export default App;
