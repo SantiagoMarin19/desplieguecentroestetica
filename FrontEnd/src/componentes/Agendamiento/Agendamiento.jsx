@@ -45,8 +45,8 @@ export const Agendamiento = () => {
             <div className='partleft'>
                 <div className='escogerprof'>
                     <form action='#' method='post'>
-                        <label className='escprof' htmlFor='prof'>
-                            Profesionales
+                        <label className='escprof' htmlFor='prof'><h3>
+                            Profesionales</h3>
                         </label>
                         <select name='profesionales' id='prof'>
                             <option>--Escoge profesional--</option>
