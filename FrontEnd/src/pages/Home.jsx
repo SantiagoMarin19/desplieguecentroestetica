@@ -9,9 +9,11 @@ import { useNavigate } from "react-router-dom";
 export const Home = ({token}) => {
   let navigate = useNavigate ()
 
+
+  
+
   function handlelogout(){
     sessionStorage.removeItem('token')
-    navigate('/')
 
   }
 
