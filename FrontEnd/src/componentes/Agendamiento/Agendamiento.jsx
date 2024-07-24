@@ -52,7 +52,7 @@ export const Agendamiento = () => {
                         <label className='escprof' htmlFor='prof'>
                             <h3>Profesionales</h3>
                         </label>
-                        <select required aria-required="true" name='profesionales' id='prof' onChange={handleProfesionalChange} value={selectedProfesional}>
+                        <select name='profesionales' id='prof' onChange={handleProfesionalChange} value={selectedProfesional}>
                             <option value=''>--Escoge profesional--</option>
                             <option value='prof1'>Natalia Salazar</option>
                             <option value='prof2'>Carlos Martinez</option>
@@ -112,7 +112,7 @@ export const Agendamiento = () => {
                         <p>
                             {getDiaSemana(date)} {date.getDate()} {date.toLocaleDateString('default', { month: 'short' })} {date.getFullYear()}
                         </p>
-                        <select required aria-required="true" name='hora' id='hor' onChange={handleHoraChange} value={selectedHora}>
+                        <select name='hora' id='hor' onChange={handleHoraChange} value={selectedHora}>
                             <option value=''>--Escoge hora--</option>
                             <option value='hor1'>9:00 - 10:00 am</option>
                             <option value='hor2'>10:00 - 11:00 am</option>

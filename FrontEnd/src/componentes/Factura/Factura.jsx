@@ -1,10 +1,16 @@
 import React from 'react';
 import '../Factura/Factura.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
+
+
 
 export const Facturaser = () => {
+
+    const location = useLocation();
+    const { service } = location.state || { service: { name: "Servicio no especificado", price: "$0.00" } };
+
     return (
-        <body>
+        <div>
         <div className='apartadoizquiero_factura'>
             <h2> Estas a un paso de reserva tu cita con nosotros</h2>
             <button> Confirmar </button>
@@ -13,45 +19,48 @@ export const Facturaser = () => {
             
             <table>
                 <thead>
-                    <tr><h2> Factura</h2></tr>
+                    <tr>Factura</tr>
                 </thead>
                 <tbody>
                     <tr>
                     <tr>
                     <th>ID Factura</th>
-                    <th>factura</th>
+                    <td>factura</td>
                     </tr>
                     <tr>
                     <th>Profesional</th>
-                    <th>nombre</th>
+                    <td>nombre</td>
                     </tr>
                     
                         <tr> 
                             <th>Cliente</th>
-                            <th>nombre cliente</th>
+                            <td>nombre cliente</td>
                             </tr>
                    <tr>
                     <th>Servicio</th>
-                    <th>nombre servicio</th>
+                    <td>{service.name}</td>
                    </tr>
                     <tr>
                         <th>Costo</th>
-                        <th>cuanto pagar</th>
+                        <td>{service.price}</td>
                         </tr>
                     <tr>
                         <th>Fecha</th>
-                        <th>fecha agendamiento</th>
+                        <td>fecha agendamiento</td>
                         </tr>
                     <tr>
                         <th>Hora</th>
-                        <th>Servicio agendado</th>
+                        <td>Servicio agendado</td>
+                        </tr>
+                        <tr>
+                        <th colSpan={2}></th>
                         </tr>
                     
                     </tr>
                 </tbody>
             </table>
         </div>
-        </body>
+        </div>
         );
     };
 export default Facturaser;
