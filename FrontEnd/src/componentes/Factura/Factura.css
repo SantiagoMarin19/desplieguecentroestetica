@@ -1,0 +1,7 @@
+table, th, td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 15px;
+    font-size: 20px;
+    word-wrap: break-word;
+}
