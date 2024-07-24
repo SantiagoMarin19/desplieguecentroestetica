@@ -89,7 +89,7 @@ export const Agendamiento = () => {
                             </tr>
                             <tr>
                                 <td colSpan={2} className='colorros'>
-                                    <NavLink to='#'>
+                                    <NavLink to='Factura'>
                                         <button className='botonreservar'>Reservar</button>
                                     </NavLink>
                                 </td>

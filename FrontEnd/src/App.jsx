@@ -18,6 +18,7 @@ import { Recuperar3 } from "./pages/Recuperar3"
 import { Recuperar4 } from "./pages/Recuperar4"
 import { Agendar } from "./pages/Agendar"
 import LoginUser from './pages/Login';
+import Facturaelectronica from './pages/FacturaElectronica'
 
 function App() {
   return (
@@ -37,8 +38,8 @@ function App() {
       <Route path='/Recover4' element={<Recuperar4/>}/>
       <Route path='/Agendarcita' element={<Agendar/>}/>
       <Route path='/loginsupa' element={<LoginUser/>}/>
-
-
+      <Route path='/loginsupa' element={<LoginUser/>}/>
+      <Route path='/Facturacion' element={<Facturaelectronica/>}/>
     </Routes>
   </Router>
   );
