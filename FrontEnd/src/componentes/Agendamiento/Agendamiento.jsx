@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Agendamiento.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const getDiaSemana = (date) => {
     const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -23,11 +23,15 @@ export const Agendamiento = () => {
     };
 
     const handleHoraChange = (event) => {
+        const selectValue = event.target.value;
         setSelectedHora(event.target.options[event.target.selectedIndex].text);
+        localStorage.setItem('selectedHora', selectValue)
     };
 
     const handleProfesionalChange = (event) => {
+        const selectedValue = event.target.value;
         setSelectedProfesional(event.target.options[event.target.selectedIndex].text);
+        localStorage.setItem('selectedProfesional', selectedValue);
     };
 
     const tileDisabled = ({ date, view }) => {
