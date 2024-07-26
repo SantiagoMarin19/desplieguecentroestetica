@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import './Agendamiento.css';
 import Calendar from 'react-calendar';
@@ -82,7 +83,7 @@ export const Agendamiento = () => {
                     </form>
                 </div>
                 <div className='partetabla'>
-                    <h3>Resumen</h3>
+                    <h3 className='resumen'>Resumen</h3>
                     <table>
                         <thead>
                             <tr>

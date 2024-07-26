@@ -83,7 +83,10 @@ export const Background = () => {
                     </div>
                 </div>
                 <div className='bottoncentrado'>
-                    <button type="button" className="buttonservi">SERVICIOS</button></div>
+                    <NavLink to="/servicios">
+                    <button type="button" className="buttonservi">SERVICIOS</button>
+                    </NavLink>
+                   </div>
 
             </div>
 
@@ -99,7 +102,7 @@ export const Background = () => {
 
                     <h2>¿Te gustaría separar una cita? <br></br>Te invito a conocer nuestros términos y condiciones de servicio para el año 2024.</h2>
 
-                    <h3>Si prefiere reservar su cita en persona, no dude en pasar por nuestra ubicación: Calle 33b #7-53 .</h3>
+                    <h3 className='reserva '>Si prefiere reservar su cita en persona, no dude en pasar por nuestra ubicación: Calle 33b #7-53 .</h3>
                 </div>
                 <div className="mapa">
                     <iframe

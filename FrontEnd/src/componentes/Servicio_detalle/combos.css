@@ -10,7 +10,13 @@ body{
     color: #422A3C;
     font-weight: 700;
 }
-.subtitulo{
+.subtituloCmbos{
+margin-top: 100px;
+margin-bottom: 10px;
+padding: 1rem;
+}
+
+.subtituloCmbos h2{
   color: #B66E7A;
   text-align: center;
   width: 30%;
@@ -76,18 +82,13 @@ body{
     font-weight: 700;
 }
 
-.contenido_botones{
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-}
 
-.informacion{
-    width: 30%;
-    display: flex;
-}
 
-.botonera{
+.btn_reservar{
+    color: #000000;
+    background-color: #B66E7A;
+    border: #FCEBF2;
+    border-radius: 10px;
     text-align: center;
     padding: 25px;
 }
