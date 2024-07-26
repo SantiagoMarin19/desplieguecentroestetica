@@ -25,6 +25,7 @@ import { Agendar } from "./pages/Agendar"
 import { LoadingProvider, useLoading } from './componentes/Animación/Loadingcontext';
 import SignUp from './pages/SignUp';
 import LoginUser from './pages/Login';
+import Facturaelectronica from './pages/FacturaElectronica'
 
 function App() {
   const [token, setToken] = useState(false)
@@ -84,6 +85,9 @@ function App() {
           <Route path='/Recover3' element={<Recuperar3 />} />
           <Route path='/Recover4' element={<Recuperar4 />} />
           <Route path='/Agendarcita' element={<Agendar />} />
+          <Route path='/Facturacion' element={<Facturaelectronica/>}/>
+
+          
         </Routes>
       </>
     );
