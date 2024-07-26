@@ -125,7 +125,7 @@ export const Agendamiento = () => {
                         <label className='eschor' htmlFor='hor'>
                             Escoge una hora
                         </label>
-                        <p>
+                        <p className='datosfecha'>
                             {getDiaSemana(date)} {date.getDate()} {date.toLocaleDateString('default', { month: 'short' })} {date.getFullYear()}
                         </p>
                         <select name='hora' id='hor' onChange={handleHoraChange} value={selectedHora}>

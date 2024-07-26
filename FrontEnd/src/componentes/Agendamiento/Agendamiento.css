@@ -2,9 +2,6 @@ body {
     background-color: rgb(255, 255, 255)
 }
 
-.escprof {
-    font-size: 30px;
-}
 
 form {
     display: flex;
@@ -14,10 +11,12 @@ form {
 
 select {
     font-size: 20px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 option {
     font-size: 20px;
+    
 }
 
 table,
@@ -28,6 +27,8 @@ td {
     padding: 15px;
     font-size: 20px;
     word-wrap: break-word;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
 }
 
 .todoingreso {
@@ -54,7 +55,7 @@ td {
 
 select {
     border-color: #FCEBF2;
-
+    font-size: 25px;
 }
 
 .helloxd {
@@ -113,3 +114,14 @@ button {
     /* Color del texto para los días del mes actual */
 }
 
+.eschor {
+ font-size: 30px;
+}
+.datosfecha {
+    font-size: 30px;
+
+}
+
+h3 {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
