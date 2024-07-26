@@ -13,13 +13,10 @@ import imagencejashenna from "../../assets/images/cejas_henna.jpg";
 
 export const Background = () => {
 
+
     return (
 
-
-
-
         <div className='conteinergeneral'>
-
             <div className='iconos'>
                 <div className="background">
                     <div className='containergoblal'>
@@ -105,7 +102,7 @@ export const Background = () => {
 
                     <h2>¿Te gustaría separar una cita? <br></br>Te invito a conocer nuestros términos y condiciones de servicio para el año 2024.</h2>
 
-                    <h3>Si prefiere reservar su cita en persona, no dude en pasar por nuestra ubicación: Calle 33b #7-53 .</h3>
+                    <h3 className='reserva '>Si prefiere reservar su cita en persona, no dude en pasar por nuestra ubicación: Calle 33b #7-53 .</h3>
                 </div>
                 <div className="mapa">
                     <iframe

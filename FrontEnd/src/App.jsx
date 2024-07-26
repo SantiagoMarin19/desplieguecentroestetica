@@ -2,14 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes , useLocation } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
-
 import Home from './pages/Home';
-
 import { InicioSesion } from './componentes/InicioSesion/InicioSesion';
 import { Acceder } from './pages/Acceder';
-
 import {Servicios} from './pages/Servicios';
 import { ServicioPestañas } from "./pages/ServicioP";
 import { ServicioCjas } from "./pages/ServicioC";
@@ -25,13 +20,11 @@ import { RegistroCheck } from "./pages/RegistroCheck"
 import { Recuperar } from "./pages/Recuperar"
 import { Recuperar2 } from "./pages/Recuperar2"
 import { Recuperar3 } from "./pages/Recuperar3"
-
 import { Recuperar4 } from "./pages/Recuperar4"
 import { Agendar } from "./pages/Agendar"
 import { LoadingProvider, useLoading } from './componentes/Animación/Loadingcontext';
 import SignUp from './pages/SignUp';
 import LoginUser from './pages/Login';
-
 
 function App() {
   const [token, setToken] = useState(false)
