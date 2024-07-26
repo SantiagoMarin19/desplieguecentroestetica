@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Agendamiento.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 const getDiaSemana = (date) => {
     const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -11,10 +11,12 @@ const getDiaSemana = (date) => {
 
 export const Agendamiento = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const { service } = location.state || { service: { name: "Servicio no especificado", price: "$0.00" } };
     const [date, setDate] = useState(new Date());
     const [selectedHora, setSelectedHora] = useState('');
     const [selectedProfesional, setSelectedProfesional] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const onChange = (date) => {
         setDate(date);
@@ -42,6 +44,21 @@ export const Agendamiento = () => {
             date1.getMonth() === date2.getMonth() &&
             date1.getFullYear() === date2.getFullYear()
         );
+    };
+
+    const handleReservarClick = (event) => {
+        event.preventDefault(); // Prevent the default link behavior
+
+        if (!selectedProfesional || !selectedHora) {
+            window.alert('Por favor, selecciona un profesional y una hora.');
+            return;
+        }
+
+        // Clear any previous error message
+        setErrorMessage('');
+
+        // Navigate to the billing page if validation passes
+        navigate('/Facturacion');
     };
 
     return (
@@ -89,13 +106,12 @@ export const Agendamiento = () => {
                             </tr>
                             <tr>
                                 <td colSpan={2} className='colorros'>
-                                    <NavLink to='/Facturacion'>
-                                        <button className='botonreservar'>Reservar</button>
-                                    </NavLink>
+                                    <button className='botonreservar' onClick={handleReservarClick}>Reservar</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                    {errorMessage && <p className='error-message'>{errorMessage}</p>}
                 </div>
             </div>
             <div className='partright'>
