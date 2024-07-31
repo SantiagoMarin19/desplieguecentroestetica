@@ -9,6 +9,10 @@ import imagenlifcejas from "../../assets/images/pestañas.png";
 import imagenfondo from "../../assets/images/imagen_fondo.jpg";
 import imagencejashenna from "../../assets/images/cejas_henna.jpg";
 
+
+
+
+
 export const Background = () => {
     return (
         <div className='conteinergeneral'>

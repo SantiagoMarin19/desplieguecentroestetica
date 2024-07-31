@@ -24,24 +24,24 @@ export const Navbar = () => {
                          
                         </li>
                         <li className="nav-item">
-                            <NavLink to="/" className="nav-link" activeClassName="active">
+                            <NavLink to="/" className="nav-link" >
                                 HOME
                             </NavLink>
                         </li>
 
                         <li className="nav-item">
-                            <NavLink to="/servicios" className="nav-link" activeClassName="active">
+                            <NavLink to="/servicios" className="nav-link">
                                 SERVICIOS
 
                             </NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink to="/acerca-de" className="nav-link" activeClassName="active">
+                            <NavLink to="/acerca-de" className="nav-link" >
                                 ACERCA DE
                             </NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink to="/contactanos" className="nav-link" activeClassName="active">
+                            <NavLink to="/contactanos" className="nav-link">
                                 CITAS
                             </NavLink>
                             <div className='todoingreso'>
@@ -131,7 +131,7 @@ export const Navbar = () => {
 
                         </li>
                         <li className="nav-item">
-                            <NavLink to="/loginsupa" className="nav-link" activeClassName="active">
+                            <NavLink to="/loginsupa" className="nav-link" >
                                 Iniciar Sesion
                             </NavLink>
                         </li>
