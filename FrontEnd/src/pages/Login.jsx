@@ -73,7 +73,7 @@ const LoginUser = ({setToken}) => {
 
 
       </form>
-      Don't have an account? <Link to='/signup'>Sign Up</Link> 
+      Don't have an account? <Link to='/Registrar'>Sign Up</Link> 
     </div>
   )
 }
