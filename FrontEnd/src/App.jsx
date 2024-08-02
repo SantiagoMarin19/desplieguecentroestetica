@@ -25,6 +25,7 @@ import { LoadingProvider, useLoading } from './componentes/Animación/Loadingcon
 import SignUp from './pages/SignUp';
 import LoginUser from './pages/Login';
 import Facturaelectronica from './pages/FacturaElectronica'
+import { VistaDetalle } from './componentes/VistaDetalladaServ/VistaDetalleSer';
 
 function App() {
   const [token, setToken] = useState(false)
