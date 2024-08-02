@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import logo from "../assets/react.svg";
-import { v } from "../styles/Variables";
+import { v } from "../../Styles/Vaiables";
 import {
   AiOutlineLeft,
   AiOutlineHome,
@@ -10,7 +9,7 @@ import {
 import { MdOutlineAnalytics, MdLogout } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
-import { ThemeContext } from "../App";
+import { ThemeContext } from "../../App";
 export function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const ModSidebaropen = () => {
     setSidebarOpen(!sidebarOpen);
