@@ -1,8 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import styled from "styled-components";
+import { ThemeProvider } from "styled-components";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { MyRoutes } from "./routers/Routes";
+import { Sidebar } from "./components/Sidebar";
+import { Light, Dark } from "./styles/Themes";
+import { Pageloader } from './componentes/Animación/Carga';
+import { LoadingProvider, useLoading } from './componentes/Animación/Loadingcontext';
+
+// Importar las páginas
 import Home from './pages/Home';
-import {Servicios} from './pages/Servicios';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { Servicios } from './pages/Servicios';
 import { InicioSesion } from './componentes/InicioSesion/InicioSesion';
 import { Piedepagina } from './componentes/Footer/footer';
 import { ServicioPestañas } from "./pages/ServicioP";
@@ -13,17 +22,19 @@ import { ComboHeyLifting } from "./pages/ComboC-Henna+Lifing";
 import { ComboSombrayLifiting } from "./pages/comboC-Sombreado+Lifitng";
 import { Combolamiyextension } from "./pages/ComboP-Lamc+Extension";
 import { Combolaminylif } from "./pages/ComboP-Lamc+Lifting";
-import { Pageloader } from './componentes/Animación/Carga';
-import {Acceder} from './pages/Acceder';
+import { Acceder } from './pages/Acceder';
 import { Registro } from "./pages/Registro";
-import { RegistroCheck } from "./pages/RegistroCheck"
-import { Recuperar } from "./pages/Recuperar"
-import { Recuperar2 } from "./pages/Recuperar2"
-import { Recuperar3 } from "./pages/Recuperar3"
-import { Recuperar4 } from "./pages/Recuperar4"
-import { Agendar } from "./pages/Agendar"
-import { LoadingProvider, useLoading } from './componentes/Animación/Loadingcontext';
+import { RegistroCheck } from "./pages/RegistroCheck";
+import { Recuperar } from "./pages/Recuperar";
+import { Recuperar2 } from "./pages/Recuperar2";
+import { Recuperar3 } from "./pages/Recuperar3";
+import { Recuperar4 } from "./pages/Recuperar4";
+import { Agendar } from "./pages/Agendar";
 
+// Crear el contexto de tema
+export const ThemeContext = React.createContext(null);
+
+// Componente principal
 function Main() {
     const { setLoading } = useLoading();
     const location = useLocation();
@@ -47,7 +58,6 @@ function Main() {
                 <Route path="/combosombreadoylifting" element={<ComboSombrayLifiting />} />
                 <Route path="/combolaminacionyextension" element={<Combolamiyextension />} />
                 <Route path="/combolaminacionylifting" element={<Combolaminylif />} />
-                <Route path="/inicio" element={<InicioSesion />} />
                 <Route path='/Ingresar' element={<Acceder />} />
                 <Route path='/registro' element={<Registro />} />
                 <Route path='/register' element={<RegistroCheck />} />
@@ -61,14 +71,40 @@ function Main() {
     );
 }
 
+// Componente principal de la aplicación
 function App() {
+    const [theme, setTheme] = useState("light");
+    const themeStyle = theme === "light" ? Light : Dark;
+
+    const [sidebarOpen, setSidebarOpen] = useState(true);
+
     return (
         <LoadingProvider>
-            <Router>
-                <Main />
-            </Router>
+            <ThemeContext.Provider value={{ setTheme, theme }}>
+                <ThemeProvider theme={themeStyle}>
+                    <Router>
+                        <Container className={sidebarOpen ? "sidebarState active" : ""}>
+                            <Sidebar
+                                sidebarOpen={sidebarOpen}
+                                setSidebarOpen={setSidebarOpen}/>
+                            <Main />
+                        </Container>
+                    </Router>
+                </ThemeProvider>
+            </ThemeContext.Provider>
         </LoadingProvider>
     );
 }
+
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: 90px auto;
+  background: ${({ theme }) => theme.bgtotal};
+  transition: all 0.3s;
+  &.active {
+    grid-template-columns: 300px auto;
+  }
+  color: ${({ theme }) => theme.text};
+`;
 
 export default App;
