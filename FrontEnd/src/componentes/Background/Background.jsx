@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Background.css';
-import imagencompleta from "../../assets/images/completo.png";
 import imagencejas from "../../assets/images/cejas.png";
 import imagenlifting from "../../assets/images/lifting.png";
 import imagenmaquillaje from "../../assets/images/maquillaje.png";

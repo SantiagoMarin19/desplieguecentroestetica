@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import  supabase  from "../supabase/supabaseconfig";
-
-
+import "./Estilos/SignUp.css"
 
 const SignUp = () => {
 
@@ -60,7 +59,7 @@ const SignUp = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <input 
-          placeholder='Fullname'
+          placeholder='Nombre'
           name='fullName'
           onChange={handleChange}
         />
@@ -72,20 +71,22 @@ const SignUp = () => {
         />
 
         <input 
-          placeholder='Password'
+          placeholder='Contraseña'
           name='password'
           type="password"
           onChange={handleChange}
         />
 
         <button type='submit'>
-          Enviar
+          Registrarme
         </button>
 
 
       </form>
-      Ya tienes una?<Link to='/loginsupa'>Login</Link> 
+      Ya tienes una cuenta?<Link to='/loginsupa'>Inicia sesión</Link> 
     </div>
+
+
   )
 }
 

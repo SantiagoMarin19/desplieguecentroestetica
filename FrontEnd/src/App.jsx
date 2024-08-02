@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes , useLocation } from 'react-rout
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './pages/Home';
-import { InicioSesion } from './componentes/InicioSesion/InicioSesion';
 import { Acceder } from './pages/Acceder';
 import {Servicios} from './pages/Servicios';
 import { ServicioPestañas } from "./pages/ServicioP";
@@ -67,7 +66,6 @@ function App() {
           <Route path={'/loginsupa'} element={<LoginUser setToken={setToken} />} />
           <Route path='/Registrar' element={<SignUp />} />
           <Route path="/servicios" element={<Servicios />} />
-          <Route path="/inicio" element={<InicioSesion />} />
           <Route path="/politicas" element={<Condiciones />} />
           <Route path="/serviciocejas" element={<ServicioCjas />} />
           <Route path="/serviciopestañas" element={<ServicioPestañas />} />
@@ -76,7 +74,6 @@ function App() {
           <Route path="/combosombreadoylifting" element={<ComboSombrayLifiting />} />
           <Route path="/combolaminacionyextension" element={<Combolamiyextension />} />
           <Route path="/combolaminacionylifting" element={<Combolaminylif />} />
-          <Route path="/inicio" element={<InicioSesion />} />
           <Route path='/Ingresar' element={<Acceder />} />
           <Route path='/registro' element={<Registro />} />
           <Route path='/register' element={<RegistroCheck />} />

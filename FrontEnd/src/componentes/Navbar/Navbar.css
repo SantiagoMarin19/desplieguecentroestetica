@@ -57,3 +57,5 @@
     transform: translate(0, -50%);
     bottom: 23%;
 }
+.navbar-expand-lg .navbar-nav {
+    display: contents;}
