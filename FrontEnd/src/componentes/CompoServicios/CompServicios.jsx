@@ -4,13 +4,15 @@ import { NavLink } from 'react-router-dom';
 import supabase from '../../supabase/supabaseconfig';
 
 export const CompServicios = () => {
+
     const [servicios, setServicios] = useState([]);
 
     useEffect(() => {
         const fetchServicios = async () => {
             const { data, error } = await supabase
                 .from('servicios')
-                .select('*')
+                .select(`* , categorias (
+                    nombreCategoria)`)
                 .eq('estado', true);
             if (error) {
                 console.error('Error fetching servicios:', error);
@@ -23,20 +25,41 @@ export const CompServicios = () => {
     }, []);
 
     const renderServiciosPorCategoria = (categoria, titulo, claseTitulo, claseServicio,) => {
+
+        const formatoCo = new Intl.NumberFormat('es-CO',{
+            style :'currency',
+            currency : 'COP',
+            minimumFractionDigits:0,
+            maximumFractionDigits:2
+
+
+        });
+
+
+
         return (
             <div className={claseTitulo}>
                 <h3>{titulo}</h3>
                 <div className={claseServicio}>
-                    {servicios.filter(servicio => servicio.categoria === categoria).map((servicio) => (
+                    {servicios.filter(servicio => servicio.categorias.nombreCategoria === categoria).map((servicio) => (
                         <div key={servicio.id_servicio} className='serviciosdetc'>
-                              <div>                            <img  src={servicio.url_img} />
-                              </div>
+                            <div>                            <img src={servicio.url_img} />
+                            </div>
                             <h5>{servicio.nombre_servicio}</h5>
-                          
-                            <h5><b>${servicio.precio}</b></h5>
-                            
+
+                            <h5><b>{formatoCo.format(servicio.precio)}</b></h5>
+
                             <div className="butonSs">
-                                <NavLink to={'/ServicioPestañas'}>
+
+
+                                
+                                <NavLink
+                                 to={{
+                                    pathname:'/VistaDetalle',
+                                    state:{ servicio: servicio}
+
+                                 }}
+                                 >
                                     <button className="button_s">Reservar</button>
                                 </NavLink>
                             </div>
@@ -53,7 +76,7 @@ export const CompServicios = () => {
                 <div className='tituloserviciosg'>
                     <h1>Nuestros servicios</h1>
                 </div>
-              
+
             </div>
 
             <div className='secciones_servicios'>
