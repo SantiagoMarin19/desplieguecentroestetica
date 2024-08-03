@@ -1,93 +1,92 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import  supabase  from "../supabase/supabaseconfig";
-import "./Estilos/SignUp.css"
+import supabase from '../supabase/supabaseconfig';
+import flechaizq from "../assets/images/decoración.png";
+import or from "../assets/images/OR.png";
+import flechader from "../assets/images/decor.png";
+import "./Estilos/SignUp.css";
 
 const SignUp = () => {
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    password: ''
+  });
 
-  const [formData,setFormData] = useState({
-    fullName:'',email:'',password:''
-  })
-
-  console.log(formData)
-
-  function handleChange(event){
-    setFormData((prevFormData)=>{
-      return{
-        ...prevFormData,
-        [event.target.name]:event.target.value
-      }
-
-    })
-
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value
+    }));
   }
 
- async function handleSubmit(e) {
-  e.preventDefault();
-
-  try {
-    const { data, error } = await supabase.auth.signUp({
-      email: formData.email,
-      password: formData.password,
-      options: {
-        data: {
-          full_name: formData.fullName,
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            full_name: formData.fullName,
+          },
         },
-      },
-    });
+      });
 
-    if (error) {
-      throw error;
-    }
-
-    alert('Verifica tu correo electrónico para el enlace de confirmación.');
-  } catch (error) {
-    if (error.response && error.response.status === 429) {
-      // Manejar el error de límite de tasa (429)
-      alert('Se ha alcanzado el límite de solicitudes. Por favor, espera unos momentos y vuelve a intentarlo.');
-    } else {
-      // Otros errores
-      alert('Ocurrió un error al registrarse:', error.message);
+      if (error) {
+        if (error.status === 429) {
+          alert('Se ha alcanzado el límite de solicitudes. Por favor, espera unos momentos y vuelve a intentarlo.');
+        } else {
+          throw error; // Propaga otros errores
+        }
+      } else {
+        alert('Verifica tu correo electrónico para el enlace de confirmación.');
+      }
+    } catch (error) {
+      alert('Ocurrió un error al registrarse: ' + error.message);
     }
   }
-}
-
-
-
 
   return (
-    <div>
+    <div className='bodySesion'>
       <form onSubmit={handleSubmit}>
-        <input 
-          placeholder='Nombre'
-          name='fullName'
-          onChange={handleChange}
-        />
-
-        <input 
-          placeholder='Email'
-          name='email'
-          onChange={handleChange}
-        />
-
-        <input 
-          placeholder='Contraseña'
-          name='password'
-          type="password"
-          onChange={handleChange}
-        />
-
-        <button type='submit'>
-          Registrarme
-        </button>
-
-
+        <div className='titulosesion'><b>Registrate</b></div>
+        <div className='subtitsesion'>Complete los campos</div>
+        <div className='datosbody'>
+          <div className='contenedorNombre'>
+            <input className='inputcontenedores'
+              placeholder='Nombre'
+              name='fullName'
+              onChange={handleChange}
+            />
+          </div>
+          <div className='contenedorCorreo'>
+            <input className='inputcontenedores'
+              placeholder='Email'
+              name='email'
+              onChange={handleChange}
+            />
+          </div>
+          <div className='contenedorContraseña'>
+            <input className='inputcontenedores'
+              placeholder='Contraseña'
+              name='password'
+              type="password"
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+        <button className="botoningresar" type='submit'>Registrarse</button>
+        <div className='decoraciones'>
+          <div className='deco1'><img className="img-dec" src={flechaizq} alt="Decoración izquierda" /></div>
+          <div className='deco2'><img className="img-o" src={or} alt="OR" /></div>
+          <div className='deco3'><img className="img-decor" src={flechader} alt="Decoración derecha" /></div>
+        </div>
       </form>
-      Ya tienes una cuenta?<Link to='/loginsupa'>Inicia sesión</Link> 
+      <div className='poncuenta'>Ya tienes una cuenta?<Link to='/loginsupa'>Inicia sesión</Link></div>
     </div>
-
-
-  )
+  );
 }
 
-export default SignUp
+export default SignUp;
