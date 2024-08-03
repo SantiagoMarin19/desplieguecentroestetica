@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export function Citas() {
   return (<Container>
-    <h1>Diagramas</h1>
+    <h1>Citas</h1>
   </Container>);
 }
 

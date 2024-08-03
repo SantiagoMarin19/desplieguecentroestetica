@@ -64,13 +64,18 @@ function Main() {
 }
 
 function App() {
+    const peticion = async () =>{
+        const response = await fetch()
+        const data= await response.json()
+        console.log(data);
+    };
+    
     return (
         <LoadingProvider>
             <Router>
                 <Main />
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/loginsupa" element={<LoginUser />} />
                     <Route path="/servicios" element={<Servicios />} />
                     <Route path="/inicio" element={<InicioSesion />} />
                     <Route path="/politicas" element={<Condiciones />} />

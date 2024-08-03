@@ -1,15 +1,13 @@
 import styled from "styled-components";
 import { v } from "../../Styles/Vaiables";
-import {
-  AiOutlineLeft,
-  AiOutlineHome,
-  AiOutlineApartment,
-  AiOutlineSetting,
-} from "react-icons/ai";
+import { AiOutlineLeft, AiOutlineHome,  AiOutlineApartment,AiOutlineSetting,} from "react-icons/ai";
 import { MdOutlineAnalytics, MdLogout } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { ThemeContext } from "../../App";
+
+
+
 export function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const ModSidebaropen = () => {
     setSidebarOpen(!sidebarOpen);
@@ -19,40 +17,40 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }) {
     setTheme((theme) => (theme === "light" ? "dark" : "light"));
   };
 
+
   return (
     <Container isOpen={sidebarOpen} themeUse={theme}>
       <button className="Sidebarbutton" onClick={ModSidebaropen}>
         <AiOutlineLeft />
       </button>
+
       <div className="Logocontent">
         <div className="imgcontent">
-          <img src={logo} />
+          {/* <img src={logo} /> */}
         </div>
-        <h2>codigo369</h2>
+        <h2>Natalia Salazar</h2>
       </div>
+
       {linksArray.map(({ icon, label, to }) => (
         <div className="LinkContainer" key={label}>
           <NavLink
-            to={to}
-            className={({ isActive }) => `Links${isActive ? ` active` : ``}`}
-          >
+            to={to} className={({ isActive }) => `Links${isActive ? ` active` : ``}`}>
             <div className="Linkicon">{icon}</div>
             {sidebarOpen && <span>{label}</span>}
           </NavLink>
         </div>
       ))}
+
       <Divider />
       {secondarylinksArray.map(({ icon, label, to }) => (
         <div className="LinkContainer" key={label}>
-          <NavLink
-            to={to}
-            className={({ isActive }) => `Links${isActive ? ` active` : ``}`}
-          >
+          <NavLink to={to} className={({ isActive }) => `Links${isActive ? ` active` : ``}`}>
             <div className="Linkicon">{icon}</div>
             {sidebarOpen && <span>{label}</span>}
           </NavLink>
         </div>
       ))}
+
       <Divider />
       <div className="Themecontent">
         {sidebarOpen && <span className="titletheme">Dark mode</span>}
@@ -77,6 +75,7 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }) {
     </Container>
   );
 }
+
 //#region Data links
 const linksArray = [
   {
@@ -85,26 +84,27 @@ const linksArray = [
     to: "/",
   },
   {
-    label: "Estadisticas",
-    icon: <MdOutlineAnalytics />,
-    to: "/estadisticas",
-  },
-  {
-    label: "Productos",
-    icon: <AiOutlineApartment />,
-    to: "/productos",
-  },
-  {
     label: "Diagramas",
     icon: <MdOutlineAnalytics />,
-    to: "/diagramas",
+    to: "/Diagramas",
   },
   {
-    label: "Reportes",
+    label: "Citas",
+    icon: <AiOutlineApartment />,
+    to: "/Citas",
+  },
+  {
+    label: "Servicios",
     icon: <MdOutlineAnalytics />,
-    to: "/reportes",
+    to: "/Servicios",
+  },
+  {
+    label: "Personal",
+    icon: <MdOutlineAnalytics />,
+    to: "/Personal",
   },
 ];
+
 const secondarylinksArray = [
   {
     label: "Configuración",
