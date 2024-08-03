@@ -7,7 +7,7 @@ export const CompServicios = () => {
     return (
         <div className='componenteServs'>
             <div className='Bannerserviciosg'>
-                <div className='tituloserviciosg'>
+                <div className='Titulo_Servicio_General'>
                     <h1>Nuestros servicios</h1>
                 </div>
 

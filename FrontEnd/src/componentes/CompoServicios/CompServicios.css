@@ -17,16 +17,23 @@ body{
 }
 
 .tituloserviciosg {
-    width: 50%;
     display: flex;
     justify-content: center;
 }
 
-.tituloserviciosg h1 {
-    font-size: 100px;
+.Titulo_Servicio_General{
+    margin: 10px;
+    padding: 1rem;
+    width: 100%;
+}
+
+.Titulo_Servicio_General h1{
     color: #422A3C;
-    font-weight: 700;
-    width: 50%;
+    width: 100%;
+    font-size: 80px;
+    display: flex;
+    justify-content: center;
+    text-shadow: 1px 5px 5px rgb(168, 168, 168);
 }
 
 .Titulo_Servicio_Cejas h3 {
@@ -233,7 +240,6 @@ body{
 h1 {
     font-size: 10vh;
     font-family: auto;
-    -webkit-text-stroke-width: medium;
 }
 
 .butonSs{
@@ -270,7 +276,6 @@ h1 {
         width: 15%;
         font-size: 4vh;
         font-family: auto;
-        -webkit-text-stroke-width: medium;
         word-wrap: break-word;
     }
 

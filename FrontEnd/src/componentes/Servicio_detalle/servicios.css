@@ -14,6 +14,7 @@ body {
     font-size: 80px;
     color: #422A3C;
     font-weight: 700;
+    text-shadow: 1px 5px 5px rgb(168, 168, 168);
 }
 
 .contenedor_total {

@@ -16,14 +16,15 @@ export const Piedepagina = () => {
             <div className='contenedorif'>
                 <div className='izquierda'>
                     <h3>Explorar</h3>
-                    <p>Inicio </p>
-                    <p>Acerca De</p>
-                    <p>Servicios</p>
+                
+                <NavLink to="/"><p>Inicio </p></NavLink>
+                <NavLink to="/ServicioCejas"> <p>Acerca De</p></NavLink>
+                <NavLink to="/servicios"> <p>Servicios</p></NavLink>
                 </div>
 
                 <div className='centro'>
                     <h3>Utilidades</h3>
-                    <p>Terminos y Condiciones</p>
+                    <NavLink to="/Politicas"><p>Terminos y Condiciones</p></NavLink>
                 </div>
 
                 <div className='derecha'>
