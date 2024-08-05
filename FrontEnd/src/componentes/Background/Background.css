@@ -96,56 +96,55 @@ html, body {
 /* Media queries para responsive design */
 @media (max-width: 768px) {
   .Frase-background h1 {
-      font-size: 1.5em;
+    font-size: 1.5em;
   }
 
   .Frase-background p {
-      font-size: 0.9em;
+    font-size: 0.9em;
   }
 
   .imgservices img {
-      max-width: 150px;
+    max-width: 150px;
   }
 
   .backgroundtercero h2 {
-      font-size: 1.2em;
+    font-size: 1.2em;
   }
 
   .backgroundtercero h3 {
-      font-size: 1em;
+    font-size: 1em;
   }
 }
 
 @media (max-width: 480px) {
   .Frase-background h2 {
-      font-size: 1.2em;
+    font-size: 1.2em;
   }
 
   .Frase-background h1 {
-      font-size: 1.2em;
+    font-size: 1.2em;
   }
 
   .Frase-background p {
-      font-size: 0.8em;
+    font-size: 0.8em;
   }
 
   .imgservices img {
-      max-width: 120px;
+    max-width: 120px;
   }
 
   .backgroundtercero h2 {
-      font-size: 1em;
+    font-size: 1em;
   }
 
   .backgroundtercero h3 {
-      font-size: 0.9em;
+    font-size: 0.9em;
   }
 
   .mapa iframe {
-      height: 200px;
+    height: 200px;
   }
 }
-
 
 .background {
   background-color: #FCEBF2;
@@ -156,8 +155,6 @@ html, body {
   align-items: center;
   overflow-y: scroll;
 }
-
-
 
 .backgroundtercero {
   display: flex;
@@ -174,58 +171,52 @@ html, body {
   padding: 50px; /* Añadido para espacio interior */
 }
 
-
 .Frase-background {
   margin-left: 10%;
-
 }
 
 .img-rostro {
   width: 100vh;
   height: auto;
-
 }
 
-
 .foto {
-  width: 800px; 
-  height: 900px; 
-  overflow: hidden; 
+  width: 800px;
+  height: 900px;
+  overflow: hidden;
 }
 
 .foto img {
-  max-width: 100%; 
-  height: 900px; 
-  display: block; 
+  max-width: 100%;
+  height: 900px;
+  display: block;
 }
 
-.enunciados{
-justify-content: center;
-text-align: center; /* Centra los enunciados */
-color: #422A3C;
-font-weight: 700;
-font-family: "Playfair Display", serif;
-margin-bottom: 40px; /* Espacio inferior */
-width: 50%;
+.enunciados {
+  justify-content: center;
+  text-align: center; /* Centra los enunciados */
+  color: #422A3C;
+  font-weight: 700;
+  font-family: "Playfair Display", serif;
+  margin-bottom: 40px; /* Espacio inferior */
+  width: 50%;
 }
 
 .enunciados h2 {
   font-size: 36px; /* Tamaño del título principal */
   margin-bottom: 20px; /* Espacio inferior */
-  }
-  
-  .enunciados h3 {
+}
+
+.enunciados h3 {
   font-size: 24px; /* Tamaño del subtítulo */
   margin-bottom: 30px; /* Espacio inferior */
   color: #fff;
-  }
+}
 
-
-.buttonservi{
+.buttonservi {
   justify-content: center;
   align-items: center;
-  background-color:white;
-
+  background-color: white;
 }
 
 .boton {
@@ -244,7 +235,7 @@ width: 50%;
   border-radius: 10px;
 }
 
-.servicios{
+.servicios {
   --bs-btn-color: #000000;
   --bs-btn-bg: #BF6A8C;
   --bs-btn-border-color: #BF6A8C;
@@ -261,50 +252,46 @@ width: 50%;
   --bs-btn-disabled-border-color: #BF6A8C;
 }
 
-.bottoncentrado{
+.bottoncentrado {
   display: flex;
   justify-content: center;
   margin-top: 100px;
   margin-bottom: 50px;
 }
+
 .mapa {
   text-align: center; /* Centra el mapa y el botón */
   margin-top: 30px; /* Espacio superior */
-  }
+}
 
-  .mapa iframe {
-    width: 100%; /* Ajusta el ancho del mapa */
-    max-width: 800px; /* Límite máximo de ancho */
-    height: 450px; /* Altura fija */
-    border: none; /* Sin borde al iframe */
-    border-radius: 10px; /* Borde redondeado */
-    margin-bottom: 20px; /* Espacio inferior */
-    }
+.mapa iframe {
+  width: 100%; /* Ajusta el ancho del mapa */
+  max-width: 800px; /* Límite máximo de ancho */
+  height: 450px; /* Altura fija */
+  border: none; /* Sin borde al iframe */
+  border-radius: 10px; /* Borde redondeado */
+  margin-bottom: 20px; /* Espacio inferior */
+}
 
 .mapa button {
-      background-color: #ffffff; /* Color de fondo del botón */
-      color: #BF6A8C; /* Color del texto del botón */
-     border: none; /* Sin borde */
-      padding: 10px 20px; /* Espaciado interno */
-      font-size: 18px; /* Tamaño de fuente */
-      cursor: pointer; /* Cursor de puntero */
-      transition: background-color 0.3s ease; /* Transición suave */
-      }
+  background-color: #ffffff; /* Color de fondo del botón */
+  color: #BF6A8C; /* Color del texto del botón */
+  border: none; /* Sin borde */
+  padding: 10px 20px; /* Espaciado interno */
+  font-size: 18px; /* Tamaño de fuente */
+  cursor: pointer; /* Cursor de puntero */
+  transition: background-color 0.3s ease; /* Transición suave */
+}
 
 .mapa button:hover {
   background-color: rgba(255, 255, 255, 0.8); /* Cambia el fondo al pasar el mouse */
- }
-
- 
+}
 
 .herr-von-muellerhoff-regular {
   font-family: "Herr Von Muellerhoff", cursive;
   font-weight: 400;
   font-style: normal;
 }
-
-
-
 
 .Frase-background h1 {
   text-align: left;
@@ -322,11 +309,7 @@ width: 50%;
   height: auto;
   font-size: 80px;
   font-family: "Herr Von Muellerhoff", cursive;
-
 }
-
-
-
 
 .Frase-background p {
   color: rgb(0, 0, 0);
@@ -334,21 +317,17 @@ width: 50%;
   margin-bottom: 10%;
   width: 70%;
   font-family: "Urbanist", sans-serif;
-
 }
 
 .containergoblal {
   display: block;
   margin-left: 2%;
   margin-bottom: 7%;
-
 }
 
 .icono_grande {
   font-size: 2em;
-
 }
-
 
 .acercade {
   font-family: "Urbanist", sans-serif;
@@ -359,7 +338,6 @@ width: 50%;
   margin-right: 25%;
   text-align: justify;
 }
-
 
 .imgservices {
   display: flex;
@@ -404,14 +382,14 @@ width: 50%;
 }
 
 .btn-servicios {
-background-color: transparent;
-padding-right: 50px;
-padding-left: 50px;
-border-radius: 2px;
-border-color: black;
-border-width: thin;
-font-size: 20px;
-font-family: 'Urbanist';
+  background-color: transparent;
+  padding-right: 50px;
+  padding-left: 50px;
+  border-radius: 2px;
+  border-color: black;
+  border-width: thin;
+  font-size: 20px;
+  font-family: 'Urbanist';
 }
 
 .redirigirserv {
@@ -428,7 +406,7 @@ font-family: 'Urbanist';
   width: 200%;
   justify-content: center;
   border-radius: 10px;
- }
+}
 
 @media (max-width: 1315px) {
   .foto {
@@ -440,12 +418,19 @@ font-family: 'Urbanist';
     width: 500px !important;
   }
   .imgservices img {
-  width: 100%;
-  height: auto;
-  max-width: 200px;
-  margin: 10px;
+    width: 100%;
+    height: auto;
+    max-width: 200px;
+    margin: 10px;
+  }
 }
-}
+@media (max-width: 500px){
+  .contenedorif {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }}
+
 
 @media (max-width: 500px) {
   .foto {
@@ -456,40 +441,40 @@ font-family: 'Urbanist';
     font-size: 30px !important;
     width: 250px !important;
   }
- 
+
   h2.frase {
     padding-top: 80%;
-}
-.acercade {
-  font-size: 20px;
-}
-.mapa {
-  text-align: center;
-  display: contents;
-}
-.backgroundtercero {
-  display: flex;
-  flex-direction: column;
-}
-h2 {
-  font-size: 20px !important;
-}
-h3.reservas {
-  font-size: 20px !important;
-}
-.oa {
-  margin-right: 20px;
-}
-.oaa {
-  margin-right: 20px;
- }
- .buttonservi {
-  display: flex !important;
-  background-color: #BF6A8C !important;
-  color: white !important;
-  padding: 10px;
-  width: 100%;
-  justify-content: center;
-  border-radius: 10px;
- }
+  }
+  .acercade {
+    font-size: 20px;
+  }
+  .mapa {
+    text-align: center;
+    display: contents;
+  }
+  .backgroundtercero {
+    display: flex;
+    flex-direction: column;
+  }
+  h2 {
+    font-size: 20px !important;
+  }
+  h3.reservas {
+    font-size: 20px !important;
+  }
+  .oa {
+    margin-right: 20px;
+  }
+  .oaa {
+    margin-right: 20px;
+  }
+  .buttonservi {
+    display: flex !important;
+    background-color: #BF6A8C !important;
+    color: white !important;
+    padding: 10px;
+    width: 100%;
+    justify-content: center;
+    border-radius: 10px;
+  }
 }
