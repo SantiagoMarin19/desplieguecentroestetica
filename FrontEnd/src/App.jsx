@@ -5,9 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './pages/Home';
 import { Acceder } from './pages/Acceder';
 import {Servicios} from './pages/Servicios';
-import { ServicioPestañas } from "./pages/ServicioP";
-import { ServicioCjas } from "./pages/ServicioC";
-import { ServicioMcion } from "./pages/ServicioM";
+
 import { Condiciones } from "./pages/Terminos";
 import { ComboHeyLifting } from "./pages/ComboC-Henna+Lifing";
 import { ComboSombrayLifiting } from "./pages/comboC-Sombreado+Lifitng";
@@ -26,6 +24,7 @@ import SignUp from './pages/SignUp';
 import LoginUser from './pages/Login';
 import Facturaelectronica from './pages/FacturaElectronica'
 import { VistaDetalle } from './componentes/VistaDetalladaServ/VistaDetalleSer';
+import { VistaServicios } from './pages/VistaServicios';
 
 function App() {
   const [token, setToken] = useState(false)
@@ -68,9 +67,8 @@ function App() {
           <Route path='/Registrar' element={<SignUp />} />
           <Route path="/servicios" element={<Servicios />} />
           <Route path="/politicas" element={<Condiciones />} />
-          <Route path="/serviciocejas" element={<ServicioCjas />} />
-          <Route path="/serviciopestañas" element={<ServicioPestañas />} />
-          <Route path="/serviciomicropigmentacion" element={<ServicioMcion />} />
+     
+
           <Route path="/combohennaylifting" element={<ComboHeyLifting />} />
           <Route path="/combosombreadoylifting" element={<ComboSombrayLifiting />} />
           <Route path="/combolaminacionyextension" element={<Combolamiyextension />} />
