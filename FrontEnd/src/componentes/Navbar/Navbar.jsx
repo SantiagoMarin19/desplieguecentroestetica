@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 export const Navbar = () => {
     return (
         
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <nav className="navbar navbar-expand-lg bg-body-tertiary , navbar fixed-top navbar light bg-light" >
             
             <div className="container-fluid">
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,9 +40,8 @@ export const Navbar = () => {
                             <NavLink to="/contactanos" className="nav-link">
                                 CITAS
                             </NavLink>
-                            <div className='todoingreso'>
+                      
 
-</div>
 
 
                         </li>

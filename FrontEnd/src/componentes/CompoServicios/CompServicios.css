@@ -1,7 +1,8 @@
-body{
+body {
     background-color: #FFFFFF;
-    margin: auto;
-    padding: auto;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .Bannerserviciosg {
@@ -9,16 +10,13 @@ body{
     align-items: center;
     background-color: #FCEBF2;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.imgcar {
-    display: flex;
-    justify-content: end;
+    padding: 20px;
 }
 
 .tituloserviciosg {
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
 }
 
 .Titulo_Servicio_General{
@@ -37,212 +35,88 @@ body{
 }
 
 .Titulo_Servicio_Cejas h3 {
-    font-size: 50px;
+    font-size: 2.5rem; /* Ajuste para tamaños más pequeños */
     color: #422A3C;
-}
-
-.Titulo_Servicio_Cejas {
-    width: 100%;
-    padding: 1rem;
-}
-
-.imgcar {
-    display: flex;
-    width: 50%;
-    justify-content: end;
-}
-
-.secciones_servicios h3 {
-    padding-top: 5%;
     text-align: center;
-    padding-bottom: 20px;
-    font-family: fangsong;
-    font-size: 6vh;
 }
-
-.serviciodcejas {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
-
-.serviciosdetc h5, .serviciosdetp h5 , .serviciosdm h5, .serviciodecom h5 {
-    font-family: "Manrope", sans-serif;
-    font-weight: normal;
-    font-style: normal;
+.Titulo_Servicio_Pestañas {
+    font-size: 2.5rem; /* Ajuste para tamaños más pequeños */
+    color: #422A3C;
     text-align: center;
-
+}
+.Titulo_Servicio_Microp {
+    font-size: 2.5rem; /* Ajuste para tamaños más pequeños */
+    color: #422A3C;
+    text-align: center;
 }
 
-.serviciodpestañas {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
-
-.serviciodmicropig {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
-
+.serviciodcejas,
+.serviciodpestañas,
+.serviciodmicropig,
 .serviciodecom {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    gap: 20px;
 }
 
-.serviciocombo h5 {
-    margin: 10px 0;
-    font-size: 18px;
-    color: #333;
-}
-
-.serviciocombo h5 b {
-    color: #C98695;
-}
-
-.serviciosdetc {
+.serviciosdetc,
+.serviciosdetp,
+.serviciosdm,
+.serviciocombo {
     background-color: #FCEBF2;
-    padding: 30px;
+    padding: 20px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px;
-    width: 20%;
-    word-wrap: break-word;
-    font-family: 'Urbanist';
-}
-
-.serviciosdetp {
-    background-color: #FCEBF2;
-    padding: 30px;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px;
-    width: 20%;
-    word-wrap: break-word;
-    font-family: 'Urbanist';
-}
-
-.serviciosdm {
-    background-color: #FCEBF2;
-    padding: 30px;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px;
-    width: 20%;
-    word-wrap: break-word;
-    font-family: 'Urbanist';
-}
-
-.serviciocombo, .serviciosdetc, .serviciosdetp, .serviciosdm {
-    background-color: #FCEBF2;
-    padding: 30px;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px;
-    width: 20%;
-    word-wrap: break-word;
-    font-family: 'Urbanist';
+    margin: 10px;
+    width: 100%; /* Cambiado para que ocupe todo el ancho disponible */
+    max-width: 300px; /* Tamaño máximo para evitar que se expanda demasiado */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.serviciosdetc:hover,
+.serviciosdetp:hover,
+.serviciosdm:hover,
 .serviciocombo:hover {
     transform: translateY(-10px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.serviciosdetc:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.serviciosdetp:hover{
-    transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.serviciosdm:hover{
-    transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
+.serviciosdetc h5,
+.serviciosdetp h5,
 .serviciosdm h5 {
     margin: 10px 0;
-    font-size: 18px;
+    font-size: 1rem;
     color: #333;
+    text-align: center;
 }
 
+.serviciosdetc h5 b,
+.serviciosdetp h5 b,
 .serviciosdm h5 b {
     color: #C98695;
 }
 
-.serviciosdetp h5 {
-    margin: 10px 0;
-    font-size: 18px;
-    color: #333;
-}
-
-.serviciosdetp h5 b {
-    color: #C98695;
-}
-
-
-.serviciosdetc h5 {
-    margin: 10px 0;
-    font-size: 18px;
-    color: #333;
-}
-
-.serviciosdetc h5 b {
-    color: #C98695;
-}
-
 .img-com {
-    width: 80%;
+    width: 100%;
     height: auto;
     border-radius: 10px;
     margin-bottom: 15px;
 }
 
-.img-cej {
-    width: 100%;
-    height: 80%;
-}
-
-.img-pes {
-    width: 100%;
-    height: 80%;
-}
-
-.img-mic {
-    width: 100%;
-    height: 80%;
-}
-
-.img-com {
-    width: 100%;
-    height: 80%;
-}
-
 .concej1 h5 {
     padding: 10px;
 }
+
 h1 {
-    font-size: 10vh;
+    font-size: 3rem;
     font-family: auto;
 }
 
-.butonSs{
+.butonSs {
     margin: 0;
     border: 0;
     background-color: #C98695;
@@ -279,12 +153,8 @@ h1 {
         word-wrap: break-word;
     }
 
-}
-
-@media (max-width: 1050) {
-    img.img-tit {
-        width: 0px;
-        height: 0px;
+    .butonSs {
+        font-size: 0.7rem;
+        padding: 5px 10px;
     }
-
 }
