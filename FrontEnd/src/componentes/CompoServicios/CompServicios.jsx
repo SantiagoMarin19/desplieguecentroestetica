@@ -34,7 +34,7 @@ export const CompServicios = () => {
     navigate('/VistaDetalle', { state: { servicio } });
   };
 
-  const renderServiciosPorCategoria = (categoria, titulo, claseTitulo, claseServicio) => (
+  const renderServiciosPorCategoria = (npombre , titulo, claseTitulo, claseServicio) => (
 
     <div key={categoria} className={claseTitulo}>
       <h3>{titulo}</h3>

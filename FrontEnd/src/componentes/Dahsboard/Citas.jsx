@@ -1,52 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import './Navbar.css';
-import { NavLink } from 'react-router-dom'; 
+import React from 'react';
+import './_Citas_Admin.css';
 
-export const AgendarCitaAdmin = () => {
-    const [profesionales, setProfesionales] = useState([]);
-    const [selectedProfesional, setSelectedProfesional] = useState('');
 
-    useEffect(() => {
-        // Función para obtener los datos de los profesionales
-        const fetchProfesionales = async () => {
-            try {
-                const response = await axios.get('https://api.example.com/profesionales'); // Cambia la URL a tu endpoint
-                setProfesionales(response.data);
-            } catch (error) {
-                console.error('Error al obtener los profesionales:', error);
-            }
-        };
-
-        fetchProfesionales();
-    }, []);
-
-    const handleChange = (event) => {
-        setSelectedProfesional(event.target.value);
-    };
-
+export const CitaAdmin = () => {
+  
     return (
-        <div className='contenedor_AG_ADMIN'>
-            <div className='Contenido_AG_ADMIN'>
-                <div className='Lista_profesionales_AG_ADMIN'>
-                    <div className='Titulo_profesionales__AG_ADMIN'>
-                        <h4>Profesionales</h4>
-                    </div>
-                    
-                    <div className='Lista_Profesionales_AG_ADMIN'>
-                        <select value={selectedProfesional} onChange={handleChange}>
-                            <option value="" disabled>Selecciona un profesional</option>
-                            {profesionales.map(profesional => (
-                                <option key={profesional.id} value={profesional.id}>
-                                    {profesional.nombre}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
+    <div className='Contenedor_Citas_Admin'>
+        <div className='Header_Citas_Admin'>
+            <div className='Cliente_Citas_Admin'>
+                <h2>Cliente</h2></div>
+                <div className='Fecha_Citas_Admin'>
+                    <h2>Fecha</h2></div>
+                    <div className='Hora_Citas_Admin'>
+                        <h2>Hora</h2></div>
+                        <div className='Duracion_Citas_Admin'>
+                            <h2>Duracion</h2></div>
+                            <div className='Costo_Citas_Admin'>
+                                <h2>Costo</h2></div>
+                                <div className='Servivio'>
+                                    <h2>Servicio</h2></div>
+                                    </div>
+                                    </div>
+    
     );
 }
 
-export default AgendarCitaAdmin;
+

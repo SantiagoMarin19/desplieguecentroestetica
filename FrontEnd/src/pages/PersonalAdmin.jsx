@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export function Personal () {
+export function PersonalAdmin () {
   
   return (
   <Container>

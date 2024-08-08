@@ -1,20 +1,20 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home } from "../pages/InicioS";
-import { Personal } from "../pages/Personal";
-import { Citas} from "../pages/Citas";
-import { Diagramas } from "../pages/Diagramas";
-import { ServiciosC } from "../pages/ServiciosC";
+import { InicioAdmin } from "../pages/InicioS";
+import { PersonalAdmin } from "../pages/PersonalAdmin";
+import { CitasAdmin} from "../pages/CitasAdmin";
+import { DiagramasAdmin } from "../pages/DiagramasAdmin";
+import { ServiciosAdmin } from "../pages/ServiciosAdmin";
 
 export function MyRoutes() {
   return (
    
      
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/Diagramas" element={<Diagramas />} />
-        <Route path="/Citas" element={<Citas />} />
-        <Route path="/Personal" element={<Personal />} />
-        <Route path="/Servicios" element={<ServiciosC/>}/>
+        <Route path="/HomeAdmin" element={<InicioAdmin />} />
+        <Route path="/DiagramasAdmin" element={<DiagramasAdmin />} />
+        <Route path="/CitasAdmin" element={<CitasAdmin />} />
+        <Route path="/PersonalAdmin" element={<PersonalAdmin />} />
+        <Route path="/ServiciosAdmin" element={<ServiciosAdmin/>}/>
       </Routes>
     
   );
