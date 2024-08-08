@@ -65,8 +65,8 @@ export const Background = () => {
             <div className="backgroundtercero">
                 <div className="enunciados">
                     <h2>¿Te gustaría separar una cita? <br /> Te invito a conocer nuestros términos y condiciones de servicio para el año 2024.</h2>
-                    <h3 className='reserva'>Si prefiere reservar su cita en persona, no dude en pasar por nuestra ubicación: Calle 33b #7-53.</h3>
                 </div>
+
                 <div className="mapa">
                     <iframe
                         title="mapa-google"
@@ -79,7 +79,8 @@ export const Background = () => {
                         referrerPolicy="no-referrer-when-downgrade"
                     ></iframe>
                     <NavLink to="/politicas">
-                        <button type="button">CONOCE MÁS</button>
+                    <div className='Boton_conocemas'>
+                        <button type="button">CONOCE MÁS</button></div>
                     </NavLink>
                 </div>
             </div>

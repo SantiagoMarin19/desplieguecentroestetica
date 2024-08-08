@@ -158,11 +158,10 @@ html, body {
 
 .backgroundtercero {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   background-image: url(../../assets/images/fondo3.png);
   width: 100vw;
-  height: 100vh;
   background-color: rgba(0, 0, 0, 0.20);
   background-size: cover;
   background-position: center;
@@ -203,7 +202,7 @@ html, body {
 }
 
 .enunciados h2 {
-  font-size: 36px; /* Tamaño del título principal */
+  font-size: 50px; /* Tamaño del título principal */
   margin-bottom: 20px; /* Espacio inferior */
 }
 
@@ -234,6 +233,7 @@ html, body {
   justify-content: center;
   border-radius: 10px;
 }
+
 
 .servicios {
   --bs-btn-color: #000000;
@@ -277,6 +277,7 @@ html, body {
   background-color: #ffffff; /* Color de fondo del botón */
   color: #BF6A8C; /* Color del texto del botón */
   border: none; /* Sin borde */
+  border-radius: 5px;
   padding: 10px 20px; /* Espaciado interno */
   font-size: 18px; /* Tamaño de fuente */
   cursor: pointer; /* Cursor de puntero */

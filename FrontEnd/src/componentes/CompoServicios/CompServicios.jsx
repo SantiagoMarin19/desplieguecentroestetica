@@ -35,19 +35,24 @@ export const CompServicios = () => {
   };
 
   const renderServiciosPorCategoria = (categoria, titulo, claseTitulo, claseServicio) => (
+
     <div key={categoria} className={claseTitulo}>
       <h3>{titulo}</h3>
       <div className={claseServicio}>
         {servicios
           .filter(servicio => servicio.categorias.nombreCategoria === categoria)
           .map(servicio => (
+            
             <div key={servicio.id_servicio} className='serviciosdetc'>
-              <div><img src={servicio.url_img} alt={servicio.nombre_servicio} /></div>
+              <div><img src={servicio.url_img} alt={servicio.nombre_servicio} />
+              </div>
               <h5>{servicio.nombre_servicio}</h5>
               <h5><b>{formatoCo.format(servicio.precio)}</b></h5>
+
               <div className="butonSs">
                 <button className="button_s" onClick={() => handleReservar(servicio)}>Reservar</button>
               </div>
+
             </div>
           ))}
       </div>
@@ -61,6 +66,7 @@ export const CompServicios = () => {
           <h1>Nuestros servicios</h1>
         </div>
       </div>
+      
       <div className='secciones_servicios'>
         {renderServiciosPorCategoria('Cejas', 'Servicio Cejas', 'Titulo_Servicio_Cejas', 'serviciodcejas')}
         {renderServiciosPorCategoria('Pestañas', 'Servicio Pestañas', 'Titulo_Servicio_Pestañas', 'serviciodpestañas')}
