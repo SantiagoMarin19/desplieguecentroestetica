@@ -56,13 +56,7 @@ button {
     padding-bottom: 5%;
 }
 
-input {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 10px;
-    font-family: system-ui;
-    padding-right: 270px;
-}
+
 b {
     font-family: sans-serif;
 }
@@ -114,3 +108,16 @@ transform: translateX(-22px);
 .Input1{
     padding-right: 58%;
 }
+
+.password2 {
+    position: absolute;
+    right: 25px;
+    transform: translate(0, -495%);
+    bottom: 23%;}
+
+    .password3 {
+        position: absolute;
+        right: 25px;
+        transform: translate(0, -220%);
+        bottom: 23%;
+    }    
