@@ -81,27 +81,27 @@ const linksArray = [
   {
     label: "Home",
     icon: <AiOutlineHome />,
-    to: "/",
+    to: "/HomeAdmin",
   },
   {
     label: "Diagramas",
     icon: <MdOutlineAnalytics />,
-    to: "/Diagramas",
+    to: "/DiagramasAdmin",
   },
   {
     label: "Citas",
     icon: <AiOutlineApartment />,
-    to: "/Citas",
+    to: "/CitasAdmin",
   },
   {
     label: "Servicios",
     icon: <MdOutlineAnalytics />,
-    to: "/Servicios",
+    to: "/ServiciosAdmin",
   },
   {
     label: "Personal",
     icon: <MdOutlineAnalytics />,
-    to: "/Personal",
+    to: "/PersonalAdmin",
   },
 ];
 
