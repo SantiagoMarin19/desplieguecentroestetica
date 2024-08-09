@@ -4,7 +4,7 @@ export function DiagramasAdmin () {
   
   return (
   <Container>
-    <h1>Personal</h1>
+    <h1>Diagramas</h1>
      </Container>);
 }
 

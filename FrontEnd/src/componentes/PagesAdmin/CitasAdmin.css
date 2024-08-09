@@ -1,0 +1,37 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #FFFFFF;
+}
+
+.titulo_Citas_Admin{
+    text-align: center;
+    background-color: #FFFFFF;
+}
+
+.titulo_Citas_Admin h1{
+    background-color:  #C98695;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.Header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    background-color: #FCEBF2;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   
+    
+}
+
+.contenido_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    background-color:  #FCEBF2;
+    
+
+}

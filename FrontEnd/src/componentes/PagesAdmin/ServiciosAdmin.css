@@ -1,0 +1,75 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #FFFFFF;
+}
+
+.titulo_Header_Servicios_Admin{
+    background-color:  #C98695;
+    text-align: center;
+    width: 100%;
+    color: black;
+}
+
+.titulo_Contenido_Header_Servicios_Admin{
+    width: 30%;
+    background-color: #FCEBF2;
+    border: 1px solid #C98695;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+   
+}
+
+.titulo_Contenido_Header_Servicios_Admin h3{
+    font-family: "Playfair Display", serif;
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+.contenido_Header_Servicios_Admin{
+    width: 30%;
+    padding: 5px;
+    font-family: "Manrope", serif;
+    font-weight: normal;
+    font-style: normal;
+    text-align:left;
+    background-color: #FCEBF2;
+    border: 1px solid #C98695;
+    border-radius: 10px;
+
+}
+
+.ajustes_edicion_contenido{
+    display: flex;
+    flex-direction: row; /* Esto asegura que los elementos dentro estén en una columna */
+    justify-content: space-evenly;    
+}
+
+.edicion_contenido{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.edicion_contenido_boton{
+    font-size: 17px;
+}
+
+.titulo_calendario_Contenido_Servicios_Admin{
+    background-color: #C98695;
+    width: 30%;
+  
+}
+.titulo_calendario_Contenido_Servicios_Admin h3{
+    background-color: #FCEBF2;
+    border-radius: 10px;
+    text-align: center;  
+    font-family: "Playfair Display", serif;
+    font-weight: normal;
+    font-style: normal;
+}
