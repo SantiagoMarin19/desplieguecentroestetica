@@ -1,75 +1,107 @@
-body{
+body {
     margin: 0;
     padding: 0;
-    background-color: #FFFFFF;
-}
-
-.titulo_Header_Servicios_Admin{
-    background-color:  #C98695;
-    text-align: center;
-    width: 100%;
-    color: black;
-}
-
-.titulo_Contenido_Header_Servicios_Admin{
-    width: 30%;
-    background-color: #FCEBF2;
-    border: 1px solid #C98695;
-    border-radius: 10px;
-    text-align: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 5px;
-   
-}
-
-.titulo_Contenido_Header_Servicios_Admin h3{
-    font-family: "Playfair Display", serif;
-    font-weight: normal;
-    font-style: normal;
-}
-
-
-.contenido_Header_Servicios_Admin{
-    width: 30%;
-    padding: 5px;
-    font-family: "Manrope", serif;
-    font-weight: normal;
-    font-style: normal;
-    text-align:left;
-    background-color: #FCEBF2;
-    border: 1px solid #C98695;
-    border-radius: 10px;
-
-}
-
-.ajustes_edicion_contenido{
-    display: flex;
-    flex-direction: row; /* Esto asegura que los elementos dentro estén en una columna */
-    justify-content: space-evenly;    
-}
-
-.edicion_contenido{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.edicion_contenido_boton{
-    font-size: 17px;
-}
-
-.titulo_calendario_Contenido_Servicios_Admin{
-    background-color: #C98695;
-    width: 30%;
+    background-color: #ffffff;
+  }
   
-}
-.titulo_calendario_Contenido_Servicios_Admin h3{
-    background-color: #FCEBF2;
+  .titulo_Header_Servicios_Admin {
+    background-color: #c98695;
+    text-align: center;
+    padding: 15px;
+    color: #000;
+  }
+  
+  .titulo_Contenido_Header_Servicios_Admin {
+    background-color: #fcebf2;
+    border: 1px solid #c98695;
     border-radius: 10px;
-    text-align: center;  
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+  }
+  
+  .titulo_Contenido_Header_Servicios_Admin h3 {
     font-family: "Playfair Display", serif;
     font-weight: normal;
     font-style: normal;
-}
+    margin: 0;
+  }
+  
+  .contenido_Header_Servicios_Admin {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 15px;
+    font-family: "Manrope", sans-serif;
+    background-color: #fcebf2;
+    border: 1px solid #c98695;
+    border-radius: 10px;
+    gap: 10px;
+  }
+  
+  .edicion_contenido {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  .edicion_contenido p {
+    margin: 0;
+  }
+  
+  .ajustes_edicion_contenido {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .edicion_contenido_boton {
+    font-size: 14px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #c98695;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .edicion_contenido_boton:hover {
+    background-color: #a75d53;
+  }
+  
+  .calendario_Contenido_Servicios_Admin {
+    background-color: #fcebf2;
+    padding: 15px;
+    border: 1px solid #c98695;
+    border-radius: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .titulo_calendario_Contenido_Servicios_Admin {
+    background-color: #c98695;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .titulo_calendario_Contenido_Servicios_Admin h3 {
+    background-color: #fcebf2;
+    border-radius: 5px;
+    margin: 0;
+    padding: 10px;
+    font-family: "Playfair Display", serif;
+    font-weight: normal;
+    font-style: normal;
+  }
+  
