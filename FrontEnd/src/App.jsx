@@ -21,7 +21,7 @@ import { Agendar } from "./pages/Agendar";
 import { LoadingProvider, useLoading } from './componentes/Animación/Loadingcontext';
 import styled, { ThemeProvider } from "styled-components";
 import { Sidebar } from "./componentes/Sidebar/Sidebar";
-import { MyRoutes } from "./routers/Route";
+import { MyRoutes } from "./componentes/PagesAdmin/routers/Route";
 import { Light, Dark } from "./Styles/Themes";
 export const ThemeContext = React.createContext(null);
 import SignUp from './pages/SignUp';

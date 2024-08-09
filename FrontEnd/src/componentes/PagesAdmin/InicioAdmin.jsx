@@ -1,11 +1,13 @@
 import styled from "styled-components";
-export function ServiciosAdmin() {
+
+export function HomeAdmin () {
+  
   return (
   <Container>
-    <h1>Servicios</h1>
-    
-  </Container>);
+    <h1>Home</h1>
+     </Container>);
 }
+
 const Container =styled.div`
-  height:100vh;
+   height:100vh;
 `
