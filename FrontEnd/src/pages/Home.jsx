@@ -8,6 +8,7 @@ import { Piedepagina } from "../componentes/Footer/footer";
 
 
 export const Home = ({token}) => {
+
   let navigate = useNavigate ()
 
 
@@ -21,7 +22,7 @@ export const Home = ({token}) => {
   return (
     <>
    <Promociones></Promociones>
-        <Navbar></Navbar>
+        <Navbar />
         <div className="user">        
          <i class='bx bxs-user-circle'>{token && token.user.user_metadata.full_name}</i>
         </div>
@@ -29,7 +30,7 @@ export const Home = ({token}) => {
           Cerrar Sesion
         </button> 
  
-        <Background></Background>
+        <Background/>
         <Piedepagina></Piedepagina>
         
         

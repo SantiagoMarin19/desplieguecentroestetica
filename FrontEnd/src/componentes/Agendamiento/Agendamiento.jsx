@@ -1,9 +1,9 @@
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Agendamiento.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useLocation, useNavigate } from 'react-router-dom';
+import supabase from '../../supabase/supabaseconfig';
 
 const getDiaSemana = (date) => {
     const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -11,28 +11,49 @@ const getDiaSemana = (date) => {
 };
 
 export const Agendamiento = () => {
+    const [profesionales, setProfesionales] = useState([]);
+    const [selectedProfesional, setSelectedProfesional] = useState('');
+    const [selectedHora, setSelectedHora] = useState('');
+
+
+    useEffect(() => {
+        const fetchProfesionales = async () => {
+            const { data, error } = await supabase
+                .from('profesional')
+                .select('nombre_profesional');
+
+            if (error) {
+                console.error('Error fetching profesionales:', error);
+            } else {
+                console.log("datos",data);
+                setProfesionales(data);
+            }
+        };
+
+        fetchProfesionales();
+    }, []);
+
+
     const location = useLocation();
     const navigate = useNavigate();
-    const { service } = location.state || { service: { name: "Servicio no especificado", price: "$0.00" } };
+    const { servicio } = location.state || { service: { name: "Servicio no especificado", price: "$0.00" } };
     const [date, setDate] = useState(new Date());
-    const [selectedHora, setSelectedHora] = useState('');
-    const [selectedProfesional, setSelectedProfesional] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
     const onChange = (date) => {
         setDate(date);
     };
 
+    const handleProfesionalChange = (event) => {
+        const selectedValue = event.target.value;
+        setSelectedProfesional(selectedValue);
+        localStorage.setItem('selectedProfesional', selectedValue);
+    };
+
     const handleHoraChange = (event) => {
         const selectValue = event.target.value;
         setSelectedHora(event.target.options[event.target.selectedIndex].text);
         localStorage.setItem('selectedHora', selectValue)
-    };
-
-    const handleProfesionalChange = (event) => {
-        const selectedValue = event.target.value;
-        setSelectedProfesional(event.target.options[event.target.selectedIndex].text);
-        localStorage.setItem('selectedProfesional', selectedValue);
     };
 
     const tileDisabled = ({ date, view }) => {
@@ -62,9 +83,15 @@ export const Agendamiento = () => {
         // Clear any previous error message
         setErrorMessage('');
 
-        // Navigate to the billing page if validation passes
         navigate('/Facturacion');
     };
+
+    const formatoCo = new Intl.NumberFormat('es-CO', {
+        style: 'currency',
+        currency: 'COP',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2
+    });
 
     return (
         <div className='todoingreso'>
@@ -74,16 +101,11 @@ export const Agendamiento = () => {
                         <label className='escprof' htmlFor='prof'>
                             <h3>Profesionales</h3>
                         </label>
-                        <select name='profesionales' id='prof' onChange={handleProfesionalChange} value={selectedProfesional}>
-                            <option value=''>--Escoge profesional--</option>
-                            <option value='prof1'>Natalia Salazar</option>
-                            <option value='prof2'>Carlos Martinez</option>
-                            <option value='prof3'>Andrea Gomez</option>
-                        </select>
+                        
                     </form>
                 </div>
                 <div className='partetabla'>
-                    <h3 className='resumen'>Resumen</h3>
+                    <h3 className='resumen'>Agendamiento</h3>
                     <table>
                         <thead>
                             <tr>
@@ -93,23 +115,32 @@ export const Agendamiento = () => {
                             </tr>
                             <tr>
                                 <th>Profesional</th>
-                                <th>Procedimiento</th>
+                                <td>{selectedProfesional}</td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{selectedProfesional}</td>
-                                <td>{service.name}</td>
+                                <th>Servicio</th>
+                                <td>{servicio.nombre_servicio}</td>
                             </tr>
                             <tr>
                                 <th>Duración</th>
-                                <th>Costo</th>
-                            </tr>
-                            <tr>
                                 <td>{selectedHora}</td>
-                                <td>{service.price}</td>
                             </tr>
                             <tr>
+                                <th>Costo</th>
+                                <td><h5><b>{formatoCo.format(servicio.precio)}</b></h5></td>
+                            </tr>
+                            <select name='profesionales' id='prof' onChange={handleProfesionalChange} value={selectedProfesional}>
+                            <option value=''>--Escoge profesional--</option>
+                            {profesionales.map((profesional, index) => (
+                                <option key={index} value={profesional.nombre_profesional}>
+                                    {profesional.nombre_profesional}
+                                </option>
+                            ))}
+                        </select>
+                            <tr>
+                                
                                 <td colSpan={2} className='colorros'>
                                     <button className='botonreservar' onClick={handleReservarClick}>Reservar</button>
                                 </td>
