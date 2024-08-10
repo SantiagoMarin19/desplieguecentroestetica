@@ -14,7 +14,6 @@ body{
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
 .Header{
     display: flex;
     justify-content: space-between;
@@ -22,8 +21,6 @@ body{
     flex-direction: row;
     background-color: #FCEBF2;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-   
-    
 }
 
 .contenido_header{
@@ -32,6 +29,4 @@ body{
     align-items: center;
     flex-direction: row;
     background-color:  #FCEBF2;
-    
-
 }

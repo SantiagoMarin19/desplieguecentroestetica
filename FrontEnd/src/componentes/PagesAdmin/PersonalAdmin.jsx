@@ -4,7 +4,16 @@ export function PersonalAdmin () {
   
   return (
   <Container>
-    <h1>Personal</h1>
+    <div className="contenidor_personal_Admin">
+    <div className="header_personal_Admin">
+      <h1>Seccion Personal</h1>
+    </div>
+
+    <div className="Lista_personal_Admin">
+      
+    </div>
+
+    </div>
      </Container>);
 }
 
