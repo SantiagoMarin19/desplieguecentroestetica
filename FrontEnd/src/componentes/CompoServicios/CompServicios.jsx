@@ -23,7 +23,7 @@ export const CompServicios = () => {
     fetchServicios();
   }, []);
 
-  const formatoCo = new Intl.NumberFormat('es-CO', {
+  const  formatoCo = new Intl.NumberFormat('es-CO', {
     style: 'currency',
     currency: 'COP',
     minimumFractionDigits: 0,

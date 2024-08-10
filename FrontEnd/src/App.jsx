@@ -25,6 +25,8 @@ import LoginUser from './pages/Login';
 import Facturaelectronica from './pages/FacturaElectronica'
 import { VistaDetalle } from './componentes/VistaDetalladaServ/VistaDetalleSer';
 import { VistaServicios } from './pages/VistaServicios';
+import Agendamiento from './componentes/Agendamiento/Agendamiento';
+import CitaPend from './pages/CitasPendientes';
 
 function App() {
   const [token, setToken] = useState(false)
@@ -66,9 +68,13 @@ function App() {
           <Route path={'/loginsupa'} element={<LoginUser setToken={setToken} />} />
           <Route path='/Registrar' element={<SignUp />} />
           <Route path="/servicios" element={<Servicios />} />
-          <Route path="/politicas" element={<Condiciones />} />
-     
+          <Route path="/VistaDetalle" element={<VistaServicios />} />
+          <Route path="/CitaPend" element={<CitaPend />} />
 
+
+          
+
+          <Route path="/politicas" element={<Condiciones />} />
           <Route path="/combohennaylifting" element={<ComboHeyLifting />} />
           <Route path="/combosombreadoylifting" element={<ComboSombrayLifiting />} />
           <Route path="/combolaminacionyextension" element={<Combolamiyextension />} />

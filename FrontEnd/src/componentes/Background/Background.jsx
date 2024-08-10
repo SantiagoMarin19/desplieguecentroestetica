@@ -26,7 +26,9 @@ export const Background = () => {
                                 Con dedicación y profesionalismo, nuestro equipo de especialistas en cuidado facial está comprometido en resaltar tu belleza natural, en cada línea, en cada gesto.
                             </p>
                         </div>
-                        <div><button className='btn-primary'>AGENDAR AHORA</button></div>
+                        <NavLink to ="/servicios">                        
+                             <div><button className='btn-primary'>AGENDAR AHORA</button></div>
+                        </NavLink>
                     </div>
                     <div className='foto'>
                         <img src={imagenfondo} alt="Fondo" />
