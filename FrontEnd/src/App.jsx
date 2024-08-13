@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './pages/Home';
 import { Servicios } from './pages/Servicios';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-
 import { Condiciones } from "./pages/Terminos";
 import { ComboHeyLifting } from "./pages/ComboC-Henna+Lifing";
 import { ComboSombrayLifiting } from "./pages/comboC-Sombreado+Lifitng";
