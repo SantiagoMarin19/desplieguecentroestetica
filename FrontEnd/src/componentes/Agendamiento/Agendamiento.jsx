@@ -16,6 +16,8 @@ export const Agendamiento = () => {
     const [selectedHora, setSelectedHora] = useState('');
     const [horariosOcupados, setHorariosOcupados] = useState([]);
     const [franjasHorarias, setFranjasHorarias] = useState([]);
+    const [date, setDate] = useState(new Date());
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         const fetchProfesionales = async () => {
@@ -26,7 +28,6 @@ export const Agendamiento = () => {
             if (error) {
                 console.error('Error fetching profesionales:', error);
             } else {
-                console.log('Profesionales:', data); // Verifica los datos
                 setProfesionales(data);
             }
         };
@@ -47,36 +48,42 @@ export const Agendamiento = () => {
     }, []);
 
     useEffect(() => {
-        if (selectedProfesional) {
+        if (selectedProfesional && date) {
             const fetchHorariosOcupados = async () => {
+                const selectedDate = date.toISOString().split('T')[0];
+
                 const { data, error } = await supabase
                     .from('disponibilidad')
                     .select('id_horario')
                     .eq('id_profesional', selectedProfesional)
-                    .eq('estado', false); // Cambiado a `estado`
+                    .eq('estado', false)
+                    .eq('fecha', selectedDate); // Filter by date
 
                 if (error) {
                     console.error('Error fetching horarios ocupados:', error);
                 } else {
-                    console.log('Horarios ocupados:', data); // Verifica el contenido de `data`
                     setHorariosOcupados(data.map(disponibilidad => disponibilidad.id_horario));
                 }
             };
 
             fetchHorariosOcupados();
         }
-    }, [selectedProfesional]);
+    }, [selectedProfesional, date]); // Trigger on professional and date change
 
     const handleProfesionalChange = (event) => {
         const selectedId = event.target.value;
         setSelectedProfesional(selectedId);
         localStorage.setItem('selectedProfesional', selectedId);
-        console.log('Profesional seleccionado:', selectedId); // Verifica el valor
+        setSelectedHora('');
+        setHorariosOcupados([]);
     };
 
-    const handleHoraChange = (event) => {
-        setSelectedHora(event.target.options[event.target.selectedIndex].text);
-        localStorage.setItem('selectedHora', event.target.value);
+    const handleHoraClick = (horario, franjaId) => {
+        if (isOcupado(franjaId)) {
+            return;
+        }
+        setSelectedHora(horario);
+        localStorage.setItem('selectedHora', horario);
     };
 
     const isOcupado = (franjaId) => {
@@ -85,8 +92,6 @@ export const Agendamiento = () => {
 
     const navigate = useNavigate();
     const { servicio } = useLocation().state || { servicio: { nombre_servicio: "Servicio no especificado", precio: "$0.00" } };
-    const [date, setDate] = useState(new Date());
-    const [errorMessage, setErrorMessage] = useState('');
 
     const handleReservarClick = (event) => {
         event.preventDefault();
@@ -138,7 +143,6 @@ export const Agendamiento = () => {
                             <tr>
                                 <th>Profesional</th>
                                 <td>{selectedProfesional}</td>
-
                             </tr>
                         </thead>
                         <tbody>
@@ -174,6 +178,8 @@ export const Agendamiento = () => {
                             <div
                                 key={franja.id_horario}
                                 className={`cuadros ${isOcupado(franja.id_horario) ? 'ocupado' : 'libre'}`}
+                                onClick={() => handleHoraClick(franja.horario, franja.id_horario)}
+                                style={{ cursor: isOcupado(franja.id_horario) ? 'not-allowed' : 'pointer' }}
                             >
                                 {franja.horario}
                             </div>

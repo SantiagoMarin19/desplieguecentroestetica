@@ -5,31 +5,56 @@ import { useLocation } from 'react-router-dom';
 
 export const Facturaser = () => {
 
-        const [hora, setHora] = useState(new Date().toLocaleTimeString());
-      
-        useEffect(() => {
-          const actualizarHora = () => {
-            setHora(new Date().toLocaleTimeString());
-          };
-      
-          // Actualiza la hora cada segundo
-          const intervalo = setInterval(actualizarHora, 1000);
-      
-          // Limpia el intervalo cuando el componente se desmonte
-          return () => clearInterval(intervalo);
-        }, []);
+  
       
 
     const location = useLocation();
-    const { service } = location.state || { service: { name: "Servicio no especificado", price: "$0.00" } };
-
-    // Recupera la hora seleccionada del almacenamiento local
+    const [servicios, setServicios] = useState([]);
+    const { servicio } = useLocation().state || { servicio: { nombre_servicio: "Servicio no especificado", precio: "$0.00" } };
     const selectedHora = localStorage.getItem('selectedHora') || 'No especificada';
-    // Recupera el nombre del profesional del almacenamiento local
-    const selectedProfesional = localStorage.getItem('selectedProfesional') || 'No especificado';
-    // Recupera la fecha seleccionada del almacenamiento local (opcional)
+    const selectedProfesional = localStorage.getItem('selectedProfesional') || 'No especificado';  
     const selectedDate = new Date(localStorage.getItem('selectedDate')) || new Date();
     const formattedDate = `${selectedDate.getDate()} ${selectedDate.toLocaleDateString('default', { month: 'short' })} ${selectedDate.getFullYear()}`;
+
+
+
+    useEffect(() => {
+        const fetchProfesionales = async () => {
+            const { data, error } = await supabase
+                .from('profesional')
+                .select('id_profesional, nombre_profesional');
+
+            if (error) {
+                console.error('Error fetching profesionales:', error);
+            } else {
+                setProfesionales(data);
+            }
+        };
+
+      
+
+        fetchProfesionales();
+    }, []);
+
+    useEffect(() => {
+        const fetchServicios = async () => {
+          const { data, error } = await supabase
+            .from('servicios')
+            .select('*')
+            .eq('estado', true);
+          if (error) {
+            console.error('Error fetching servicios:', error);
+          } else {
+            console.log('Servicios:', data);
+            setServicios(data);
+          }
+        };
+        fetchServicios();
+      }, []);
+
+
+
+
     return (
         <div>
             <div className='apartadoizquierdo_factura'>
@@ -38,17 +63,9 @@ export const Facturaser = () => {
             </div>
             <div className='apartado_derecho_factura'>
                 <table>
-                    <thead>
-                        <tr>
-                            <th>Factura</th>
-                            <th>{hora}</th>
-                            </tr>
-                    </thead>
+                  
                     <tbody>
-                        <tr>
-                            <th>ID Factura</th>
-                            <td>factura</td>
-                        </tr>
+                      
                         <tr>
                             <th>Profesional</th>
                             <td>{selectedProfesional}</td> {/* Muestra el nombre del profesional */}
@@ -59,11 +76,11 @@ export const Facturaser = () => {
                         </tr>
                         <tr>
                             <th>Servicio</th>
-                            <td>{service.name}</td>
+                            <td>{servicios.nombre_servicio}</td>
                         </tr>
                         <tr>
                             <th>Costo</th>
-                            <td>{service.price}</td>
+                            <td>{servicios.precio}</td>
                         </tr>
                         <tr>
                             <th>Fecha</th>
