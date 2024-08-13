@@ -1,17 +1,18 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import '../Servicio_detalle/Serviciocejas';
 
 export const VistaDetalle = () => {
   const location = useLocation();
-  const { servicio } = location.state || {};
+  const navigate = useNavigate();
+  const { servicio } = location.state || {}; 
 
-  if (!servicio) {
-    return <div>No se seleccionó ningún servicio</div>;
-  }
+  const handleReservar = () => {
+    navigate('/Agendarcita', { state: { servicio } }); 
+  };
+
 
   return (
-    
     <div className='contenedor_total'>
       <div className='banneer'>
         <h1 className='detallserv'>Detalle del Servicio</h1>
@@ -37,7 +38,7 @@ export const VistaDetalle = () => {
               </div>
             </div>
             <div className='botones'>
-              <button className='ReservarS'>Reservar Ahora</button>
+              <button className="button_R" onClick={handleReservar}>Reservar</button>
             </div>
           </div>
           <div className='imagen-contenedor'>
@@ -47,7 +48,7 @@ export const VistaDetalle = () => {
         </div>
       </div>
     </div>
-    
   );
 };
+
 export default VistaDetalle;

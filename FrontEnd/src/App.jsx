@@ -25,6 +25,8 @@ import LoginUser from './pages/Login';
 import Facturaelectronica from './pages/FacturaElectronica'
 import { VistaDetalle } from './componentes/VistaDetalladaServ/VistaDetalleSer';
 import { VistaServicios } from './pages/VistaServicios';
+import Agendamiento from './componentes/Agendamiento/Agendamiento';
+
 
 function App() {
   const [token, setToken] = useState(false)
@@ -41,13 +43,6 @@ function App() {
 
   }, [])
 
-
-
-
-
-
-
- 
 
   function Main() {
     const { setLoading } = useLoading();
@@ -66,9 +61,8 @@ function App() {
           <Route path={'/loginsupa'} element={<LoginUser setToken={setToken} />} />
           <Route path='/Registrar' element={<SignUp />} />
           <Route path="/servicios" element={<Servicios />} />
+          <Route path="/VistaDetalle" element={<VistaServicios />} />
           <Route path="/politicas" element={<Condiciones />} />
-     
-
           <Route path="/combohennaylifting" element={<ComboHeyLifting />} />
           <Route path="/combosombreadoylifting" element={<ComboSombrayLifiting />} />
           <Route path="/combolaminacionyextension" element={<Combolamiyextension />} />
@@ -82,8 +76,6 @@ function App() {
           <Route path='/Recover4' element={<Recuperar4 />} />
           <Route path='/Agendarcita' element={<Agendar />} />
           <Route path='/Facturacion' element={<Facturaelectronica/>}/>
-
-          
         </Routes>
       </>
     );
