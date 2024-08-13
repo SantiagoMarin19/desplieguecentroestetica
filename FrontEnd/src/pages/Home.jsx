@@ -1,22 +1,39 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { Navbar } from "../componentes/Navbar/Navbar";
 import { Background } from "../componentes/Background/Background";
-import {Promociones} from "../componentes/Promociones/Promociones";
+import { Promociones } from "../componentes/Promociones/Promociones";
+import { useNavigate } from "react-router-dom";
+import { Piedepagina } from "../componentes/Footer/footer";
 
+export const Home = ({ token }) => {
+  const navigate = useNavigate();
 
+  function handleLogout() {
+    // Eliminar el token del sessionStorage
+    sessionStorage.removeItem('token');
 
-export const Home = ({token}) => {
+    // Forzar la recarga de la página
+    window.location.reload();
+    
+    // Alternativamente, podrías redirigir a la página de inicio de sesión y luego recargar
+    // navigate('/login');
+    // window.location.reload();
+  }
 
   return (
     <>
-   <Promociones></Promociones>
-        <Navbar></Navbar>
-        <h1>Bienvenido {token && token.user.user_metadata.full_name}</h1>
-
-        <Background></Background>
-        
-        
-
+      <Promociones />
+      <Navbar />
+      <div className="user">
+        <i className='bx bxs-user-circle'>
+          {token && token.user.user_metadata.full_name}
+        </i>
+      </div>
+      <button onClick={handleLogout}>
+        Cerrar Sesión
+      </button>
+      <Background />
+      <Piedepagina />
     </>
   );
 };

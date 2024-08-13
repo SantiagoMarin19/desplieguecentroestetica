@@ -1,50 +1,54 @@
 import react from 'react';
-import diseñodepilacionysombreado from "../../assets/images/diseñodepilacionysombreado.png";
-import liftingdepestañas from "../../assets/images/liftingdepestañas.png";
+import extensionpestaña from "../../assets/images/extensionpestaña.png";
+import lidtingdepestañas from "../../assets/images/lidtingdepestañas.png";
 import "./combos.css"
 
 export const ComboSyLifting = () => {
     return (
         <div className='contenedorcombo'>
             <div className='encabezado'>
-                <h1>Diseño depilacion y sombreado + lifting de pestañas  </h1>
+                <h1>laminacion de cejas + Extension de Pestañas   </h1>
             </div>
-            <div className='subtitulo'>
+            <div className='subtituloCmbos'>
                 <h2>Nuestro Metodo:</h2>
             </div>
 
             <div className='contenedor_contenido'>
                 <div className='contenido_combo1'>
                     <div className='conten_h3'>
-                    <h3>Diseño de depilación y sombreado:</h3>
+                    <h3>Laminación de cejas:</h3>
                     <ul>
-                        <li>Análisis de forma y estructura del rostro para un diseño personalizado de las cejas.</li>
-                        <li>Depilación y perfilado de cejas con técnica de hilo o cera.</li>
-                        <li>Sombreado de cejas con maquillaje para definir y resaltar la mirada.</li>
+                        <li>Alisamiento y modelado de las cejas para conseguir un efecto uniforme y natural.</li>
+                        <li>Aplicación de un tratamiento con queratina que alisa, fija y nutre las cejas.</li>
+                        <li>Resultado duradero (hasta 6-8 semanas).</li>
                     </ul>
                     </div>
 
                     <div className='picture'>
-                        <img className='picture1' src={diseñodepilacionysombreado}/>
+                        <img className='picture1' src={lidtingdepestañas}/>
                         </div>
                     </div>
 
                     <div className='contenido_combo2'>
                         <div className='conten_h3'>
-                        <h3>Lifting de pestañas:</h3>
+                        <h3>Extension de pestañas:
+                        </h3>
                         <ul>
-                            <li>Elevación y rizado de las pestañas naturales para dar un efecto más abierto y expresivo a la mirada.</li>
-                            <li>Aplicación de adhesivo especial y colocación de extensiones de pestañas.</li>
-                            <li>Posibilidad de personalizar el largo y volumen de las pestañas.</li>
+                            <li>Extensión y alargamiento de las pestañas naturales.</li>
+                            <li>Aplicación de extensiones de diferentes largos y grosores, adaptadas al tipo de ojo y mirada deseada.</li>
+                            <li>Efecto voluminoso y definido de la mirada.</li>
                         </ul></div>
 
                         <div className='picture'>
-                        <img className='picture2' src={liftingdepestañas}/>
+                        <img className='picture2' src={extensionpestaña}/>
                         </div>
                     </div>
                     </div> 
 
-                    <div className='content_boton'>   
+                    <div className='content_boton'>     
+                    <div className='botones'>
+                                <button id='boton'>Reservar Ahora</button>
+                            </div>
                                 <div className='combobotontyp'>  
                                     <div className='tiempo'>
                                         <h4>Tiempo</h4>
@@ -54,9 +58,6 @@ export const ComboSyLifting = () => {
                                         <h4>Precio</h4>
                                         <p>$120.000</p>
                                     </div>
-                                    <div className='botones'>
-                                <button id='boton'>Reservar Ahora</button>
-                            </div>  
                                 </div>
                             </div>
         </div>

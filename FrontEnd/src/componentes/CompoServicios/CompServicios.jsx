@@ -1,115 +1,73 @@
-import React from 'react';
-import "./CompServicios.css"
-import cej from "../../assets/images/cej.png"
-import tit from "../../assets/images/nuse.png"
-import { NavLink } from "react-router-dom";
-
+import React, { useState, useEffect } from 'react';
+import "./CompServicios.css";
+import { useNavigate } from 'react-router-dom'; // Importar useNavigate
+import supabase from '../../supabase/supabaseconfig';
 
 export const CompServicios = () => {
-    return (
-        <div className='todo'>
-            <div className='partarriba'>
-                <div className='titservic'>
-                    <h1>Nuestros servicios</h1>
-                </div>
-                <div className='imgcar'>
-                    <img className="img-tit" src={tit} />
-                </div>
+  const [servicios, setServicios] = useState([]);
+  const navigate = useNavigate(); // Usar useNavigate
+
+  useEffect(() => {
+    const fetchServicios = async () => {
+      const { data, error } = await supabase
+        .from('servicios')
+        .select(`* , categorias ( nombreCategoria )`)
+        .eq('estado', true);
+      if (error) {
+        console.error('Error fetching servicios:', error);
+      } else {
+        console.log('Servicios:', data);
+        setServicios(data);
+      }
+    };
+    fetchServicios();
+  }, []);
+
+  const formatoCo = new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2
+  });
+
+  const handleReservar = (servicio) => {
+    navigate('/VistaDetalle', { state: { servicio } });
+  };
+
+  const renderServiciosPorCategoria = (categoria, titulo, claseTitulo, claseServicio) => (
+    <div key={categoria} className={claseTitulo}>
+      <h3>{titulo}</h3>
+      <div className={claseServicio}>
+        {servicios
+          .filter(servicio => servicio.categorias.nombreCategoria === categoria)
+          .map(servicio => (
+            <div key={servicio.id_servicio} className='serviciosdetc'>
+              <div><img src={servicio.url_img} alt={servicio.nombre_servicio} /></div>
+              <h5>{servicio.nombre_servicio}</h5>
+              <h5><b>{formatoCo.format(servicio.precio)}</b></h5>
+              <div className="butonSs">
+                <button className="button_s" onClick={() => handleReservar(servicio)}>Reservar</button>
+              </div>
             </div>
-            <div className='medio'>
-                <h3> Servicio Cejas</h3>
-                <div className='sercej'>
-                <div className='concej1'>
-                <img className="img-cej" src={cej} />
-                <h5>Diseño-Depilación y sombreado</h5>
-                <h5><b>$49.00</b></h5>
-                <NavLink to="/politicas">
-                <button>Reservar</button>
-                </NavLink>
-                </div>
-                <div className='concej1'>
-                <img className="img-cej" src={cej} />
-                <h5>Diseño-Depilación y sombreado</h5>
-                <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
-                </div>
-                <div className='concej1'>
-                <img className="img-cej" src={cej} />
-                <h5>Diseño-Depilación y sombreado</h5>
-                <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
-                </div>
-                </div>
+          ))}
+      </div>
+    </div>
+  );
 
-                <h3> Servicio Pestaña</h3>
-                <div className='serpes'>
-                <div className='conpes1'>
-                <img className="img-pes" src={cej} />
-                <h5>Diseño-Depilación y sombreado</h5>
-                <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
-                </div>
-                <div className='conpes1'>
-                <img className="img-pes" src={cej} />
-                <h5>Diseño-Depilación y sombreado</h5>
-                <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
-                </div>
-                </div>
-
-                <h3> Servicio de Micropigmentación</h3>
-                <div className='sermic'>
-                <div className='conmic1'>
-                <img className="img-mic" src={cej} />
-                <h5>Micropigmentacion Hair Stroke </h5>
-                <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
-                </div>
-                <div className='conmic1'>
-                <img className="img-mic" src={cej} />
-                <h5>Diseño Depilación en Henna </h5>
-                <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
-                </div>
-                <div className='conmic1'>
-                <img className="img-mic" src={cej} />
-                <h5>Micropigmentacion de Cejas </h5>
-                <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
-                </div>
-                </div>
-
-                <h3> Combos</h3>
-                <div className='sercom'>
-                <div className='concom1'>
-                <img className="img-com" src={cej} />
-                <h5>Diseño depilacion en henna + lifting de pestañas </h5>
-                <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
-                </div>
-                <div className='concom1'>
-                <img className="img-com" src={cej} />
-                <h5>laminacion de cejas+ extensiones de pestañas </h5>
-                <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
-                </div>
-                <div className='concom1'>
-                <img className="img-com" src={cej} />
-                <h5>Diseño depilacion y sombreado + lifting de pestañas </h5>
-                <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
-                </div>
-                <div className='concom1'>
-                <img className="img-com" src={cej} />
-                <h5>laminacion de cejas+ Lifting de pestañas </h5>
-                <h5><b>$49.00</b></h5>
-                <button>Reservar</button>
-                </div>
-                </div>
-
-                </div>
-                </div>
-    );
-}
+  return (
+    <div className='componenteServs'>
+      <div className='Bannerserviciosg'>
+        <div className='tituloserviciosg'>
+          <h1>Nuestros servicios</h1>
+        </div>
+      </div>
+      <div className='secciones_servicios'>
+        {renderServiciosPorCategoria('Cejas', 'Servicio Cejas', 'Titulo_Servicio_Cejas', 'serviciodcejas')}
+        {renderServiciosPorCategoria('Pestañas', 'Servicio Pestañas', 'Titulo_Servicio_Pestañas', 'serviciodpestañas')}
+        {renderServiciosPorCategoria('Micropigmentación', 'Servicio de Micropigmentación', 'Titulo_Servicio_Microp', 'serviciodmicropig')}
+      </div>
+    </div>
+  );
+};
 
 export default CompServicios;
