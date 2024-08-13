@@ -19,6 +19,7 @@ option {
     
 }
 
+
 table,
 th,
 td {
@@ -91,6 +92,26 @@ button {
 .escogerhora {
     transform: translateX(20px);
 }
+
+.cuadros {
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+.cuadros.libre {
+    background-color: rgb(184, 118, 223);
+}
+
+.cuadros.ocupado {
+    background-color: rgb(126, 121, 121);
+}
+
+
 
 /* Estilo para el día seleccionado */
 .react-calendar__tile--active {

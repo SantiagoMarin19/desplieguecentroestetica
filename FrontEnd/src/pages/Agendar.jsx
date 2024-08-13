@@ -13,7 +13,6 @@ export const Agendar = () => {
     <body className="helloxd">
       <Agendamiento/>
     </body>
-    <Piedepagina></Piedepagina>
       
 
    
