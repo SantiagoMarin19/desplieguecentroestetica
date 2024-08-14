@@ -1,4 +1,3 @@
-
 import supabase from "../../supabase/supabaseconfig";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
@@ -36,14 +35,18 @@ export function PersonalAdmin() {
       console.log("Error adding professional: ", error);
     } else {
       setPersonalList([...personalList, data[0]]);
-      setNewProfesional({
-        nombre_profesional: "",
-        especialidad: "",
-        celular: "",
-        correo: "",
-        estado: true
-      });
+      resetForm(); // Resetear el formulario
     }
+  };
+
+  const resetForm = () => {
+    setNewProfesional({
+      nombre_profesional: "",
+      especialidad: "",
+      celular: "",
+      correo: "",
+      estado: false
+    });
   };
 
   return (
@@ -56,26 +59,25 @@ export function PersonalAdmin() {
         <div className="Lista_personal_Admin">
           {personalList.map((profesional, index) => (
             <div key={index} className="personal_item">
-              <p>{profesional.nombre_profesional}</p>
+              <button className="boton_nombre_profesional_calendario">{profesional.nombre_profesional}</button>
               <p>{profesional.especialidad}</p>
               <p>{profesional.celular}</p>
               <p>{profesional.correo}</p>
               <p>{profesional.estado ? "Activo" : "Inactivo"}</p>
             </div>
           ))}
+        </div>
+        <div className="add_personal_form">
+          <input
+            type="text" name="nombre_profesional" value={newProfesional.nombre_profesional} placeholder="Nombre Profesional" onChange={handleChange} />
 
-          <div className="add_personal_form">
-            <input
-              type="text" name="nombre_profesional" value={newProfesional.nombre_profesional} placeholder="Nombre Profesional" onChange={handleChange} />
-
-            <input
-              type="text" name="especialidad" value={newProfesional.especialidad} placeholder="Especialidad" onChange={handleChange}/>
-            <input
-              type="text" name="celular" value={newProfesional.celular} placeholder="Celular" onChange={handleChange}/>
-            <input
-              type="email" name="correo" value={newProfesional.correo} placeholder="Correo" onChange={handleChange}/>
-            <button className="añadir_personal_boton" onClick={addProfesional}>Añadir Profesional</button>
-          </div>
+          <input
+            type="text" name="especialidad" value={newProfesional.especialidad} placeholder="Especialidad" onChange={handleChange} />
+          <input
+            type="text" name="celular" value={newProfesional.celular} placeholder="Celular" onChange={handleChange} />
+          <input
+            type="email" name="correo" value={newProfesional.correo} placeholder="Correo" onChange={handleChange} />
+          <button className="añadir_personal_boton" onClick={addProfesional}>Añadir Profesional</button>
         </div>
       </div>
     </Container>
@@ -85,8 +87,6 @@ export function PersonalAdmin() {
 const Container = styled.div`
   height: 100vh;
   padding: 20px;
-
- 
 `;
 
 export default PersonalAdmin;
