@@ -6,6 +6,8 @@ import { NavLink } from 'react-router-dom';
 
 export const Navbar = () => {
     return (
+
+        
         
         <nav className="navbar navbar-expand-lg bg-body-tertiary , navbar fixed-top navbar light bg-light" >
             

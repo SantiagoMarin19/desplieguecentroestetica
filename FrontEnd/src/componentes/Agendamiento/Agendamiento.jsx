@@ -102,7 +102,12 @@ export const Agendamiento = () => {
         }
 
         setErrorMessage('');
-        navigate('/Facturacion');
+        navigate('/Facturacion', { state: {
+            fecha:date,
+            duracion:selectedHora,
+            nombre_profesional:selectedProfesional,
+            
+            servicio } });
     };
 
     return (

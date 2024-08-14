@@ -65,6 +65,8 @@ function App() {
         <Pageloader />
         <Routes>
           <Route path="/" element={<Home token={token} />} />
+          <Route path='/Facturacion' element={<Facturaelectronica token={token}/>}/>
+
           <Route path={'/loginsupa'} element={<LoginUser setToken={setToken} />} />
           <Route path='/Registrar' element={<SignUp />} />
           <Route path="/servicios" element={<Servicios />} />

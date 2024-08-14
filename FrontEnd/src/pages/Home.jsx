@@ -9,15 +9,13 @@ export const Home = ({ token }) => {
   const navigate = useNavigate();
 
   function handleLogout() {
-    // Eliminar el token del sessionStorage
+ 
     sessionStorage.removeItem('token');
 
-    // Forzar la recarga de la página
+
     window.location.reload();
     
-    // Alternativamente, podrías redirigir a la página de inicio de sesión y luego recargar
-    // navigate('/login');
-    // window.location.reload();
+ 
   }
 
   return (
