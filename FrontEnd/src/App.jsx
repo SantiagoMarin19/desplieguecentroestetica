@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './pages/Home';
 import { Acceder } from './pages/Acceder';
 import {Servicios} from './pages/Servicios';
-
+import {Acerca_de} from './pages/Acerca_de';
 import { Condiciones } from "./pages/Terminos";
 import { ComboHeyLifting } from "./pages/ComboC-Henna+Lifing";
 import { ComboSombrayLifiting } from "./pages/comboC-Sombreado+Lifitng";
@@ -66,7 +66,7 @@ function App() {
           <Route path='/Registrar' element={<SignUp />} />
           <Route path="/servicios" element={<Servicios />} />
           <Route path="/politicas" element={<Condiciones />} />
-     
+          <Route path="/Acerca" element={<Acerca_de />} />
 
           <Route path="/combohennaylifting" element={<ComboHeyLifting />} />
           <Route path="/combosombreadoylifting" element={<ComboSombrayLifiting />} />
