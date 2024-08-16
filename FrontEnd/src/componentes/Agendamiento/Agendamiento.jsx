@@ -92,23 +92,29 @@ export const Agendamiento = () => {
 
     const navigate = useNavigate();
     const { servicio } = useLocation().state || { servicio: { nombre_servicio: "Servicio no especificado", precio: "$0.00" } };
-
     const handleReservarClick = (event) => {
         event.preventDefault();
-
+    
         if (!selectedProfesional || !selectedHora) {
             window.alert('Por favor, selecciona un profesional y una hora.');
             return;
         }
-
+    
         setErrorMessage('');
-        navigate('/Facturacion', { state: {
-            fecha:date,
-            duracion:selectedHora,
-            nombre_profesional:selectedProfesional,
-            
-            servicio } });
+        navigate('/Facturacion', {
+            state: {
+                fecha: date,
+                duracion: selectedHora, 
+                idProfesional: selectedProfesional, 
+                servicio: {
+                    id_servicios: servicio.id_servicios, 
+                    nombre_servicio: servicio.nombre_servicio,
+                    precio: servicio.precio
+                }
+            }
+        });
     };
+    
 
     return (
         <div className='todoingreso'>
@@ -202,11 +208,11 @@ export const Agendamiento = () => {
                 />
                 <div className='escogerhora'>
                     <form action='#' method='post'>
-                     
+
                         <p className='datosfecha'>
                             {getDiaSemana(date)} {date.getDate()} {date.toLocaleDateString('default', { month: 'short' })} {date.getFullYear()}
                         </p>
-                    
+
                     </form>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import supabase from '../supabase/supabaseconfig';
 import flechaizq from "../assets/images/decoración.png";
 import or from "../assets/images/OR.png";
@@ -8,6 +8,7 @@ import "./Estilos/Login.css";
 
 const LoginUser = ({ setToken }) => {
   let navigate = useNavigate();
+  let location = useLocation(); // Use useLocation to capture the state
 
   const [formData, setFormData] = useState({
     email: '',
@@ -40,7 +41,10 @@ const LoginUser = ({ setToken }) => {
 
       console.log("Login successful:", data); // Log successful login data
       setToken(data);
-      navigate('/');
+
+      // Redirect to the page where the user was before login
+      const redirectTo = location.state?.from || '/';
+      navigate(redirectTo);
     } catch (error) {
       console.error("Caught error:", error); // Log caught error
       alert(error.message); // Display error message to user
