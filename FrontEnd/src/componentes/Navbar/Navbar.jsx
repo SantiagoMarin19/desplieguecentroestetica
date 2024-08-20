@@ -27,7 +27,7 @@ export const Navbar = ({ token, handleLogout }) => {
                             </NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink to="/contactanos" className="nav-link">
+                            <NavLink to="/CitaPend" className="nav-link">
                                 CITAS
                             </NavLink>
                         </li>

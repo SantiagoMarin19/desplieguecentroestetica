@@ -23,6 +23,8 @@ import LoginUser from './pages/Login';
 import Facturaelectronica from './pages/FacturaElectronica';
 import { VistaDetalle } from './componentes/VistaDetalladaServ/VistaDetalleSer';
 import { VistaServicios } from './pages/VistaServicios';
+import Agendamiento from './componentes/Agendamiento/Agendamiento';
+import CitaPend from './pages/CitasPendientes';
 
 function App() {
   const [token, setToken] = useState(null);
@@ -47,11 +49,19 @@ function App() {
         <Pageloader />
         <Routes>
           <Route path="/" element={<Home token={token} />} />
+          <Route path='/Facturacion' element={<Facturaelectronica token={token} />} />
+
           <Route path="/loginsupa" element={<LoginUser setToken={setToken} />} />
-          <Route path="/Registrar" element={<SignUp />} />
+          <Route path='/Registrar' element={<SignUp />} />
           <Route path="/servicios" element={<Servicios token={token} />} />
-          <Route path="/politicas" element={<Condiciones />} />
+          <Route path="/VistaDetalle" element={<VistaServicios />} />
+          <Route path="/CitaPend" element={<CitaPend />} />
+
+
           <Route path="/acerca" element={<Acerca_de token={token} />} />
+
+
+          <Route path="/politicas" element={<Condiciones />} />
           <Route path="/combohennaylifting" element={<ComboHeyLifting />} />
           <Route path="/combosombreadoylifting" element={<ComboSombrayLifiting />} />
           <Route path="/combolaminacionyextension" element={<Combolamiyextension />} />
@@ -63,7 +73,7 @@ function App() {
           <Route path="/Recover3" element={<Recuperar3 />} />
           <Route path="/Recover4" element={<Recuperar4 />} />
           <Route path="/Agendarcita" element={<Agendar />} />
-          <Route path="/Facturacion" element={<Facturaelectronica />} />
+          <Route path='/Facturacion' element={<Facturaelectronica token={token} />} />
         </Routes>
       </>
     );

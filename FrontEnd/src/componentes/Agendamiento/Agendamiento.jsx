@@ -1,9 +1,9 @@
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Agendamiento.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useLocation, useNavigate } from 'react-router-dom';
+import supabase from '../../supabase/supabaseconfig';
 
 const getDiaSemana = (date) => {
     const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -11,60 +11,110 @@ const getDiaSemana = (date) => {
 };
 
 export const Agendamiento = () => {
-    const location = useLocation();
-    const navigate = useNavigate();
-    const { service } = location.state || { service: { name: "Servicio no especificado", price: "$0.00" } };
-    const [date, setDate] = useState(new Date());
-    const [selectedHora, setSelectedHora] = useState('');
+    const [profesionales, setProfesionales] = useState([]);
     const [selectedProfesional, setSelectedProfesional] = useState('');
+    const [selectedHora, setSelectedHora] = useState('');
+    const [horariosOcupados, setHorariosOcupados] = useState([]);
+    const [franjasHorarias, setFranjasHorarias] = useState([]);
+    const [date, setDate] = useState(new Date());
     const [errorMessage, setErrorMessage] = useState('');
 
-    const onChange = (date) => {
-        setDate(date);
-    };
+    useEffect(() => {
+        const fetchProfesionales = async () => {
+            const { data, error } = await supabase
+                .from('profesional')
+                .select('id_profesional, nombre_profesional');
 
-    const handleHoraChange = (event) => {
-        const selectValue = event.target.value;
-        setSelectedHora(event.target.options[event.target.selectedIndex].text);
-        localStorage.setItem('selectedHora', selectValue)
-    };
+            if (error) {
+                console.error('Error fetching profesionales:', error);
+            } else {
+                setProfesionales(data);
+            }
+        };
+
+        const fetchFranjasHorarias = async () => {
+            const { data, error } = await supabase
+                .from('franja_horario')
+                .select('id_horario, horario');
+            if (error) {
+                console.error('Error fetching franjas horarias:', error);
+            } else {
+                setFranjasHorarias(data);
+            }
+        };
+
+        fetchProfesionales();
+        fetchFranjasHorarias();
+    }, []);
+
+    useEffect(() => {
+        if (selectedProfesional && date) {
+            const fetchHorariosOcupados = async () => {
+                const selectedDate = date.toISOString().split('T')[0];
+
+                const { data, error } = await supabase
+                    .from('disponibilidad')
+                    .select('id_horario')
+                    .eq('id_profesional', selectedProfesional)
+                    .eq('estado', false)
+                    .eq('fecha', selectedDate); // Filter by date
+
+                if (error) {
+                    console.error('Error fetching horarios ocupados:', error);
+                } else {
+                    setHorariosOcupados(data.map(disponibilidad => disponibilidad.id_horario));
+                }
+            };
+
+            fetchHorariosOcupados();
+        }
+    }, [selectedProfesional, date]); // Trigger on professional and date change
 
     const handleProfesionalChange = (event) => {
-        const selectedValue = event.target.value;
-        setSelectedProfesional(event.target.options[event.target.selectedIndex].text);
-        localStorage.setItem('selectedProfesional', selectedValue);
+        const selectedId = event.target.value;
+        setSelectedProfesional(selectedId);
+        localStorage.setItem('selectedProfesional', selectedId);
+        setSelectedHora('');
+        setHorariosOcupados([]);
     };
 
-    const tileDisabled = ({ date, view }) => {
-        const today = new Date();
-        return (
-            (view === 'month' && date < today && !isSameDay(date, today)) ||
-            (date.getDay() === 1)
-        );
+    const handleHoraClick = (horario, franjaId) => {
+        if (isOcupado(franjaId)) {
+            return;
+        }
+        setSelectedHora(horario);
+        localStorage.setItem('selectedHora', horario);
     };
 
-    const isSameDay = (date1, date2) => {
-        return (
-            date1.getDate() === date2.getDate() &&
-            date1.getMonth() === date2.getMonth() &&
-            date1.getFullYear() === date2.getFullYear()
-        );
+    const isOcupado = (franjaId) => {
+        return horariosOcupados.includes(franjaId);
     };
 
+    const navigate = useNavigate();
+    const { servicio } = useLocation().state || { servicio: { nombre_servicio: "Servicio no especificado", precio: "$0.00" } };
     const handleReservarClick = (event) => {
-        event.preventDefault(); // Prevent the default link behavior
-
+        event.preventDefault();
+    
         if (!selectedProfesional || !selectedHora) {
             window.alert('Por favor, selecciona un profesional y una hora.');
             return;
         }
-
-        // Clear any previous error message
+    
         setErrorMessage('');
-
-        // Navigate to the billing page if validation passes
-        navigate('/Facturacion');
+        navigate('/Facturacion', {
+            state: {
+                fecha: date,
+                duracion: selectedHora, 
+                idProfesional: selectedProfesional, 
+                servicio: {
+                    id_servicios: servicio.id_servicios, 
+                    nombre_servicio: servicio.nombre_servicio,
+                    precio: servicio.precio
+                }
+            }
+        });
     };
+    
 
     return (
         <div className='todoingreso'>
@@ -74,16 +124,26 @@ export const Agendamiento = () => {
                         <label className='escprof' htmlFor='prof'>
                             <h3>Profesionales</h3>
                         </label>
-                        <select name='profesionales' id='prof' onChange={handleProfesionalChange} value={selectedProfesional}>
+                        <select
+                            name='profesionales'
+                            id='prof'
+                            onChange={handleProfesionalChange}
+                            value={selectedProfesional}
+                        >
                             <option value=''>--Escoge profesional--</option>
-                            <option value='prof1'>Natalia Salazar</option>
-                            <option value='prof2'>Carlos Martinez</option>
-                            <option value='prof3'>Andrea Gomez</option>
+                            {profesionales.map(profesional => (
+                                <option
+                                    key={profesional.id_profesional}
+                                    value={profesional.id_profesional}
+                                >
+                                    {profesional.nombre_profesional}
+                                </option>
+                            ))}
                         </select>
                     </form>
                 </div>
                 <div className='partetabla'>
-                    <h3 className='resumen'>Resumen</h3>
+                    <h3 className='resumen'>Agendamiento</h3>
                     <table>
                         <thead>
                             <tr>
@@ -93,21 +153,28 @@ export const Agendamiento = () => {
                             </tr>
                             <tr>
                                 <th>Profesional</th>
-                                <th>Procedimiento</th>
+                                <td>{selectedProfesional}</td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{selectedProfesional}</td>
-                                <td>{service.name}</td>
+                                <th>Servicio</th>
+                                <td>{servicio.nombre_servicio}</td>
                             </tr>
                             <tr>
                                 <th>Duración</th>
-                                <th>Costo</th>
+                                <td>{selectedHora}</td>
                             </tr>
                             <tr>
-                                <td>{selectedHora}</td>
-                                <td>{service.price}</td>
+                                <th>Costo</th>
+                                <td>
+                                    <h5><b>{new Intl.NumberFormat('es-CO', {
+                                        style: 'currency',
+                                        currency: 'COP',
+                                        minimumFractionDigits: 0,
+                                        maximumFractionDigits: 2
+                                    }).format(servicio.precio)}</b></h5>
+                                </td>
                             </tr>
                             <tr>
                                 <td colSpan={2} className='colorros'>
@@ -116,30 +183,36 @@ export const Agendamiento = () => {
                             </tr>
                         </tbody>
                     </table>
+
+                    <div className='TotalCuadros'> HORARIOS
+                        {franjasHorarias.map(franja => (
+                            <div
+                                key={franja.id_horario}
+                                className={`cuadros ${isOcupado(franja.id_horario) ? 'ocupado' : 'libre'}`}
+                                onClick={() => handleHoraClick(franja.horario, franja.id_horario)}
+                                style={{ cursor: isOcupado(franja.id_horario) ? 'not-allowed' : 'pointer' }}
+                            >
+                                {franja.horario}
+                            </div>
+                        ))}
+                    </div>
+
                     {errorMessage && <p className='error-message'>{errorMessage}</p>}
                 </div>
             </div>
             <div className='partright'>
                 <Calendar
-                    onChange={onChange}
+                    onChange={setDate}
                     value={date}
-                    tileDisabled={tileDisabled}
+                    tileDisabled={({ date, view }) => view === 'month' && date < new Date()}
                 />
                 <div className='escogerhora'>
                     <form action='#' method='post'>
-                        <label className='eschor' htmlFor='hor'>
-                            Escoge una hora
-                        </label>
+
                         <p className='datosfecha'>
                             {getDiaSemana(date)} {date.getDate()} {date.toLocaleDateString('default', { month: 'short' })} {date.getFullYear()}
                         </p>
-                        <select name='hora' id='hor' onChange={handleHoraChange} value={selectedHora}>
-                            <option value=''>--Escoge hora--</option>
-                            <option value='hor1'>9:00 - 10:00 am</option>
-                            <option value='hor2'>10:00 - 11:00 am</option>
-                            <option value='hor3'>2:00 - 3:00 pm</option>
-                            <option value='hor4'>3:00 - 4:00 pm</option>
-                        </select>
+
                     </form>
                 </div>
             </div>

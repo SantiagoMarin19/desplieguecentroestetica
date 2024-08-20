@@ -23,7 +23,7 @@ export const CompServicios = () => {
     fetchServicios();
   }, []);
 
-  const formatoCo = new Intl.NumberFormat('es-CO', {
+  const  formatoCo = new Intl.NumberFormat('es-CO', {
     style: 'currency',
     currency: 'COP',
     minimumFractionDigits: 0,
@@ -39,7 +39,7 @@ export const CompServicios = () => {
       <h3>{titulo}</h3>
       <div className={claseServicio}>
         {servicios
-          .filter(servicio => servicio.categorias.nombreCategoria === categoria)
+      .filter(servicio => servicio.categorias && servicio.categorias.nombreCategoria === categoria)
           .map(servicio => (
             <div key={servicio.id_servicio} className='serviciosdetc'>
               <div><img src={servicio.url_img} alt={servicio.nombre_servicio} /></div>
