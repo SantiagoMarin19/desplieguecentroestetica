@@ -32,8 +32,7 @@ export const Background = () => {
                             <button 
                                 className='btn-primary'
 
-                            >
-                                AGENDAR AHORA
+                            ><a className="agendarYa" href="/servicios">AGENDAR AHORA</a>
                             </button>
                         </div>
                     </div>
@@ -66,7 +65,7 @@ export const Background = () => {
 
                 <div className='bottoncentrado'>
                     <NavLink to="/servicios">
-                        <button type="button" className="buttonservi">aaaaaaaaaaaaaa</button>
+                        <button type="button" className="buttonservi">Servicios</button>
                     </NavLink>
                 </div>
             </div>

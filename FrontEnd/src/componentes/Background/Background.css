@@ -478,3 +478,8 @@ html, body {
     border-radius: 10px;
   }
 }
+
+.agendarYa {
+  text-decoration: none;
+  color: inherit;
+}
