@@ -11,13 +11,16 @@
 .header_personal_Admin {
   border: 10px solid #c98695;
   border-radius: 10px;
-  font-size: 30px;
+  font-size: 10px;
   font-family: "Playfair Display", serif;
   text-align: center;
-  padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header_personal_Admin h1{
+  font-size: 30px;
 }
 
 /* Estilo para la lista de profesionales */

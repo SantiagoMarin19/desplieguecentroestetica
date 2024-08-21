@@ -1,40 +1,101 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import './CitasAdmin.css';
 import Pagination from './Pagination';
-import supabase from '../../supabase/supabaseconfig'; 
-export function CitasAdmin() {
+import "./CitasAdmin.css"
+import supabase from '../../supabase/supabaseconfig';
+
+const Citas = ({ token }) => {
   const [citas, setCitas] = useState([]);
+  const [appointments, setAppointments] = useState([]);
+  const [user, setUser] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [loading, setLoading] = useState(true); // Estado para manejar la carga de datos
+  const [loading, setLoading] = useState(true);
   const citasPerPage = 5;
 
-  // Función para cargar las citas desde Supabase
-  const fetchCitas = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('citas') // Nombre de la tabla en Supabase
-        .select('*'); // Selecciona todas las columnas
-      if (error) throw error;
-      setCitas(data);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching citas:', error);
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (token && token.user) {
+        setUser(token.user);
+      } else {
+        const { data, error } = await supabase.auth.getUser();
+        if (error) {
+          console.error('Error fetching user:', error);
+        } else {
+          setUser(data.user);
+        }
+      }
+    };
+
+    fetchUser();
+  }, [token]);
 
   useEffect(() => {
+    const fetchAppointments = async () => {
+      if (user) {
+        const { data, error } = await supabase
+          .from('cita')
+          .select(`
+            fecha,
+            duracion,
+            estado,
+            profesional (
+              nombre_profesional
+            ),
+            servicio (
+              nombre_servicio
+            )
+          `)
+          .eq('usuarios', user.id);
+
+        if (error) {
+          console.error('Error fetching appointments:', error);
+        } else {
+          setAppointments(data || []);
+        }
+      }
+    };
+
+    fetchAppointments();
+  }, [user]);
+
+  useEffect(() => {
+    const fetchCitas = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('cita')
+          .select('*');
+        if (error) throw error;
+        setCitas(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching citas:', error);
+        setLoading(false);
+      }
+    };
+
     fetchCitas();
   }, []);
 
- 
   const indexOfLastCita = currentPage * citasPerPage;
   const indexOfFirstCita = indexOfLastCita - citasPerPage;
   const currentCitas = citas.slice(indexOfFirstCita, indexOfLastCita);
 
-  // Función para cambiar de página
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const handleAcceptCita = async (cita) => {
+    if (window.confirm(`¿Estás seguro de aprobar la cita de ${cita.usuarios} para el ${cita.fecha}?`)) {
+      try {
+        const { data, error } = await supabase
+          .from('citas')
+          .update({ estado: 'Abono' })
+          .eq('id_cita', cita.id_cita);
+        if (error) throw error;
+        console.log('Cita aprobada correctamente');
+      } catch (error) {
+        console.error('Error al aprobar cita:', error);
+      }
+    }
+  };
 
   if (loading) return <p>Loading...</p>;
 
@@ -56,9 +117,6 @@ export function CitasAdmin() {
         </div>
         <div className='duracion_Citas_Admin'>
           <h2>Duración</h2>
-        </div>
-        <div className='costo_Citas_Admin'>
-          <h2>Costo</h2>
         </div>
         <div className='servicio_Citas_Admin'>
           <h2>Servicio</h2>
@@ -83,9 +141,6 @@ export function CitasAdmin() {
             <div className="duracion_Admin">
               <p>{cita.duracion}</p>
             </div>
-            <div className="costo_Admin">
-              <p>{cita.costo}</p>
-            </div>
             <div className="servicio_Admin">
               <p>{cita.servicio}</p>
             </div>
@@ -96,7 +151,8 @@ export function CitasAdmin() {
                   id={`estado${index}`} 
                   name={`estado${index}`} 
                   checked={cita.estado === 'Abono'} 
-                  readOnly 
+                  onChange={() => handleAcceptCita(cita)} 
+                  readOnly={cita.estado === 'Abono'}
                 />
                 <label htmlFor={`estado${index}`}>{cita.estado}</label>
               </p>
@@ -122,3 +178,5 @@ const Container = styled.div`
   padding: 20px;
   box-sizing: border-box;
 `;
+
+export default Citas;
