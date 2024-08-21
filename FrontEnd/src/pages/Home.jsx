@@ -9,27 +9,19 @@ export const Home = ({ token }) => {
   const navigate = useNavigate();
 
   function handleLogout() {
- 
     sessionStorage.removeItem('token');
-
-
-    window.location.reload();
-    
- 
+    window.location.reload(); // Recarga la página después de cerrar sesión
   }
 
   return (
     <>
       <Promociones />
-      <Navbar />
+      <Navbar token={token} handleLogout={handleLogout} />
       <div className="user">
         <i className='bx bxs-user-circle'>
           {token && token.user.user_metadata.full_name}
         </i>
       </div>
-      <button onClick={handleLogout}>
-        Cerrar Sesión
-      </button>
       <Background />
       <Piedepagina />
     </>

@@ -1,10 +1,9 @@
 import React from "react";
 import { Navbar } from "../componentes/Navbar/Navbar";
 import { Promociones } from "../componentes/Promociones/Promociones";
-import { CompServicios } from "../componentes/CompoServicios/CompServicios";
 import { Piedepagina } from "../componentes/Footer/footer";
 
-export const Servicios = ({ token }) => {
+export const Acerca_de = ({ token }) => {
   function handleLogout() {
     sessionStorage.removeItem('token');
     window.location.reload(); // Recarga la página después de cerrar sesión
@@ -14,10 +13,12 @@ export const Servicios = ({ token }) => {
     <>
       <Promociones />
       <Navbar token={token} handleLogout={handleLogout} />
-      <CompServicios />
+      <div className="askdjk">
+        <h1>Hola mundo</h1>
+      </div>
       <Piedepagina />
     </>
   );
 };
 
-export default Servicios;
+export default Acerca_de;

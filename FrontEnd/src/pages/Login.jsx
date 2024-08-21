@@ -75,6 +75,7 @@ const LoginUser = ({ setToken }) => {
               onChange={handleChange}
             />
           </div>
+          <div className='passwordforgot'> <Link to={'/Recover'}>Haz olvidado contraseña?</Link></div>
         </div>
         <button className="botoningresar" type='submit'>Ingresar</button>
         <div className='decoraciones'>

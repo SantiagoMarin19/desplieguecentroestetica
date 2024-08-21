@@ -9,6 +9,8 @@ import imagenfondo from "../../assets/images/imagen_fondo.jpg";
 import imagencejashenna from "../../assets/images/cejas_henna.jpg";
 
 export const Background = () => {
+    const enunciadoRef = React.useRef(null);
+
     return (
         <div className='conteinergeneral'>
             <div className='iconos'>
@@ -26,16 +28,20 @@ export const Background = () => {
                                 Con dedicación y profesionalismo, nuestro equipo de especialistas en cuidado facial está comprometido en resaltar tu belleza natural, en cada línea, en cada gesto.
                             </p>
                         </div>
-                        <NavLink to ="/servicios">                        
-                             <div><button className='btn-primary'>AGENDAR AHORA</button></div>
-                        </NavLink>
+                        <div>
+                            <button 
+                                className='btn-primary'
+
+                            ><a className="agendarYa" href="/servicios">AGENDAR AHORA</a>
+                            </button>
+                        </div>
                     </div>
                     <div className='foto'>
                         <img src={imagenfondo} alt="Fondo" />
                     </div>
                 </div>
 
-                <div className='acercade'>
+                <div id="acerca-de" className='acercade'>
                     En <b>Natalia Salazar</b>, creemos que realzar tu mirada y tu sonrisa es el secreto para sentirte más bella y segura de ti misma. Nuestros tratamientos están diseñados para resaltar tu mirada, definir tus rasgos y dejar que tu sonrisa resplandezca. Déjate consentir en nuestro oasis de belleza y encuentra tu resplandor interior.
                 </div>
 
@@ -59,12 +65,12 @@ export const Background = () => {
 
                 <div className='bottoncentrado'>
                     <NavLink to="/servicios">
-                        <button type="button" className="buttonservi">SERVICIOS</button>
+                        <button type="button" className="buttonservi">Servicios</button>
                     </NavLink>
                 </div>
             </div>
 
-            <div className="backgroundtercero">
+            <div id="enunciado" ref={enunciadoRef} className="backgroundtercero">
                 <div className="enunciados">
                     <h2>¿Te gustaría separar una cita? <br /> Te invito a conocer nuestros términos y condiciones de servicio para el año 2024.</h2>
                     <h3 className='reserva'>Si prefiere reservar su cita en persona, no dude en pasar por nuestra ubicación: Calle 33b #7-53.</h3>
