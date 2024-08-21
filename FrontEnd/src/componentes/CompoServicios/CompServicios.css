@@ -8,6 +8,7 @@ body {
 .Bannerserviciosg {
     display: flex;
     align-items: center;
+    justify-content: center;
     background-color: #FCEBF2;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -15,73 +16,77 @@ body {
 
 .tituloserviciosg {
     width: 100%;
-    display: flex;
-    justify-content: center;
+    text-align: center;
     margin-bottom: 20px;
 }
 
 .tituloserviciosg h1 {
-    font-size: 4rem; /* Ajuste para tamaños más pequeños */
+    font-size: 3rem; /* Tamaño ajustado para que sea responsivo */
     color: #422A3C;
     font-weight: 700;
-    text-align: center;
+    margin: 0;
 }
 
 .secciones_servicios {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    padding: 0 10px; /* Espaciado horizontal para evitar que el contenido toque los bordes */
 }
 
-.Titulo_Servicio_Cejas h3 {
-    font-size: 2.5rem; /* Ajuste para tamaños más pequeños */
-    color: #422A3C;
-    text-align: center;
-}
-.Titulo_Servicio_Pestañas {
-    font-size: 2.5rem; /* Ajuste para tamaños más pequeños */
-    color: #422A3C;
-    text-align: center;
-}
+.Titulo_Servicio_Cejas,
+.Titulo_Servicio_Pestañas,
 .Titulo_Servicio_Microp {
-    font-size: 2.5rem; /* Ajuste para tamaños más pequeños */
-    color: #422A3C;
+    padding: 2rem;
     text-align: center;
+}
+
+.Titulo_Servicio_Cejas h3,
+.Titulo_Servicio_Pestañas h3,
+.Titulo_Servicio_Microp h3 {
+    font-size: 2.5rem; /* Tamaño de fuente consistente para los títulos */
+    color: #422A3C;
+    margin: 0;
 }
 
 .serviciodcejas,
 .serviciodpestañas,
-.serviciodmicropig,
-.serviciodecom {
+.serviciodmicropig {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
 }
 
 .serviciosdetc,
 .serviciosdetp,
-.serviciosdm,
-.serviciocombo {
+.serviciosdm {
     background-color: #FCEBF2;
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 10px;
-    width: 100%; /* Cambiado para que ocupe todo el ancho disponible */
-    max-width: 300px; /* Tamaño máximo para evitar que se expanda demasiado */
+    width: 100%;
+    max-width: 300px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .serviciosdetc:hover,
 .serviciosdetp:hover,
-.serviciosdm:hover,
-.serviciocombo:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+.serviciosdm:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.serviciosdetc img,
+.serviciosdetp img,
+.serviciosdm img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
 }
 
 .serviciosdetc h5,
@@ -99,54 +104,46 @@ body {
     color: #C98695;
 }
 
-.img-com {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
-
-.concej1 h5 {
-    padding: 10px;
-}
-
-h1 {
-    font-size: 3rem;
-    font-family: auto;
-    -webkit-text-stroke-width: medium;
-    text-align: center;
-}
-
-.butonSs {
-    margin: 0;
-    border: 0;
+.button_s {
+    color: #FCEBF2;
+    border: 1px solid  #FCEBF2;
+    padding: 12px 30px 12px 30px;
+    border-radius: 30px;
     background-color: #C98695;
-    border-radius: 10px;
-    padding: 10px 20px;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.butonSs:hover {
-    background-color: #a76e66;
-}
+    font-weight: bolder;
+    font-size: 15px;
+    box-shadow: 0px 0px 1px;
+    transform: all 2s esase;
+    transition-duration: .3s;
+  }
+  
+  .button_s:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 7px 1px  #000000;
+    border: 1px solid  #C98695;
+  }
+  
+  .button_s:active {
+    transform: translateY(10px);
+    box-shadow: 0px 0px 1px;
+  }
+    
 
 /* Media Queries */
 @media (max-width: 1200px) {
     .tituloserviciosg h1 {
-        font-size: 3rem; /* Ajustado para pantallas más pequeñas */
+        font-size: 2.5rem; /* Ajustado para pantallas más pequeñas */
     }
 
     .secciones_servicios {
+        padding: 0;
         gap: 15px;
     }
 }
 
 @media (max-width: 992px) {
     .tituloserviciosg h1 {
-        font-size: 2.5rem; /* Ajustado para pantallas más pequeñas */
+        font-size: 2rem; /* Ajustado para pantallas más pequeñas */
     }
 
     .secciones_servicios {
@@ -156,10 +153,9 @@ h1 {
 
     .serviciosdetc,
     .serviciosdetp,
-    .serviciosdm,
-    .serviciocombo {
-        width: 100%; /* Ajuste para pantallas más pequeñas */
-        max-width: 100%; /* Asegura que no se expanda más allá del contenedor */
+    .serviciosdm {
+        width: 100%;
+        max-width: 100%;
     }
 
     .butonSs {
@@ -170,11 +166,7 @@ h1 {
 
 @media (max-width: 768px) {
     .tituloserviciosg h1 {
-        font-size: 2rem; /* Ajuste para pantallas más pequeñas */
-    }
-
-    .secciones_servicios {
-        gap: 15px;
+        font-size: 1.8rem; /* Ajuste para pantallas más pequeñas */
     }
 
     .serviciosdetc h5,
