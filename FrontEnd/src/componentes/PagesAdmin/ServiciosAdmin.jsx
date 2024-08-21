@@ -14,7 +14,7 @@ export function ServiciosAdmin() {
   const [editableService, setEditableService] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [newService, setNewService] = useState({
-    name_servicio: '',
+    nombre_servicio: '',
     descripcion: '',
     duracion: '',
     precio: ''
@@ -48,7 +48,7 @@ export function ServiciosAdmin() {
     const { data, error } = await supabase
       .from('servicios')
       .update({
-        name_servicio: editableService.name_servicio,
+        nombre_servicio: editableService.nombre_servicio,
         descripcion: editableService.descripcion,
         duracion: editableService.duracion,
         precio: editableService.precio
@@ -70,7 +70,7 @@ export function ServiciosAdmin() {
   };
 
   const handleAddService = async () => {
-    if (!newService.name_servicio || !newService.descripcion || !newService.duracion || !newService.precio) {
+    if (!newService.nombre_servicio || !newService.descripcion || !newService.duracion || !newService.precio) {
       alert('Por favor, complete todos los campos');
       return;
     }
@@ -88,7 +88,7 @@ export function ServiciosAdmin() {
       console.log('Servicio añadido exitosamente:', data);
       setServicios([...servicios, ...data]);
       setNewService({
-        name_servicio: '',
+        nombre_servicio: '',
         descripcion: '',
         duracion: '',
         precio: ''
@@ -116,7 +116,7 @@ export function ServiciosAdmin() {
                   className="nombre_servicio_boton" 
                   onClick={() => handleServiceClick(service)}
                 >
-                  {service.name_servicio}
+                  {service.nombre_servicio}
                 </button>
                 <div className="ajustes_edicion_contenido">
                   <button 
@@ -144,14 +144,15 @@ export function ServiciosAdmin() {
           />
         </div>
       </div>
-
+      <div className='titulo-add-service'>
+      <h2>Añadir Servicio</h2></div>
       <div className="add-service-container">
-        <h2>Añadir Servicio</h2>
+      
         <p>Nombre: 
           <input
             type="text"
             value={newService.name_servicio}
-            onChange={(e) => setNewService({ ...newService, name_servicio: e.target.value })}
+            onChange={(e) => setNewService({ ...newService,nombre_servicio: e.target.value })}
           />
         </p>
         <p>Descripción: 
@@ -175,7 +176,7 @@ export function ServiciosAdmin() {
             onChange={(e) => setNewService({ ...newService, precio: e.target.value })}
           />
         </p>
-        <button onClick={handleAddService}>Añadir Servicio</button>
+        <button className="handleAddService" onClick={handleAddService}>Añadir Servicio</button>
       </div>
 
       {modalOpen && (
@@ -188,8 +189,8 @@ export function ServiciosAdmin() {
                 <p>Nombre: 
                   <input
                     type="text"
-                    value={editableService.name_servicio}
-                    onChange={(e) => setEditableService({ ...editableService, name_servicio: e.target.value })}
+                    value={editableService.nombre_servicio}
+                    onChange={(e) => setEditableService({ ...editableService, nombre_servicio: e.target.value })}
                   />
                 </p>
                 <p>Descripción: 
@@ -261,36 +262,4 @@ const Modal = styled.div`
   }
 `;
 
-const AddServiceContainer = styled.div`
-  margin: 20px 0;
-  padding: 20px;
-  background-color: #fcebf2;
-  border: 1px solid #c98695;
-  border-radius: 10px;
-  
-  h2 {
-    margin-bottom: 15px;
-  }
 
-  p {
-    margin: 10px 0;
-  }
-
-  input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-
-  button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    background-color: #c98695;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-`;

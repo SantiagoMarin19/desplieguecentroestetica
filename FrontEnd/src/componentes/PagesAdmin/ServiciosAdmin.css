@@ -15,10 +15,13 @@ body {
 
 /* Cabecera */
 .titulo_Header_Servicios_Admin {
-  background-color: #c98695;
+  background-color: #fcebf2;
+  border: 3px solid #c98695;
+  border-radius: 10px;
   text-align: center;
   padding: 15px;
-  color: #000;
+  font-family: "Playfair Display", serif;
+  font-weight: normal;
   border-radius: 10px;
   margin-bottom: 20px;
 }
@@ -33,7 +36,7 @@ body {
 /* Sección de Servicios */
 .titulo_Contenido_Header_Servicios_Admin {
   background-color: #fcebf2;
-  border: 1px solid #c98695;
+  border: 2px solid #c98695;
   border-radius: 10px;
   text-align: center;
   display: flex;
@@ -163,4 +166,51 @@ body {
 
 .modal-content button:hover {
   background-color: #a75d53;
+}
+
+.add-service-container{
+  padding: auto;
+  gap: 10px;
+  margin: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  align-items: center;
+}
+
+.add-service-container input{
+  background-color: transparent;
+  border: 2px solid #c98695;
+  border-radius: 5px; 
+}
+
+.handleAddService{
+  background-color: #fcebf2;
+  border: 2px solid #c98695;
+  border-radius: 5px; 
+  padding: 1rem;
+  font-size: 18px;
+  font-family: "Playfair Display", serif;
+  font-weight: bold;
+}
+
+.titulo-add-service{
+  background-color: #fcebf2;
+  border: 10px solid #c98695;
+  border-radius: 10px; 
+  padding: 1rem;
+  font-size: 20px;
+  font-family: "Playfair Display", serif;
+  text-align: center;
+  margin-top: 1%;
+} 
+
+.titulo-add_personal_form{
+  
+  border: 10px solid #c98695;
+  border-radius: 10px;
+  font-size: 20px;
+  font-family: "Playfair Display", serif;
+  text-align: center;
+  margin-top: 1%; 
 }

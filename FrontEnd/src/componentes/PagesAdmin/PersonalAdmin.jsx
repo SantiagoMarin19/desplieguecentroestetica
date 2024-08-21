@@ -67,6 +67,9 @@ export function PersonalAdmin() {
             </div>
           ))}
         </div>
+        <div className="titulo-add_personal_form">
+          <h2>Añadir Personal</h2>
+        </div>
         <div className="add_personal_form">
           <input
             type="text" name="nombre_profesional" value={newProfesional.nombre_profesional} placeholder="Nombre Profesional" onChange={handleChange} />

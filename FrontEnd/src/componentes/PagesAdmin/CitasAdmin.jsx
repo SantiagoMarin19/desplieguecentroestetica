@@ -1,19 +1,42 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import "./CitasAdmin.css";
-import Pagination from "./Pagination"; // Importa el componente de paginación
-
-export function CitasAdmin({ citas = [] }) {
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import './CitasAdmin.css';
+import Pagination from './Pagination';
+import supabase from '../../supabase/supabaseconfig'; 
+export function CitasAdmin() {
+  const [citas, setCitas] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const citasPerPage = 5; // Número de citas por página
+  const [loading, setLoading] = useState(true); // Estado para manejar la carga de datos
+  const citasPerPage = 5;
 
-  // Calcular el índice de las citas que se deben mostrar
+  // Función para cargar las citas desde Supabase
+  const fetchCitas = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('citas') // Nombre de la tabla en Supabase
+        .select('*'); // Selecciona todas las columnas
+      if (error) throw error;
+      setCitas(data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching citas:', error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchCitas();
+  }, []);
+
+ 
   const indexOfLastCita = currentPage * citasPerPage;
   const indexOfFirstCita = indexOfLastCita - citasPerPage;
   const currentCitas = citas.slice(indexOfFirstCita, indexOfLastCita);
 
   // Función para cambiar de página
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <Container>
@@ -49,13 +72,13 @@ export function CitasAdmin({ citas = [] }) {
         {currentCitas.map((cita, index) => (
           <div key={index} className="fila_Cita">
             <div className="cliente_Admin">
-              <p>{cita.cliente}</p>
+              <p>{cita.usuarios}</p>
             </div>
             <div className="fecha_Admin">
               <p>{cita.fecha}</p>
             </div>
             <div className="hora_Admin">
-              <p>{cita.hora}</p>
+              <p>{cita.franja_horaria}</p>
             </div>
             <div className="duracion_Admin">
               <p>{cita.duracion}</p>
@@ -68,15 +91,20 @@ export function CitasAdmin({ citas = [] }) {
             </div>
             <div className="estado_Admin">
               <p>
-                <input type="checkbox" id={`estado${index}`} name={`estado${index}`} checked={cita.estado} />
-                <label htmlFor={`estado${index}`}>{cita.estado ? "Abono" : "Pendiente"}</label>
+                <input 
+                  type="checkbox" 
+                  id={`estado${index}`} 
+                  name={`estado${index}`} 
+                  checked={cita.estado === 'Abono'} 
+                  readOnly 
+                />
+                <label htmlFor={`estado${index}`}>{cita.estado}</label>
               </p>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Paginación */}
       <Pagination 
         citasPerPage={citasPerPage} 
         totalCitas={citas.length} 

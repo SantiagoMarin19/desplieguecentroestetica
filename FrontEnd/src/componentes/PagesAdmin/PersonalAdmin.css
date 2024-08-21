@@ -9,10 +9,12 @@
 
 /* Estilo para el encabezado de la sección */
 .header_personal_Admin {
-  background-color: #c98695;
+  border: 10px solid #c98695;
+  border-radius: 10px;
+  font-size: 30px;
+  font-family: "Playfair Display", serif;
   text-align: center;
   padding: 20px;
-  color: #fff;
   border-radius: 10px;
   margin-bottom: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -105,12 +107,13 @@
   color: #a75d53;
 }
 
-/* Estilo para el encabezado del formulario */
-.add_personal_form h3 {
-  font-size: 24px;
-  text-align: center;
+
+
+.titulo-add_personal_form{
+  border: 10px solid #c98695;
+  border-radius: 10px;
+  font-size: 20px;
   font-family: "Playfair Display", serif;
-  font-weight: bold;
-  color: #c98695;
-  margin-bottom: 20px;
+  text-align: center;
+  margin-top: 1%; 
 }
