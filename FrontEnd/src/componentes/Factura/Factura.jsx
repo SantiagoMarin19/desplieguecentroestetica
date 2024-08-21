@@ -2,14 +2,13 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import supabase from '../../supabase/supabaseconfig';
 import { Modal, Button } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './Factura.css'; 
 
 const Facturacion = ({ token }) => {
     const navigate = useNavigate();
-    const location = useLocation(); // Obtener la ubicación actual
+    const location = useLocation(); 
     const { state } = location;
     const { fecha, duracion, idProfesional, servicio, idUsuario } = state;
-    console.log(servicio);
 
     const [user, setUser] = useState(null);
     const [nombreProfesional, setNombreProfesional] = useState('');
@@ -30,22 +29,6 @@ const Facturacion = ({ token }) => {
                 }
             }
         };
-        // const fetchservicio = async () => {
-        //     if (servicio) {
-        //         const { data, error } = await supabase
-        //             .from('servicios')
-        //             .select('nombre_servicio')
-        //             .eq('id_servicio', servicio)
-        //             .single();
-
-        //         if (error) {
-        //             console.error('Error fetching professional name:', error);
-        //         } else {
-        //             setNombreServicio(data?.nombre_servicio || '');
-        //         }
-        //     }
-        // };
-        
 
         const fetchNombreProfesional = async () => {
             if (idProfesional) {
@@ -65,11 +48,10 @@ const Facturacion = ({ token }) => {
 
         const fetchIdHorario = async () => {
             if (duracion) {
-                console.log('Duracion:', duracion); // Verificar que la duración es correcta
                 const { data, error } = await supabase
                     .from('franja_horario')
                     .select('id_horario')
-                    .eq('horario', duracion) // Usa la variable `duracion` aquí
+                    .eq('horario', duracion)
                     .single();
 
                 if (error) {
@@ -83,7 +65,6 @@ const Facturacion = ({ token }) => {
         fetchUser();
         fetchNombreProfesional();
         fetchIdHorario();
-        // fetchservicio();
     }, [idProfesional, idUsuario, token, duracion]);
 
     const handleGuardarCita = async () => {
@@ -100,23 +81,15 @@ const Facturacion = ({ token }) => {
             return;
         }
 
-        console.log('Guardando cita con los siguientes datos:');
-        console.log('Fecha:', fecha);
-        console.log('Horario ID:', idHorario);
-        console.log('Profesional:', idProfesional);
-        console.log('Servicio ID:', servicio?.id_servicios); 
-        console.log('Usuario ID:', user.id);
-        console.log('Duracion:', duracion);
-
         const { data, error } = await supabase
             .from('cita')
             .insert([{
-                fecha: fecha.toISOString().split('T')[0], // Guardar la fecha
+                fecha: fecha.toISOString().split('T')[0],
                 franja_horaria: idHorario,
                 profesional: idProfesional,
-                servicio: servicio?.id_servicios, // Asegurarse de que id_servicio existe
+                servicio: servicio?.id_servicios,
                 usuarios: user.id,
-                duracion: duracion, // Guardar la duración como string
+                duracion: duracion,
                 estado: 'true'
             }]);
 
@@ -125,7 +98,6 @@ const Facturacion = ({ token }) => {
             setModalMessage(`Error al guardar la cita: ${error.message}`);
             setShowModal(true);
         } else {
-            console.log('Cita guardada con éxito:', data);
             setModalMessage('Cita guardada con éxito. Un administrador verificará tu cita.');
             setShowModal(true);
             setTimeout(() => navigate('/'), 1500);
@@ -133,16 +105,26 @@ const Facturacion = ({ token }) => {
     };
 
     return (
-        <div>
-            <h3>Confirmar Cita</h3>
-            <p>Fecha: {fecha.toLocaleDateString()}</p>
-            <p>Duración: {duracion}</p>
-            <p>Profesional: {nombreProfesional}</p>
-            <p>Servicio: {servicio?.nombre_servicio}</p>
-            <p>Costo: {servicio?.precio}</p>
-            <p>Cliente: {user ? user.user_metadata.full_name : 'No disponible'}</p>
+        <div className="facturacion-container">
+            <div className="invoice-header">
+                <h1>Factura</h1>
+                <p>Fecha: {fecha.toLocaleDateString()}</p>
+            </div>
+            
+            <div className="invoice-body">
+                <div className="invoice-section">
+                    <h2>Detalles de la Cita</h2>
+                    <p><strong>Duración:</strong> {duracion}</p>
+                    <p><strong>Profesional:</strong> {nombreProfesional}</p>
+                    <p><strong>Servicio:</strong> {servicio?.nombre_servicio}</p>
+                    <p><strong>Costo:</strong> {servicio?.precio}</p>
+                    <p><strong>Cliente:</strong> {user ? user.user_metadata.full_name : 'No disponible'}</p>
+                </div>
+            </div>
 
-            <Button onClick={handleGuardarCita}>Continuar</Button>
+            <div className="invoice-footer">
+                <Button onClick={handleGuardarCita}>Confirmar Cita</Button>
+            </div>
 
             <Modal show={showModal} onHide={() => setShowModal(false)}>
                 <Modal.Header closeButton>
