@@ -17,9 +17,18 @@ export const Agendamiento = () => {
     const [horariosOcupados, setHorariosOcupados] = useState([]);
     const [franjasHorarias, setFranjasHorarias] = useState([]);
     const [date, setDate] = useState(new Date());
-    const [errorMessage, setErrorMessage] = useState('');
+    const [userId, setUserId] = useState(null);
 
     useEffect(() => {
+        const fetchUser = async () => {
+            const { data, error } = await supabase.auth.getUser();
+            if (data) {
+                setUserId(data.user.id);
+            } else {
+                console.error('Error fetching user:', error);
+            }
+        };
+
         const fetchProfesionales = async () => {
             const { data, error } = await supabase
                 .from('profesional')
@@ -43,32 +52,33 @@ export const Agendamiento = () => {
             }
         };
 
+        fetchUser();
         fetchProfesionales();
         fetchFranjasHorarias();
     }, []);
 
     useEffect(() => {
-        if (selectedProfesional && date) {
-            const fetchHorariosOcupados = async () => {
+        const fetchHorariosOcupados = async () => {
+            if (selectedProfesional && date) {
                 const selectedDate = date.toISOString().split('T')[0];
 
+                // Consulta todas las citas para el profesional seleccionado en la fecha seleccionada
                 const { data, error } = await supabase
-                    .from('disponibilidad')
-                    .select('id_horario')
-                    .eq('id_profesional', selectedProfesional)
-                    .eq('estado', false)
-                    .eq('fecha', selectedDate); // Filter by date
+                    .from('cita')
+                    .select('franja_horaria')
+                    .eq('profesional', selectedProfesional)
+                    .eq('fecha', selectedDate);
 
                 if (error) {
                     console.error('Error fetching horarios ocupados:', error);
                 } else {
-                    setHorariosOcupados(data.map(disponibilidad => disponibilidad.id_horario));
+                    setHorariosOcupados(data.map(cita => cita.franja_horaria));
                 }
-            };
+            }
+        };
 
-            fetchHorariosOcupados();
-        }
-    }, [selectedProfesional, date]); // Trigger on professional and date change
+        fetchHorariosOcupados();
+    }, [selectedProfesional, date]);
 
     const handleProfesionalChange = (event) => {
         const selectedId = event.target.value;
@@ -100,7 +110,6 @@ export const Agendamiento = () => {
             return;
         }
     
-        setErrorMessage('');
         navigate('/Facturacion', {
             state: {
                 fecha: date,
@@ -114,7 +123,6 @@ export const Agendamiento = () => {
             }
         });
     };
-    
 
     return (
         <div className='todoingreso'>
@@ -197,7 +205,6 @@ export const Agendamiento = () => {
                         ))}
                     </div>
 
-                    {errorMessage && <p className='error-message'>{errorMessage}</p>}
                 </div>
             </div>
             <div className='partright'>

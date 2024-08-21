@@ -57,7 +57,7 @@ const CitasPendientes = ({ token }) => {
             <h3>Tus Citas Pendientes  </h3>
             
             {appointments.length === 0 ? (
-                <p>No tienes citas programadas.</p>
+                <p>No tienes citas programadas. Porfavor inicia session para verificar tus citas </p>
             ) : (
                 <ListGroup>
                     {appointments.map((appointment, index) => (
