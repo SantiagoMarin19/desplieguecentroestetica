@@ -2,6 +2,7 @@ import React from "react";
 import { Navbar } from "../componentes/Navbar/Navbar";
 import { Promociones } from "../componentes/Promociones/Promociones";
 import { Piedepagina } from "../componentes/Footer/footer";
+import Nosotros from "../componentes/Nosotros/Nosotros";
 
 export const Acerca_de = ({ token }) => {
   function handleLogout() {
@@ -13,9 +14,8 @@ export const Acerca_de = ({ token }) => {
     <>
       <Promociones />
       <Navbar token={token} handleLogout={handleLogout} />
-      <div className="askdjk">
-        <h1>Hola mundo</h1>
-      </div>
+      <Nosotros></Nosotros>
+     
       <Piedepagina />
     </>
   );

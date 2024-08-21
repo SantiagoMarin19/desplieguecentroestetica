@@ -58,15 +58,17 @@ const CitasPendientes = ({ token }) => {
             
             {appointments.length === 0 ? (
                 <p>No tienes citas programadas. Porfavor inicia session para verificar tus citas </p>
+                
             ) : (
                 <ListGroup>
-                    {appointments.map((appointment, index) => (
+                    
+                    {appointments.map((citas, index) => (
                         <ListGroup.Item key={index}>
-                            <p>Fecha: {new Date(appointment.fecha).toLocaleDateString()}</p>
-                            <p>Duración: {appointment.duracion}</p>
-                            <p>Profesional: {appointment.profesional.nombre_profesional}</p>
-                            <p>Servicio: {appointment.servicio.nombre_servicio}</p>
-                            <p>Estado: {appointment.estado ? 'Confirmada' : 'Pendiente'}</p>
+                            <p>Fecha: {new Date(citas.fecha).toLocaleDateString()}</p>
+                            <p>Duración: {citas.duracion}</p>
+                            <p>Profesional: {citas.profesional.nombre_profesional}</p>
+                            <p>Servicio: {citas.servicio.nombre_servicio}</p>
+                            <p>Estado: {citas.estado ? 'Confirmada' : 'Pendiente'}</p>
                         </ListGroup.Item>
                     ))}
                 </ListGroup>
