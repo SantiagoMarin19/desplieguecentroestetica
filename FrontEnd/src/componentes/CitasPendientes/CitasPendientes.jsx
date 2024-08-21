@@ -1,70 +1,77 @@
 import { useState, useEffect } from 'react';
 import supabase from '../../supabase/supabaseconfig';
+import { ListGroup, Container } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const CitasPendientes = ({ userId }) => {
-    const [citas, setCitas] = useState([]);
+const CitasPendientes = ({ token }) => {
+    const [appointments, setAppointments] = useState([]);
     const [user, setUser] = useState(null);
 
-    const [loading, setLoading] = useState(true);
-
     useEffect(() => {
-        const fetchCitas = async () => {
-            if (!userId) {
-                console.error('User ID is required');
-                return;
-            }
-
-            const { data, error } = await supabase
-                .from('cita')
-                .select(`
-                    id_cita,
-                    fecha,
-                    duracion,
-                    estado,
-                    profesional (
-                        nombre_profesional
-                    ),
-                    servicio (
-                        nombre_servicio
-                    )
-                `)
-                .eq('usuarios', userId);
-
-            if (error) {
-                console.error('Error fetching citas:', error);
+        const fetchUser = async () => {
+            if (token && token.user) {
+                setUser(token.user);
             } else {
-                setCitas(data);
+                const { data, error } = await supabase.auth.getUser();
+                if (error) {
+                    console.error('Error fetching user:', error);
+                } else {
+                    setUser(data.user);
+                }
             }
-
-            setLoading(false);
         };
 
-        fetchCitas();
-    }, [userId]);
+        const fetchAppointments = async () => {
+            if (user) {
+                const { data, error } = await supabase
+                    .from('cita')
+                    .select(`
+                        fecha,
+                        duracion,
+                        estado,
+                        profesional (
+                            nombre_profesional
+                        ),
+                        servicio (
+                            nombre_servicio
+                        )
+                    `)
+                    .eq('usuarios', user.id);
 
-    if (loading) {
-        return <p>Loading...</p>;
-    }
+                if (error) {
+                    console.error('Error fetching appointments:', error);
+                } else {
+                    setAppointments(data || []);
+                }
+            }
+        };
 
-    if (citas.length === 0) {
-        return <p>No tienes citas asignadas.</p>;
-    }
+        fetchUser();
+        if (user) {
+            fetchAppointments();
+        }
+    }, [token, user]);
 
     return (
-        <div>
-            <h3>Mis Citas</h3>
-            <ul>
-                {citas.map((cita) => (
-                    <li key={cita.id_cita}>
-                        <h4>{cita.servicio.nombre_servicio}</h4>
-                        <p>Fecha: {new Date(cita.fecha).toLocaleDateString()}</p>
-                        <p>Duración: {cita.duracion}</p>
-                        <p>Profesional: {cita.profesional.nombre_profesional}</p>
-                        <p>Estado: {cita.estado ? 'Confirmada' : 'Pendiente'}</p>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <Container>
+            <h3>Tus Citas Pendientes  </h3>
+            
+            {appointments.length === 0 ? (
+                <p>No tienes citas programadas.</p>
+            ) : (
+                <ListGroup>
+                    {appointments.map((appointment, index) => (
+                        <ListGroup.Item key={index}>
+                            <p>Fecha: {new Date(appointment.fecha).toLocaleDateString()}</p>
+                            <p>Duración: {appointment.duracion}</p>
+                            <p>Profesional: {appointment.profesional.nombre_profesional}</p>
+                            <p>Servicio: {appointment.servicio.nombre_servicio}</p>
+                            <p>Estado: {appointment.estado ? 'Confirmada' : 'Pendiente'}</p>
+                        </ListGroup.Item>
+                    ))}
+                </ListGroup>
+            )}
+        </Container>
     );
 };
 

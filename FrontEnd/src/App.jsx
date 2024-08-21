@@ -27,6 +27,7 @@ import { VistaDetalle } from './componentes/VistaDetalladaServ/VistaDetalleSer';
 import { VistaServicios } from './pages/VistaServicios';
 import Agendamiento from './componentes/Agendamiento/Agendamiento';
 import CitaPend from './pages/CitasPendientes';
+import CitasPendientes from './componentes/CitasPendientes/CitasPendientes';
 
 function App() {
   const [token, setToken] = useState(false)
