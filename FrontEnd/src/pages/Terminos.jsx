@@ -8,7 +8,8 @@ export const Condiciones = () => {
     return (
         <>
     <Promociones></Promociones>
-    <Navbar></Navbar>
+    <Navbar token={token} />
+
         <Politicases></Politicases>    
         <Piedepagina/>    
       

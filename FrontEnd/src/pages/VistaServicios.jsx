@@ -7,14 +7,14 @@ import Promociones from "../componentes/Promociones/Promociones";
 
 
 
-export const VistaServicios = () => {
+export const VistaServicios = ({token}) => {
 
 
 
     return (
         <>
         <Promociones></Promociones>
-        <Navbar></Navbar>
+        <Navbar token={token} />
         <VistaDetalle></VistaDetalle>
         <Piedepagina></Piedepagina>
 

@@ -51,29 +51,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Home token={token} />} />
           <Route path='/Facturacion' element={<Facturaelectronica token={token} />} />
-
           <Route path="/loginsupa" element={<LoginUser setToken={setToken} />} />
           <Route path='/Registrar' element={<SignUp />} />
           <Route path="/servicios" element={<Servicios token={token} />} />
-          <Route path="/VistaDetalle" element={<VistaServicios />} />
+          <Route path="/VistaDetalle" element={<VistaServicios token={token} />} />
           <Route path="/CitaPend" element={<CitaPend />} />
-
-
           <Route path="/acerca" element={<Acerca_de token={token} />} />
-
-
-          <Route path="/politicas" element={<Condiciones />} />
-          <Route path="/combohennaylifting" element={<ComboHeyLifting />} />
-          <Route path="/combosombreadoylifting" element={<ComboSombrayLifiting />} />
-          <Route path="/combolaminacionyextension" element={<Combolamiyextension />} />
-          <Route path="/combolaminacionylifting" element={<Combolaminylif />} />
-          <Route path="/Ingresar" element={<Acceder />} />
-          <Route path="/registro" element={<Registro />} />
-          <Route path="/register" element={<RegistroCheck />} />
-          <Route path="/Recover" element={<Recuperar />} />
-          <Route path="/Recover3" element={<Recuperar3 />} />
-          <Route path="/Recover4" element={<Recuperar4 />} />
-          <Route path="/Agendarcita" element={<Agendar />} />
+          <Route path="/politicas" element={<Condiciones token={token} />} />
+          <Route path="/Agendarcita" element={<Agendar token={token}/>} />
           <Route path='/Facturacion' element={<Facturaelectronica token={token} />} />
         </Routes>
       </>

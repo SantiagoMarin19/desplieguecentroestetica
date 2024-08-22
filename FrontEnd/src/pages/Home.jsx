@@ -8,20 +8,11 @@ import { Piedepagina } from "../componentes/Footer/footer";
 export const Home = ({ token }) => {
   const navigate = useNavigate();
 
-  function handleLogout() {
-    sessionStorage.removeItem('token');
-    window.location.reload(); // Recarga la página después de cerrar sesión
-  }
 
   return (
     <>
       <Promociones />
-      <Navbar token={token} handleLogout={handleLogout} />
-      <div className="user">
-        <i className='bx bxs-user-circle'>
-          {token && token.user.user_metadata.full_name}
-        </i>
-      </div>
+      <Navbar token={token} />
       <Background />
       <Piedepagina />
     </>

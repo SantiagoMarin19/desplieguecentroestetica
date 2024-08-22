@@ -5,12 +5,13 @@ import Promociones from "../componentes/Promociones/Promociones";
 import CitasPendientes from "../componentes/CitasPendientes/CitasPendientes";
 
 
-export const CitaPend = () => {
+export const CitaPend = ({ token }) => {
 
     return (
         <>
             <Promociones></Promociones>
-            <Navbar></Navbar>
+            <Navbar token={token} />
+
             <CitasPendientes></CitasPendientes>
             <Piedepagina></Piedepagina>
 

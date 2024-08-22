@@ -4,12 +4,12 @@ import {Promociones} from "../componentes/Promociones/Promociones";
 import { Navbar } from "../componentes/Navbar/Navbar";
 import { Piedepagina } from "../componentes/Footer/footer";
 
-export const Agendar = () => {
+export const Agendar = ({ token }) => {
 
   return (
     <>
        <Promociones></Promociones>
-       <Navbar></Navbar>
+       <Navbar token={token} />
     <body className="helloxd">
       <Agendamiento/>
     </body>

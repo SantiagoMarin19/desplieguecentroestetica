@@ -6,18 +6,26 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const CitasPendientes = ({ token }) => {
     const [appointments, setAppointments] = useState([]);
     const [user, setUser] = useState(null);
+    const [userName, setUserName] = useState('');
 
     useEffect(() => {
         const fetchUser = async () => {
+            let currentUser;
             if (token && token.user) {
-                setUser(token.user);
+                currentUser = token.user;
             } else {
                 const { data, error } = await supabase.auth.getUser();
                 if (error) {
                     console.error('Error fetching user:', error);
+                    return;
                 } else {
-                    setUser(data.user);
+                    currentUser = data.user;
                 }
+            }
+            if (currentUser) {
+                setUser(currentUser);
+                setUserName(currentUser.user_metadata.full_name);
+                localStorage.setItem('userName', currentUser.user_metadata.full_name);
             }
         };
 
@@ -47,21 +55,46 @@ const CitasPendientes = ({ token }) => {
         };
 
         fetchUser();
+    }, [token]);
+
+    useEffect(() => {
+        const fetchAppointments = async () => {
+            if (user) {
+                const { data, error } = await supabase
+                    .from('cita')
+                    .select(`
+                        fecha,
+                        duracion,
+                        estado,
+                        profesional (
+                            nombre_profesional
+                        ),
+                        servicio (
+                            nombre_servicio
+                        )
+                    `)
+                    .eq('usuarios', user.id);
+
+                if (error) {
+                    console.error('Error fetching appointments:', error);
+                } else {
+                    setAppointments(data || []);
+                }
+            }
+        };
+
         if (user) {
             fetchAppointments();
         }
-    }, [token, user]);
+    }, [user]);
 
     return (
         <Container>
-            <h3>Tus Citas Pendientes  </h3>
-            
+            <h3>Tus Citas Pendientes, {userName}</h3>
             {appointments.length === 0 ? (
-                <p>No tienes citas programadas. Porfavor inicia session para verificar tus citas </p>
-                
+                <p>No tienes citas programadas. Por favor inicia sesión para verificar tus citas.</p>
             ) : (
                 <ListGroup>
-                    
                     {appointments.map((citas, index) => (
                         <ListGroup.Item key={index}>
                             <p>Fecha: {new Date(citas.fecha).toLocaleDateString()}</p>

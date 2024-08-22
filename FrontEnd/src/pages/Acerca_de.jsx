@@ -5,15 +5,12 @@ import { Piedepagina } from "../componentes/Footer/footer";
 import Nosotros from "../componentes/Nosotros/Nosotros";
 
 export const Acerca_de = ({ token }) => {
-  function handleLogout() {
-    sessionStorage.removeItem('token');
-    window.location.reload(); // Recarga la página después de cerrar sesión
-  }
+  
 
   return (
     <>
       <Promociones />
-      <Navbar token={token} handleLogout={handleLogout} />
+      <Navbar token={token} />
       <Nosotros></Nosotros>
      
       <Piedepagina />
