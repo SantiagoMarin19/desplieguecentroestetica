@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import "./ServiciosAdmin.css";
-import { Calendar, momentLocalizer } from 'react-big-calendar';
-import moment from 'moment';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
+import './ServiciosAdmin.css';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 import supabase from '../../supabase/supabaseconfig';
 
-const localizer = momentLocalizer(moment);
-
 export function ServiciosAdmin() {
-  const [events, setEvents] = useState([]);
+  const [selectedDates, setSelectedDates] = useState([]);
+  const [serviceTimes, setServiceTimes] = useState({});
   const [servicios, setServicios] = useState([]);
+  const [selectedService, setSelectedService] = useState(null);
   const [editableService, setEditableService] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [newService, setNewService] = useState({
@@ -30,20 +29,51 @@ export function ServiciosAdmin() {
     fetchServicios();
   }, []);
 
-  const handleServiceClick = (service) => {
+  const handleEditClick = async (service) => {
     setEditableService(service);
     setModalOpen(true);
+    setSelectedService(null); // Reset selected service to hide calendar
+    setServiceTimes({}); // Clear service times
+  };
+
+  const handleSelectClick = async (service) => {
+    setSelectedService(service);
+    setEditableService(null); // Reset editable service
+    setModalOpen(false); // Close modal if open
+
+    // Reset service times and selected dates
+    setServiceTimes({});
+    setSelectedDates([]);
+
+    // Fetch service times for the selected service
+    const { data, error } = await supabase
+      .from('franja_horaria')
+      .select('*')
+      .eq('service_id', service.id_servicios);
+
+    if (error) console.error('Error fetching service times:', error);
+    else {
+      const serviceTimes = data.reduce((acc, item) => {
+        const date = new Date(item.fecha);
+        if (!acc[date.toDateString()]) {
+          acc[date.toDateString()] = [];
+        }
+        acc[date.toDateString()].push(item.hora);
+        return acc;
+      }, {});
+      setServiceTimes(serviceTimes);
+      setSelectedDates(Object.keys(serviceTimes).map(date => new Date(date))); // Set selected dates for calendar
+    }
   };
 
   const handleModalClose = () => {
     setModalOpen(false);
     setEditableService(null);
+    setSelectedService(null); // Also reset the selected service to hide calendar
   };
 
   const handleServiceUpdate = async () => {
     if (!editableService) return;
-
-    console.log('Datos para actualizar:', editableService);
 
     const { data, error } = await supabase
       .from('servicios')
@@ -59,7 +89,6 @@ export function ServiciosAdmin() {
       console.error('Error al actualizar servicio:', error);
       alert(`Error actualizando el servicio: ${error.message}`);
     } else {
-      console.log('Servicio actualizado exitosamente:', data);
       setServicios(prevServicios =>
         prevServicios.map(service =>
           service.id_servicios === editableService.id_servicios ? editableService : service
@@ -75,8 +104,6 @@ export function ServiciosAdmin() {
       return;
     }
 
-    console.log('Datos para añadir:', newService);
-
     const { data, error } = await supabase
       .from('servicios')
       .insert([newService]);
@@ -85,7 +112,6 @@ export function ServiciosAdmin() {
       console.error('Error al añadir servicio:', error);
       alert(`Error añadiendo el servicio: ${error.message}`);
     } else {
-      console.log('Servicio añadido exitosamente:', data);
       setServicios([...servicios, ...data]);
       setNewService({
         nombre_servicio: '',
@@ -93,6 +119,83 @@ export function ServiciosAdmin() {
         duracion: '',
         precio: ''
       });
+    }
+  };
+
+  const handleDateChange = (date) => {
+    if (selectedService) {
+      const newSelectedDates = selectedDates.some(d => d.toDateString() === date.toDateString())
+        ? selectedDates.filter(d => d.toDateString() !== date.toDateString())
+        : [...selectedDates, date];
+
+      setSelectedDates(newSelectedDates);
+      const newServiceTimes = { ...serviceTimes };
+      newSelectedDates.forEach(d => {
+        if (!newServiceTimes[d.toDateString()]) {
+          newServiceTimes[d.toDateString()] = [];
+        }
+      });
+      setServiceTimes(newServiceTimes);
+    }
+  };
+
+  const handleTimeChange = (date, index, value) => {
+    if (selectedService) {
+      const dateString = date.toDateString();
+      const newServiceTimes = { ...serviceTimes };
+      newServiceTimes[dateString][index] = value;
+      setServiceTimes(newServiceTimes);
+    }
+  };
+
+  const addTime = (date) => {
+    if (selectedService) {
+      const dateString = date.toDateString();
+      const newServiceTimes = { ...serviceTimes };
+      if (!newServiceTimes[dateString]) {
+        newServiceTimes[dateString] = [];
+      }
+      newServiceTimes[dateString].push('00:00');
+      setServiceTimes(newServiceTimes);
+    }
+  };
+
+  const removeTime = (date, index) => {
+    if (selectedService) {
+      const dateString = date.toDateString();
+      const newServiceTimes = { ...serviceTimes };
+      newServiceTimes[dateString].splice(index, 1);
+      setServiceTimes(newServiceTimes);
+    }
+  };
+
+  const tileClassName = ({ date, view }) => {
+    if (view === 'month' && selectedService) {
+      return selectedDates.some(d => d.toDateString() === date.toDateString()) ? 'selected-date' : null;
+    }
+  };
+
+  const handleUpdateAll = async () => {
+    // Prepare data for update
+    const allUpdates = Object.entries(serviceTimes).flatMap(([date, times]) => 
+      times.map(time => ({
+        service_id: selectedService.id_servicios,
+        fecha: date,
+        hora: time,
+        estado: 'disponible' // Assuming default status is available
+      }))
+    );
+
+    // Send the updates to Supabase
+    const { error } = await supabase.from('franja_horaria').upsert(allUpdates);
+
+    if (error) {
+      console.error('Error al actualizar horarios de servicios:', error);
+      alert(`Error actualizando horarios de servicios: ${error.message}`);
+    } else {
+      alert('Horarios actualizados correctamente.');
+      // Reset updates after successful submission
+      setServiceTimes({});
     }
   };
 
@@ -112,16 +215,16 @@ export function ServiciosAdmin() {
           <div className="contenido_Header_Servicios_Admin">
             {servicios.map(service => (
               <div key={service.id_servicios} className="edicion_contenido">
-                <button 
-                  className="nombre_servicio_boton" 
-                  onClick={() => handleServiceClick(service)}
+                <button
+                  className="nombre_servicio_boton"
+                  onClick={() => handleSelectClick(service)}
                 >
                   {service.nombre_servicio}
                 </button>
                 <div className="ajustes_edicion_contenido">
-                  <button 
-                    className="edicion_contenido_boton" 
-                    onClick={() => handleServiceClick(service)}
+                  <button
+                    className="edicion_contenido_boton"
+                    onClick={() => handleEditClick(service)}
                   >
                     editar
                   </button>
@@ -131,96 +234,132 @@ export function ServiciosAdmin() {
           </div>
         </div>
 
-        <div className="calendario_Contenido_Servicios_Admin">
-          <div className="titulo_calendario_Contenido_Servicios_Admin">
-            <h3>Calendario Citas</h3>
+        {selectedService && (
+          <div className="calendario_Contenido_Servicios_Admin">
+            <div className="titulo_calendario_Contenido_Servicios_Admin">
+              <h3>Calendario Citas</h3>
+            </div>
+            <div className='calendario-container'>
+              <Calendar
+                onChange={handleDateChange}
+                value={null}
+                tileClassName={tileClassName}
+                prevLabel={null}
+                nextLabel={null}
+                showNeighboringMonth={false}
+              />
+            </div>
+            <div className='escogerhora'>
+              <form action='#' method='post'>
+                <p className='datosfecha'>
+                  {selectedDates.map(date => (
+                    <div key={date.toDateString()} className="fecha-seleccionada">
+                      <div>
+                        {date.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' })}
+                      </div>
+                      <div>
+                        {serviceTimes[date.toDateString()] && serviceTimes[date.toDateString()].map((time, index) => (
+                          <div key={index}>
+                            <input
+                              type="time"
+                              value={time}
+                              onChange={(e) => handleTimeChange(date, index, e.target.value)}
+                            />
+                            <button type="button" onClick={() => removeTime(date, index)}>Eliminar Hora</button>
+                          </div>
+                        ))}
+                        <button type="button" className="añadirhora_servicios" onClick={() => addTime(date)}>Añadir Hora</button>
+                      </div>
+                    </div>
+                  ))}
+                </p>
+              </form>
+            </div>
           </div>
-          <Calendar
-            localizer={localizer}
-            events={events}
-            startAccessor="start"
-            endAccessor="end"
-            style={{ height: 500, margin: "50px" }}
-          />
-        </div>
-      </div>
-      <div className='titulo-add-service'>
-      <h2>Añadir Servicio</h2></div>
-      <div className="add-service-container">
-      
-        <p>Nombre: 
-          <input
-            type="text"
-            value={newService.name_servicio}
-            onChange={(e) => setNewService({ ...newService,nombre_servicio: e.target.value })}
-          />
-        </p>
-        <p>Descripción: 
-          <input
-            type="text"
-            value={newService.descripcion}
-            onChange={(e) => setNewService({ ...newService, descripcion: e.target.value })}
-          />
-        </p>
-        <p>Duración: 
-          <input
-            type="text"
-            value={newService.duracion}
-            onChange={(e) => setNewService({ ...newService, duracion: e.target.value })}
-          />
-        </p>
-        <p>Precio: 
-          <input
-            type="number"
-            value={newService.precio}
-            onChange={(e) => setNewService({ ...newService, precio: e.target.value })}
-          />
-        </p>
-        <button className="handleAddService" onClick={handleAddService}>Añadir Servicio</button>
-      </div>
+        )}
 
-      {modalOpen && (
-        <Modal>
-          <div className="modal-content">
-            <h2>{editableService ? 'Editar Servicio' : 'Ver Servicio'}</h2>
-            {editableService && (
-              <div className="modal-fields">
-                <p>ID: {editableService.id_servicios}</p>
-                <p>Nombre: 
-                  <input
-                    type="text"
-                    value={editableService.nombre_servicio}
-                    onChange={(e) => setEditableService({ ...editableService, nombre_servicio: e.target.value })}
-                  />
-                </p>
-                <p>Descripción: 
-                  <input
-                    type="text"
-                    value={editableService.descripcion}
-                    onChange={(e) => setEditableService({ ...editableService, descripcion: e.target.value })}
-                  />
-                </p>
-                <p>Duración: 
-                  <input
-                    type="text"
-                    value={editableService.duracion}
-                    onChange={(e) => setEditableService({ ...editableService, duracion: e.target.value })}
-                  />
-                </p>
-                <p>Precio: 
-                  <input
-                    type="number"
-                    value={editableService.precio}
-                    onChange={(e) => setEditableService({ ...editableService, precio: e.target.value })}
-                  />
-                </p>
-                <button onClick={handleServiceUpdate}>Actualizar</button>
-              </div>
-            )}
-            <button onClick={handleModalClose}>Cerrar</button>
-          </div>
-        </Modal>
-      )}
+        <div className='actualizar_horario_servicio'>
+          <button className='btn-flotante' onClick={handleUpdateAll}>Actualizar</button>
+        </div>
+
+        <div className='titulo-add-service'>
+          <h2>Añadir Servicio</h2>
+        </div>
+        <div className="add-service-container">
+          <p>Nombre:
+            <input
+              type="text"
+              value={newService.nombre_servicio}
+              onChange={(e) => setNewService({ ...newService, nombre_servicio: e.target.value })}
+            />
+          </p>
+          <p>Descripción:
+            <input
+              type="text"
+              value={newService.descripcion}
+              onChange={(e) => setNewService({ ...newService, descripcion: e.target.value })}
+            />
+          </p>
+          <p>Duración:
+            <input
+              type="text"
+              value={newService.duracion}
+              onChange={(e) => setNewService({ ...newService, duracion: e.target.value })}
+            />
+          </p>
+          <p>Precio:
+            <input
+              type="number"
+              value={newService.precio}
+              onChange={(e) => setNewService({ ...newService, precio: e.target.value })}
+            />
+          </p>
+          <button className="handleAddService" onClick={handleAddService}>Añadir Servicio</button>
+        </div>
+
+        {modalOpen && (
+          <Modal>
+            <div className="modal-content">
+              <h2>{editableService ? 'Editar Servicio' : 'Ver Servicio'}</h2>
+              {editableService && (
+                <div className="modal-fields">
+                  <p>ID: {editableService.id_servicios}</p>
+                  <p>Nombre:
+                    <input
+                      type="text"
+                      value={editableService.nombre_servicio}
+                      onChange={(e) => setEditableService({ ...editableService, nombre_servicio: e.target.value })}
+                    />
+                  </p>
+                  <p>Descripción:
+                    <input
+                      type="text"
+                      value={editableService.descripcion}
+                      onChange={(e) => setEditableService({ ...editableService, descripcion: e.target.value })}
+                    />
+                  </p>
+                  <p>Duración:
+                    <input
+                      type="text"
+                      value={editableService.duracion}
+                      onChange={(e) => setEditableService({ ...editableService, duracion: e.target.value })}
+                    />
+                  </p>
+                  <p>Precio:
+                    <input
+                      type="number"
+                      value={editableService.precio}
+                      onChange={(e) => setEditableService({ ...editableService, precio: e.target.value })}
+                    />
+                  </p>
+                  <button onClick={handleServiceUpdate}>Actualizar</button>
+                </div>
+              )}
+              <button onClick={handleModalClose}>Cerrar</button>
+            </div>
+          </Modal>
+        )}
+      </div>
     </Container>
   );
 }
@@ -241,25 +380,4 @@ const Modal = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  .modal-content {
-    background: #fcebf2;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 500px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .modal-fields input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
 `;
-
-

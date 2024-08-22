@@ -125,14 +125,59 @@ body {
   font-weight: normal;
 }
 
-.Calendario_contenudo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Calendario */
+.react-calendar {
+  width: 100%;
+  max-width: 100%;
   background-color: #ffffff;
-  padding: 20px;
+  border: 1px solid #c98695;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.react-calendar__tile {
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.react-calendar__tile--active {
+  background-color: #c98695;
+  color: #fff;
+}
+
+.react-calendar__tile--hasActive {
+  background-color: #c98695;
+  color: #fff;
+}
+
+.selected-date {
+  background-color: #c98695 !important;
+  color: #fff !important;
+
+}
+
+.selected-date > abbr {
+  background-color: #c98695 !important;
+  color: #fff !important;
+  
+}
+
+/* Estilo para las fechas seleccionadas en la vista previa */
+.datosfecha {
+  background-color: #fcebf2;
+  border: 1px solid #c98695;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.fecha-seleccionada {
+  display: block;
+  font-size: 20px;
+  color: #000;
+}
+
+.fecha-seleccionada + .fecha-seleccionada {
+  margin-top: 5px;
 }
 
 /* Estilos del Modal */
@@ -213,4 +258,86 @@ body {
   font-family: "Playfair Display", serif;
   text-align: center;
   margin-top: 1%; 
+}
+
+.btn-flotante {
+	font-size: 16px; /* Cambiar el tamaño de la tipografia */
+	text-transform: uppercase; /* Texto en mayusculas */
+	font-weight: bold; /* Fuente en negrita o bold */
+	color: #000000; /* Color del texto */
+	border-radius: 5px; /* Borde del boton */
+	letter-spacing: 2px; /* Espacio entre letras */
+	background-color: #fcebf2; /* Color de fondo */
+	padding: 18px 30px; /* Relleno del boton */
+	position: fixed;
+	bottom: 40px;
+	right: 40px;
+	transition: all 300ms ease 0ms;
+	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+	z-index: 99;
+}
+.btn-flotante:hover {
+	background-color: #c98695; /* Color de fondo al pasar el cursor */
+  color: #ffffff;
+	box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.3);
+	transform: translateY(-7px);
+}
+@media only screen and (max-width: 600px) {
+ 	.btn-flotante {
+		font-size: 14px;
+		padding: 12px 20px;
+		bottom: 20px;
+		right: 20px;
+	}
+}
+
+.calendario-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.selected-date {
+  background-color: #007bff;
+  color: white;
+  border-radius: 50%;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.escogerhora input[type="time"] {
+  margin: 0.5rem 0;
 }
