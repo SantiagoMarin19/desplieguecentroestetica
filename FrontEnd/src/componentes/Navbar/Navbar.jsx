@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import "./Navbar.css";
 import { NavLink } from 'react-router-dom';
+import { useModal } from '../modal/ContextModal';
 
 export const Navbar = ({ token, handleLogout }) => {
+    const { openModal } = useModal();
     const [showLogout, setShowLogout] = useState(false);
     const [userName, setUserName] = useState('');
 
@@ -60,7 +62,7 @@ export const Navbar = ({ token, handleLogout }) => {
                                         SERVICIOS
                                     </NavLink>
                                 </li>
-                              
+
                                 <li className="nav-item">
                                     <NavLink to="/CitaPend" className="nav-link">
                                         CITAS
@@ -71,20 +73,23 @@ export const Navbar = ({ token, handleLogout }) => {
                                         NOSOTROS
                                     </NavLink>
                                 </li>
-                                
+
                             </ul>
                         </div>
                         <div className='iniciosesion'>
                             {!token && !userName ? (
                                 <li className="nav-item">
-                                    <NavLink to="/loginsupa" className="nav-link">
+                                    <NavLink to="/loginsupa" className="nav-link" onClick={(e) => {
+                                        e.preventDefault(); 
+                                        openModal(); 
+                                    }}>
                                         Iniciar Sesion
                                     </NavLink>
                                 </li>
                             ) : (
                                 <div className='iniciosesion-content'>
                                     <div className='iniciosesion-name' onClick={toggleLogout}>
-                                    <box-icon type='solid' name='user-circle'></box-icon>
+                                        <box-icon type='solid' name='user-circle'></box-icon>
                                         <span className="nav-link">
                                             {userName}
                                         </span>

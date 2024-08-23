@@ -26,6 +26,8 @@ import { VistaServicios } from './pages/VistaServicios';
 import Agendamiento from './componentes/Agendamiento/Agendamiento';
 import CitaPend from './pages/CitasPendientes';
 import CitasPendientes from './componentes/CitasPendientes/CitasPendientes';
+import { ModalProvider } from './componentes/modal/ContextModal';
+import AppModal from './componentes/modal/Modalinicio';
 
 function App() {
   const [token, setToken] = useState(null);
@@ -48,19 +50,22 @@ function App() {
     return (
       <>
         <Pageloader />
-        <Routes>
-          <Route path="/" element={<Home token={token} />} />
-          <Route path='/Facturacion' element={<Facturaelectronica token={token} />} />
-          <Route path="/loginsupa" element={<LoginUser setToken={setToken} />} />
-          <Route path='/Registrar' element={<SignUp />} />
-          <Route path="/servicios" element={<Servicios token={token} />} />
-          <Route path="/VistaDetalle" element={<VistaServicios token={token} />} />
-          <Route path="/CitaPend" element={<CitaPend />} />
-          <Route path="/acerca" element={<Acerca_de token={token} />} />
-          <Route path="/politicas" element={<Condiciones token={token} />} />
-          <Route path="/Agendarcita" element={<Agendar token={token}/>} />
-          <Route path='/Facturacion' element={<Facturaelectronica token={token} />} />
-        </Routes>
+        <ModalProvider>
+          <Routes>
+            <Route path="/" element={<Home token={token} />} />
+            <Route path='/Facturacion' element={<Facturaelectronica token={token} />} />
+            <Route path="/loginsupa" element={<LoginUser setToken={setToken} />} />
+            <Route path='/Registrar' element={<SignUp />} />
+            <Route path="/servicios" element={<Servicios token={token} />} />
+            <Route path="/VistaDetalle" element={<VistaServicios token={token} />} />
+            <Route path="/CitaPend" element={<CitaPend />} />
+            <Route path="/acerca" element={<Acerca_de token={token} />} />
+            <Route path="/politicas" element={<Condiciones token={token} />} />
+            <Route path="/Agendarcita" element={<Agendar token={token} />} />
+            <Route path='/Facturacion' element={<Facturaelectronica token={token} />} />
+          </Routes>
+          <AppModal> </AppModal>
+        </ModalProvider>
       </>
     );
   }

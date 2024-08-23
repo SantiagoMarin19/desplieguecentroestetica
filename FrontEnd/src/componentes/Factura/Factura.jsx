@@ -83,10 +83,10 @@ const FacturacionModal = ({ show, onHide, fecha, duracion, idProfesional, servic
             setModalMessage('Su cita ha sido asignada y está en proceso de confirmación.');
             setTimeout(onHide, 4500); 
 
-            setShowSuccessMessage(true); // Muestra el mensaje de éxito
+            setShowSuccessMessage(true); 
             setTimeout(() => {
                 onHide();
-                navigate('/servicios'); // Redirige después de cerrar el modal
+                navigate('/servicios'); 
             }, 2500); 
         }
     };
@@ -118,3 +118,4 @@ const FacturacionModal = ({ show, onHide, fecha, duracion, idProfesional, servic
 };
 
 export default FacturacionModal;
+
