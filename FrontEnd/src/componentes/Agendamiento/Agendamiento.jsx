@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import './Agendamiento.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import supabase from '../../supabase/supabaseconfig';
+import FacturacionModal from '../Factura/Factura';
 
 const getDiaSemana = (date) => {
     const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -18,6 +19,7 @@ export const Agendamiento = () => {
     const [franjasHorarias, setFranjasHorarias] = useState([]);
     const [date, setDate] = useState(new Date());
     const [userId, setUserId] = useState(null);
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -62,7 +64,6 @@ export const Agendamiento = () => {
             if (selectedProfesional && date) {
                 const selectedDate = date.toISOString().split('T')[0];
 
-                // Consulta todas las citas para el profesional seleccionado en la fecha seleccionada
                 const { data, error } = await supabase
                     .from('cita')
                     .select('franja_horaria')
@@ -102,6 +103,7 @@ export const Agendamiento = () => {
 
     const navigate = useNavigate();
     const { servicio } = useLocation().state || { servicio: { nombre_servicio: "Servicio no especificado", precio: "$0.00" } };
+    
     const handleReservarClick = (event) => {
         event.preventDefault();
     
@@ -109,19 +111,8 @@ export const Agendamiento = () => {
             window.alert('Por favor, selecciona un profesional y una hora.');
             return;
         }
-    
-        navigate('/Facturacion', {
-            state: {
-                fecha: date,
-                duracion: selectedHora, 
-                idProfesional: selectedProfesional, 
-                servicio: {
-                    id_servicios: servicio.id_servicios, 
-                    nombre_servicio: servicio.nombre_servicio,
-                    precio: servicio.precio
-                }
-            }
-        });
+
+        setShowModal(true); 
     };
 
     return (
@@ -192,7 +183,10 @@ export const Agendamiento = () => {
                         </tbody>
                     </table>
 
-                    <div className='TotalCuadros'> HORARIOS
+                    <div
+
+
+                     className='TotalCuadros'> HORARIOS
                         {franjasHorarias.map(franja => (
                             <div
                                 key={franja.id_horario}
@@ -204,7 +198,6 @@ export const Agendamiento = () => {
                             </div>
                         ))}
                     </div>
-
                 </div>
             </div>
             <div className='partright'>
@@ -215,16 +208,35 @@ export const Agendamiento = () => {
                 />
                 <div className='escogerhora'>
                     <form action='#' method='post'>
-
                         <p className='datosfecha'>
                             {getDiaSemana(date)} {date.getDate()} {date.toLocaleDateString('default', { month: 'short' })} {date.getFullYear()}
                         </p>
-
                     </form>
                 </div>
+                
             </div>
+
+          
+            <FacturacionModal 
+            
+                show={showModal} // Usar 'show' en lugar de 'showModal'
+                onHide={() => setShowModal(false)} // Asegúrate de que 'onHide' esté configurado
+                fecha={date}
+                duracion={selectedHora}
+                idProfesional={selectedProfesional}
+                servicio={servicio}
+                
+                
+                idUsuario={userId} // Asegúr
+            />
+            
         </div>
+        
+        
     );
+    console.log(showModal)
+
+    
 };
 
 export default Agendamiento;
