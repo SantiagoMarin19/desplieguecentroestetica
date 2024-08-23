@@ -19,6 +19,7 @@ export const Agendamiento = () => {
     const [date, setDate] = useState(new Date());
     const [userId, setUserId] = useState(null);
 
+    // Fetch user and professionals data
     useEffect(() => {
         const fetchUser = async () => {
             const { data, error } = await supabase.auth.getUser();
@@ -33,7 +34,6 @@ export const Agendamiento = () => {
             const { data, error } = await supabase
                 .from('profesional')
                 .select('id_profesional, nombre_profesional');
-
             if (error) {
                 console.error('Error fetching profesionales:', error);
             } else {
@@ -41,10 +41,19 @@ export const Agendamiento = () => {
             }
         };
 
+        fetchUser();
+        fetchProfesionales();
+    }, []);
+
+    // Fetch franjas horarias and ocupados whenever date or profesional changes
+    useEffect(() => {
         const fetchFranjasHorarias = async () => {
+            const selectedDate = date.toISOString().split('T')[0];
             const { data, error } = await supabase
                 .from('franja_horario')
-                .select('id_horario, horario');
+                .select('id_horario, hora, estado')
+                .eq('fecha', selectedDate);
+
             if (error) {
                 console.error('Error fetching franjas horarias:', error);
             } else {
@@ -52,10 +61,8 @@ export const Agendamiento = () => {
             }
         };
 
-        fetchUser();
-        fetchProfesionales();
         fetchFranjasHorarias();
-    }, []);
+    }, [date]);
 
     useEffect(() => {
         const fetchHorariosOcupados = async () => {
@@ -86,12 +93,12 @@ export const Agendamiento = () => {
         setHorariosOcupados([]);
     };
 
-    const handleHoraClick = (horario, franjaId) => {
+    const handleHoraClick = (hora, franjaId) => {
         if (isOcupado(franjaId)) {
             return;
         }
-        setSelectedHora(horario);
-        localStorage.setItem('selectedHora', horario);
+        setSelectedHora(hora);
+        localStorage.setItem('selectedHora', hora);
     };
 
     const isOcupado = (franjaId) => {
@@ -100,22 +107,23 @@ export const Agendamiento = () => {
 
     const navigate = useNavigate();
     const { servicio } = useLocation().state || { servicio: { nombre_servicio: "Servicio no especificado", precio: "$0.00" } };
+
     const handleReservarClick = (event) => {
         event.preventDefault();
-    
+
         if (!selectedProfesional || !selectedHora) {
             window.alert('Por favor, selecciona un profesional y una hora.');
             return;
         }
-    
+
         navigate('/Facturacion', {
             state: {
-                fecha: date, 
-                duracion: selectedHora, 
-                idProfesional: selectedProfesional, 
+                fecha: date,
+                duracion: selectedHora,
+                idProfesional: selectedProfesional,
                 servicio: {
-                    id_servicios: servicio.id_servicios, 
-                    nombre_servicio: servicio.nombre_servicio, 
+                    id_servicios: servicio.id_servicios,
+                    nombre_servicio: servicio.nombre_servicio,
                     precio: servicio.precio
                 }
             }
@@ -143,11 +151,11 @@ export const Agendamiento = () => {
                             </select>
                         </div>
                     </div>
-                    
+
                     <div className='hr'>
                         <hr />
                     </div>
-                    
+
                     <div className='titulo_calendario_escoger_fecha'>
                         <h3>Escoge La fecha</h3>
                         <p>Selecciona el día de tu cita</p>
@@ -160,12 +168,8 @@ export const Agendamiento = () => {
                                 onChange={setDate} 
                                 value={date} 
                                 tileDisabled={({ date, view }) => view === 'month' && date < new Date()} 
-                               
                             />
-                             {/* <p className='datosfecha'>
-                                {getDiaSemana(date)} {date.getDate()} {date.toLocaleDateString('default', { month: 'short' })} {date.getFullYear()}
-                            </p> */}
-                            
+
                             <div className='horarios-container'>
                                 <div className='titulo_horarios'>
                                     <h3>Horarios Disponibles</h3>
@@ -175,9 +179,9 @@ export const Agendamiento = () => {
                                         <div
                                             key={franja.id_horario}
                                             className={`cuadros ${isOcupado(franja.id_horario) ? 'ocupado' : 'libre'}`}
-                                            onClick={() => handleHoraClick(franja.horario, franja.id_horario)}
+                                            onClick={() => handleHoraClick(franja.hora, franja.id_horario)}
                                             style={{ cursor: isOcupado(franja.id_horario) ? 'not-allowed' : 'pointer' }}>
-                                            {franja.horario}
+                                            {franja.hora}
                                         </div>
                                     ))}
                                 </div>
