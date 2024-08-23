@@ -37,7 +37,7 @@ export const Agendamiento = () => {
             if (error) {
                 console.error('Error fetching profesionales:', error);
             } else {
-                setProfesionales(data);
+                setProfesionales(data || []);
             }
         };
 
@@ -48,7 +48,7 @@ export const Agendamiento = () => {
             if (error) {
                 console.error('Error fetching franjas horarias:', error);
             } else {
-                setFranjasHorarias(data);
+                setFranjasHorarias(data || []);
             }
         };
 
@@ -61,18 +61,16 @@ export const Agendamiento = () => {
         const fetchHorariosOcupados = async () => {
             if (selectedProfesional && date) {
                 const selectedDate = date.toISOString().split('T')[0];
-
-                // Consulta todas las citas para el profesional seleccionado en la fecha seleccionada
                 const { data, error } = await supabase
                     .from('cita')
-                    .select('franja_horaria')
+                    .select('franja_horario')
                     .eq('profesional', selectedProfesional)
                     .eq('fecha', selectedDate);
 
                 if (error) {
                     console.error('Error fetching horarios ocupados:', error);
                 } else {
-                    setHorariosOcupados(data.map(cita => cita.franja_horaria));
+                    setHorariosOcupados(data.map(cita => cita.franja_horario) || []);
                 }
             }
         };
@@ -112,12 +110,12 @@ export const Agendamiento = () => {
     
         navigate('/Facturacion', {
             state: {
-                fecha: date,
+                fecha: date, 
                 duracion: selectedHora, 
                 idProfesional: selectedProfesional, 
                 servicio: {
                     id_servicios: servicio.id_servicios, 
-                    nombre_servicio: servicio.nombre_servicio,
+                    nombre_servicio: servicio.nombre_servicio, 
                     precio: servicio.precio
                 }
             }
@@ -125,102 +123,114 @@ export const Agendamiento = () => {
     };
 
     return (
-        <div className='todoingreso'>
-            <div className='partleft'>
-                <div className='escogerprof'>
-                    <form action='#' method='post'>
-                        <label className='escprof' htmlFor='prof'>
-                            <h3>Profesionales</h3>
-                        </label>
-                        <select
-                            name='profesionales'
-                            id='prof'
-                            onChange={handleProfesionalChange}
-                            value={selectedProfesional}
-                        >
-                            <option value=''>--Escoge profesional--</option>
-                            {profesionales.map(profesional => (
-                                <option
-                                    key={profesional.id_profesional}
-                                    value={profesional.id_profesional}
-                                >
-                                    {profesional.nombre_profesional}
-                                </option>
-                            ))}
-                        </select>
-                    </form>
-                </div>
-                <div className='partetabla'>
-                    <h3 className='resumen'>Agendamiento</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th colSpan={2} className='colorros'>
-                                    {date.getDate()} {date.toLocaleDateString('default', { month: 'short' })} {date.getFullYear()} - {selectedHora}
-                                </th>
-                            </tr>
-                            <tr>
-                                <th>Profesional</th>
-                                <td>{selectedProfesional}</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>Servicio</th>
-                                <td>{servicio.nombre_servicio}</td>
-                            </tr>
-                            <tr>
-                                <th>Duración</th>
-                                <td>{selectedHora}</td>
-                            </tr>
-                            <tr>
-                                <th>Costo</th>
-                                <td>
-                                    <h5><b>{new Intl.NumberFormat('es-CO', {
-                                        style: 'currency',
-                                        currency: 'COP',
-                                        minimumFractionDigits: 0,
-                                        maximumFractionDigits: 2
-                                    }).format(servicio.precio)}</b></h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colSpan={2} className='colorros'>
-                                    <button className='botonreservar' onClick={handleReservarClick}>Reservar</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <div className='agendamiento-container'>
+            <div className='header_agendamiento'>
+                <h3>Agenda Tu Cita</h3>
+            </div>
 
-                    <div className='TotalCuadros'> HORARIOS
-                        {franjasHorarias.map(franja => (
-                            <div
-                                key={franja.id_horario}
-                                className={`cuadros ${isOcupado(franja.id_horario) ? 'ocupado' : 'libre'}`}
-                                onClick={() => handleHoraClick(franja.horario, franja.id_horario)}
-                                style={{ cursor: isOcupado(franja.id_horario) ? 'not-allowed' : 'pointer' }}
-                            >
-                                {franja.horario}
-                            </div>
-                        ))}
+            <div className='main-content'>
+                <div className='left-section'>
+                    <div className='seleccion-container'>
+                        <h3>Elige un Profesional</h3>
+                        <div className='select_contenedor_profesionales'>
+                            <select className="select_profesional" onChange={handleProfesionalChange} value={selectedProfesional}>
+                                <option value=''>--Escoge profesional--</option>
+                                {profesionales.map(profesional => (
+                                    <option key={profesional.id_profesional} value={profesional.id_profesional}>
+                                        {profesional.nombre_profesional}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div className='hr'>
+                        <hr />
+                    </div>
+                    
+                    <div className='titulo_calendario_escoger_fecha'>
+                        <h3>Escoge La fecha</h3>
+                        <p>Selecciona el día de tu cita</p>
                     </div>
 
+                    <div className='seccion_calendario_escoger_fecha'>
+                        <div className='calendario-container'>
+                            <Calendar 
+                                className="react_calendar_fecha" 
+                                onChange={setDate} 
+                                value={date} 
+                                tileDisabled={({ date, view }) => view === 'month' && date < new Date()} 
+                               
+                            />
+                             {/* <p className='datosfecha'>
+                                {getDiaSemana(date)} {date.getDate()} {date.toLocaleDateString('default', { month: 'short' })} {date.getFullYear()}
+                            </p> */}
+                            
+                            <div className='horarios-container'>
+                                <div className='titulo_horarios'>
+                                    <h3>Horarios Disponibles</h3>
+                                </div>
+                                <div className='horarios-grid'>
+                                    {franjasHorarias.map(franja => (
+                                        <div
+                                            key={franja.id_horario}
+                                            className={`cuadros ${isOcupado(franja.id_horario) ? 'ocupado' : 'libre'}`}
+                                            onClick={() => handleHoraClick(franja.horario, franja.id_horario)}
+                                            style={{ cursor: isOcupado(franja.id_horario) ? 'not-allowed' : 'pointer' }}>
+                                            {franja.horario}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div className='partright'>
-                <Calendar
-                    onChange={setDate}
-                    value={date}
-                    tileDisabled={({ date, view }) => view === 'month' && date < new Date()}
-                />
-                <div className='escogerhora'>
-                    <form action='#' method='post'>
 
-                        <p className='datosfecha'>
-                            {getDiaSemana(date)} {date.getDate()} {date.toLocaleDateString('default', { month: 'short' })} {date.getFullYear()}
-                        </p>
-
-                    </form>
+                <div className='right-section'>
+                    <div className='Resumendecompra_Agendamiento'>
+                        <div className='titulo_Resumendecompra_Agendamiento'>
+                            <h3>Resumen de Compra</h3>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th colSpan={2}>
+                                        {date.getDate()} {date.toLocaleDateString('default', { month: 'short' })} {date.getFullYear()} - {selectedHora}
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>Profesional</th>
+                                    <td>{selectedProfesional}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>Servicio</th>
+                                    <td>{servicio.nombre_servicio}</td>
+                                </tr>
+                                <tr>
+                                    <th>Duración</th>
+                                    <td>{selectedHora}</td>
+                                </tr>
+                                <tr>
+                                    <th>Costo</th>
+                                    <td>
+                                        <h5><b>{new Intl.NumberFormat('es-CO', {
+                                            style: 'currency',
+                                            currency: 'COP',
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 2
+                                        }).format(servicio.precio)}</b></h5>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colSpan={2}>
+                                        <button onClick={handleReservarClick}>Reservar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

@@ -55,11 +55,12 @@ const CitasPendientes = ({ token }) => {
 
     return (
         <Container>
-            <h3>Tus Citas Pendientes  </h3>
+            <div className='titulo_citas'>
+            <h3>Tus Citas Pendientes  </h3></div>
             
             {appointments.length === 0 ? (
                 <p>No tienes citas programadas. Porfavor inicia session para verificar tus citas </p>
-            ) : (
+            ) : ( 
                 <ListGroup>
                     {appointments.map((appointment, index) => (
                         <ListGroup.Item key={index}>
@@ -73,6 +74,8 @@ const CitasPendientes = ({ token }) => {
                 </ListGroup>
             )}
         </Container>
+
+       
     );
 };
 
