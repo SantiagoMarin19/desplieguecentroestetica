@@ -1,0 +1,41 @@
+.tituloacercade {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    position: relative; /* Para que el pseudo-elemento se posicione correctamente */
+    overflow: hidden;   /* Para evitar que el pseudo-elemento se salga del contenedor */
+}
+
+.tituloacercade::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    background-image: url('wave.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 150%;
+    transform: rotate(180deg);
+    z-index: -1; /* Para que el fondo esté detrás del contenido */
+}
+
+
+ 
+.acercadenosotros {
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.quienessomos {
+    font-family: 'Urbanist';
+    text-decoration: underline;
+}
+
+.sobrenosotros p {
+    font-family: system-ui;
+    font-size: 18px;
+    padding-bottom: 30px;
+}
+

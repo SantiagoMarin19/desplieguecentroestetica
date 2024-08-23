@@ -60,6 +60,10 @@ function App() {
           <Route path="/politicas" element={<Condiciones token={token} />} />
           <Route path="/Agendarcita" element={<Agendar token={token}/>} />
           <Route path='/Facturacion' element={<Facturaelectronica token={token} />} />
+          <Route path='/Recover' element={<Recuperar/>}/>
+          <Route path='/Recover2' element={<Recuperar3/>}/>
+          <Route path='/Recover3' element={<Recuperar4/>}/>
+
         </Routes>
       </>
     );
