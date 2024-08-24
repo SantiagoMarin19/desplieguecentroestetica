@@ -6,10 +6,12 @@ export default function Nosotros() {
         <div>
             <div className='tituloacercade'>
                 <h1 className='acercadenosotros'>Acerca de Nosotros </h1>
+                
             </div>
 
             <div className='sobrenosotros'>
                 <div className='titulosobrenosotros'><h2 className='quienessomos'> Quienes somos </h2></div>
+                <div class="linea"></div>
                 <p>
                     En Natalia Salazar Artist,
                     nos enorgullece ser un centro de estética facial dedicado a realzar la belleza natural de nuestras clientas. Ubicados en la hermosa ciudad de Palmira, en el barrio de Calle 33b #7-53,

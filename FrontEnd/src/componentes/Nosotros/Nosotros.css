@@ -28,14 +28,39 @@
     font-family: sans-serif;
 }
 
-.quienessomos {
-    font-family: 'Urbanist';
-    text-decoration: underline;
-}
+
 
 .sobrenosotros p {
     font-family: system-ui;
     font-size: 18px;
     padding-bottom: 30px;
+}
+
+.quienessomos {
+    font-family: 'Urbanist';
+    text-decoration: underline;
+    padding: 20px;
+    width: 15%;
+    background-color: #FCEBF2;
+    border-radius: 0% 50% 50% 0%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative; /* Para que la .linea pueda estar por encima */
+    z-index: 1; /* Asegura que este elemento esté por debajo de .linea */
+}
+
+.linea {
+    border-top: 1px solid rgb(255, 0, 0);
+    height: 2px;
+    max-width: 200px;
+    padding: 0;
+    margin: 50px auto 0 auto;
+    position: absolute; /* Posiciona la .linea para que esté encima */
+    top: 0; /* Ajusta según sea necesario */
+    left: 50%; /* Centra la línea */
+    transform: translateX(-50%); /* Centra la línea completamente */
+    z-index: 2; /* Asegura que la .linea esté por encima de .quienessomos */
 }
 
