@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import supabase from '../../supabase/supabaseconfig';
+import "./CitasPendientes.css"
 import { ListGroup, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
