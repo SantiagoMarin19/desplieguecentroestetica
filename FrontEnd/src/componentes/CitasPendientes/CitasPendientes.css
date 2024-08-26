@@ -48,7 +48,7 @@
     width: 80%;
     font-weight: bold;
     margin-top: 10px;
-    font-size: 2em;
+    font-size: 35px;
     font-family: "Urbanist", sans-serif;
   }
   .contenedorsubtitulo {
@@ -56,7 +56,47 @@
     font-weight: bold;
     color: rgb(85, 84, 84);
     font-family: "Urbanist", sans-serif;
+    font-size: 20px;
   }
   .citaspendientestitulo {
     padding-bottom: 3%;
 }
+
+@media (max-width: 1400px) {
+    .contenedorTitulo {
+      font-size: 30px
+    }.contenedorsubtitulo {
+        font-size: 20px;
+      }}
+
+    @media (max-width: 1200px) {
+        .contenedorTitulo {
+          font-size: 26px
+        }
+        .contenedorsubtitulo {
+            font-size: 15px;
+          }}
+          @media (max-width: 500px) {
+            .cartacompletacitas {
+              display: flex;
+              flex-direction: column;
+            }
+            .contenedorcarta {
+                width: 100%;
+            }
+            }
+            @media (max-width: 990px) {
+                .contenedorTitulo {
+                    font-size: 40px
+                  }
+                  .contenedorsubtitulo {
+                    font-size: 25px;
+                  }
+                  .cartacompletacitas {
+                    display: flex;
+                    flex-direction: column;
+                  }
+                  .contenedorcarta {
+                    width: 100%;
+                  }
+                }
