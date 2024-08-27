@@ -27,6 +27,7 @@ const LoginUser = ({ closeModal }) => {
         e.preventDefault();
 
         try {
+            
             const { data, error } = await supabase.auth.signInWithPassword({
                 email: formData.email,
                 password: formData.password,
@@ -37,10 +38,9 @@ const LoginUser = ({ closeModal }) => {
                 throw error;
             }
 
-            // Redirect to the page where the user was before login
             const redirectTo = location.state?.from || '/';
             navigate(redirectTo);
-            closeModal(); // Close the modal after successful login
+            closeModal(); 
         } catch (error) {
             console.error("Caught error:", error);
             alert(error.message);
@@ -82,7 +82,8 @@ const LoginUser = ({ closeModal }) => {
             </form>
             <div className='redireccionamiento'>
                 <div className='poncuenta'>¿No tienes cuenta?</div>
-                <Link to='/Registrar'>Regístrate</Link>
+                <Link to="/Registrar" onClick={() => openModal('SignUp')}>Regístrate</Link>
+
             </div>
         </div>
     );

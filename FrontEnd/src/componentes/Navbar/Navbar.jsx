@@ -26,19 +26,16 @@ export const Navbar = ({ token, handleLogout }) => {
     };
 
     const handleLogoutClick = () => {
-        // Eliminar token y nombre del usuario de localStorage
         localStorage.removeItem('userName');
         localStorage.removeItem("sb-bxluhldahxrqbukrqcdy-auth-token");
         window.location.reload();
 
-        // Limpiar el estado local
         setUserName('');
         setShowLogout(false);
 
-        // Llamar a la función de cierre de sesión pasada como prop
+ 
         handleLogout();
 
-        // Refrescar la página o redirigir al usuario
         window.location.reload();
     };
 

@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import supabase from '../supabase/supabaseconfig';
 import flechaizq from "../assets/images/decoración.png";
 import or from "../assets/images/OR.png";
 import flechader from "../assets/images/decor.png";
 import "./Estilos/SignUp.css";
 
-const SignUp = () => {
+const SignUp = ({ closeModal }) => {
+  let navigate = useNavigate();
+  let location = useLocation(); // Use useLocation to capture the state
+  
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -84,7 +87,8 @@ const SignUp = () => {
           <div className='deco3'><img className="img-decor" src={flechader} alt="Decoración derecha" /></div>
         </div>
       </form>
-      <div className='poncuenta'>Ya tienes una cuenta?<Link to='/loginsupa'>Inicia sesión</Link></div>
+      <div className='poncuenta'>Ya tienes una cuenta?<Link to="/loginsupa" onClick={() => openModal('LoginUser')}>Inicia sesión</Link>
+      </div>
     </div>
   );
 }
