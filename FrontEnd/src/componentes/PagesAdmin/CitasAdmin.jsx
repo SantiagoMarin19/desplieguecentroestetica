@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Pagination from './Pagination';
-import "./CitasAdmin.css"
+import "./CitasAdmin.css";
 import supabase from '../../supabase/supabaseconfig';
 
 const Citas = ({ token }) => {
@@ -14,7 +14,7 @@ const Citas = ({ token }) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      if (token && token.user) {
+      if (token?.user) {
         setUser(token.user);
       } else {
         const { data, error } = await supabase.auth.getUser();
@@ -35,16 +35,8 @@ const Citas = ({ token }) => {
         const { data, error } = await supabase
           .from('cita')
           .select(`
-            fecha,
-            duracion,
-            estado,
-            profesional (
-              nombre_profesional
-            ),
-            servicio (
-              nombre_servicio
-            )
-          `)
+            fecha, duracion, estado, profesional 
+            ( nombre_profesional ), servicio ( nombre_servicio )`)
           .eq('usuarios', user.id);
 
         if (error) {
@@ -86,11 +78,12 @@ const Citas = ({ token }) => {
     if (window.confirm(`¿Estás seguro de aprobar la cita de ${cita.usuarios} para el ${cita.fecha}?`)) {
       try {
         const { data, error } = await supabase
-          .from('citas')
+          .from('cita') 
           .update({ estado: 'Abono' })
           .eq('id_cita', cita.id_cita);
         if (error) throw error;
         console.log('Cita aprobada correctamente');
+        setCitas(citas.map(c => c.id_cita === cita.id_cita ? { ...c, estado: 'Abono' } : c));
       } catch (error) {
         console.error('Error al aprobar cita:', error);
       }
@@ -101,51 +94,34 @@ const Citas = ({ token }) => {
 
   return (
     <Container>
-      <div className="titulo_Citas_Admin">
-        <h1>Sección Citas</h1>
-      </div>
+      <div className='titulo_Citas_Admin'>
+      <h1>Citas Administrador</h1></div>
+      <div className='Contenido_Citas_Admin'>
+      <hr />
+      <p>En esta sección encontraras todas las citas apartadas (pendientes por confirmación) por los clientes.</p>
+      <hr />
+      <p> <b>Nota:</b> Confirma el Estado de la cita por medio del Checklist <b>SOLO</b> sí la cita fue abonada exitosamente con el 50%.</p></div>
 
-      <div className="Header">
-        <div className='cliente_Citas_Admin'>
-          <h2>Cliente</h2>
-        </div>
-        <div className='fecha_Citas_Admin'>
-          <h2>Fecha</h2>
-        </div>
-        <div className='hora_Citas_Admin'>
-          <h2>Hora</h2>
-        </div>
-        <div className='duracion_Citas_Admin'>
-          <h2>Duración</h2>
-        </div>
-        <div className='servicio_Citas_Admin'>
-          <h2>Servicio</h2>
-        </div>
-        <div className='estado_Citas_Admin'>
-          <h2>Estado</h2>
-        </div>
-      </div>
-
-      <div className="contenido_header">
-        {currentCitas.map((cita, index) => (
-          <div key={index} className="fila_Cita">
-            <div className="cliente_Admin">
-              <p>{cita.usuarios}</p>
-            </div>
-            <div className="fecha_Admin">
-              <p>{cita.fecha}</p>
-            </div>
-            <div className="hora_Admin">
-              <p>{cita.franja_horaria}</p>
-            </div>
-            <div className="duracion_Admin">
-              <p>{cita.duracion}</p>
-            </div>
-            <div className="servicio_Admin">
-              <p>{cita.servicio}</p>
-            </div>
-            <div className="estado_Admin">
-              <p>
+      <Table>
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Duración</th>
+            <th>Servicio</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentCitas.map((cita, index) => (
+            <tr key={cita.id_cita}>
+              <td>{cita.usuarios}</td>
+              <td>{cita.fecha}</td>
+              <td>{cita.franja_horaria}</td>
+              <td>{cita.duracion}</td>
+              <td>{cita.servicio}</td>
+              <td>
                 <input 
                   type="checkbox" 
                   id={`estado${index}`} 
@@ -155,11 +131,11 @@ const Citas = ({ token }) => {
                   readOnly={cita.estado === 'Abono'}
                 />
                 <label htmlFor={`estado${index}`}>{cita.estado}</label>
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
 
       <Pagination 
         citasPerPage={citasPerPage} 
@@ -177,6 +153,29 @@ const Container = styled.div`
   gap: 20px;
   padding: 20px;
   box-sizing: border-box;
+`;
+
+const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    background-color: #FCEBF2;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  th, td {
+    padding: 1rem;
+    text-align: left;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  th {
+    font-weight: bold;
+  }
 `;
 
 export default Citas;

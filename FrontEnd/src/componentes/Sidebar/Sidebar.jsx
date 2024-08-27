@@ -87,7 +87,7 @@ const linksArray = [
   {
     label: "Citas",
     icon: <AiOutlineApartment />,
-    to: "/CitasAdmin",
+    to: "/AdminCitas",
   },
   {
     label: "Servicios",

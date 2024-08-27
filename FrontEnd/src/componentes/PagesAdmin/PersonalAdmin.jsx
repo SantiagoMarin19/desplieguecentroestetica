@@ -83,6 +83,7 @@ export function PersonalAdmin() {
           <button className="añadir_personal_boton" onClick={addProfesional}>Añadir Profesional</button>
         </div>
       </div>
+      
     </Container>
   );
 }
