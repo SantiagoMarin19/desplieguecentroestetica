@@ -8,7 +8,7 @@ import "./Estilos/Login.css";
 
 const LoginUser = ({ closeModal }) => {
     let navigate = useNavigate();
-    let location = useLocation(); // Use useLocation to capture the state
+    let location = useLocation();
 
     const [formData, setFormData] = useState({
         email: '',
@@ -27,7 +27,6 @@ const LoginUser = ({ closeModal }) => {
         e.preventDefault();
 
         try {
-            
             const { data, error } = await supabase.auth.signInWithPassword({
                 email: formData.email,
                 password: formData.password,
@@ -38,9 +37,13 @@ const LoginUser = ({ closeModal }) => {
                 throw error;
             }
 
+            // Guarda el token y otros datos en sessionStorage
+            sessionStorage.setItem('token', JSON.stringify(data.session.access_token));
+            sessionStorage.setItem('user', JSON.stringify(data.user.user_metadata.full_name));
+
             const redirectTo = location.state?.from || '/';
             navigate(redirectTo);
-            closeModal(); 
+            closeModal();
         } catch (error) {
             console.error("Caught error:", error);
             alert(error.message);
@@ -80,11 +83,14 @@ const LoginUser = ({ closeModal }) => {
                     <div className='deco3'><img className="img-decor" src={flechader} alt="Decoración derecha" /></div>
                 </div>
             </form>
-            <div className='redireccionamiento'>
-                <div className='poncuenta'>¿No tienes cuenta?</div>
-                <Link to="/Registrar" onClick={() => openModal('SignUp')}>Regístrate</Link>
-
+            <div className='poncuenta'>
+                ¿No tienes cuenta?
+                <Link to="/Registrar" onClick={() => openModal('SignUp')}>
+                    Regístrate
+                </Link>
             </div>
+
+
         </div>
     );
 }

@@ -9,7 +9,7 @@ import "./Estilos/SignUp.css";
 const SignUp = ({ closeModal }) => {
   let navigate = useNavigate();
   let location = useLocation(); // Use useLocation to capture the state
-  
+
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -87,8 +87,13 @@ const SignUp = ({ closeModal }) => {
           <div className='deco3'><img className="img-decor" src={flechader} alt="Decoración derecha" /></div>
         </div>
       </form>
-      <div className='poncuenta'>Ya tienes una cuenta?<Link to="/loginsupa" onClick={() => openModal('LoginUser')}>Inicia sesión</Link>
+      <div className='poncuenta'>
+        Ya tienes una cuenta?
+        <Link to="/loginsupa" onClick={() => openModal('LoginUser')}>
+          Inicia sesión
+        </Link>
       </div>
+
     </div>
   );
 }

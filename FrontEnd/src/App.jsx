@@ -10,13 +10,14 @@ import { Agendar } from "./pages/Agendar";
 import { LoadingProvider, useLoading } from './componentes/Animación/Loadingcontext';
 import { ModalProvider, useModal } from './componentes/modal/ContextModal';
 import Modalinicio from './componentes/modal/Modalinicio';
+import ModalRegistro from './componentes/modal/ModalRegistro';
 import Facturaelectronica from './pages/FacturaElectronica';
 import { VistaServicios } from './pages/VistaServicios';
 import CitaPend from './pages/CitasPendientes';
 
 function Main() {
     const { setLoading } = useLoading();
-    const { openModal } = useModal(); // Mueve useModal aquí
+    const { openModal } = useModal();
     const location = useLocation();
 
     useEffect(() => {
@@ -30,7 +31,7 @@ function Main() {
                 <Route path="/" element={<Home />} />
                 <Route path='/Facturacion' element={<Facturaelectronica />} />
                 <Route path='/Registrar' element={<button onClick={() => openModal('SignUp')}>Regístrate</button>} />
-                <Route path="/loginsupa" element={<button onClick={() => openModal('Login')}>Inicia Sesión</button>} />
+                <Route path="/loginsupa" element={<button onClick={() => openModal('LoginUser')}>Inicia Sesión</button>} />
                 <Route path="/servicios" element={<Servicios />} />
                 <Route path="/VistaDetalle" element={<VistaServicios />} />
                 <Route path="/CitaPend" element={<CitaPend />} />
@@ -39,6 +40,7 @@ function Main() {
                 <Route path="/Agendarcita" element={<Agendar />} />
             </Routes>
             <Modalinicio />
+            <ModalRegistro />
         </>
     );
 }

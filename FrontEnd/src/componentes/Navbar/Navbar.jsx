@@ -10,13 +10,9 @@ export const Navbar = ({ token, handleLogout }) => {
 
     useEffect(() => {
         if (token) {
-            const userNameFromToken = token.user.user_metadata.full_name;
-            setUserName(userNameFromToken);
-            localStorage.setItem('userName', userNameFromToken);
-        } else {
-            const savedUserName = localStorage.getItem('userName');
-            if (savedUserName) {
-                setUserName(savedUserName);
+            const fullName = JSON.parse(sessionStorage.getItem('user')) || localStorage.getItem('userName');
+            if (fullName) {
+                setUserName(fullName);
             }
         }
     }, [token]);
@@ -28,14 +24,11 @@ export const Navbar = ({ token, handleLogout }) => {
     const handleLogoutClick = () => {
         localStorage.removeItem('userName');
         localStorage.removeItem("sb-bxluhldahxrqbukrqcdy-auth-token");
-        window.location.reload();
-
+        sessionStorage.removeItem('user');
         setUserName('');
         setShowLogout(false);
 
- 
         handleLogout();
-
         window.location.reload();
     };
 
@@ -59,7 +52,6 @@ export const Navbar = ({ token, handleLogout }) => {
                                         SERVICIOS
                                     </NavLink>
                                 </li>
-
                                 <li className="nav-item">
                                     <NavLink to="/CitaPend" className="nav-link">
                                         CITAS
@@ -70,15 +62,14 @@ export const Navbar = ({ token, handleLogout }) => {
                                         NOSOTROS
                                     </NavLink>
                                 </li>
-
                             </ul>
                         </div>
                         <div className='iniciosesion'>
                             {!token && !userName ? (
                                 <li className="nav-item">
-                                    <NavLink to="/loginsupa" className="nav-link" onClick={(e) => {
+                                    <NavLink to="#" className="nav-link" onClick={(e) => {
                                         e.preventDefault(); 
-                                        openModal(); 
+                                        openModal('login'); // abre el modal de login
                                     }}>
                                         Iniciar Sesion
                                     </NavLink>
