@@ -40,17 +40,17 @@ export function ServiciosAdmin() {
     setSelectedService(service);
     setEditableService(null); // Reset editable service
     setModalOpen(false); // Close modal if open
-
+  
     // Reset service times and selected dates
     setServiceTimes({});
     setSelectedDates([]);
-
-    // Fetch service times for the selected service
+  
+    // Fetch service times for the selected service using nombre_servicio
     const { data, error } = await supabase
-      .from('franja_horaria')
+      .from('franja_horaria_nueva')
       .select('*')
-      .eq('service_id', service.id_servicios);
-
+      .eq('nombre_servicio', service.nombre_servicio);
+  
     if (error) console.error('Error fetching service times:', error);
     else {
       const serviceTimes = data.reduce((acc, item) => {
@@ -138,11 +138,17 @@ export function ServiciosAdmin() {
       setServiceTimes(newServiceTimes);
     }
   };
-
   const handleTimeChange = (date, index, value) => {
     if (selectedService) {
       const dateString = date.toDateString();
       const newServiceTimes = { ...serviceTimes };
+  
+      // Validar si la nueva hora ya existe
+      if (newServiceTimes[dateString].includes(value)) {
+        alert('Esta hora ya está seleccionada.');
+        return;
+      }
+  
       newServiceTimes[dateString][index] = value;
       setServiceTimes(newServiceTimes);
     }
@@ -152,9 +158,17 @@ export function ServiciosAdmin() {
     if (selectedService) {
       const dateString = date.toDateString();
       const newServiceTimes = { ...serviceTimes };
+  
+      // Validar si la hora '00:00' ya está presente
+      if (newServiceTimes[dateString] && newServiceTimes[dateString].includes('00:00')) {
+        alert('Esta hora ya está seleccionada.');
+        return;
+      }
+  
       if (!newServiceTimes[dateString]) {
         newServiceTimes[dateString] = [];
       }
+  
       newServiceTimes[dateString].push('00:00');
       setServiceTimes(newServiceTimes);
     }
@@ -176,28 +190,50 @@ export function ServiciosAdmin() {
   };
 
   const handleUpdateAll = async () => {
-    // Prepare data for update
-    const allUpdates = Object.entries(serviceTimes).flatMap(([date, times]) => 
-      times.map(time => ({
-        service_id: selectedService.id_servicios,
-        fecha: date,
-        hora: time,
-        estado: 'disponible' // Assuming default status is available
-      }))
-    );
+  // Prepare data for update
+  const allUpdates = Object.entries(serviceTimes).flatMap(([date, times]) => 
+    times.map(time => ({
+      nombre_servicio: selectedService.nombre_servicio,
+      fecha: date,
+      hora: time,
+      estado: 'disponible' // Assuming default status is available
+    }))
+  );
 
-    // Send the updates to Supabase
-    const { error } = await supabase.from('franja_horaria').upsert(allUpdates);
+  // Check for existing records with the same date and time
+  for (let update of allUpdates) {
+    const { data: existingRecords, error: checkError } = await supabase
+      .from('franja_horaria')
+      .select('*')
+      .eq('nombre_servicio', update.nombre_servicio)
+      .eq('fecha', update.fecha)
+      .eq('hora', update.hora);
 
-    if (error) {
-      console.error('Error al actualizar horarios de servicios:', error);
-      alert(`Error actualizando horarios de servicios: ${error.message}`);
-    } else {
-      alert('Horarios actualizados correctamente.');
-      // Reset updates after successful submission
-      setServiceTimes({});
+    if (checkError) {
+      console.error('Error verificando duplicados:', checkError);
+      alert(`Error verificando duplicados: ${checkError.message}`);
+      return;
     }
-  };
+
+    if (existingRecords.length > 0) {
+      alert(`Ya existe una franja horaria para la fecha ${update.fecha} a las ${update.hora}. No se guardará.`);
+      continue; // Skip this update
+    }
+
+    // Proceed with the upsert only if no duplicates found
+    const { error: insertError } = await supabase.from('franja_horaria').upsert([update]);
+
+    if (insertError) {
+      console.error('Error al actualizar horarios de servicios:', insertError);
+      alert(`Error actualizando horarios de servicios: ${insertError.message}`);
+      return;
+    }
+  }
+
+  alert('Horarios actualizados correctamente.');
+  // Reset updates after successful submission
+  setServiceTimes({});
+};
 
   return (
     <Container>
@@ -215,17 +251,12 @@ export function ServiciosAdmin() {
           <div className="contenido_Header_Servicios_Admin">
             {servicios.map(service => (
               <div key={service.id_servicios} className="edicion_contenido">
-                <button
-                  className="nombre_servicio_boton"
-                  onClick={() => handleSelectClick(service)}
-                >
+                <button className="nombre_servicio_boton" onClick={() => handleSelectClick(service)}>
                   {service.nombre_servicio}
                 </button>
+
                 <div className="ajustes_edicion_contenido">
-                  <button
-                    className="edicion_contenido_boton"
-                    onClick={() => handleEditClick(service)}
-                  >
+                  <button className="edicion_contenido_boton" onClick={() => handleEditClick(service)}>
                     editar
                   </button>
                 </div>
