@@ -11,13 +11,13 @@ export default function Nosotros() {
 
             <div className='sobrenosotros'>
                 <div className='titulosobrenosotros'><h2 className='quienessomos'> Quienes somos </h2></div>
-                <div class="linea"></div>
+                
                 <p>
                     En Natalia Salazar Artist,
                     nos enorgullece ser un centro de estética facial dedicado a realzar la belleza natural de nuestras clientas. Ubicados en la hermosa ciudad de Palmira, en el barrio de Calle 33b #7-53,
                     nos hemos consolidado como un referente en la industria de la belleza, ofreciendo servicios de alta calidad que cumplen con los más altos estándares.</p>
             </div>
-
+<hr />
 
             <div className='sobrenosotros'>
                 <div className='titulosobrenosotros'><h2 className='quienessomos'> Nuestra Historia </h2></div>
@@ -26,9 +26,10 @@ export default function Nosotros() {
                     convirtiéndose en un espacio de confianza donde la belleza y el cuidado personal se encuentran.
                     Nuestra historia comenzó con un sueño compartido de ofrecer servicios excepcionales en un ambiente acogedor y profesional..</p>
             </div>
+            <hr />
 
             <div className='sobrenosotros'>
-            <div className='titulosobrenosotros'><h2 className='quienessomos'> Nuestros Profesionales </h2></div>
+            <div className='titulosobrenosotros'><h2 className='quienessomos'> Nuestro equipo </h2></div>
             <p>
                 Natalia Salazar: Experta en cejas y Profesional en Micropigmentación, Natalia ha perfeccionado el arte de realzar la belleza natural a través de técnicas avanzadas
                 que garantizan resultados espectaculares y duraderos.
@@ -36,7 +37,7 @@ export default function Nosotros() {
                 Derian Manzano: Con una especialización en lifting y extensiones de pestañas, Derian ha transformado la mirada de innumerables clientas, proporcionándoles un toque de elegancia
                 y sofisticación que marca la diferencia.</p>
                 </div>
-
+<hr />
                 <div className='sobrenosotros'>
                 <div className='titulosobrenosotros'>
             <h2 className='quienessomos'> Nuestros Servicios </h2></div>
@@ -49,6 +50,8 @@ export default function Nosotros() {
 
                 Cuidado de Cejas: Desde el diseño hasta la tintura, nuestras técnicas aseguran cejas perfectamente definidas que complementan tu rostro.</p> </div>
 
+                <hr />
+
                 <div className='sobrenosotros'>
                 <div className='titulosobrenosotros'>
             <h2 className='quienessomos'> Nuestro Compromiso  </h2></div>
@@ -56,6 +59,7 @@ export default function Nosotros() {
                 La satisfacción de nuestras clientas es nuestra máxima prioridad. Nos esforzamos por ofrecer un servicio personalizado y de calidad, utilizando
                 productos de primera línea y técnicas innovadoras para garantizar resultados que superen las expectativas. En Natalia Salazar Artist, tu belleza es nuestra pasión.</p></div>
 
+                <hr />
                 <div className='sobrenosotros'>
                 <div className='titulosobrenosotros'>
             <h2 className='quienessomos'> Ubicacion y contacto  </h2></div>
