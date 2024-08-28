@@ -50,8 +50,8 @@ export const Agendamiento = () => {
         const fetchFranjasHorarias = async () => {
             const selectedDate = date.toISOString().split('T')[0];
             const { data, error } = await supabase
-                .from('franja_horario')
-                .select('id_horario, hora, estado')
+                .from('franja_horaria')
+                .select('id_horario, hora, estado, fecha')
                 .eq('fecha', selectedDate);
 
             if (error) {
@@ -70,7 +70,7 @@ export const Agendamiento = () => {
                 const selectedDate = date.toISOString().split('T')[0];
                 const { data, error } = await supabase
                     .from('cita')
-                    .select('franja_horario')
+                    .select('franja_horaria')
                     .eq('profesional', selectedProfesional)
                     .eq('fecha', selectedDate);
 

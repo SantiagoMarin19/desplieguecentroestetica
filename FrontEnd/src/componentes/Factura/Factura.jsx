@@ -2,11 +2,12 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import supabase from '../../supabase/supabaseconfig';
 import { Modal, Button } from 'react-bootstrap';
-import './Factura.css'; 
+// import { Logo } from "../../../src/assets/images/Logo.png";
+import './Factura.css';
 
 const Facturacion = ({ token }) => {
     const navigate = useNavigate();
-    const location = useLocation(); 
+    const location = useLocation();
     const { state } = location;
     const { fecha, duracion, idProfesional, servicio, idUsuario } = state;
 
@@ -105,20 +106,40 @@ const Facturacion = ({ token }) => {
     };
 
     return (
+        <div className='contenedor_facturacion'>
         <div className="facturacion-container">
             <div className="invoice-header">
-                <h1>Factura</h1>
-                <p>Fecha: {fecha.toLocaleDateString()}</p>
+                <h1>Natalia Salazar Artist</h1>
+                <hr />
             </div>
-            
+
+            <div className='explicacion_factura'>
+                <h2>Factura</h2>
+                <h2>id:factura</h2>
+                <h2>Fecha: {fecha.toLocaleDateString()}</h2>
+            </div>
+
+
             <div className="invoice-body">
                 <div className="invoice-section">
-                    <h2>Detalles de la Cita</h2>
-                    <p><strong>Duración:</strong> {duracion}</p>
+                    <div className='titulo_invoice-section'>
+                    <p>Detalles de la Cita</p>
+                    <hr /></div>
+
+                    <p><strong>Hora:</strong> {duracion}</p>
                     <p><strong>Profesional:</strong> {nombreProfesional}</p>
                     <p><strong>Servicio:</strong> {servicio?.nombre_servicio}</p>
                     <p><strong>Costo:</strong> {servicio?.precio}</p>
                     <p><strong>Cliente:</strong> {user ? user.user_metadata.full_name : 'No disponible'}</p>
+                </div>
+                <div className='contenido_invoice-section'>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
                 </div>
             </div>
 
@@ -137,6 +158,7 @@ const Facturacion = ({ token }) => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+        </div>
         </div>
     );
 };
