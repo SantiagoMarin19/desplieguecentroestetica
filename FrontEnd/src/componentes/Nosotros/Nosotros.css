@@ -30,7 +30,7 @@
 
 .header h1 {
     font-size: 3rem;
-    color: #ff7e5f;
+    color: #ff99c7;
     font-weight: 700;
     text-transform: uppercase;
     margin: 0;
@@ -38,7 +38,7 @@
     display: inline-block;
     padding: 10px 20px;
     border-radius: 10px;
-    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    background: linear-gradient(to right, #ff5fd7, #7ba3fe);
     color: white;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     overflow: hidden;
@@ -78,9 +78,9 @@
 
 .section h2 {
     font-size: 2rem;
-    color: #ff7e5f;
+    color: #000000;
     margin-bottom: 20px;
-    border-bottom: 2px solid #ff7e5f;
+    border-bottom: 2px solid #ff9fe2;
     padding-bottom: 10px;
 }
 
@@ -89,6 +89,10 @@
     line-height: 1.6;
     color: #333;
     text-align: justify;
+}
+
+.section li {
+    color: black;
 }
 
 .section:nth-child(even) {
