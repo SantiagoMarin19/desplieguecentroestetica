@@ -33,11 +33,11 @@ const Citas = ({ token }) => {
     const fetchAppointments = async () => {
       if (user) {
         const { data, error } = await supabase
-          .from('cita')
+          .from('citas')
           .select(`
-            fecha, duracion, estado, profesional 
-            ( nombre_profesional ), servicio ( nombre_servicio )`)
-          .eq('usuarios', user.id);
+            id_cita, fecha, hora, estado, id_profesional ( nombre_profesional ), id_servicio ( nombre_servicio )
+          `)
+          .eq('id_usuario', user.id);
 
         if (error) {
           console.error('Error fetching appointments:', error);
@@ -54,7 +54,7 @@ const Citas = ({ token }) => {
     const fetchCitas = async () => {
       try {
         const { data, error } = await supabase
-          .from('cita')
+          .from('citas')
           .select('*');
         if (error) throw error;
         setCitas(data);
@@ -75,10 +75,10 @@ const Citas = ({ token }) => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleAcceptCita = async (cita) => {
-    if (window.confirm(`¿Estás seguro de aprobar la cita de ${cita.usuarios} para el ${cita.fecha}?`)) {
+    if (window.confirm(`¿Estás seguro de aprobar la cita de ${cita.id_usuario} para el ${cita.fecha}?`)) {
       try {
         const { data, error } = await supabase
-          .from('cita') 
+          .from('citas') 
           .update({ estado: 'Abono' })
           .eq('id_cita', cita.id_cita);
         if (error) throw error;
@@ -116,11 +116,11 @@ const Citas = ({ token }) => {
         <tbody>
           {currentCitas.map((cita, index) => (
             <tr key={cita.id_cita}>
-              <td>{cita.usuarios}</td>
+              <td>{cita.id_usuario}</td>
               <td>{cita.fecha}</td>
-              <td>{cita.franja_horaria}</td>
+              <td>{cita.hora}</td>
               <td>{cita.duracion}</td>
-              <td>{cita.servicio}</td>
+              <td>{cita.id_servicio.nombre_servicio}</td>
               <td>
                 <input 
                   type="checkbox" 
