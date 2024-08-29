@@ -5,10 +5,10 @@ import '../Servicio_detalle/Serviciocejas';
 export const VistaDetalle = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { servicio } = location.state || {}; 
+  const { servicio } = location.state || {};
 
   const handleReservar = () => {
-    navigate('/Agendarcita', { state: { servicio } }); 
+    navigate('/Agendarcita', { state: { servicio } });
   };
 
 
@@ -33,7 +33,12 @@ export const VistaDetalle = () => {
                 <p>Tiempo</p>
               </div>
               <div className='precio'>
-                <h4>{servicio.precio}</h4>
+                <h4><b>{new Intl.NumberFormat('es-CO', {
+                  style: 'currency',
+                  currency: 'COP',
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 2
+                }).format(servicio.precio)}</b></h4>
                 <p>Precio</p>
               </div>
             </div>
