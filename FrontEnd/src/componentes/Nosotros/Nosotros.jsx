@@ -5,9 +5,9 @@ export default function Nosotros() {
     return (
         <div>
             <div className='tituloacercade'>
-                <h1 className='acercadenosotros'>Acerca de Nosotros </h1>
                 
-            </div>
+                <h1 className='acercadenosotros'>Acerca de Nosotros </h1>
+                </div>
 
             <div className='sobrenosotros'>
                 <div className='titulosobrenosotros'><h2 className='quienessomos'> Quienes somos </h2></div>
