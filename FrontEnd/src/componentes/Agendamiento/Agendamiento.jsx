@@ -223,38 +223,12 @@ export const Agendamiento = () => {
                         </tbody>
                     </table>
 
-                    <div
-
-
-                     className='TotalCuadros'> HORARIOS
-                        {franjasHorarias.map(franja => (
-                            <div
-                                key={franja.id_horario}
-                                className={`cuadros ${isOcupado(franja.id_horario) ? 'ocupado' : 'libre'}`}
-                                onClick={() => handleHoraClick(franja.horario, franja.id_horario)}
-                                style={{ cursor: isOcupado(franja.id_horario) ? 'not-allowed' : 'pointer' }}
-                            >
-                                {franja.horario}
-                            </div>
-                        ))}
-                    </div>
+                  
+                  
                 </div>
             </div>
-            <div className='partright'>
-                <Calendar
-                    onChange={setDate}
-                    value={date}
-                    tileDisabled={({ date, view }) => view === 'month' && date < new Date()}
-                />
-                <div className='escogerhora'>
-                    <form action='#' method='post'>
-                        <p className='datosfecha'>
-                            {getDiaSemana(date)} {date.getDate()} {date.toLocaleDateString('default', { month: 'short' })} {date.getFullYear()}
-                        </p>
-                    </form>
-                </div>
-                
-            </div>
+          
+           
 
           
             <FacturacionModal 
