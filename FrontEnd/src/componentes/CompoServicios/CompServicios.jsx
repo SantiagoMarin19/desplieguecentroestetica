@@ -49,6 +49,7 @@ export const CompServicios = () => {
                 <button className="button_s" onClick={() => handleReservar(servicio)}>Reservar </button>
               </div>
             </div>
+            
           ))}
       </div>
     </div>

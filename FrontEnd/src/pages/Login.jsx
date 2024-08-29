@@ -4,6 +4,7 @@ import supabase from '../supabase/supabaseconfig';
 import flechaizq from "../assets/images/decoración.png";
 import or from "../assets/images/OR.png";
 import flechader from "../assets/images/decor.png";
+import { useModal } from '../componentes/modal/ContextModal'; // Asegúrate de que la ruta sea correcta
 import "./Estilos/Login.css";
 
 const LoginUser = ({ closeModal }) => {
@@ -14,6 +15,8 @@ const LoginUser = ({ closeModal }) => {
         email: '',
         password: ''
     });
+
+    const { openModal } = useModal(); // Usa el contexto del modal
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -37,7 +40,6 @@ const LoginUser = ({ closeModal }) => {
                 throw error;
             }
 
-            // Guarda el token y otros datos en sessionStorage
             sessionStorage.setItem('token', JSON.stringify(data.session.access_token));
             sessionStorage.setItem('user', JSON.stringify(data.user.user_metadata.full_name));
 
@@ -74,7 +76,9 @@ const LoginUser = ({ closeModal }) => {
                             onChange={handleChange}
                         />
                     </div>
-                    <div className='passwordforgot'> <Link to={'/Recover'}>Haz olvidado contraseña?</Link></div>
+                    <div className='passwordforgot'> 
+                        <Link to={'/Recover'}>Haz olvidado contraseña?</Link>
+                    </div>
                 </div>
                 <button className="botoningresar" type='submit'>Ingresar</button>
                 <div className='decoraciones'>
@@ -84,13 +88,13 @@ const LoginUser = ({ closeModal }) => {
                 </div>
             </form>
             <div className='poncuenta'>
-                ¿No tienes cuenta?
-                <Link to="/Registrar" onClick={() => openModal('SignUp')}>
-                    Regístrate
-                </Link>
+                <p>No tengo cuenta. <span 
+                    className="registrarme-link" 
+                    onClick={() => openModal('SignUp')}
+                >
+                    Registrarme
+                </span></p>
             </div>
-
-
         </div>
     );
 }

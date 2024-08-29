@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import "./Navbar.css";
-import { NavLink } from 'react-router-dom';
 import { useModal } from '../modal/ContextModal';
 
 export const Navbar = ({ token, handleLogout }) => {
     const { openModal } = useModal();
     const [showLogout, setShowLogout] = useState(false);
     const [userName, setUserName] = useState('');
+    const location = useLocation();
 
     useEffect(() => {
-        if (token) {
-            const fullName = JSON.parse(sessionStorage.getItem('user')) || localStorage.getItem('userName');
-            if (fullName) {
-                setUserName(fullName);
-            }
+        const fullName = JSON.parse(sessionStorage.getItem('user')) || localStorage.getItem('userName');
+        if (fullName) {
+            setUserName(fullName);
         }
-    }, [token]);
+    }, [token, location]);  
 
     const toggleLogout = () => {
         setShowLogout(!showLogout);
@@ -27,9 +26,10 @@ export const Navbar = ({ token, handleLogout }) => {
         sessionStorage.removeItem('user');
         setUserName('');
         setShowLogout(false);
+        window.location.reload();
+
 
         handleLogout();
-        window.location.reload();
     };
 
     return (
@@ -65,13 +65,13 @@ export const Navbar = ({ token, handleLogout }) => {
                             </ul>
                         </div>
                         <div className='iniciosesion'>
-                            {!token && !userName ? (
+                            {!userName ? (
                                 <li className="nav-item">
                                     <NavLink to="#" className="nav-link" onClick={(e) => {
                                         e.preventDefault(); 
-                                        openModal('login'); // abre el modal de login
+                                        openModal('login'); 
                                     }}>
-                                        Iniciar Sesion
+                                        Mi Cuenta
                                     </NavLink>
                                 </li>
                             ) : (
