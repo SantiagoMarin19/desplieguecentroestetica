@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import supabase from '../supabase/supabaseconfig';
 import flechaizq from "../assets/images/decoración.png";
 import or from "../assets/images/OR.png";
@@ -18,20 +18,54 @@ const SignUp = ({ closeModal }) => {
     confirmPassword: ''
   });
 
+  const [errors, setErrors] = useState({
+    fullName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
+
   function handleChange(event) {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value
     }));
+    validate(name, value);
+  }
+
+  function validate(name, value) {
+    let error = '';
+    switch (name) {
+      case 'fullName':
+        error = value.trim() === '' ? 'El nombre es obligatorio' : '';
+        break;
+      case 'email':
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        error = !emailPattern.test(value) ? 'Correo electrónico inválido' : '';
+        break;
+      case 'password':
+        error = value.length < 6 ? 'La contraseña debe tener al menos 6 caracteres' : '';
+        break;
+      case 'confirmPassword':
+        error = value !== formData.password ? 'Las contraseñas no coinciden' : '';
+        break;
+      default:
+        break;
+    }
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: error
+    }));
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
-      alert('Las contraseñas no coinciden');
-      return;
+    // Validar todos los campos antes de enviar el formulario
+    Object.keys(formData).forEach(name => validate(name, formData[name]));
+    if (Object.values(errors).some(error => error)) {
+      return; // Si hay errores, no enviar el formulario
     }
 
     try {
@@ -53,7 +87,9 @@ const SignUp = ({ closeModal }) => {
         }
       } else {
         alert('Verifica tu correo electrónico para el enlace de confirmación.');
-        navigate('/login'); // Redirige al login después del registro exitoso
+        openModal('login')
+
+        
       }
     } catch (error) {
       alert('Ocurrió un error al registrarse: ' + error.message);
@@ -70,31 +106,40 @@ const SignUp = ({ closeModal }) => {
             <input className='inputcontenedores'
               placeholder='Nombre'
               name='fullName'
+              value={formData.fullName}
               onChange={handleChange}
             />
+            {errors.fullName && <div className="error">{errors.fullName}</div>}
           </div>
           <div className='contenedorCorreo'>
             <input className='inputcontenedores'
               placeholder='Email'
               name='email'
+              type='email'
+              value={formData.email}
               onChange={handleChange}
             />
+            {errors.email && <div className="error">{errors.email}</div>}
           </div>
           <div className='contenedorContraseña'>
             <input className='inputcontenedores'
               placeholder='Contraseña'
               name='password'
               type="password"
+              value={formData.password}
               onChange={handleChange}
             />
+            {errors.password && <div className="error">{errors.password}</div>}
           </div>
           <div className='contenedorConfirmarContra'>
             <input className='inputcontenedores'
               placeholder='Confirmar Contraseña'
               name='confirmPassword'
               type="password"
+              value={formData.confirmPassword}
               onChange={handleChange}
             />
+            {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
           </div>
         </div>
         <button className="botoningresar" type='submit'>Registrarse</button>

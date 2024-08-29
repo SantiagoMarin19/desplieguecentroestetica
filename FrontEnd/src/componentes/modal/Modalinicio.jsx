@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal as BootstrapModal, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useModal } from './ContextModal'; // Asegúrate de la ruta correcta
+import { useModal } from './ContextModal'; 
 import LoginUser from '../../pages/Login'; 
 
 const Modalinicio = () => {
