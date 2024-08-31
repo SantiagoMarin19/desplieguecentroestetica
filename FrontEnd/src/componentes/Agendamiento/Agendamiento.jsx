@@ -241,18 +241,18 @@ export const Agendamiento = () => {
             </div>
 
           
-            <FacturacionModal 
+            {/* <FacturacionModal 
             
-                show={showModal} // Usar 'show' en lugar de 'showModal'
-                onHide={() => setShowModal(false)} // Asegúrate de que 'onHide' esté configurado
+                show={showModal}
+                onHide={() => setShowModal(false)} 
                 fecha={date}
                 duracion={selectedHora}
                 idProfesional={selectedProfesional}
                 servicio={servicio}
                 
                 
-                idUsuario={userId} // Asegúr
-            />
+                idUsuario={userId} 
+            /> */}
             
         </div>
         
