@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import supabase from '../../supabase/supabaseconfig';
 import { Modal, Button } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from 'react-router-dom'; // Importa useNavigate
+// import { Logo } from "../../../src/assets/images/Logo.png";
+import './Factura.css';
 
-const FacturacionModal = ({ show, onHide, fecha, duracion, idProfesional, servicio }) => {
+const Facturacion = ({ token }) => {
+    const location = useLocation();
+    const { state } = location;
+    const { fecha, duracion, idProfesional, servicio, idUsuario } = state;
+
     const [user, setUser] = useState(null);
     const [nombreProfesional, setNombreProfesional] = useState('');
     const [idHorario, setIdHorario] = useState(null);
     const [modalMessage, setModalMessage] = useState('');
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-    const navigate = useNavigate(); // Inicializa useNavigate
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -57,11 +60,18 @@ const FacturacionModal = ({ show, onHide, fecha, duracion, idProfesional, servic
         fetchUser();
         fetchNombreProfesional();
         fetchIdHorario();
-    }, [idProfesional, duracion]);
+    }, [idProfesional, idUsuario, token, duracion]);
 
     const handleGuardarCita = async () => {
         if (!user) {
             window.alert('Por favor, inicie sesión para continuar.');
+            return;
+        }
+
+        if (!idHorario) {
+            console.error('No se pudo obtener el id_horario para la duración.');
+            setModalMessage('No se pudo obtener el id_horario para la duración.');
+            setShowModal(true);
             return;
         }
 
@@ -80,40 +90,67 @@ const FacturacionModal = ({ show, onHide, fecha, duracion, idProfesional, servic
         if (error) {
             setModalMessage(`Error al guardar la cita: ${error.message}`);
         } else {
-            setModalMessage('Su cita ha sido asignada y está en proceso de confirmación.');
-            setTimeout(onHide, 4500); 
-
-            setShowSuccessMessage(true); 
-            setTimeout(() => {
-                onHide();
-                navigate('/servicios'); 
-            }, 2500); 
+            setModalMessage('Cita guardada con éxito. Un administrador verificará tu cita.');
+            setShowModal(true);
+            setTimeout(() => navigate('/'), 1500);
         }
     };
 
     return (
-        <Modal show={show} onHide={onHide}>
-            <Modal.Header closeButton>
-                <Modal.Title>Confirmar Cita</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                {showSuccessMessage ? (
-                    <p>{modalMessage}</p>
-                ) : (
-                    <>
-                        <p>Fecha: {fecha.toLocaleDateString()}</p>
-                        <p>Duración: {duracion}</p>
-                        <p>Profesional: {nombreProfesional}</p>
-                        <p>Servicio: {servicio?.nombre_servicio}</p>
-                        <p>Costo: {servicio?.precio}</p>
-                        <p>Cliente: {user ? user.user_metadata.full_name : 'No disponible'}</p>
-                    </>
-                )}
-            </Modal.Body>
-            <Modal.Footer>
-                {!showSuccessMessage && <Button variant="primary" onClick={handleGuardarCita}>Guardar Cita</Button>}
-            </Modal.Footer>
-        </Modal>
+        <div className='contenedor_facturacion'>
+        <div className="facturacion-container">
+            <div className="invoice-header">
+                <h1>Natalia Salazar Artist</h1>
+                <hr />
+            </div>
+
+            <div className='explicacion_factura'>
+                <h2>Factura</h2>
+                <h2>id:factura</h2>
+                <h2>Fecha: {fecha.toLocaleDateString()}</h2>
+            </div>
+
+
+            <div className="invoice-body">
+                <div className="invoice-section">
+                    <div className='titulo_invoice-section'>
+                    <p>Detalles de la Cita</p>
+                    <hr /></div>
+
+                    <p><strong>Hora:</strong> {duracion}</p>
+                    <p><strong>Profesional:</strong> {nombreProfesional}</p>
+                    <p><strong>Servicio:</strong> {servicio?.nombre_servicio}</p>
+                    <p><strong>Costo:</strong> {servicio?.precio}</p>
+                    <p><strong>Cliente:</strong> {user ? user.user_metadata.full_name : 'No disponible'}</p>
+                </div>
+                <div className='contenido_invoice-section'>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                </div>
+            </div>
+
+            <div className="invoice-footer">
+                <Button onClick={handleGuardarCita}>Confirmar Cita</Button>
+            </div>
+
+            <Modal show={showModal} onHide={() => setShowModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirmación</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{modalMessage}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowModal(false)}>
+                        Cerrar
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </div>
+        </div>
     );
 };
 
