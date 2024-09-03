@@ -286,4 +286,15 @@ const Divider = styled.div`
   background: ${(props) => props.theme.bg3};
   margin: ${v.lgSpacing} 0;
 `;
+
+const MainLayout = styled.div`
+  display: flex;
+`;
+
+const MainContent = styled.div`
+  margin-left: ${({ sidebarOpen }) => (sidebarOpen ? '300px' : '70px')};
+  transition: margin-left 0.3s;
+  width: 100%;
+  padding: 20px;
+`;
 //#endregion
