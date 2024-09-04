@@ -4,6 +4,7 @@ import "./CitasPendientes.css";
 import { ListGroup, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import imagenfondo from "../../assets/images/imagen_fondo.jpg";
+import { NavLink } from 'react-router-dom';
 
 const CitasPendientes = ({ token }) => {
     const [appointments, setAppointments] = useState([]);
@@ -83,10 +84,14 @@ const CitasPendientes = ({ token }) => {
                                 <p className='contenedorsubtitulo'><b className='fechaAgendadaSubtitulo'>Duración:</b> {citas.duracion}</p>
                                 <p className='contenedorsubtitulo'><b className='fechaAgendadaSubtitulo'>Profesional:</b> {citas.profesional.nombre_profesional}</p>
                                 <p className='contenedorsubtitulo'><b className='fechaAgendadaSubtitulo'>Estado:</b> {citas.estado ? 'Confirmada' : 'Pendiente'}</p>
+                                <NavLink to={"/politicas"}> <button> RECOMENDACIONES PARA TU CITA </button> </NavLink>   
+                               
                             </div>
+                            
                         </div>
                     ))}
                 </div>
+                
             )}
         </Container>
 
