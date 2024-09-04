@@ -26,10 +26,93 @@ td {
 
 th, td {
     font-size: 16px;
+    background-color: rgb(255, 255, 255);
+    margin: 0;
+    font-family: Arial, sans-serif; /* Asegura que todos los elementos tengan una fuente base */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+select {
+    font-size: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+option {
+    font-size: 20px;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 15px;
+    font-size: 20px;
+    word-wrap: break-word;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    /* Añadido para hacer la tabla más flexible */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.todoingreso {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.escogerprof,
+.partetabla {
+    display: flex;
+    flex-direction: column;
 }
 
 .colorros {
     background-color: #FCEBF2;
+}
+
+select {
+    border-color: #FCEBF2;
+    font-size: 25px;
+    margin: 0.5rem 0;
+}
+
+.helloxd {
+    height: 100vh;
+}
+
+button {
+    color: black;
+}
+
+.partright {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilo para la parte de la calendar */
+.react-calendar__tile {
+    color: #000000 !important;
+    border-radius: 0% !important;
+}
+
+.react-calendar__tile--disable {
+    background-color: rgb(255, 0, 0) !important;
+}
+
+.react-calendar__month-view__days {
+    padding: 10px;
+}
+
+.escogerhora {
+    transform: translateX(20px);
 }
 
 .cuadros {
@@ -50,10 +133,7 @@ th, td {
     background-color: rgb(126, 121, 121);
 }
 
-.react-calendar__tile {
-    color: #000000 !important;
-}
-
+/* Estilo para el día seleccionado */
 .react-calendar__tile--active {
     background: #ffdceb !important;
 }
