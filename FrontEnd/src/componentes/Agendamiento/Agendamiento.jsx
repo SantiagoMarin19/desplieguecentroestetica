@@ -5,7 +5,7 @@ import 'react-calendar/dist/Calendar.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import supabase from '../../supabase/supabaseconfig';
 import FacturacionModal from '../Factura/Factura';
-
+ 
 const getDiaSemana = (date) => {
     const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
     return diasSemana[date.getDay()];
@@ -70,7 +70,6 @@ export const Agendamiento = () => {
         const fetchHorariosOcupados = async () => {
             if (selectedProfesional && date) {
                 const selectedDate = date.toISOString().split('T')[0];
-
                 const { data, error } = await supabase
                     .from('cita')
                     .select('franja_horaria')
@@ -110,7 +109,6 @@ export const Agendamiento = () => {
 
     const navigate = useNavigate();
     const { servicio } = useLocation().state || { servicio: { nombre_servicio: "Servicio no especificado", precio: "$0.00" } };
-    
     const handleReservarClick = (event) => {
         event.preventDefault();
 
@@ -119,7 +117,18 @@ export const Agendamiento = () => {
             return;
         }
 
-        setShowModal(true); 
+        navigate('/Facturacion', {
+            state: {
+                fecha: date,
+                duracion: selectedHora,
+                idProfesional: selectedProfesional,
+                servicio: {
+                    id_servicios: servicio.id_servicios,
+                    nombre_servicio: servicio.nombre_servicio,
+                    precio: servicio.precio
+                }
+            }
+        });
     };
 
     return (
@@ -181,68 +190,69 @@ export const Agendamiento = () => {
                         </div>
                     </div>
                 </div>
-                <div className='partetabla'>
-                    <h3 className='resumen'>Agendamiento</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th colSpan={2} className='colorros'>
-                                    {date.getDate()} {date.toLocaleDateString('default', { month: 'short' })} {date.getFullYear()} - {selectedHora}
-                                </th>
-                            </tr>
-                            <tr>
-                                <th>Profesional</th>
-                                <td>{selectedProfesional}</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>Servicio</th>
-                                <td>{servicio.nombre_servicio}</td>
-                            </tr>
-                            <tr>
-                                <th>Duración</th>
-                                <td>{selectedHora}</td>
-                            </tr>
-                            <tr>
-                                <th>Costo</th>
-                                <td>
-                                    <h5><b>{new Intl.NumberFormat('es-CO', {
-                                        style: 'currency',
-                                        currency: 'COP',
-                                        minimumFractionDigits: 0,
-                                        maximumFractionDigits: 2
-                                    }).format(servicio.precio)}</b></h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colSpan={2} className='colorros'>
-                                    <button className='botonreservar' onClick={handleReservarClick}>Reservar</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
 
-                  
-                  
+                <div className='right-section'>
+                    <div className='Resumendecompra_Agendamiento'>
+                        <div className='titulo_Resumendecompra_Agendamiento'>
+                            <h3>Resumen de Compra</h3>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th colSpan={2}>
+                                        {date.getDate()} {date.toLocaleDateString('default', { month: 'short' })} {date.getFullYear()} - {selectedHora}
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>Profesional</th>
+                                    <td>{selectedProfesional}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>Servicio</th>
+                                    <td>{servicio.nombre_servicio}</td>
+                                </tr>
+                                <tr>
+                                    <th>Duración</th>
+                                    <td>{selectedHora}</td>
+                                </tr>
+                                <tr>
+                                    <th>Costo</th>
+                                    <td>
+                                        <h5><b>{new Intl.NumberFormat('es-CO', {
+                                            style: 'currency',
+                                            currency: 'COP',
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 2
+                                        }).format(servicio.precio)}</b></h5>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colSpan={2}>
+                                        <button onClick={handleReservarClick}>Reservar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+                
             </div>
-          
-           
 
           
-            <FacturacionModal 
+            {/* <FacturacionModal 
             
                 show={showModal} // Usar 'show' en lugar de 'showModal'
-                onHide={() => setShowModal(false)} // Asegúrate de que 'onHide' esté configurado
+                onHide={() => setShowModal(false)} 
                 fecha={date}
                 duracion={selectedHora}
                 idProfesional={selectedProfesional}
                 servicio={servicio}
                 
                 
-                idUsuario={userId} // Asegúr
-            />
+                idUsuario={userId} 
+            /> */}
             
         </div>
         
