@@ -45,6 +45,7 @@ export const CompServicios = () => {
               <div><img src={servicio.url_img} alt={servicio.nombre_servicio} /></div>
               <h5>{servicio.nombre_servicio}</h5>
               <h5><b>{formatoCo.format(servicio.precio)}</b></h5>
+              
               <div className="butonSs">
                 <button className="button_s" onClick={() => handleReservar(servicio)}>Reservar </button>
               </div>

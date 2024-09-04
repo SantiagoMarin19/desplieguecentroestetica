@@ -193,7 +193,7 @@ th, td {
     font-size: 30px;
 }
 
-button {
+.boton_reservar_cita {
     background-color: #422A3C;
     color: #ffffff;
     border: none;
@@ -202,7 +202,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.boton_reservar_cita:hover {
     background-color: #5c3f5d;
 }
 
