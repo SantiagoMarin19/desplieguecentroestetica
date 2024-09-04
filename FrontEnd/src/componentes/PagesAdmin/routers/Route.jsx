@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { HomeAdmin } from "../InicioAdmin";
+
 import { PersonalAdmin } from "../PersonalAdmin";
 import  Citas from '../CitasAdmin';
 import { DiagramasAdmin } from "../DiagramasAdmin";
@@ -11,7 +11,7 @@ export function MyRoutes() {
    
      
       <Routes>
-        <Route path="/HomeAdmin" element={<HomeAdmin />} />
+ 
         <Route path="/DiagramasAdmin" element={<DiagramasAdmin />} /> 
         <Route path="/PersonalAdmin" element={<PersonalAdmin />} />
         <Route path="/AdminCitas" element={< Citas/>}/>
