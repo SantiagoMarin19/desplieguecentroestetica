@@ -90,3 +90,71 @@ table {
     opacity: .35;
   }
 
+  .container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .titulo_Citas_Admin h1 {
+    color: #333;
+    text-align: center;
+  }
+  
+  .Contenido_Citas_Admin {
+    margin-bottom: 20px;
+  }
+  
+  .Contenido_Citas_Admin hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
+  }
+  
+/* Controles de ordenación */
+.sort-control {
+  margin-bottom: 1rem;
+}
+
+.sort-button {
+  background-color: #FCEBF2;
+  border: 1px solid #DAB4C1;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 4px;
+}
+
+.sort-button:hover {
+  background-color: #F9D6D6;
+}
+  .citas-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .citas-table thead {
+    background-color: #FCEBF2;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .citas-table th, .citas-table td {
+    padding: 1rem;
+    text-align: left;
+  }
+  
+  .citas-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .citas-table th {
+    font-weight: bold;
+  }
+  
+  input[type="checkbox"] {
+    margin-right: 5px;
+  }
+

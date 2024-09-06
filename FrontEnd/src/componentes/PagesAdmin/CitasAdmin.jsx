@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import Pagination from './Pagination';
+import styled from "styled-components";
 import "./CitasAdmin.css";
 import supabase from '../../supabase/supabaseconfig';
+import moment from 'moment';
 
 const Citas = ({ token }) => {
   const [citas, setCitas] = useState([]);
-  const [appointments, setAppointments] = useState([]);
   const [user, setUser] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortOrder, setSortOrder] = useState('asc');
   const [loading, setLoading] = useState(true);
   const citasPerPage = 5;
 
@@ -30,32 +31,12 @@ const Citas = ({ token }) => {
   }, [token]);
 
   useEffect(() => {
-    const fetchAppointments = async () => {
-      if (user) {
-        const { data, error } = await supabase
-          .from('citas')
-          .select(`
-            id_cita, fecha, hora, estado, id_profesional ( nombre_profesional ), id_servicio ( nombre_servicio )
-          `)
-          .eq('id_usuario', user.id);
-
-        if (error) {
-          console.error('Error fetching appointments:', error);
-        } else {
-          setAppointments(data || []);
-        }
-      }
-    };
-
-    fetchAppointments();
-  }, [user]);
-
-  useEffect(() => {
     const fetchCitas = async () => {
       try {
         const { data, error } = await supabase
-          .from('citas')
-          .select('*');
+          .from('cita')
+          .select('id_cita, fecha, estado, usuarios, servicio, profesional, duracion')
+          .eq('profesional', 1);
         if (error) throw error;
         setCitas(data);
         setLoading(false);
@@ -66,19 +47,26 @@ const Citas = ({ token }) => {
     };
 
     fetchCitas();
-  }, []);
+  }, [user]);
+
+  const sortedCitas = [...citas].sort((a, b) => {
+    const dateA = new Date(a.fecha);
+    const dateB = new Date(b.fecha);
+
+    return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
+  });
 
   const indexOfLastCita = currentPage * citasPerPage;
   const indexOfFirstCita = indexOfLastCita - citasPerPage;
-  const currentCitas = citas.slice(indexOfFirstCita, indexOfLastCita);
+  const currentCitas = sortedCitas.slice(indexOfFirstCita, indexOfLastCita);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleAcceptCita = async (cita) => {
-    if (window.confirm(`¿Estás seguro de aprobar la cita de ${cita.id_usuario} para el ${cita.fecha}?`)) {
+    if (window.confirm(`¿Estás seguro de aprobar la cita de ${cita.usuarios} para el ${cita.fecha}?`)) {
       try {
         const { data, error } = await supabase
-          .from('citas') 
+          .from('cita')
           .update({ estado: 'Abono' })
           .eq('id_cita', cita.id_cita);
         if (error) throw error;
@@ -90,24 +78,35 @@ const Citas = ({ token }) => {
     }
   };
 
+  const toggleSortOrder = () => {
+    setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+  };
+
   if (loading) return <p>Loading...</p>;
 
   return (
-    <Container>
+    <div className="Container">
       <div className='titulo_Citas_Admin'>
-      <h1>Citas Administrador</h1></div>
+        <h1>Citas Administrador</h1>
+      </div>
       <div className='Contenido_Citas_Admin'>
-      <hr />
-      <p>En esta sección encontraras todas las citas apartadas (pendientes por confirmación) por los clientes.</p>
-      <hr />
-      <p> <b>Nota:</b> Confirma el Estado de la cita por medio del Checklist <b>SOLO</b> sí la cita fue abonada exitosamente con el 50%.</p></div>
+        <hr />
+        <p>En esta sección encontraras todas las citas apartadas (pendientes por confirmación) por los clientes.</p>
+        <hr />
+        <p><b>Nota:</b> Confirma el Estado de la cita por medio del Checklist <b>SOLO</b> sí la cita fue abonada exitosamente con el 50%.</p>
+      </div>
+      
+      <div className="sort-control">
+        <button onClick={toggleSortOrder} className="sort-button">
+          Ordenar por fecha: {sortOrder === 'asc' ? 'Más antiguas primero' : 'Más recientes primero'}
+        </button>
+      </div>
 
-      <Table>
+      <table className="Table">
         <thead>
           <tr>
             <th>Cliente</th>
             <th>Fecha</th>
-            <th>Hora</th>
             <th>Duración</th>
             <th>Servicio</th>
             <th>Estado</th>
@@ -116,11 +115,10 @@ const Citas = ({ token }) => {
         <tbody>
           {currentCitas.map((cita, index) => (
             <tr key={cita.id_cita}>
-              <td>{cita.id_usuario}</td>
+              <td>{cita.usuarios}</td> 
               <td>{cita.fecha}</td>
-              <td>{cita.hora}</td>
-              <td>{cita.duracion}</td>
-              <td>{cita.id_servicio.nombre_servicio}</td>
+              <td>{moment(cita.duracion, 'HH:mm').format('h:mm A')}</td> {/* Formatear la duración */}
+              <td>{cita.servicio}</td>
               <td>
                 <input 
                   type="checkbox" 
@@ -135,16 +133,17 @@ const Citas = ({ token }) => {
             </tr>
           ))}
         </tbody>
-      </Table>
+      </table>
 
       <Pagination 
         citasPerPage={citasPerPage} 
         totalCitas={citas.length} 
         paginate={paginate} 
       />
-    </Container>
+    </div>
   );
 }
+
 
 const Container = styled.div`
   height: 100vh;
