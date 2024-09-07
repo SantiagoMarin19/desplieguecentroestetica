@@ -78,11 +78,11 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
 //#region Data links
 const linksArray = [
-  {
-    label: "Home",
-    icon: <AiOutlineHome />,
-    to: "/HomeAdmin",
-  },
+  // {
+  //   label: "Home",
+  //   icon: <AiOutlineHome />,
+  //   to: "/HomeAdmin",
+  // },
   
   {
     label: "Citas",
@@ -102,11 +102,7 @@ const linksArray = [
 ];
 
 const secondarylinksArray = [
-  {
-    label: "Configuración",
-    icon: <AiOutlineSetting />,
-    to: "/null",
-  },
+ 
   {
     label: "Salir",
     icon: <MdLogout />,

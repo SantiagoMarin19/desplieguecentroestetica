@@ -11,7 +11,6 @@ export function MyRoutes() {
    
      
       <Routes>
-        
         <Route path="/DiagramasAdmin" element={<DiagramasAdmin />} /> 
         <Route path="/PersonalAdmin" element={<PersonalAdmin />} />
         <Route path="/AdminCitas" element={< Citas/>}/>
