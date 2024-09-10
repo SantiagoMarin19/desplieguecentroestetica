@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styled, { ThemeProvider } from "styled-components";
 import { LoadingProvider, useLoading } from './componentes/Animación/Loadingcontext';
@@ -23,7 +23,21 @@ import { Sidebar } from "./componentes/Sidebar/Sidebar";
 import { MyRoutes } from "./componentes/PagesAdmin/routers/Route";
 import LoginUser from './pages/Login';
 import SignUp from './pages/SignUp';
-import { CitaAdmin } from "./componentes/Dahsboard/Citas";
+import { Citas } from "./componentes/Dahsboard/Citas";
+
+function AdminLayout({ children }) {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  
+  return (
+    <Container className={sidebarOpen ? "sidebarState active" : ""}>
+      <Sidebar
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+      />
+      {children}
+    </Container>
+  );
+}
 
 function Main() {
     const { setLoading } = useLoading();
@@ -31,14 +45,12 @@ function Main() {
     const location = useLocation();
     const [theme, setTheme] = useState("light");
     const themeStyle = theme === "light" ? Light : Dark;
-    const [sidebarOpen, setSidebarOpen] = useState(true);
-    const [isAdmin, setIsAdmin] = useState(false); // Estado para determinar si es admin o cliente
+    const [isAdmin, setIsAdmin] = useState(false); // Determina si el usuario es admin
 
     useEffect(() => {
         setLoading(true);
-        // Aquí puedes agregar lógica para determinar si el usuario es admin o cliente
-        // Por ejemplo, basado en el token o en la ruta actual
-        setIsAdmin(location.pathname.startsWith('/admin'));
+        // Aquí puedes agregar lógica para determinar si el usuario es admin
+        // Por ejemplo, basado en el token o en algún estado global
     }, [location, setLoading]);
 
     return (
@@ -46,28 +58,30 @@ function Main() {
             <Pageloader />
             <ThemeContext.Provider value={{ setTheme, theme }}>
                 <ThemeProvider theme={themeStyle}>
-                    {isAdmin ? (
-                        <Container className={sidebarOpen ? "sidebarState active" : ""}>
-                            <Sidebar
-                                sidebarOpen={sidebarOpen}
-                                setSidebarOpen={setSidebarOpen}
-                            />
-                            <MyRoutes />
-                        </Container>
-                    ) : (
-                        <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path='/Facturacion' element={<Facturaelectronica />} />
-                            <Route path='/Registrar' element={<button onClick={() => openModal('SignUp')}>Regístrate</button>} />
-                            <Route path="/loginsupa" element={<button onClick={() => openModal('LoginUser')}>Inicia Sesión</button>} />
-                            <Route path="/servicios" element={<Servicios />} />
-                            <Route path="/VistaDetalle" element={<VistaServicios />} />
-                            <Route path="/CitaPend" element={<CitaPend />} />
-                            <Route path="/acerca" element={<Acerca_de />} />
-                            <Route path="/politicas" element={<Condiciones />} />
-                            <Route path="/Agendarcita" element={<Agendar />} />
-                        </Routes>
-                    )}
+                    <Routes>
+                        {/* Rutas de cliente */}
+                        <Route path="/" element={<Home />} />
+                        <Route path='/Facturacion' element={<Facturaelectronica />} />
+                        <Route path='/Registrar' element={<button onClick={() => openModal('SignUp')}>Regístrate</button>} />
+                        <Route path="/loginsupa" element={<button onClick={() => openModal('LoginUser')}>Inicia Sesión</button>} />
+                        <Route path="/servicios" element={<Servicios />} />
+                        <Route path="/VistaDetalle" element={<VistaServicios />} />
+                        <Route path="/CitaPend" element={<CitaPend />} />
+                        <Route path="/acerca" element={<Acerca_de />} />
+                        <Route path="/politicas" element={<Condiciones />} />
+                        <Route path="/Agendarcita" element={<Agendar />} />
+
+                        {/* Rutas de administrador */}
+                        <Route path="/admin/*" element={
+                            isAdmin ? (
+                                <AdminLayout>
+                                    <MyRoutes />
+                                </AdminLayout>
+                            ) : (
+                                <Navigate to="/loginsupa" replace />
+                            )
+                        } />
+                    </Routes>
                 </ThemeProvider>
             </ThemeContext.Provider>
             <Modalinicio />
