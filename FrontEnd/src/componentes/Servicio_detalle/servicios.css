@@ -13,6 +13,8 @@ body {
 .banneer h1 {
     font-size: 80px;
     color: #422A3C;
+    font-weight: 700;
+    text-shadow: 1px 5px 5px rgb(168, 168, 168);
 }
 
 .contenedor_total {
@@ -87,7 +89,7 @@ body {
     border: 1px solid #ddd;
     border-radius: 10px;
     margin-bottom: 20px;
-    width: 50%;
+    width: 70%;
 }
 
 .imagen-contenedor {
@@ -114,4 +116,24 @@ body {
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.button_R{
+    background-color: #B66E7A;
+    border: transparent;
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    color: #ffffff;
+    width: 50%;
+    font-family: "Playfair Display", serif;
+    font-size: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+
+.button_R:hover{
+    background-color: #FCEBF2;
+    color: #422A3C;
 }

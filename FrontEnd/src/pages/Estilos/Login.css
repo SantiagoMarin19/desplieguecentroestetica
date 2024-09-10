@@ -6,6 +6,7 @@ html, body {
   width: 100%;
 }
 
+
 .bodySesion {
   display: flex;
   flex-direction: column;
@@ -92,4 +93,16 @@ form {
   .subtitsesion {
     font-size: 14px;
   }
+}
+
+.header_inicio_sesion {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
+.imgNataliaArtist {
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+
 }
