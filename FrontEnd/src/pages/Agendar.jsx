@@ -8,9 +8,7 @@ export const Agendar = () => {
     <>
        <Promociones></Promociones>
        <Navbar />
-    <body className="helloxd">
       <Agendamiento/>
-    </body>
       
 
    

@@ -20,7 +20,7 @@ const LoginUser = ({ closeModal }) => {
 
     function handleChange(event) {
         const { name, value } = event.target;
-        setFormData((prevFormData) => ({
+        setFormData((prevFormData) => ({    
             ...prevFormData,
             [name]: value
         }));
