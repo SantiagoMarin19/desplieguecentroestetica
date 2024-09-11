@@ -23,7 +23,7 @@ import { Sidebar } from "./componentes/Sidebar/Sidebar";
 import { MyRoutes } from "./componentes/PagesAdmin/routers/Route";
 import LoginUser from './pages/Login';
 import SignUp from './pages/SignUp';
-import { Citas } from "./componentes/Dahsboard/Citas";
+
 
 function AdminLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
