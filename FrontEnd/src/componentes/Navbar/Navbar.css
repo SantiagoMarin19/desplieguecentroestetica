@@ -1,0 +1,83 @@
+/* Asegúrate de que el contenedor del navbar tenga el ancho completo */
+.navbar {
+    background-color: #e9cbd5 !important;
+}
+
+/* Contenedor de colapso del navbar */
+.navbar-collapse {
+    display: flex;
+    width: 100%;
+    align-items: center; /* Alinea verticalmente en el centro */
+}
+
+.navbar-nav{
+    margin-left: 100px;
+}
+
+/* Contenedor para la navegación y el inicio de sesión */
+.navbar-content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between; /* Espacio entre los elementos de navegación y el inicio de sesión */
+    align-items: center; /* Alinea verticalmente en el centro */
+}
+
+/* Contenedor para centrar los enlaces de navegación */
+.navbar-nav-container {
+    flex-grow: 1; /* Permite que este contenedor ocupe el espacio disponible */
+    display: flex;
+    justify-content: center; /* Centra los enlaces de navegación horizontalmente */
+}
+
+/* Contenedor para los elementos de inicio de sesión alineados a la derecha */
+.iniciosesion {
+    display: flex;
+    flex-direction: column; /* Apila verticalmente el nombre y el botón */
+    align-items: flex-end; /* Alinea los elementos al final del contenedor */
+}
+
+/* Contenedor para el contenido de inicio de sesión */
+.iniciosesion-content {
+    display: flex;
+    flex-direction: column; /* Apila verticalmente el nombre y el botón */
+    align-items: flex-end; /* Alinea los elementos al final del contenedor */
+}
+
+.iniciosesion-name {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.iniciosesion-name box-icon {
+    margin-right: 8px;
+}
+
+.iniciosesion-name span {
+    font-weight: lighter;
+    font-size: 16px;
+    color: #333;
+}
+
+
+
+/* Alineación y espaciado entre los elementos del navbar */
+.navbar-nav .nav-item {
+    margin: 0 15px; /* Ajusta el espaciado entre los elementos */
+}
+
+/* Estilos para los enlaces del navbar */
+.nav-link {
+    color: black; /* Cambia el color de los enlaces a negro */
+    transition: color 0.3s; /* Agrega una transición suave para el cambio de color */
+}
+
+.nav-link:hover, .nav-link:focus {
+    color: #a7249c; /* Cambia el color a magenta al hacer hover o focus */
+    text-decoration: none; /* Opcional: quita la subrayado del enlace */
+}
+
+/* Estilo para el botón */
+.btn-link {
+    color: black; /* Cambia el color del texto del botón a negro */
+}

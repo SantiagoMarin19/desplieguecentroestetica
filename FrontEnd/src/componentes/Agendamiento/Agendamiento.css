@@ -1,0 +1,248 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Playfair Display", serif;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    text-align: center;
+    padding: 12px;
+}
+
+th {
+    background-color: #f7f7f7;
+}
+
+td {
+    background-color: #ffffff;
+}
+
+th, td {
+    font-size: 16px;
+}
+
+.colorros {
+    background-color: #FCEBF2;
+}
+
+.cuadros {
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+.cuadros.libre {
+    background-color: rgb(184, 118, 223);
+}
+
+.cuadros.ocupado {
+    background-color: rgb(126, 121, 121);
+}
+
+.react-calendar__tile {
+    color: #000000 !important;
+}
+
+.react-calendar__tile--active {
+    background: #ffdceb !important;
+}
+
+.react-calendar__tile:hover {
+    background: #FCEBF2 !important;
+}
+
+.header_agendamiento {
+    background-color: #FCEBF2;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header_agendamiento h3 {
+    font-size: 40px;
+    text-align: center;
+    color: #422A3C;
+}
+
+.seleccion-container {
+    background-color: #422A3C;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+    padding: 1rem;
+    border: #422A3C;
+    border-radius: 10px;
+    margin: 20px;
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.seleccion-container h3 {
+    text-align: center;
+    font-weight: 100;
+    font-size: 30px;
+}
+
+.select_profesional {
+    background-color: #422A3C;
+    color: #ddd;
+    display: flex;
+}
+
+.select_contenedor_profesionales {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.hr {
+    width: 98%;
+    margin: 20px;
+}
+
+.titulo_calendario_escoger_fecha {
+    background-color: #422A3C;
+    color: #ffffff;
+    border: 2px solid #422A3C;
+    border-radius: 10px;
+    width: 98%;
+    margin: 20px;
+}
+
+.titulo_calendario_escoger_fecha h3 {
+    text-align: center;
+    font-size: 30px;
+}
+
+.titulo_calendario_escoger_fecha p {
+    font-size: 18px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.calendario-container {
+    display: flex;
+    flex-direction: row;
+    background-color: #dddddd59;
+    border: 2px solid #422a3c36;
+    border-radius: 10px;
+    padding: 1rem;
+    width: 98%;
+    height: 10%;
+    justify-content: space-around;
+    align-items: baseline;
+    margin: 20px;
+}
+
+.react_calendar_fecha {
+    width: 100%;
+    max-width: 100%;
+    background: white;
+    border: 1px solid #a0a096;
+    line-height: 1.125em;
+}
+
+.react-calendar__navigation {
+    display: flex;
+    height: 44px;
+    margin-bottom: 1em;
+    background-color: #ffdceb;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.horarios-container {
+    display: flex;
+    margin-top: 20px;
+    align-content: center;
+    justify-content: center;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.Resumendecompra_Agendamiento {
+    background-color: #FCEBF2;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    margin: 20px;
+}
+
+.titulo_Resumendecompra_Agendamiento {
+    background-color: #422A3C;
+    color: #ffffff;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.titulo_Resumendecompra_Agendamiento h3 {
+    text-align: center;
+    font-size: 30px;
+}
+
+.boton_reservar_cita {
+    background-color: #422A3C;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.boton_reservar_cita:hover {
+    background-color: #5c3f5d;
+}
+
+.main-content {
+    display: flex;
+    width: 100%;
+}
+
+.left-section {
+    width: 50%;
+    padding: 1rem;
+}
+
+.right-section {
+    width: 50%;
+    padding: 1rem;
+    background-color: #dddddd59;
+    border: 2px solid #422a3c36;
+    margin: 25px;
+    border-radius: 10px;
+}
+
+.agendamiento-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.horarios-container {
+    margin-top: 20px;
+    /* Asegura que el título esté en una columna separada */
+}
+
+.titulo_horarios {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.horarios-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

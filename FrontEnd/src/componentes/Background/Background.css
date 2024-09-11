@@ -1,0 +1,501 @@
+/* Estilos generales */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* Estilo del contenedor principal */
+.conteinergeneral {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Asegura que el contenedor abarque toda la altura de la vista */
+}
+
+/* Ajustes para la sección .iconos */
+.iconos {
+  flex: 1; /* Permite que esta sección ocupe el espacio restante disponible */
+}
+
+/* Estilo para la imagen de fondo */
+.background {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh; /* Asegura que el fondo cubra la altura completa de la vista */
+}
+
+.foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Asegura que la imagen cubra el área sin distorsión */
+  border: none;
+  border-radius: 10px;
+}
+
+/* Estilos para el texto y botones */
+.Frase-background {
+  text-align: center;
+  padding: 20px;
+}
+
+.frase, .Frase-background h1, .Frase-background p {
+  margin: 0;
+  text-align: -webkit-auto;
+}
+
+/* Botón primario */
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
+}
+
+/* Estilo para la sección de imágenes de servicios */
+.imgservices {
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* Botón de navegación */
+.bottoncentrado {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.buttonservi {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+/* Estilos para el mapa */
+.backgroundtercero {
+  padding: 20px;
+}
+
+.enunciados h2 {
+  font-size: 1.5em;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.mapa iframe {
+  width: 100%;
+  height: 300px;
+  border: 0;
+}
+
+/* Media queries para responsive design */
+@media (max-width: 768px) {
+  .Frase-background h1 {
+    font-size: 1.5em;
+  }
+
+  .Frase-background p {
+    font-size: 0.9em;
+  }
+
+  .imgservices img {
+    max-width: 150px;
+  }
+
+  .backgroundtercero h2 {
+    font-size: 1.2em;
+  }
+
+  .backgroundtercero h3 {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .Frase-background h2 {
+    font-size: 1.2em;
+  }
+
+  .Frase-background h1 {
+    font-size: 1.2em;
+  }
+
+  .Frase-background p {
+    font-size: 0.8em;
+  }
+
+  .imgservices img {
+    max-width: 120px;
+  }
+
+  .backgroundtercero h2 {
+    font-size: 1em;
+  }
+
+  .backgroundtercero h3 {
+    font-size: 0.9em;
+  }
+
+  .mapa iframe {
+    height: 200px;
+  }
+}
+
+.background {
+  background-color: #FCEBF2;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  overflow-y: scroll;
+}
+
+a {
+  text-decoration: none;
+}
+
+.backgroundtercero {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-image: url(../../assets/images/fondo3.png);
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.20);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-sizing: border-box; /* Asegura que el padding no incremente el tamaño total */
+  padding: 50px; /* Añadido para espacio interior */
+}
+
+.Frase-background {
+  margin-left: 10%;
+}
+
+.img-rostro {
+  width: 100vh;
+  height: auto;
+}
+
+.foto {
+  width: 800px;
+  height: 900px;
+  overflow: hidden;
+}
+
+.foto img {
+  max-width: 100%;
+  height: 900px;
+  display: block;
+}
+
+.enunciados {
+  justify-content: center;
+  text-align: center; /* Centra los enunciados */
+  color: #422A3C;
+  font-weight: 700;
+  font-family: "Playfair Display", serif;
+  margin-bottom: 40px; /* Espacio inferior */
+  width: 50%;
+}
+
+.enunciados h2 {
+  font-size: 50px; /* Tamaño del título principal */
+  margin-bottom: 20px; /* Espacio inferior */
+}
+
+.enunciados h3 {
+  font-size: 24px; /* Tamaño del subtítulo */
+  margin-bottom: 30px; /* Espacio inferior */
+  color: #fff;
+}
+
+.buttonservi {
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.boton {
+  margin-left: 40% !important;
+  background-color: #C98695;
+  font-size: 20px;
+}
+
+.btn-primary {
+  display: flex !important;
+  background-color: #BF6A8C !important;
+  color: white !important;
+  padding: 10px;
+  width: 25%;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+
+.servicios {
+  --bs-btn-color: #000000;
+  --bs-btn-bg: #BF6A8C;
+  --bs-btn-border-color: #BF6A8C;
+  --bs-btn-hover-color: #ff0000;
+  --bs-btn-hover-bg: #BF6A8C;
+  --bs-btn-hover-border-color: #BF6A8C;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: #ff0000;
+  --bs-btn-active-bg: #BF6A8C;
+  --bs-btn-active-border-color: #BF6A8C;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #ff0000;
+  --bs-btn-disabled-bg: #BF6A8C;
+  --bs-btn-disabled-border-color: #BF6A8C;
+}
+
+.bottoncentrado {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+.mapa {
+  text-align: center; /* Centra el mapa y el botón */
+  margin-top: 30px; /* Espacio superior */
+}
+
+.mapa iframe {
+  width: 100%; /* Ajusta el ancho del mapa */
+  max-width: 800px; /* Límite máximo de ancho */
+  height: 450px; /* Altura fija */
+  border: none; /* Sin borde al iframe */
+  border-radius: 10px; /* Borde redondeado */
+  margin-bottom: 20px; /* Espacio inferior */
+}
+
+.mapa button {
+  background-color: #ffffff; /* Color de fondo del botón */
+  color: #BF6A8C; /* Color del texto del botón */
+  border: none; /* Sin borde */
+  border-radius: 5px;
+  padding: 10px 20px; /* Espaciado interno */
+  font-size: 18px; /* Tamaño de fuente */
+  cursor: pointer; /* Cursor de puntero */
+  transition: background-color 0.3s ease; /* Transición suave */
+}
+
+.mapa button:hover {
+  background-color: rgba(255, 255, 255, 0.8); /* Cambia el fondo al pasar el mouse */
+
+ }
+
+ .Boton_Politicas{
+  border: transparent;
+  border-radius: 10px;
+ }
+ 
+
+
+
+.herr-von-muellerhoff-regular {
+  font-family: "Herr Von Muellerhoff", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.Frase-background h1 {
+  text-align: left;
+  justify-content: left;
+  color: rgb(0, 0, 0);
+  height: auto;
+  font-size: 80px;
+  font-family: "Playfair Display", serif;
+}
+
+.Frase-background h2 {
+  text-align: left;
+  justify-content: left;
+  color: #E9AF4A;
+  height: auto;
+  font-size: 80px;
+  font-family: "Herr Von Muellerhoff", cursive;
+}
+
+.Frase-background p {
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+  margin-bottom: 10%;
+  width: 70%;
+  font-family: "Urbanist", sans-serif;
+}
+
+.containergoblal {
+  display: block;
+  margin-left: 2%;
+  margin-bottom: 7%;
+}
+
+.icono_grande {
+  font-size: 2em;
+}
+
+.acercade {
+  font-family: "Urbanist", sans-serif;
+  font-size: 30px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 25%;
+  margin-right: 25%;
+  text-align: justify;
+}
+
+.imgservices {
+  display: flex;
+  justify-content: center;
+}
+
+.img-completa {
+  border-top-left-radius: 20px;
+  margin-top: 3px;
+  border-bottom-left-radius: 20px;
+  width: auto;
+  height: 600px;
+}
+
+.img-cejas {
+  margin: 5px;
+}
+
+.img-lifting {
+  margin: 5px;
+}
+
+.img-maquillaje {
+  margin: 5px;
+  border-top-right-radius: 20px;
+}
+
+.img-lifcejas {
+  margin: 5px;
+  border-bottom-right-radius: 20px;
+}
+
+.fraseservicios {
+  text-align: center;
+  font-family: "Urbanist", sans-serif;
+  font-size: 30px;
+  margin-top: 5%;
+  margin-bottom: 3%;
+  margin-left: 25%;
+  margin-right: 25%;
+  color: #422A3C;
+}
+
+.btn-servicios {
+  background-color: transparent;
+  padding-right: 50px;
+  padding-left: 50px;
+  border-radius: 2px;
+  border-color: black;
+  border-width: thin;
+  font-size: 20px;
+  font-family: 'Urbanist';
+}
+
+.redirigirserv {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.buttonservi {
+  display: flex !important;
+  background-color: #BF6A8C !important;
+  color: white !important;
+  padding: 10px;
+  width: 200%;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+@media (max-width: 1315px) {
+  .foto {
+    width: 0;
+    height: 0;
+  }
+  h1 {
+    font-size: 50px !important;
+    width: 500px !important;
+  }
+  .imgservices img {
+    width: 100%;
+    height: auto;
+    max-width: 200px;
+    margin: 10px;
+  }
+}
+@media (max-width: 500px){
+  .contenedorif {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }}
+
+
+@media (max-width: 500px) {
+  .foto {
+    width: 0;
+    height: 0;
+  }
+  h1 {
+    font-size: 30px !important;
+    width: 250px !important;
+  }
+
+  h2.frase {
+    padding-top: 80%;
+  }
+  .acercade {
+    font-size: 20px;
+  }
+  .mapa {
+    text-align: center;
+    display: contents;
+  }
+  .backgroundtercero {
+    display: flex;
+    flex-direction: column;
+  }
+  h2 {
+    font-size: 20px !important;
+  }
+  h3.reservas {
+    font-size: 20px !important;
+  }
+  .oa {
+    margin-right: 20px;
+  }
+  .oaa {
+    margin-right: 20px;
+  }
+  .buttonservi {
+    display: flex !important;
+    background-color: #BF6A8C !important;
+    color: white !important;
+    padding: 10px;
+    width: 100%;
+    justify-content: center;
+    border-radius: 10px;
+  }
+}
+
+.agendarYa {
+  text-decoration: none;
+  color: inherit;
+}
