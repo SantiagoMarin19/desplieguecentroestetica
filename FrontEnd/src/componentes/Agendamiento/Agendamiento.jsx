@@ -4,12 +4,6 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import supabase from '../../supabase/supabaseconfig';
-import FacturacionModal from '../Factura/Factura';
- 
-const getDiaSemana = (date) => {
-    const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-    return diasSemana[date.getDay()];
-};
 
 export const Agendamiento = () => {
     const [profesionales, setProfesionales] = useState([]);
@@ -17,9 +11,11 @@ export const Agendamiento = () => {
     const [selectedHora, setSelectedHora] = useState('');
     const [horariosOcupados, setHorariosOcupados] = useState([]);
     const [franjasHorarias, setFranjasHorarias] = useState([]);
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState(null); // Cambiar a null inicialmente
     const [userId, setUserId] = useState(null);
-    const [showModal, setShowModal] = useState(false);
+
+    const navigate = useNavigate();
+    const { servicio } = useLocation().state || { servicio: { nombre_servicio: "Servicio no especificado", precio: "$0.00" } };
 
     // Fetch user and professionals data
     useEffect(() => {
@@ -47,19 +43,21 @@ export const Agendamiento = () => {
         fetchProfesionales();
     }, []);
 
-    // Fetch franjas horarias and ocupados whenever date or profesional changes
+    // Fetch franjas horarias whenever date changes
     useEffect(() => {
         const fetchFranjasHorarias = async () => {
-            const selectedDate = date.toISOString().split('T')[0];
-            const { data, error } = await supabase
-                .from('franja_horaria')
-                .select('id_horario, hora, estado, fecha')
-                .eq('fecha', selectedDate);
+            if (date) {
+                const selectedDate = date.toISOString().split('T')[0];
+                const { data, error } = await supabase
+                    .from('franja_horaria')
+                    .select('id_horario, hora, estado, fecha')
+                    .eq('fecha', selectedDate);
 
-            if (error) {
-                console.error('Error fetching franjas horarias:', error);
-            } else {
-                setFranjasHorarias(data || []);
+                if (error) {
+                    console.error('Error fetching franjas horarias:', error);
+                } else {
+                    setFranjasHorarias(data || []);
+                }
             }
         };
 
@@ -68,35 +66,37 @@ export const Agendamiento = () => {
 
     useEffect(() => {
         const fetchHorariosOcupados = async () => {
-            if (selectedProfesional && date) {
+            if (selectedProfesional && date && servicio) {
                 const selectedDate = date.toISOString().split('T')[0];
                 const { data, error } = await supabase
                     .from('cita')
                     .select('franja_horaria')
                     .eq('profesional', selectedProfesional)
-                    .eq('fecha', selectedDate);
+                    .eq('fecha', selectedDate)
+                    .eq('servicio', servicio.id_servicios);
 
                 if (error) {
                     console.error('Error fetching horarios ocupados:', error);
                 } else {
-                    setHorariosOcupados(data.map(cita => cita.franja_horario) || []);
+                    setHorariosOcupados(data.map(cita => cita.franja_horaria) || []);
                 }
             }
         };
 
         fetchHorariosOcupados();
-    }, [selectedProfesional, date]);
+    }, [selectedProfesional, date, servicio]);
 
     const handleProfesionalChange = (event) => {
         const selectedId = event.target.value;
         setSelectedProfesional(selectedId);
         localStorage.setItem('selectedProfesional', selectedId);
         setSelectedHora('');
-        setHorariosOcupados([]);
+        setHorariosOcupados([]); // Reset horarios ocupados cuando se cambia el profesional
     };
 
     const handleHoraClick = (hora, franjaId) => {
         if (isOcupado(franjaId)) {
+            alert('Esta hora ya está ocupada. Por favor, elige otra.');
             return;
         }
         setSelectedHora(hora);
@@ -107,8 +107,6 @@ export const Agendamiento = () => {
         return horariosOcupados.includes(franjaId);
     };
 
-    const navigate = useNavigate();
-    const { servicio } = useLocation().state || { servicio: { nombre_servicio: "Servicio no especificado", precio: "$0.00" } };
     const handleReservarClick = (event) => {
         event.preventDefault();
 
@@ -129,6 +127,18 @@ export const Agendamiento = () => {
                 }
             }
         });
+    };
+
+    const tileDisabled = ({ date }) => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Resetear la hora para comparación solo de fechas
+
+        // Deshabilitar el día actual y días pasados
+        if (date.toDateString() === today.toDateString()) {
+            console.log('No se puede seleccionar el día actual. Por favor, elige una fecha futura.');
+            return true;
+        }
+        return date < today; // Deshabilitar días pasados
     };
 
     return (
@@ -168,20 +178,20 @@ export const Agendamiento = () => {
                                 className="react_calendar_fecha" 
                                 onChange={setDate} 
                                 value={date} 
-                                tileDisabled={({ date, view }) => view === 'month' && date < new Date()} 
+                                tileDisabled={tileDisabled} 
                             />
 
                             <div className='horarios-container'>
                                 <div className='titulo_horarios'>
                                     <h3>Horarios Disponibles</h3>
                                 </div>
+                                
                                 <div className='horarios-grid'>
                                     {franjasHorarias.map(franja => (
-                                        <div
-                                            key={franja.id_horario}
-                                            className={`cuadros ${isOcupado(franja.id_horario) ? 'ocupado' : 'libre'}`}
-                                            onClick={() => handleHoraClick(franja.hora, franja.id_horario)}
-                                            style={{ cursor: isOcupado(franja.id_horario) ? 'not-allowed' : 'pointer' }}>
+                                        <div key={franja.id_horario}
+                                             className={`cuadros ${isOcupado(franja.id_horario) ? 'ocupado' : 'libre'}`}
+                                             onClick={() => handleHoraClick(franja.hora, franja.id_horario)}
+                                             style={{ cursor: isOcupado(franja.id_horario) ? 'not-allowed' : 'pointer', opacity: isOcupado(franja.id_horario) ? 0.5 : 1 }}>
                                             {franja.hora}
                                         </div>
                                     ))}
@@ -200,7 +210,7 @@ export const Agendamiento = () => {
                             <thead>
                                 <tr>
                                     <th colSpan={2}>
-                                        {date.getDate()} {date.toLocaleDateString('default', { month: 'short' })} {date.getFullYear()} - {selectedHora}
+                                        {date ? `${date.getDate()} ${date.toLocaleDateString('default', { month: 'short' })} ${date.getFullYear()} - ${selectedHora}` : 'Selecciona una fecha'}
                                     </th>
                                 </tr>
                                 <tr>
@@ -237,30 +247,9 @@ export const Agendamiento = () => {
                         </table>
                     </div>
                 </div>
-                
             </div>
-
-          
-            {/* <FacturacionModal 
-            
-                show={showModal} // Usar 'show' en lugar de 'showModal'
-                onHide={() => setShowModal(false)} 
-                fecha={date}
-                duracion={selectedHora}
-                idProfesional={selectedProfesional}
-                servicio={servicio}
-                
-                
-                idUsuario={userId} 
-            /> */}
-            
         </div>
-        
-        
     );
-    console.log(showModal)
-
-    
 };
 
 export default Agendamiento;
