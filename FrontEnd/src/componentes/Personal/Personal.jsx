@@ -178,5 +178,3 @@ const Table = styled.table`
 `;
 
 export default Personal;
-
- 
