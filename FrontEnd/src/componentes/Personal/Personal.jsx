@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Pagination from './Pagination';
+import Pagination from '../PagesAdmin/Pagination';
 import "./Personal.css";
 import supabase from '../../supabase/supabaseconfig';
 
-const Citas = ({ token }) => {
+const Personal = ({ token }) => {
   const [citas, setCitas] = useState([]);
   const [appointments, setAppointments] = useState([]);
   const [user, setUser] = useState(null);
