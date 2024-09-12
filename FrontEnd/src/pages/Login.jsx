@@ -4,7 +4,7 @@ import supabase from '../supabase/supabaseconfig';
 import flechaizq from "../assets/images/decoración.png";
 import or from "../assets/images/OR.png";
 import flechader from "../assets/images/decor.png";
-import { useModal } from '../componentes/modal/ContextModal'; // Asegúrate de que la ruta sea correcta
+import { useModal } from '../componentes/modal/ContextModal';
 import "./Estilos/Login.css";
 
 const LoginUser = ({ closeModal }) => {
@@ -16,7 +16,7 @@ const LoginUser = ({ closeModal }) => {
         password: ''
     });
 
-    const { openModal } = useModal(); // Usa el contexto del modal
+    const { openModal } = useModal();
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -43,9 +43,15 @@ const LoginUser = ({ closeModal }) => {
             sessionStorage.setItem('token', JSON.stringify(data.session.access_token));
             sessionStorage.setItem('user', JSON.stringify(data.user.user_metadata.full_name));
 
-            const redirectTo = location.state?.from || '/';
-            navigate(redirectTo);
-            closeModal();  // Cierra el modal después de la redirección
+            // Comprueba si el correo es "davidochoa772@gmail.com"
+            if (formData.email === "davidochoa772@gmail.com") {
+                navigate('/AgendaPersonal');
+            } else {
+                const redirectTo = location.state?.from || '/';
+                navigate(redirectTo);
+            }
+            
+            closeModal();
         } catch (error) {
             console.error("Caught error:", error);
             alert(error.message);
@@ -53,8 +59,8 @@ const LoginUser = ({ closeModal }) => {
     }
 
     function handleForgotPasswordClick() {
-        closeModal(); // Cierra el modal antes de redirigir
-        navigate('/recover'); // Redirige a la página de recuperación de contraseña
+        closeModal();
+        navigate('/recover');
     }
 
     return (
