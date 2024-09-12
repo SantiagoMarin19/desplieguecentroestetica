@@ -23,7 +23,7 @@ import { Sidebar } from "./componentes/Sidebar/Sidebar";
 import { MyRoutes } from "./componentes/PagesAdmin/routers/Route";
 import LoginUser from './pages/Login';
 import SignUp from './pages/SignUp';
-
+import VistaProfesional from './pages/Personal'
 
 function AdminLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -70,7 +70,7 @@ function Main() {
                         <Route path="/acerca" element={<Acerca_de />} />
                         <Route path="/politicas" element={<Condiciones />} />
                         <Route path="/Agendarcita" element={<Agendar />} />
-
+                        <Route path="/AgendaPersonal" element={<VistaProfesional/>}/>
                         {/* Rutas de administrador */}
                         <Route path="/admin/*" element={
                             isAdmin ? (
