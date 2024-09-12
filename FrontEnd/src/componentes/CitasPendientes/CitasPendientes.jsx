@@ -76,26 +76,27 @@ const CitasPendientes = ({ token }) => {
                 <div className='cartacompletacitas'>
                     {appointments.map((citas, index) => (
                         <div key={index} className='contenedorcarta'>
-                           
+
                             <div className='subcarta'>
                                 <img src={citas.servicio.url_img} alt={citas.servicio.nombre_servicio} className="imagen-servicio" />
                                 <p className='contenedorTitulo'>{citas.servicio.nombre_servicio}</p>
                                 <p className='contenedorsubtitulo'><b className='fechaAgendadaSubtitulo'>Fecha:</b> {new Date(citas.fecha).toLocaleDateString()}</p>
                                 <p className='contenedorsubtitulo'><b className='fechaAgendadaSubtitulo'>Duración:</b> {citas.duracion}</p>
                                 <p className='contenedorsubtitulo'><b className='fechaAgendadaSubtitulo'>Profesional:</b> {citas.profesional.nombre_profesional}</p>
-                                <p className='contenedorsubtitulo'><b className='fechaAgendadaSubtitulo'>Estado:</b> {citas.estado ? 'Confirmada' : 'Pendiente'}</p>
-                                <NavLink to={"/politicas"}> <button> RECOMENDACIONES PARA TU CITA </button> </NavLink>   
-                               
+                                <p className='contenedorsubtitulo'> <b className='fechaAgendadaSubtitulo'>Estado:</b> {citas.estado ? 'Confirmada' : 'Pendiente'}</p>
+
+                                <NavLink to={"/politicas"}> <button> RECOMENDACIONES PARA TU CITA </button> </NavLink>
+
                             </div>
-                            
+
                         </div>
                     ))}
                 </div>
-                
+
             )}
         </Container>
 
-       
+
     );
 };
 

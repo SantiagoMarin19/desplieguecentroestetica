@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import Modalinicio from './Modalinicio'; 
 import ModalRegistro from './ModalRegistro'; 
 
@@ -9,17 +9,23 @@ export const ModalProvider = ({ children }) => {
     const [modalType, setModalType] = useState('');
 
     const openModal = (type) => {
-        setShowModal(false);
-        setTimeout(() => {
-            setModalType(type);
-            setShowModal(true);
-        }, 200); 
+        setModalType(type);
+        setShowModal(true);
     };
 
     const closeModal = () => {
         setShowModal(false);
         setModalType('');
     };
+
+    useEffect(() => {
+        if (!showModal) {
+            const modalBackdrop = document.querySelector('.modal-backdrop');
+            if (modalBackdrop) {
+                modalBackdrop.remove();
+            }
+        }
+    }, [showModal]);
 
     return (
         <ModalContext.Provider value={{ showModal, openModal, closeModal, modalType }}>

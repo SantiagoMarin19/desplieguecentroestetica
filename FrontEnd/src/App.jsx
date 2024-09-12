@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation, Navigate, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styled, { ThemeProvider } from "styled-components";
 import { LoadingProvider, useLoading } from './componentes/Animación/Loadingcontext';
-import { ModalProvider, useModal } from './componentes/modal/ContextModal';
+import { ModalProvider } from './componentes/modal/ContextModal';
 import { Light, Dark } from "./Styles/Themes";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
+import { toast, ToastContainer } from 'react-toastify'; // Importa react-toastify para notificaciones globales
+import 'react-toastify/dist/ReactToastify.css'; // Asegúrate de importar los estilos de react-toastify
+
 export const ThemeContext = React.createContext(null);
 
-// Importa todos los componentes necesarios aquí
+// Importa todos los componentes necesarios
 import Home from './pages/Home';
 import { Servicios } from './pages/Servicios';
 import { Acerca_de } from './pages/Acerca_de';
@@ -23,7 +28,7 @@ import { Sidebar } from "./componentes/Sidebar/Sidebar";
 import { MyRoutes } from "./componentes/PagesAdmin/routers/Route";
 import LoginUser from './pages/Login';
 import SignUp from './pages/SignUp';
-
+import AbonoInfo from './componentes/AbonoInfo/AbonoInfo';
 
 function AdminLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -41,11 +46,11 @@ function AdminLayout({ children }) {
 
 function Main() {
     const { setLoading } = useLoading();
-    const { openModal } = useModal();
     const location = useLocation();
     const [theme, setTheme] = useState("light");
     const themeStyle = theme === "light" ? Light : Dark;
     const [isAdmin, setIsAdmin] = useState(false); // Determina si el usuario es admin
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLoading(true);
@@ -70,6 +75,8 @@ function Main() {
                         <Route path="/acerca" element={<Acerca_de />} />
                         <Route path="/politicas" element={<Condiciones />} />
                         <Route path="/Agendarcita" element={<Agendar />} />
+                        <Route path="/abono-info" element={<AbonoInfo />} />
+
 
                         {/* Rutas de administrador */}
                         <Route path="/admin/*" element={
@@ -86,17 +93,42 @@ function Main() {
             </ThemeContext.Provider>
             <Modalinicio />
             <ModalRegistro />
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </>
     );
 }
 
 function App() {
     const [token, setToken] = useState(null);
+    const [userName, setUserName] = useState('');
 
     useEffect(() => {
         const storedToken = sessionStorage.getItem('token');
-        if (storedToken) {
+        const storedUser = sessionStorage.getItem('user');
+        const welcomeShown = sessionStorage.getItem('welcomeShown');
+
+        if (storedToken && storedUser) {
             setToken(JSON.parse(storedToken));
+            setUserName(JSON.parse(storedUser));
+
+            // Muestra el mensaje de bienvenida si no se ha mostrado previamente
+            if (!welcomeShown) {
+                toast.success(`Bienvenido de nuevo, ${storedUser}`);
+                sessionStorage.setItem('welcomeShown', 'true');
+            }
+        } else {
+            // Si no hay token ni nombre de usuario, muestra el mensaje de cierre de sesión
+            toast.info("Sesión Finalizada");
         }
     }, []);
 

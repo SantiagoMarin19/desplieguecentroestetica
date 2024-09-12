@@ -3,7 +3,7 @@ import './Nosotros.css';
 
 export default function Nosotros() {
     return (
-        <div className='container'>
+        <div className='containernosotros'>
             <div className='header'>
                 <h1>Acerca de Nosotros</h1>
             </div>

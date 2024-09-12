@@ -27,6 +27,7 @@ export const Navbar = ({ token, handleLogout }) => {
         setUserName('');
         setShowLogout(false);
         window.location.reload();
+        navigate('/')
 
 
         handleLogout();
