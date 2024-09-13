@@ -43,9 +43,11 @@ const LoginUser = ({ closeModal }) => {
             sessionStorage.setItem('token', JSON.stringify(data.session.access_token));
             sessionStorage.setItem('user', JSON.stringify(data.user.user_metadata.full_name));
 
-            // Comprueba si el correo es "davidochoa772@gmail.com"
+            // Check email and navigate accordingly
             if (formData.email === "davidochoa772@gmail.com") {
                 navigate('/admin');
+            } else if (formData.email === "santiago192506@gmail.com") {
+                navigate('/AgendaPersonal');
             } else {
                 const redirectTo = location.state?.from || '/';
                 navigate(redirectTo);
