@@ -5,7 +5,7 @@ import styled, { ThemeProvider } from "styled-components";
 import { LoadingProvider, useLoading } from './componentes/Animación/Loadingcontext';
 import { ModalProvider, useModal } from './componentes/modal/ContextModal';
 import { Light, Dark } from "./Styles/Themes";
-import supabase from './supabase/supabaseconfig'; // Asegúrate de que esta importación es correcta
+import supabase from './supabase/supabaseconfig';
 export const ThemeContext = React.createContext(null);
 
 // Importa todos los componentes necesarios aquí
@@ -24,7 +24,7 @@ import { Sidebar } from "./componentes/Sidebar/Sidebar";
 import { MyRoutes } from "./componentes/PagesAdmin/routers/Route";
 import LoginUser from './pages/Login';
 import SignUp from './pages/SignUp';
-import VistaProfesional from './pages/Personal'
+import VistaProfesional from './pages/Personal';
 
 function AdminLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -53,10 +53,10 @@ function Main() {
         const checkUser = async () => {
             setLoading(true);
             const { data: { user } } = await supabase.auth.getUser();
-            console.log("Current user:", user); // Para depuración
+            console.log("Current user:", user);
             setUser(user);
             if (user && user.email === "davidochoa772@gmail.com") {
-                console.log("Setting user as admin"); // Para depuración
+                console.log("Setting user as admin");
                 setIsAdmin(true);
             } else {
                 setIsAdmin(false);
@@ -67,7 +67,7 @@ function Main() {
     }, [setLoading]);
 
     useEffect(() => {
-        console.log("isAdmin:", isAdmin); // Para depuración
+        console.log("isAdmin:", isAdmin);
     }, [isAdmin]);
 
     return (
@@ -91,7 +91,15 @@ function Main() {
                         {/* Rutas de administrador */}
                         <Route 
                             path="/admin/*" 
-                            element={isAdmin ? <AdminLayout><MyRoutes /></AdminLayout> : <Navigate to="/" replace />} 
+                            element={
+                                isAdmin ? (
+                                    <AdminLayout>
+                                        <MyRoutes />
+                                    </AdminLayout>
+                                ) : (
+                                    <Navigate to="/" replace />
+                                )
+                            } 
                         />
                     </Routes>
                 </ThemeProvider>

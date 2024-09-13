@@ -83,7 +83,7 @@ form {
   }
 
   .decoraciones {
-    display: none;
+    display: flex;
   }
 
   .titulosesion {

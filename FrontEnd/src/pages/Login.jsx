@@ -45,7 +45,7 @@ const LoginUser = ({ closeModal }) => {
 
             // Comprueba si el correo es "davidochoa772@gmail.com"
             if (formData.email === "davidochoa772@gmail.com") {
-                navigate('/AgendaPersonal');
+                navigate('/admin');
             } else {
                 const redirectTo = location.state?.from || '/';
                 navigate(redirectTo);
