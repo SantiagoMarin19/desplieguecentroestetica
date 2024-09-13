@@ -5,12 +5,11 @@ import "./Personal.css";
 import supabase from '../../supabase/supabaseconfig';
 
 const Personal = ({ token }) => {
-  const [citas, setCitas] = useState([]);
   const [appointments, setAppointments] = useState([]);
   const [user, setUser] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
-  const citasPerPage = 5;
+  const appointmentsPerPage = 5;
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -35,110 +34,88 @@ const Personal = ({ token }) => {
         const { data, error } = await supabase
           .from('cita')
           .select(`
-            fecha, duracion, estado, profesional (
-              nombre_profesional
-            ), servicio (
+            id_cita,
+            fecha,
+            duracion,
+            estado,
+            usuario_id,
+            profesional_id,
+            servicio_id,
+            profesional (
+              id_profesional,
+              nombre_profesional,
+              email
+            ),
+            servicio (
+              id_servicio,
               nombre_servicio
             )`)
-          .eq('usuarios', user.id);
+          .eq('profesional.email', user.email);
 
         if (error) {
           console.error('Error fetching appointments:', error);
         } else {
+          console.log('Fetched appointments:', data);
           setAppointments(data || []);
         }
+        setLoading(false);
       }
     };
 
-    fetchAppointments();
+    if (user) {
+      fetchAppointments();
+    }
   }, [user]);
 
-  useEffect(() => {
-    const fetchCitas = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('cita')
-          .select(`
-            fecha, duracion, estado, profesional (
-              nombre_profesional
-            ), servicio (
-              nombre_servicio
-            )`);
-        if (error) throw error;
-        setCitas(data);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching citas:', error);
-        setLoading(false);
-      }
-    };
-
-    fetchCitas();
-  }, []);
-
-  const indexOfLastCita = currentPage * citasPerPage;
-  const indexOfFirstCita = indexOfLastCita - citasPerPage;
-  const currentCitas = citas.slice(indexOfFirstCita, indexOfLastCita);
+  const indexOfLastAppointment = currentPage * appointmentsPerPage;
+  const indexOfFirstAppointment = indexOfLastAppointment - appointmentsPerPage;
+  const currentAppointments = appointments.slice(indexOfFirstAppointment, indexOfLastAppointment);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  const handleAcceptCita = async (cita) => {
-    if (window.confirm(`¿Estás seguro de aprobar la cita de ${cita.usuarios} para el ${cita.fecha}?`)) {
-      try {
-        const { data, error } = await supabase
-          .from('cita') 
-          .update({ estado: 'Abono' })
-          .eq('id_cita', cita.id_cita);
-        if (error) throw error;
-        console.log('Cita aprobada correctamente');
-        setCitas(citas.map(c => c.id_cita === cita.id_cita ? { ...c, estado: 'Abono' } : c));
-      } catch (error) {
-        console.error('Error al aprobar cita:', error);
-      }
-    }
-  };
 
   if (loading) return <p>Loading...</p>;
 
   return (
     <Container>
       <div className='titulo_Citas_Admin'>
-        <h1>Citas Administrador</h1>
+        <h1>Mis Citas</h1>
       </div>
       <div className='Contenido_Citas_Admin'>
         <hr />
-        <p>En esta sección encontrarás todas las citas apartadas por los clientes.</p>
+        <p>Aquí encontrarás todas las citas que tienes programadas.</p>
         <hr />
       </div>
 
       <Table>
         <thead>
           <tr>
-            <th>Cliente</th>
+            <th>ID Cliente</th>
             <th>Fecha</th>
             <th>Hora</th>
             <th>Duración</th>
             <th>Servicio</th>
-            <th>Profesional</th>
+            <th>Estado</th>
           </tr>
         </thead>
         <tbody>
-          {currentCitas.map((cita, index) => (
-            <tr key={cita.id_cita}>
-              <td>{cita.usuarios}</td>
-              <td>{cita.fecha}</td>
-              <td>{cita.duracion}</td>
-              <td>1 hora</td>
-              <td>{cita.servicio.nombre_servicio}</td>
-              <td>{cita.profesional.nombre_profesional}</td> {/* Mostrar el nombre del profesional aquí */}
+          {currentAppointments.map((appointment) => (
+            <tr key={appointment.id_cita}>
+              <td>{appointment.usuario_id}</td>
+              <td>{new Date(appointment.fecha).toLocaleDateString()}</td>
+              <td>{new Date(appointment.fecha).toLocaleTimeString()}</td>
+              <td>{appointment.duracion}</td>
+              <td>{appointment.servicio.nombre_servicio}</td>
+              <td>{appointment.estado}</td>
             </tr>
           ))}
         </tbody>
       </Table>
 
+      {appointments.length === 0 && <p>No tienes citas programadas.</p>}
+
       <Pagination 
-        citasPerPage={citasPerPage} 
-        totalCitas={citas.length} 
+        citasPerPage={appointmentsPerPage} 
+        totalCitas={appointments.length} 
         paginate={paginate} 
       />
     </Container>

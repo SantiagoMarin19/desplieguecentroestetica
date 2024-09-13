@@ -5,6 +5,7 @@ import styled, { ThemeProvider } from "styled-components";
 import { LoadingProvider, useLoading } from './componentes/Animación/Loadingcontext';
 import { ModalProvider, useModal } from './componentes/modal/ContextModal';
 import { Light, Dark } from "./Styles/Themes";
+import supabase from './supabase/supabaseconfig'; // Asegúrate de que esta importación es correcta
 export const ThemeContext = React.createContext(null);
 
 // Importa todos los componentes necesarios aquí
@@ -45,13 +46,29 @@ function Main() {
     const location = useLocation();
     const [theme, setTheme] = useState("light");
     const themeStyle = theme === "light" ? Light : Dark;
-    const [isAdmin, setIsAdmin] = useState(false); // Determina si el usuario es admin
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
-        setLoading(true);
-        // Aquí puedes agregar lógica para determinar si el usuario es admin
-        // Por ejemplo, basado en el token o en algún estado global
-    }, [location, setLoading]);
+        const checkUser = async () => {
+            setLoading(true);
+            const { data: { user } } = await supabase.auth.getUser();
+            console.log("Current user:", user); // Para depuración
+            setUser(user);
+            if (user && user.email === "davidochoa772@gmail.com") {
+                console.log("Setting user as admin"); // Para depuración
+                setIsAdmin(true);
+            } else {
+                setIsAdmin(false);
+            }
+            setLoading(false);
+        };
+        checkUser();
+    }, [setLoading]);
+
+    useEffect(() => {
+        console.log("isAdmin:", isAdmin); // Para depuración
+    }, [isAdmin]);
 
     return (
         <>
@@ -60,7 +77,7 @@ function Main() {
                 <ThemeProvider theme={themeStyle}>
                     <Routes>
                         {/* Rutas de cliente */}
-                        <Route path="/" element={<Home />} />
+                        <Route path="/" element={isAdmin ? <Navigate to="/admin" replace /> : <Home />} />
                         <Route path='/Facturacion' element={<Facturaelectronica />} />
                         <Route path='/Registrar' element={<button onClick={() => openModal('SignUp')}>Regístrate</button>} />
                         <Route path="/loginsupa" element={<button onClick={() => openModal('LoginUser')}>Inicia Sesión</button>} />
@@ -72,15 +89,10 @@ function Main() {
                         <Route path="/Agendarcita" element={<Agendar />} />
                         <Route path="/AgendaPersonal" element={<VistaProfesional/>}/>
                         {/* Rutas de administrador */}
-                        <Route path="/admin/*" element={
-                            isAdmin ? (
-                                <AdminLayout>
-                                    <MyRoutes />
-                                </AdminLayout>
-                            ) : (
-                                <Navigate to="/loginsupa" replace />
-                            )
-                        } />
+                        <Route 
+                            path="/admin/*" 
+                            element={isAdmin ? <AdminLayout><MyRoutes /></AdminLayout> : <Navigate to="/" replace />} 
+                        />
                     </Routes>
                 </ThemeProvider>
             </ThemeContext.Provider>
@@ -91,15 +103,6 @@ function Main() {
 }
 
 function App() {
-    const [token, setToken] = useState(null);
-
-    useEffect(() => {
-        const storedToken = sessionStorage.getItem('token');
-        if (storedToken) {
-            setToken(JSON.parse(storedToken));
-        }
-    }, []);
-
     return (
         <LoadingProvider>
             <Router>
