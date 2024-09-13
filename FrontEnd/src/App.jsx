@@ -29,6 +29,7 @@ import { MyRoutes } from "./componentes/PagesAdmin/routers/Route";
 import LoginUser from './pages/Login';
 import SignUp from './pages/SignUp';
 import AbonoInfo from './componentes/AbonoInfo/AbonoInfo';
+import Abono from './pages/Abonos';
 
 function AdminLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -75,7 +76,7 @@ function Main() {
                         <Route path="/acerca" element={<Acerca_de />} />
                         <Route path="/politicas" element={<Condiciones />} />
                         <Route path="/Agendarcita" element={<Agendar />} />
-                        <Route path="/abono-info" element={<AbonoInfo />} />
+                        <Route path="/abono-info" element={<Abono />} />
 
 
                         {/* Rutas de administrador */}

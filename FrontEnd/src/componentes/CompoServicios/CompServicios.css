@@ -4,6 +4,15 @@ body {
     padding: 0;
     box-sizing: border-box;
 }
+/* Resto del CSS existente */
+
+.estado-pendiente {
+    color: yellow; /* Cambia el color según tus preferencias */
+}
+
+.estado-confirmada {
+    color: green; /* Cambia el color según tus preferencias */
+}
 
 .Bannerserviciosg {
     display: flex;

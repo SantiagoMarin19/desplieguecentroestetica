@@ -118,6 +118,7 @@
     margin-top: 20px; /* Espaciado superior para el código QR */
     max-width: 100%; /* Ajuste automático al contenedor */
     height: auto; /* Altura automática para mantener la proporción */
+    margin-left: 40px;
 }
 
 .bancolombia-logo {
