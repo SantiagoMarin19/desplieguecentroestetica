@@ -83,7 +83,7 @@ const CitasPendientes = ({ token }) => {
                                 <p className='contenedorsubtitulo'><b className='fechaAgendadaSubtitulo'>Fecha:</b> {new Date(citas.fecha).toLocaleDateString()}</p>
                                 <p className='contenedorsubtitulo'><b className='fechaAgendadaSubtitulo'>Duración:</b> {citas.duracion}</p>
                                 <p className='contenedorsubtitulo'><b className='fechaAgendadaSubtitulo'>Profesional:</b> {citas.profesional.nombre_profesional}</p>
-                                <p className='contenedorsubtitulo'> <b className='fechaAgendadaSubtitulo'>Estado:</b> {citas.estado ? 'Confirmada' : 'Pendiente'}</p>
+                                <p className='contenedorsubtitulo'> <b className='fechaAgendadaSubtitulo'>Estado:</b> {citas.estado ? 'Pendiente' : 'Confirmada'}</p>
 
                                 <NavLink to={"/politicas"}> <button> RECOMENDACIONES PARA TU CITA </button> </NavLink>
 

@@ -13,51 +13,52 @@
     border-radius: 12px; /* Bordes más redondeados */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más prominente */
     padding: 30px;
-    max-width: 450px; /* Ancho máximo aumentado para una mejor visualización */
-    width: 100%; /* Ajustar al 100% del contenedor padre */
-    height: auto; /* Ajustar la altura según el contenido */
-    text-align: center; /* Centrar el texto */
     display: flex;
-    flex-direction: column; /* Disposición vertical */
-    justify-content: center; /* Centrar el contenido verticalmente */
-    align-items: center; /* Centrar el contenido horizontalmente */
+    flex-direction: row; /* Disposición horizontal de las secciones */
+    justify-content: space-between; /* Espacio entre las columnas */
+    flex-wrap: wrap; /* Permite ajustar el diseño en pantallas más pequeñas */
+    max-width: 1200px; /* Ancho máximo para mantener la disposición en pantallas grandes */
+    width: 100%; /* Ajustar al 100% del contenedor padre */
+    box-sizing: border-box; /* Incluir padding en el ancho total */
+}
+
+.info-column {
+    flex: 1; /* Ocupa el mismo espacio en la fila */
+    margin-right: 20px; /* Espacio entre columnas */
+}
+
+.info-column:last-child {
+    margin-right: 0; /* Sin margen derecho en la última columna */
 }
 
 .card-title {
-
-    
-    margin-bottom: 15px;
-    font-size: 28px;
+    margin-bottom: 25px; /* Espaciado incrementado */
+    font-size: 32px; /* Tamaño de fuente aumentado */
     color: #333;
     font-weight: bold;
 }
 
-.personal{
-    text-align: left;
-}
-
 .card-subtitle {
-    margin-bottom: 20px;
-    font-size: 20px;
+    margin-bottom: 30px; /* Espaciado incrementado */
+    font-size: 22px; /* Tamaño de fuente aumentado */
     color: #666;
     font-weight: 500;
 }
 
-.service-info, .payment-info, .cost-details, .additional-info {
-    margin-bottom: 25px;
-    text-align: center ; /* Alineación del texto */
-    width: 100%;
+.service-info, .payment-info, .cost-details {
+    margin-bottom: 30px; /* Espaciado incrementado */
+    text-align: left; /* Alineación del texto a la izquierda */
 }
 
-.service-info p, .payment-info p, .cost-details p, .additional-info p {
-    margin-bottom: 15px;
+.service-info p, .payment-info p, .cost-details p {
+    margin-bottom: 20px; /* Espaciado incrementado */
     font-size: 18px;
     color: #444;
 }
 
 .service-info h5, .payment-info h5 {
-    margin-bottom: 10px;
-    font-size: 20px;
+    margin-bottom: 20px; /* Espaciado incrementado */
+    font-size: 22px; /* Tamaño de fuente aumentado */
     color: #007bff; /* Color del título para resaltar */
     display: flex;
     align-items: center;
@@ -66,32 +67,61 @@
 .service-info i, .payment-info i {
     margin-right: 10px; /* Espacio entre el icono y el texto */
     color: #007bff; /* Color del icono */
-    font-size: 22px; /* Tamaño del icono */
+    font-size: 24px; /* Tamaño del icono aumentado */
 }
+
+.cost-details p {
+    font-size: 22px; /* Tamaño de fuente aumentado */
+    font-weight: bold; /* Negrita para destacar */
+    color: #333; /* Color de texto para mayor contraste */
+}
+
+.cost-details .price {
+    color: #007bff; /* Color para destacar los precios y abonos */
+    font-size: 24px; /* Tamaño de fuente más grande para resaltar */
+}
+
 .status-info {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px; /* Espaciado superior para separar del contenido */
+    margin-top: 30px; /* Espaciado superior incrementado */
 }
 
 .status-info i {
     margin-left: 10px; /* Espaciado entre el texto y el ícono */
-    font-size: 20px; /* Tamaño del ícono */
+    font-size: 22px; /* Tamaño del ícono aumentado */
 }
 
-
 .go-home-button {
-    margin-top: 20px;
     background-color: #007bff; /* Color de fondo del botón */
     color: #ffffff; /* Color del texto del botón */
     border: none; /* Sin borde */
     border-radius: 6px; /* Bordes redondeados */
     cursor: pointer; /* Cursor de puntero */
     font-size: 18px;
-    width: 35%;
+    text-align: center; /* Centrar el texto dentro del botón */
+    display: block; /* Asegurarse de que el botón sea un bloque */
+    margin: 20px auto; /* Margen superior e inferior, auto para centrar horizontalmente */
 }
 
 .go-home-button:hover {
     background-color: #0056b3; /* Color de fondo al pasar el cursor */
+}
+
+.consideraciones {
+    width: 100%;
+    text-align: left; /* Alineación del texto a la izquierda */
+}
+
+.qr-code {
+    margin-top: 20px; /* Espaciado superior para el código QR */
+    max-width: 100%; /* Ajuste automático al contenedor */
+    height: auto; /* Altura automática para mantener la proporción */
+}
+
+.bancolombia-logo {
+    margin-top: 20px; /* Espaciado superior para el logo de Bancolombia */
+    max-width: 100%; /* Ajuste automático al contenedor */
+    height: auto; /* Altura automática para mantener la proporción */
 }
