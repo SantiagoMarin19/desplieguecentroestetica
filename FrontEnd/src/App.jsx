@@ -5,7 +5,7 @@ import styled, { ThemeProvider } from "styled-components";
 import { LoadingProvider, useLoading } from './componentes/Animación/Loadingcontext';
 import { ModalProvider } from './componentes/modal/ContextModal';
 import { Light, Dark } from "./Styles/Themes";
-import '@fortawesome/fontawesome-free/css/all.min.css';
+// import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import { toast, ToastContainer } from 'react-toastify'; // Importa react-toastify para notificaciones globales
 import 'react-toastify/dist/ReactToastify.css'; // Asegúrate de importar los estilos de react-toastify

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import "./CompServicios.css";
-import { useNavigate } from 'react-router-dom'; // Importar useNavigate
+import { useNavigate } from 'react-router-dom';
 import supabase from '../../supabase/supabaseconfig';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'; // Importar estilos de Skeleton
 
 export const CompServicios = () => {
   const [servicios, setServicios] = useState([]);
-  const navigate = useNavigate(); // Usar useNavigate
+  const [loading, setLoading] = useState(true); // Estado para controlar la carga
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchServicios = async () => {
@@ -16,14 +19,14 @@ export const CompServicios = () => {
       if (error) {
         console.error('Error fetching servicios:', error);
       } else {
-        console.log('Servicios:', data);
         setServicios(data);
       }
+      setLoading(false); // Desactivar el loading una vez que se cargan los datos
     };
     fetchServicios();
   }, []);
 
-  const  formatoCo = new Intl.NumberFormat('es-CO', {
+  const formatoCo = new Intl.NumberFormat('es-CO', {
     style: 'currency',
     currency: 'COP',
     minimumFractionDigits: 0,
@@ -38,20 +41,28 @@ export const CompServicios = () => {
     <div key={categoria} className={claseTitulo}>
       <h3>{titulo}</h3>
       <div className={claseServicio}>
-        {servicios
-      .filter(servicio => servicio.categorias && servicio.categorias.nombreCategoria === categoria)
-          .map(servicio => (
-            <div key={servicio.id_servicio} className='serviciosdetc'>
-              <div><img src={servicio.url_img} alt={servicio.nombre_servicio} /></div>
-              <h5>{servicio.nombre_servicio}</h5>
-              <h5><b>{formatoCo.format(servicio.precio)}</b></h5>
-              
-              <div className="butonSs">
-                <button className="button_s" onClick={() => handleReservar(servicio)}>Reservar </button>
+        {loading ? (
+          // Mostrar Skeleton mientras se cargan los servicios
+          <>
+            <Skeleton height={150} /> {/* Placeholder para imagen */}
+            <Skeleton height={30} width={200} /> {/* Placeholder para título del servicio */}
+            <Skeleton height={20} width={100} /> {/* Placeholder para el precio */}
+            <Skeleton height={40} width={100} /> {/* Placeholder para el botón */}
+          </>
+        ) : (
+          servicios
+            .filter(servicio => servicio.categorias && servicio.categorias.nombreCategoria === categoria)
+            .map(servicio => (
+              <div key={servicio.id_servicio} className='serviciosdetc'>
+                <div><img src={servicio.url_img} alt={servicio.nombre_servicio} /></div>
+                <h5>{servicio.nombre_servicio}</h5>
+                <h5><b>{formatoCo.format(servicio.precio)}</b></h5>
+                <div className="butonSs">
+                  <button className="button_s" onClick={() => handleReservar(servicio)}>Reservar</button>
+                </div>
               </div>
-            </div>
-            
-          ))}
+            ))
+        )}
       </div>
     </div>
   );
