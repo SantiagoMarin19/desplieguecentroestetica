@@ -10,7 +10,6 @@ html, body {
 .conteinergeneral {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Asegura que el contenedor abarque toda la altura de la vista */
 }
 
 /* Ajustes para la sección .iconos */

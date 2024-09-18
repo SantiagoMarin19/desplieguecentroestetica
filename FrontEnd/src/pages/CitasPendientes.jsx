@@ -11,9 +11,8 @@ export const CitaPend = ({ token }) => {
         <>
             <Promociones></Promociones>
             <Navbar token={token} />
-
-            <CitasPendientes/>
-            <Piedepagina/>
+            <CitasPendientes></CitasPendientes>
+            <Piedepagina></Piedepagina>
 
         </>
 
