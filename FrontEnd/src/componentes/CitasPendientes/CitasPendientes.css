@@ -11,14 +11,47 @@ html, body {
   background-color: #FFFFFF;
 }
 
+button:disabled {
+  background-color: #e0e0e0; /* Color de fondo cuando está deshabilitado */
+  color: #a0a0a0; /* Color del texto cuando está deshabilitado */
+  cursor: not-allowed; /* Cambia el cursor para indicar que está deshabilitado */
+  border: 1px solid #ccc; /* Borde cuando está deshabilitado */
+}
+
+/* Estilos específicos para los estados */
+.status-pendiente {
+  color: #ffc107; /* Amarillo */
+}
+
+.status-confirmada {
+  color: #28a745; /* Verde */
+}
+
+.estado-text {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.estado-pendiente {
+  color: #ffc107; /* Amarillo */
+}
+
+.estado-confirmada {
+  color: #28a745; /* Verde */
+}
+
+
 /* Contenedor principal para centrar el contenido */
 .citaspendientesbody {
-  padding: 40px;
+  font-family: "Manrope", sans-serif;
+  background-color: #ffffff;
+  height: max-content;
+  width: 100%;
+  padding: 20px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: center; /* Centra verticalmente el contenido */
-  min-height: 80vh; /* Ajuste para centrar verticalmente */
+  max-width: 1200px; /* Limita el ancho máximo del contenedor */
 }
 
 .citaspendientesbody.container {
@@ -33,15 +66,22 @@ html, body {
 
 /* Títulos */
 .citaspendientestitulo {
-  padding-bottom: 3%;
-  border-bottom: 30px;
+  font-size: 2rem; /* Ajusta el tamaño del título */
+  font-weight: bold;
+  padding-bottom: 20px; /* Espacio debajo del título */
+  border-bottom: 2px solid #ccc; /* Línea inferior opcional */
+  text-align: center; /* Centra el texto del título */
+  width: 100%;
 }
+
 
 /* Carta completa de citas */
 .cartacompletacitas {
   width: 80%;
   display: flex;
   align-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+
   gap: 40px;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -61,8 +101,17 @@ html, body {
   text-align: center;
   border-radius: 5px;
   background-color: #e9cbd5;
-  color: black;
   border-color: #e9cbd5;
+}
+.main-container {
+  flex: 1; /* Permite que el contenedor principal ocupe el espacio restante */
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Centra verticalmente el contenido */
+  min-height: 80vh; /* Ajuste para centrar verticalmente */
+  min-height: 0; /* Permite que el contenedor se ajuste a su contenido */
 }
 
 /* Contenedor de cada carta */

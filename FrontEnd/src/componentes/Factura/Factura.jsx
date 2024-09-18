@@ -90,8 +90,8 @@ const FacturacionModal = ({ token }) => {
                 profesional: idProfesional,
                 servicio: servicio?.id_servicios,
                 usuarios: user.id,
-                duracion: duracion, // Asumiendo que `duracion` ya es una hora en formato 'HH:MM:SS'
-                estado: 'TRUE'
+                duracion: duracion, // 
+                estado: 'FALSE'
             }]);
 
         if (error) {

@@ -22,7 +22,7 @@ export const Navbar = ({ token, handleLogout }) => {
 
     const handleLogoutClick = () => {
         localStorage.removeItem('userName');
-        localStorage.removeItem("sb-bxluhldahxrqbukrqcdy-auth-token");
+        localStorage.removeItem("sb-gdgzbxlcnemmcxpgnowg-auth-token");
         sessionStorage.removeItem('user');
         setUserName('');
         setShowLogout(false);

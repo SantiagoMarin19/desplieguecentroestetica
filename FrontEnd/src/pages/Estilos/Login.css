@@ -5,6 +5,17 @@ html, body {
   height: 100%;
   width: 100%;
 }
+.poncuenta .registrarme-link {
+  color: #007bff; /* Azul para el subrayado */
+  cursor: default; /* Evita que el cursor cambie a puntero */
+  text-decoration: underline; /* Subrayado del texto */
+}
+
+.poncuenta .registrarme-link:hover {
+  color: #0056b3; /* Color del texto al pasar el cursor */
+  text-decoration: underline; /* Asegura que el subrayado se mantenga */
+}
+
 
 
 .bodySesion {
