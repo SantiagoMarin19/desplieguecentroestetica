@@ -4,6 +4,8 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import supabase from '../../supabase/supabaseconfig';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 export const Agendamiento = () => {
     const [profesionales, setProfesionales] = useState([]);
@@ -11,8 +13,11 @@ export const Agendamiento = () => {
     const [selectedHora, setSelectedHora] = useState('');
     const [horariosOcupados, setHorariosOcupados] = useState([]);
     const [franjasHorarias, setFranjasHorarias] = useState([]);
-    const [date, setDate] = useState(null); // Cambiar a null inicialmente
+    const [date, setDate] = useState(null);
     const [userId, setUserId] = useState(null);
+    const [loadingProfesionales, setLoadingProfesionales] = useState(true);
+    const [loadingFranjas, setLoadingFranjas] = useState(false);
+    const [loadingHorarios, setLoadingHorarios] = useState(false);
 
     const navigate = useNavigate();
     const { servicio } = useLocation().state || { servicio: { nombre_servicio: "Servicio no especificado", precio: "$0.00" } };
@@ -29,6 +34,7 @@ export const Agendamiento = () => {
         };
 
         const fetchProfesionales = async () => {
+            setLoadingProfesionales(true);
             const { data, error } = await supabase
                 .from('profesional')
                 .select('id_profesional, nombre_profesional');
@@ -37,6 +43,7 @@ export const Agendamiento = () => {
             } else {
                 setProfesionales(data || []);
             }
+            setLoadingProfesionales(false);
         };
 
         fetchUser();
@@ -47,6 +54,7 @@ export const Agendamiento = () => {
     useEffect(() => {
         const fetchFranjasHorarias = async () => {
             if (date) {
+                setLoadingFranjas(true);
                 const selectedDate = date.toISOString().split('T')[0];
                 const { data, error } = await supabase
                     .from('franja_horaria')
@@ -58,6 +66,7 @@ export const Agendamiento = () => {
                 } else {
                     setFranjasHorarias(data || []);
                 }
+                setLoadingFranjas(false);
             }
         };
 
@@ -67,6 +76,7 @@ export const Agendamiento = () => {
     useEffect(() => {
         const fetchHorariosOcupados = async () => {
             if (selectedProfesional && date && servicio) {
+                setLoadingHorarios(true);
                 const selectedDate = date.toISOString().split('T')[0];
                 const { data, error } = await supabase
                     .from('cita')
@@ -80,6 +90,7 @@ export const Agendamiento = () => {
                 } else {
                     setHorariosOcupados(data.map(cita => cita.franja_horaria) || []);
                 }
+                setLoadingHorarios(false);
             }
         };
 
@@ -131,14 +142,13 @@ export const Agendamiento = () => {
 
     const tileDisabled = ({ date }) => {
         const today = new Date();
-        today.setHours(0, 0, 0, 0); // Resetear la hora para comparación solo de fechas
+        today.setHours(0, 0, 0, 0);
 
-        // Deshabilitar el día actual y días pasados
         if (date.toDateString() === today.toDateString()) {
             console.log('No se puede seleccionar el día actual. Por favor, elige una fecha futura.');
             return true;
         }
-        return date < today; // Deshabilitar días pasados
+        return date < today;
     };
 
     return (
@@ -152,14 +162,18 @@ export const Agendamiento = () => {
                     <div className='seleccion-container'>
                         <h3>Elige un Profesional</h3>
                         <div className='select_contenedor_profesionales'>
-                            <select className="select_profesional" onChange={handleProfesionalChange} value={selectedProfesional}>
-                                <option value=''>--Escoge profesional--</option>
-                                {profesionales.map(profesional => (
-                                    <option key={profesional.id_profesional} value={profesional.id_profesional}>
-                                        {profesional.nombre_profesional}
-                                    </option>
-                                ))}
-                            </select>
+                            {loadingProfesionales ? (
+                                <Skeleton height={40} />
+                            ) : (
+                                <select className="select_profesional" onChange={handleProfesionalChange} value={selectedProfesional}>
+                                    <option value=''>--Escoge profesional--</option>
+                                    {profesionales.map(profesional => (
+                                        <option key={profesional.id_profesional} value={profesional.id_profesional}>
+                                            {profesional.nombre_profesional}
+                                        </option>
+                                    ))}
+                                </select>
+                            )}
                         </div>
                     </div>
 
@@ -187,14 +201,18 @@ export const Agendamiento = () => {
                                 </div>
                                 
                                 <div className='horarios-grid'>
-                                    {franjasHorarias.map(franja => (
-                                        <div key={franja.id_horario}
-                                             className={`cuadros ${isOcupado(franja.id_horario) ? 'ocupado' : 'libre'}`}
-                                             onClick={() => handleHoraClick(franja.hora, franja.id_horario)}
-                                             style={{ cursor: isOcupado(franja.id_horario) ? 'not-allowed' : 'pointer', opacity: isOcupado(franja.id_horario) ? 0.5 : 1 }}>
-                                            {franja.hora}
-                                        </div>
-                                    ))}
+                                    {loadingFranjas ? (
+                                        <Skeleton count={10} height={40} />
+                                    ) : (
+                                        franjasHorarias.map(franja => (
+                                            <div key={franja.id_horario}
+                                                 className={`cuadros ${isOcupado(franja.id_horario) ? 'ocupado' : 'libre'}`}
+                                                 onClick={() => handleHoraClick(franja.hora, franja.id_horario)}
+                                                 style={{ cursor: isOcupado(franja.id_horario) ? 'not-allowed' : 'pointer', opacity: isOcupado(franja.id_horario) ? 0.5 : 1 }}>
+                                                {franja.hora}
+                                            </div>
+                                        ))
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -215,7 +233,7 @@ export const Agendamiento = () => {
                                 </tr>
                                 <tr>
                                     <th>Profesional</th>
-                                    <td>{selectedProfesional}</td>
+                                    <td>{loadingProfesionales ? <Skeleton width={100} height={20} /> : selectedProfesional}</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -225,17 +243,21 @@ export const Agendamiento = () => {
                                 </tr>
                                 <tr>
                                     <th>Duración</th>
-                                    <td>{selectedHora}</td>
+                                    <td>{selectedHora ? selectedHora : <Skeleton width={100} height={20} />}</td>
                                 </tr>
                                 <tr>
                                     <th>Costo</th>
                                     <td>
-                                        <h5><b>{new Intl.NumberFormat('es-CO', {
-                                            style: 'currency',
-                                            currency: 'COP',
-                                            minimumFractionDigits: 0,
-                                            maximumFractionDigits: 2
-                                        }).format(servicio.precio)}</b></h5>
+                                        {servicio.precio ? (
+                                            <h5><b>{new Intl.NumberFormat('es-CO', {
+                                                style: 'currency',
+                                                currency: 'COP',
+                                                minimumFractionDigits: 0,
+                                                maximumFractionDigits: 2
+                                            }).format(servicio.precio)}</b></h5>
+                                        ) : (
+                                            <Skeleton width={100} height={20} />
+                                        )}
                                     </td>
                                 </tr>
                                 <tr>

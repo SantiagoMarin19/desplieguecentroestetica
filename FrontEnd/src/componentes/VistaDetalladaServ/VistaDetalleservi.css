@@ -160,3 +160,28 @@
         margin-bottom: 10px;
     }
 }
+
+/* Estilos generales para Skeleton */
+.detallserv_skeleton {
+    margin: 0 auto;
+}
+
+.titulo_ds_skeleton {
+    margin-bottom: 10px;
+}
+
+.detalle_ds_skeleton {
+    margin-bottom: 20px;
+}
+
+.tiempo_skeleton, .precio_skeleton {
+    margin-bottom: 10px;
+}
+
+.imagen_skeleton {
+    margin-bottom: 10px;
+}
+
+.leyenda_skeleton {
+    margin-bottom: 10px;
+}

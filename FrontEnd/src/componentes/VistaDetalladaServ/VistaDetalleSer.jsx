@@ -1,50 +1,80 @@
-import React from 'react';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import '../Servicio_detalle/Serviciocejas';
-import "./VistaDetalleservi.css"
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import './VistaDetalleservi.css';
 
 export const VistaDetalle = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { servicio } = location.state || {};
 
+  const [loading, setLoading] = useState(true);
+
+  // Simulate data fetching
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleReservar = () => {
     navigate('/Agendarcita', { state: { servicio } });
   };
 
-
   return (
-    <div className='contenedor_total' style={{flex:1}}>
+    <div className='contenedor_total' style={{ flex: 1 }}>
       <div className='banneer'>
-        <h1 className='detallserv'>Detalle del Servicio</h1>
+        {loading ? (
+          <Skeleton width={300} height={40} className='detallserv_skeleton' />
+        ) : (
+          <h1 className='detallserv'>Detalle del Servicio</h1>
+        )}
       </div>
 
       <div className='content_total'>
         <div className='tarjeta'>
           <div className='contenido_ds'>
             <div className='titulo_ds'>
-              <h1>{servicio.nombre_servicio}</h1>
+              {loading ? (
+                <Skeleton width={200} height={30} className='titulo_ds_skeleton' />
+              ) : (
+                <h1>{servicio.nombre_servicio}</h1>
+              )}
             </div>
             <div className='detalle_ds'>
-              <p>{servicio.descripcion}</p>
+              {loading ? (
+                <Skeleton count={3} className='detalle_ds_skeleton' />
+              ) : (
+                <p>{servicio.descripcion}</p>
+              )}
             </div>
             <div className='botontyp'>
               <div className='tiempo'>
-                <h4>{servicio.duracion} </h4>
+                {loading ? (
+                  <Skeleton width={100} height={20} className='tiempo_skeleton' />
+                ) : (
+                  <h4>{servicio.duracion}</h4>
+                )}
                 <p>Tiempo</p>
               </div>
               <div className='precio'>
-                <h4><b>{new Intl.NumberFormat('es-CO', {
-                  style: 'currency',
-                  currency: 'COP',
-                  minimumFractionDigits: 0,
-                  maximumFractionDigits: 2
-                }).format(servicio.precio)}</b></h4>
+                {loading ? (
+                  <Skeleton width={100} height={20} className='precio_skeleton' />
+                ) : (
+                  <h4>
+                    <b>{new Intl.NumberFormat('es-CO', {
+                      style: 'currency',
+                      currency: 'COP',
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 2
+                    }).format(servicio.precio)}</b>
+                  </h4>
+                )}
                 <p>Precio</p>
               </div>
             </div>
-            <div className="continue_reserva">
-              <button onClick={handleReservar} className="continue_reserva">
+            <div className='continue_reserva'>
+              <button onClick={handleReservar} className='continue_reserva'>
                 <span>Continue</span>
                 <svg width="34" height="34" viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="37" cy="37" r="35.5" stroke="black" strokeWidth="3"></circle>
@@ -54,8 +84,16 @@ export const VistaDetalle = () => {
             </div>
           </div>
           <div className='imagen-contenedor'>
-            <img className='imagen' src={servicio.url_img} alt={servicio.nombre_servicio} />
-            <p className='leyenda'>Confía en nuestros expertos para obtener unas cejas perfectamente diseñadas</p>
+            {loading ? (
+              <Skeleton height={200} className='imagen_skeleton' />
+            ) : (
+              <img className='imagen' src={servicio.url_img} alt={servicio.nombre_servicio} />
+            )}
+            {loading ? (
+              <Skeleton count={1} className='leyenda_skeleton' />
+            ) : (
+              <p className='leyenda'>Confía en nuestros expertos para obtener unas cejas perfectamente diseñadas</p>
+            )}
           </div>
         </div>
       </div>

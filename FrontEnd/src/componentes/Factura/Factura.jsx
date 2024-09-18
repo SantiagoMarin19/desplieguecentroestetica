@@ -3,6 +3,8 @@ import supabase from '../../supabase/supabaseconfig';
 import { Modal, Button } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Factura.css';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const FacturacionModal = ({ token }) => {
     const navigate = useNavigate();
@@ -16,6 +18,7 @@ const FacturacionModal = ({ token }) => {
     const [idHorario, setIdHorario] = useState(null);
     const [modalMessage, setModalMessage] = useState('');
     const [showModal, setShowModal] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -45,29 +48,24 @@ const FacturacionModal = ({ token }) => {
 
         const fetchIdHorario = async () => {
             if (duracion) {
-                console.log('Duración:', duracion);
-        
                 const { data, error } = await supabase
                     .from('franja_horaria')
                     .select('id_horario')
                     .eq('hora', duracion.trim());
-        
+
                 if (error) {
                     console.error('Error fetching horario ID:', error);
                 } else if (data.length > 0) {
-                    console.log('Horario ID(s) obtenido(s):', data);
-                    setIdHorario(data[0].id_horario); 
+                    setIdHorario(data[0].id_horario);
                 } else {
-                    console.log('No se encontraron horarios que coincidan.');
                     setIdHorario(null);
                 }
             }
         };
-        
 
-        fetchUser();
-        fetchNombreProfesional();
-        fetchIdHorario();
+        Promise.all([fetchUser(), fetchNombreProfesional(), fetchIdHorario()]).then(() => {
+            setLoading(false);
+        });
     }, [idProfesional, idUsuario, idHorario, token, duracion]);
 
     const handleGuardarCita = async () => {
@@ -90,12 +88,12 @@ const FacturacionModal = ({ token }) => {
                 profesional: idProfesional,
                 servicio: servicio?.id_servicios,
                 usuarios: user.id,
-                duracion: duracion, // 
+                duracion: duracion,
                 estado: 'FALSE'
             }]);
 
         if (error) {
-            setModalMessage(`Error al guardar la cita: ${error.message}`);  
+            setModalMessage(`Error al guardar la cita: ${error.message}`);
         } else {
             setModalMessage('Cita guardada con éxito. Un administrador verificará tu cita.');
             setShowModal(true);
@@ -112,7 +110,7 @@ const FacturacionModal = ({ token }) => {
                 </div>
 
                 <div className='explicacion_factura'>
-                    <h2>Fecha: {formattedFecha}</h2>
+                    {loading ? <Skeleton width={200} height={30} /> : <h2>Fecha: {formattedFecha}</h2>}
                 </div>
 
                 <div className="invoice-body">
@@ -122,21 +120,33 @@ const FacturacionModal = ({ token }) => {
                             <hr />
                         </div>
 
-                        <p><strong>Hora:</strong> {duracion}</p>
-                        <p><strong>Profesional:</strong> {nombreProfesional}</p>
-                        <p><strong>Servicio:</strong> {servicio?.nombre_servicio}</p>
-                        <p><strong>Costo:</strong> <b>{new Intl.NumberFormat('es-CO', {
-                            style: 'currency',
-                            currency: 'COP',
-                            minimumFractionDigits: 0,
-                            maximumFractionDigits: 2
-                        }).format(servicio.precio)}</b></p>
-                        <p><strong>Cliente:</strong> {user ? user.user_metadata.full_name : 'No disponible'}</p>
+                        {loading ? (
+                            <>
+                                <Skeleton width={200} height={20} />
+                                <Skeleton width={200} height={20} />
+                                <Skeleton width={200} height={20} />
+                                <Skeleton width={200} height={20} />
+                                <Skeleton width={200} height={20} />
+                            </>
+                        ) : (
+                            <>
+                                <p><strong>Hora:</strong> {duracion}</p>
+                                <p><strong>Profesional:</strong> {nombreProfesional}</p>
+                                <p><strong>Servicio:</strong> {servicio?.nombre_servicio}</p>
+                                <p><strong>Costo:</strong> <b>{new Intl.NumberFormat('es-CO', {
+                                    style: 'currency',
+                                    currency: 'COP',
+                                    minimumFractionDigits: 0,
+                                    maximumFractionDigits: 2
+                                }).format(servicio.precio)}</b></p>
+                                <p><strong>Cliente:</strong> {user ? user.user_metadata.full_name : 'No disponible'}</p>
+                            </>
+                        )}
                     </div>
                 </div>
 
                 <div className="invoice-footer">
-                    <Button onClick={handleGuardarCita}>Confirmar Cita</Button>
+                    <Button onClick={handleGuardarCita} disabled={loading}>Confirmar Cita</Button>
                 </div>
 
                 <Modal show={showModal} onHide={() => setShowModal(false)}>
