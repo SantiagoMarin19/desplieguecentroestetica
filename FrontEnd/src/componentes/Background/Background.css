@@ -155,7 +155,6 @@ html, body {
   display: flex;
   justify-content: left;
   align-items: center;
-  overflow-y: scroll;
 }
 
 a {

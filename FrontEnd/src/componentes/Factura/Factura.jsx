@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import supabase from '../../supabase/supabaseconfig';
 import { Modal, Button } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useModal } from '../modal/ContextModal'; // Importar el hook useModal
 import './Factura.css';
 
 const FacturacionModal = ({ token }) => {
@@ -15,10 +14,8 @@ const FacturacionModal = ({ token }) => {
     const [user, setUser] = useState(null);
     const [nombreProfesional, setNombreProfesional] = useState('');
     const [idHorario, setIdHorario] = useState(null);
-    const [showNotificationModal, setShowNotificationModal] = useState(false);
-    const [showLoginModal, setShowLoginModal] = useState(false);
-    const [alertMessage, setAlertMessage] = useState('');
-    const { openModal, closeModal } = useModal(); // Usar el hook useModal
+    const [modalMessage, setModalMessage] = useState('');
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -48,20 +45,25 @@ const FacturacionModal = ({ token }) => {
 
         const fetchIdHorario = async () => {
             if (duracion) {
+                console.log('Duración:', duracion);
+        
                 const { data, error } = await supabase
                     .from('franja_horaria')
                     .select('id_horario')
                     .eq('hora', duracion.trim());
-
+        
                 if (error) {
                     console.error('Error fetching horario ID:', error);
                 } else if (data.length > 0) {
-                    setIdHorario(data[0].id_horario);
+                    console.log('Horario ID(s) obtenido(s):', data);
+                    setIdHorario(data[0].id_horario); 
                 } else {
+                    console.log('No se encontraron horarios que coincidan.');
                     setIdHorario(null);
                 }
             }
         };
+        
 
         fetchUser();
         fetchNombreProfesional();
@@ -70,24 +72,17 @@ const FacturacionModal = ({ token }) => {
 
     const handleGuardarCita = async () => {
         if (!user) {
-            setAlertMessage('Por favor, inicie sesión para continuar.');
-            setShowNotificationModal(true);
-
-            // Cierra el modal de notificación y abre el modal de inicio de sesión después de 2 segundos
-            setTimeout(() => {
-                setShowNotificationModal(false);
-                openModal('login'); // Abre el modal de inicio de sesión
-                // Aquí puedes manejar la lógica para redirigir a la página deseada después de un inicio de sesión exitoso
-            }, 2000);
-
+            window.alert('Por favor, inicie sesión para continuar.');
             return;
         }
-    
+
         if (!idHorario) {
-            window.alert('No se pudo obtener el id_horario para la duración.');
+            console.error('No se pudo obtener el id_horario para la duración.');
+            setModalMessage('No se pudo obtener el id_horario para la duración.');
+            setShowModal(true);
             return;
         }
-    
+
         const { data, error } = await supabase
             .from('cita')
             .insert([{
@@ -95,26 +90,17 @@ const FacturacionModal = ({ token }) => {
                 profesional: idProfesional,
                 servicio: servicio?.id_servicios,
                 usuarios: user.id,
-                duracion: duracion,
-                estado: false
+                duracion: duracion, // Asumiendo que `duracion` ya es una hora en formato 'HH:MM:SS'
+                estado: 'TRUE'
             }]);
-    
+
         if (error) {
-            window.alert(`Error al guardar la cita: ${error.message}`);
+            setModalMessage(`Error al guardar la cita: ${error.message}`);  
         } else {
-            // Redirigir a AbonoInfo después de 1 segundo
-            setTimeout(() => navigate('/abono-info', { state: { servicio } }), 1000);
+            setModalMessage('Cita guardada con éxito. Un administrador verificará tu cita.');
+            setShowModal(true);
+            setTimeout(() => navigate('/'), 3000);
         }
-    };
-
-    const handleModalClose = () => {
-        setShowNotificationModal(false);
-        window.location.reload(); // Recarga la página al cerrar el modal de notificación
-    };
-
-    const handleLoginModalClose = () => {
-        setShowLoginModal(false);
-        window.location.reload(); // Recarga la página si el modal de inicio de sesión se cierra sin iniciar sesión
     };
 
     return (
@@ -152,32 +138,19 @@ const FacturacionModal = ({ token }) => {
                 <div className="invoice-footer">
                     <Button onClick={handleGuardarCita}>Confirmar Cita</Button>
                 </div>
+
+                <Modal show={showModal} onHide={() => setShowModal(false)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Confirmación</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>{modalMessage}</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setShowModal(false)}>
+                            Cerrar
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
-
-            {/* Modal de notificación */}
-            <Modal show={showNotificationModal} onHide={handleModalClose}>
-                
-                    <Modal.Title>Notificación</Modal.Title>
-                
-                <Modal.Body>{alertMessage}</Modal.Body>
-                <Modal.Footer>
-                 
-                </Modal.Footer>
-            </Modal>
-
-            {/* Modal de inicio de sesión */}
-            <Modal show={showLoginModal} onHide={handleLoginModalClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Iniciar Sesión</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleLoginModalClose}>
-                        Cerrar
-                    </Button>
-                </Modal.Footer>
-            </Modal>
         </div>
     );
 };

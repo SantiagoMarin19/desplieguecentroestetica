@@ -7,47 +7,44 @@
 
 html, body {
   width: 100%;
-  height: 100%;
   overflow-x: hidden; /* Evita el desplazamiento horizontal */
   background-color: #FFFFFF;
-  display: flex;
-  flex-direction: column;
 }
 
 /* Contenedor principal para centrar el contenido */
-.main-container {
-  flex: 1; /* Permite que el contenedor principal ocupe el espacio restante */
+.citaspendientesbody {
   padding: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 0; /* Permite que el contenedor se ajuste a su contenido */
+  justify-content: center; /* Centra verticalmente el contenido */
+  min-height: 80vh; /* Ajuste para centrar verticalmente */
 }
 
-/* Contenedor de contenido principal */
-.citaspendientesbody {
+.citaspendientesbody.container {
   font-family: "Manrope", sans-serif;
-  width: 100%;
+  background-color: #ffffff;
+  height: max-content;
   padding: 20px;
-  max-width: 1200px; /* Limita el ancho máximo del contenedor */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Títulos y subtítulos */
+/* Títulos */
 .citaspendientestitulo {
-  font-size: 2rem; /* Ajusta el tamaño del título */
-  font-weight: bold;
-  padding-bottom: 20px; /* Espacio debajo del título */
-  border-bottom: 2px solid #ccc; /* Línea inferior opcional */
-  text-align: center; /* Centra el texto del título */
-  width: 100%;
+  padding-bottom: 3%;
+  border-bottom: 30px;
 }
 
 /* Carta completa de citas */
 .cartacompletacitas {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Ajusta el número de columnas */
-  gap: 20px; /* Espacio entre las cartas */
-  width: 100%;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 /* Subcarta */
@@ -56,7 +53,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  margin-bottom: 20px; /* Ajusta según sea necesario */
+  margin-bottom: 10%;
 }
 
 .subcarta button {
@@ -71,10 +68,12 @@ html, body {
 
 /* Contenedor de cada carta */
 .contenedorcarta {
+  width: 40%;
+  height: 85%;
   border-radius: 35px;
   transition: 400ms all ease;
   box-shadow: 10px 10px 16px -5px rgba(0, 0, 0, 0.75);
-  overflow: hidden; /* Asegura que las esquinas redondeadas funcionen */
+  margin-bottom: 20px;
 }
 
 .contenedorcarta:hover {
@@ -93,6 +92,7 @@ html, body {
 /* Títulos y subtítulos */
 .contenedorTitulo,
 .contenedorsubtitulo {
+  width: 80%;
   font-weight: bold;
   font-family: "Urbanist", sans-serif;
   display: flex;
@@ -107,42 +107,6 @@ html, body {
 .contenedorsubtitulo {
   color: rgb(85, 84, 84);
   font-size: 20px;
-}
-
-button:disabled {
-  background-color: #e0e0e0; /* Color de fondo cuando está deshabilitado */
-  color: #a0a0a0; /* Color del texto cuando está deshabilitado */
-  cursor: not-allowed; /* Cambia el cursor para indicar que está deshabilitado */
-  border: 1px solid #ccc; /* Borde cuando está deshabilitado */
-}
-
-/* Estilos específicos para los estados */
-.status-pendiente {
-  color: #ffc107; /* Amarillo */
-}
-
-.status-confirmada {
-  color: #28a745; /* Verde */
-}
-
-.estado-text {
-  font-weight: bold;
-  margin-right: 5px;
-}
-
-.estado-pendiente {
-  color: #ffc107; /* Amarillo */
-}
-
-.estado-confirmada {
-  color: #28a745; /* Verde */
-}
-
-/* Footer */
-footer {
-  background-color: #f1f1f1;
-  padding: 20px;
-  text-align: center;
 }
 
 /* Media Queries */
@@ -166,7 +130,10 @@ footer {
 
 @media (max-width: 990px) {
   .cartacompletacitas {
-    grid-template-columns: 1fr; /* Una sola columna en pantallas más pequeñas */
+    flex-direction: column;
+  }
+  .contenedorcarta {
+    width: 100%;
   }
   .contenedorTitulo {
     font-size: 28px;

@@ -1,12 +1,10 @@
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { v } from "../../Styles/Vaiables";
-import { AiOutlineLeft, AiOutlineHome,  AiOutlineApartment,AiOutlineSetting,} from "react-icons/ai";
+import { AiOutlineLeft, AiOutlineApartment } from "react-icons/ai";
 import { MdOutlineAnalytics, MdLogout } from "react-icons/md";
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
 import { ThemeContext } from "../../App";
-
-
 
 export function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const ModSidebaropen = () => {
@@ -17,9 +15,8 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }) {
     setTheme((theme) => (theme === "light" ? "dark" : "light"));
   };
 
-
   return (
-    <Container isOpen={sidebarOpen} themeUse={theme}>
+    <Container $isOpen={sidebarOpen} $themeUse={theme}>
       <button className="Sidebarbutton" onClick={ModSidebaropen}>
         <AiOutlineLeft />
       </button>
@@ -34,7 +31,9 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }) {
       {linksArray.map(({ icon, label, to }) => (
         <div className="LinkContainer" key={label}>
           <NavLink
-            to={to} className={({ isActive }) => `Links${isActive ? ` active` : ``}`}>
+            to={to}
+            className={({ isActive }) => `Links${isActive ? ` active` : ``}`}
+          >
             <div className="Linkicon">{icon}</div>
             {sidebarOpen && <span>{label}</span>}
           </NavLink>
@@ -44,7 +43,10 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }) {
       <Divider />
       {secondarylinksArray.map(({ icon, label, to }) => (
         <div className="LinkContainer" key={label}>
-          <NavLink to={to} className={({ isActive }) => `Links${isActive ? ` active` : ``}`}>
+          <NavLink
+            to={to}
+            className={({ isActive }) => `Links${isActive ? ` active` : ``}`}
+          >
             <div className="Linkicon">{icon}</div>
             {sidebarOpen && <span>{label}</span>}
           </NavLink>
@@ -58,14 +60,14 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }) {
           <div className="grid theme-container">
             <div className="content">
               <div className="demo">
-                <label className="switch" istheme={theme}>
+                <label className="switch" $istheme={theme}>
                   <input
-                    istheme={theme}
+                    $istheme={theme}
                     type="checkbox"
                     className="theme-swither"
                     onClick={CambiarTheme}
-                  ></input>
-                  <span istheme={theme} className="slider round"></span>
+                  />
+                  <span $istheme={theme} className="slider round"></span>
                 </label>
               </div>
             </div>
@@ -76,42 +78,32 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }) {
   );
 }
 
-//#region Data links
 const linksArray = [
-  // {
-  //   label: "Home",
-  //   icon: <AiOutlineHome />,
-  //   to: "/HomeAdmin",
-  // },
-  
   {
     label: "Citas",
     icon: <AiOutlineApartment />,
-    to: "/AdminCitas",
+    to: "/admin/citas",
   },
   {
     label: "Servicios",
     icon: <MdOutlineAnalytics />,
-    to: "/ServiciosAdmin",
+    to: "/admin/servicios",
   },
   {
     label: "Personal",
     icon: <MdOutlineAnalytics />,
-    to: "/PersonalAdmin",
+    to: "/admin/personal",
   },
 ];
 
 const secondarylinksArray = [
- 
   {
     label: "Salir",
     icon: <MdLogout />,
-    to: "/null",
+    to: "/logout",
   },
 ];
-//#endregion
 
-//#region STYLED COMPONENTS
 const Container = styled.div`
   color: ${(props) => props.theme.text};
   background: ${(props) => props.theme.bg};
@@ -132,7 +124,7 @@ const Container = styled.div`
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s;
-    transform: ${({ isOpen }) => (isOpen ? `initial` : `rotate(180deg)`)};
+    transform: ${({ $isOpen }) => ($isOpen ? `initial` : `rotate(180deg)`)};
     border: none;
     letter-spacing: inherit;
     color: inherit;
@@ -146,7 +138,6 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-
     padding-bottom: ${v.lgSpacing};
     .imgcontent {
       display: flex;
@@ -156,15 +147,14 @@ const Container = styled.div`
       }
       cursor: pointer;
       transition: all 0.3s;
-      transform: ${({ isOpen }) => (isOpen ? `scale(0.7)` : `scale(1.5)`)};
+      transform: ${({ $isOpen }) => ($isOpen ? `scale(0.7)` : `scale(1.5)`)};
     }
     h2 {
-      display: ${({ isOpen }) => (isOpen ? `block` : `none`)};
+      display: ${({ $isOpen }) => ($isOpen ? `block` : `none`)};
     }
   }
   .LinkContainer {
     margin: 8px 0;
-   
     padding: 0 15%;
     :hover {
       background: ${(props) => props.theme.bg3};
@@ -175,11 +165,10 @@ const Container = styled.div`
       text-decoration: none;
       padding: calc(${v.smSpacing}-2px) 0;
       color: ${(props) => props.theme.text};
-      height:50px;
+      height: 50px;
       .Linkicon {
         padding: ${v.smSpacing} ${v.mdSpacing};
         display: flex;
-
         svg {
           font-size: 25px;
         }
@@ -201,13 +190,13 @@ const Container = styled.div`
       display: block;
       padding: 10px;
       font-weight: 700;
-      opacity: ${({ isOpen }) => (isOpen ? `1` : `0`)};
+      opacity: ${({ $isOpen }) => ($isOpen ? `1` : `0`)};
       transition: all 0.3s;
       white-space: nowrap;
       overflow: hidden;
     }
     .Togglecontent {
-      margin: ${({ isOpen }) => (isOpen ? `auto 40px` : `auto 15px`)};
+      margin: ${({ $isOpen }) => ($isOpen ? `auto 40px` : `auto 15px`)};
       width: 36px;
       height: 20px;
       border-radius: 10px;
@@ -248,9 +237,8 @@ const Container = styled.div`
               left: 0;
               right: 0;
               bottom: 0;
-              background: ${({ themeUse }) =>
-                themeUse === "light" ? v.lightcheckbox : v.checkbox};
-
+              background: ${({ $themeUse }) =>
+                $themeUse === "light" ? v.lightcheckbox : v.checkbox};
               transition: 0.4s;
               &::before {
                 position: absolute;
@@ -264,7 +252,6 @@ const Container = styled.div`
               }
               &.round {
                 border-radius: 34px;
-
                 &::before {
                   border-radius: 50%;
                 }
@@ -283,14 +270,4 @@ const Divider = styled.div`
   margin: ${v.lgSpacing} 0;
 `;
 
-const MainLayout = styled.div`
-  display: flex;
-`;
-
-const MainContent = styled.div`
-  margin-left: ${({ sidebarOpen }) => (sidebarOpen ? '300px' : '70px')};
-  transition: margin-left 0.3s;
-  width: 100%;
-  padding: 20px;
-`;
-//#endregion
+export default Sidebar;

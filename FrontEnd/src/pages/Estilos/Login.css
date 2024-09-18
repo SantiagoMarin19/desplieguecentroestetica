@@ -4,21 +4,18 @@ html, body {
   padding: 0;
   height: 100%;
   width: 100%;
-  background-color: #f4f4f4; /* Fondo general de la página */
 }
+
 
 .bodySesion {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: #ffffff; /* Fondo del formulario */
-  border-radius: 8px; /* Redondea las esquinas del formulario */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra del formulario */
 }
 
 .inputcontenedores {
-  margin: 10px 0;
+  margin: 10px 0px;
   padding: 10px;
   color: #B0A6BD;
   border-color: #B0A6BD;
@@ -39,7 +36,7 @@ form {
 
 .botoningresar {
   background-color: #BA7894;
-  padding: 10px;
+  padding: 5px;
   width: 100%;
   border-radius: 4px;
   margin-top: 20px;
@@ -76,18 +73,6 @@ form {
   width: 100%;
 }
 
-/* Estilo para el enlace "Registrarme" */
-.poncuenta .registrarme-link {
-  color: #007bff; /* Azul para el subrayado */
-  cursor: default; /* Evita que el cursor cambie a puntero */
-  text-decoration: underline; /* Subrayado del texto */
-}
-
-.poncuenta .registrarme-link:hover {
-  color: #0056b3; /* Color del texto al pasar el cursor */
-  text-decoration: underline; /* Asegura que el subrayado se mantenga */
-}
-
 @media (max-width: 600px) {
   .bodySesion {
     padding: 10px;
@@ -98,7 +83,7 @@ form {
   }
 
   .decoraciones {
-    display: none;
+    display: flex;
   }
 
   .titulosesion {
@@ -110,25 +95,14 @@ form {
   }
 }
 
-/* Estilos para el modal */
-.modal-overlay {
-  background: rgba(255, 255, 255, 0.6); /* Fondo blanco con opacidad para hacer el fondo más claro */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999; /* Asegura que el overlay esté sobre otros contenidos */
+.header_inicio_sesion {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
 }
-
-.modal-content {
-  background-color: #ffffff; /* Fondo del contenido del modal */
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el contenido del modal */
+.imgNataliaArtist {
+  height: 100%;
   width: 100%;
-  max-width: 400px; /* Ajusta según el tamaño deseado */
+  border-radius: 100%;
+
 }

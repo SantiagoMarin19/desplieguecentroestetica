@@ -60,7 +60,7 @@ export const CompServicios = () => {
     <div className='componenteServs'>
       <div className='Bannerserviciosg'>
         <div className='tituloserviciosg'>
-          <h1>Nuestros Servicios</h1>
+          <h1>Nuestros servicios</h1>
         </div>
       </div>
       <div className='secciones_servicios'>
