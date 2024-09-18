@@ -1,29 +1,22 @@
 import React, { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import supabase from '../supabase/supabaseconfig';
+import { toast } from 'react-toastify';  // Importa react-toastify para mostrar notificaciones
+import 'react-toastify/dist/ReactToastify.css';
 import flechaizq from "../assets/images/decoración.png";
 import or from "../assets/images/OR.png";
 import flechader from "../assets/images/decor.png";
-import { useModal } from '../componentes/modal/ContextModal';
+import { useModal } from '../componentes/modal/ContextModal'; 
 import "./Estilos/Login.css";
 
 const LoginUser = ({ closeModal }) => {
     let navigate = useNavigate();
-    let location = useLocation();
-
-    const [formData, setFormData] = useState({
-        email: '',
-        password: ''
-    });
-
+    const [formData, setFormData] = useState({ email: '', password: '' });
     const { openModal } = useModal();
 
     function handleChange(event) {
         const { name, value } = event.target;
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            [name]: value
-        }));
+        setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
     }
 
     async function handleSubmit(e) {
@@ -34,28 +27,21 @@ const LoginUser = ({ closeModal }) => {
                 password: formData.password,
             });
 
-            if (error) {
-                console.error("Supabase error:", error);
-                throw error;
-            }
+            if (error) throw error;
 
+            // Almacena el token y el nombre de usuario
             sessionStorage.setItem('token', JSON.stringify(data.session.access_token));
             sessionStorage.setItem('user', JSON.stringify(data.user.user_metadata.full_name));
 
-            // Check email and navigate accordingly
-            if (formData.email === "davidochoa772@gmail.com") {
-                navigate('/admin');
-            } else if (formData.email === "santiago192506@gmail.com") {
-                navigate('/AgendaPersonal');
-            } else {
-                const redirectTo = location.state?.from || '/';
-                navigate(redirectTo);
-            }
-            
-            closeModal();
+            // Muestra la notificación de inicio de sesión exitoso
+            toast.success(`Bienvenido de nuevo, ${data.user.user_metadata.full_name}`);
+
+            const redirectTo = location.state?.from || '/';
+            navigate(redirectTo);
+            closeModal();  // Cierra el modal después de la redirección
         } catch (error) {
-            console.error("Caught error:", error);
-            alert(error.message);
+            console.error("Error:", error);
+            toast.error(error.message);  // Muestra una notificación en caso de error
         }
     }
 
@@ -93,7 +79,7 @@ const LoginUser = ({ closeModal }) => {
                             className="hover-pointer" 
                             onClick={handleForgotPasswordClick}
                         >
-                            Haz olvidado contraseña?
+                            ¿Has olvidado la contraseña?
                         </span>
                     </div>
                 </div>
@@ -117,3 +103,5 @@ const LoginUser = ({ closeModal }) => {
 }
 
 export default LoginUser;
+
+
