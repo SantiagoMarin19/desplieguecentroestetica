@@ -73,14 +73,14 @@ const FacturacionModal = ({ token }) => {
             window.alert('Por favor, inicie sesión para continuar.');
             return;
         }
-
+    
         if (!idHorario) {
             console.error('No se pudo obtener el id_horario para la duración.');
             setModalMessage('No se pudo obtener el id_horario para la duración.');
             setShowModal(true);
             return;
         }
-
+    
         const { data, error } = await supabase
             .from('cita')
             .insert([{
@@ -91,16 +91,17 @@ const FacturacionModal = ({ token }) => {
                 duracion: duracion,
                 estado: 'FALSE'
             }]);
-
+    
         if (error) {
             setModalMessage(`Error al guardar la cita: ${error.message}`);
         } else {
             setModalMessage('Cita guardada con éxito. Un administrador verificará tu cita.');
             setShowModal(true);
-            setTimeout(() => navigate('/'), 3000);
+            // Redirigir a la página de abono, pasando el servicio en el estado de la navegación
+            setTimeout(() => navigate('/abono-info', { state: { servicio } }), 3000);
         }
     };
-
+    
     return (
         <div className='contenedor_facturacion'>
             <div className="facturacion-container">
