@@ -1,113 +1,129 @@
-/* Nosostros.css */
-.containernosotros {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    font-family: 'Arial', sans-serif;
-    height: max-content;
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Urbanist:wght@300;400;600&display=swap');
 
+:root {
+  --primary-color: #BF6A8C;
+  --secondary-color: #FCEBF2;
+  --text-color: #333;
+  --background-color: #fff;
+}
+
+body {
+  font-family: "Urbanist", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
 .header {
-    position: relative;
-    text-align: center;
-    margin-bottom: 40px;
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  background-color: var(--secondary-color);
+padding: 2rem 1rem;
+margin-bottom: 2rem;
 }
 
-.header::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 150%;
-    height: 150%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 0, 150, 0.5));
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-    filter: blur(20px);
-    opacity: 0.6;
+.header h1 { 
+  font-family: "Playfair Display", serif;
+  font-size: 4rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+  animation: fadeInUp 1s ease-out;
 }
 
-.header h1 {
-    font-size: 3rem;
-    color: #ff99c7;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin: 0;
-    position: relative;
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 10px;
-background-color: #C98695;
-    color: white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
+.header h1::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--primary-color);
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
 }
 
-@keyframes shimmer {
-    0% {
-        transform: translateX(-100%) translateY(-100%);
-    }
-    100% {
-        transform: translateX(100%) translateY(100%);
-    }
+.header h1:hover::after {
+  transform: scaleX(1);
 }
 
 .section {
-    width: 100%;
-    max-width: 800px;
-    margin-bottom: 40px;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.section h2 {
-    font-size: 2rem;
-    color: #000000;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #e9cbd5;
-    padding-bottom: 10px;
+.section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.section p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #333;
-    text-align: justify;
+h2 {
+  font-family: "Playfair Display", serif;
+  color: var(--primary-color);
+  font-size: 2rem;
+  margin-bottom: 1rem;
 }
 
-.section li {
-    color: black;
+p, ul {
+  font-family: "Urbanist", sans-serif;
+  margin-bottom: 1rem;
 }
 
-.section:nth-child(even) {
-    background-color: #f9f9f9;
+ul {
+  padding-left: 1.5rem;
 }
 
-.section:nth-child(odd) {
-    background-color: #ffffff;
+li {
+  margin-bottom: 0.5rem;
 }
+
+strong {
+  color: var(--primary-color);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section {
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.section:nth-child(1) { animation-delay: 0.1s; }
+.section:nth-child(2) { animation-delay: 0.2s; }
+.section:nth-child(3) { animation-delay: 0.3s; }
+.section:nth-child(4) { animation-delay: 0.4s; }
+.section:nth-child(5) { animation-delay: 0.5s; }
+.section:nth-child(6) { animation-delay: 0.6s; }
 
 @media (max-width: 768px) {
-    .header h1 {
-        font-size: 2.5rem;
-    }
-
-    .section h2 {
-        font-size: 1.5rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .header h1 {
-        font-size: 1.8rem;
-    }
-
-    .section h2 {
-        font-size: 1.2rem;
-    }
+  h1 {
+    font-size: 3rem;
+  }
+  
+  .section {
+    padding: 1.5rem;
+  }
 }

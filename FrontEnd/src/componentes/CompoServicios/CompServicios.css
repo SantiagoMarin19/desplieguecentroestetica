@@ -1,48 +1,78 @@
-body {
-    background-color: #FFFFFF;
+:root {
+    --primary-color: #BF6A8C;
+    --secondary-color: #FCEBF2;
+    --text-color: #333;
+    --background-color: #fff;
+    --card-shadow: 0 2px 8px rgba(191, 106, 140, 0.2);
+  }
+  
+  body {
+    font-family: "Urbanist", sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    width: 100%;
-    overflow-x: hidden; /* Evita el desplazamiento horizontal */
-}
+  }
 
-html {
-    width: 100%; /* Asegura que el HTML abarque todo el ancho */
-    overflow-x: hidden; /* Evita el desplazamiento horizontal */
-}
+  .Bannerserviciosg {
+    background-color: var(--secondary-color);
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+  }
 
-.Bannerserviciosg {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #FCEBF2;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 100%; /* Asegura que abarque todo el ancho */
-    margin: 0 auto; /* Centra el contenido */
+  @keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .tituloserviciosg {
-    width: 100%;
     text-align: center;
     margin-bottom: 20px;
+    animation: fadeInUp 1s ease-out;
+    position: relative; /* Agregado */
 }
 
 .tituloserviciosg h1 {
+    display: inline-block; /* Cambiado */
+    font-family: "Playfair Display", serif;
     font-size: 2.5rem;
-    color: #422A3C;
-    font-weight: 700;
+    color: var(--primary-color);
     margin: 0;
+    animation: fadeInUp 0.8s ease-out;
 }
+
+.tituloserviciosg h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .tituloserviciosg h1:hover::after {
+    transform: scaleX(1);
+  }
+  
 
 .secciones_servicios {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 0 10px;
-    width: 100%; /* Asegura que abarque todo el ancho */
-    margin: 0 auto; /* Centra el contenido */
+    padding: 0 10px; 
 }
 
 .Titulo_Servicio_Cejas,
@@ -50,17 +80,17 @@ html {
 .Titulo_Servicio_Microp {
     padding: 2rem;
     text-align: center;
-    background-color: #FBFCF8;
-    width: 100%;
+   
+ 
 }
 
 .Titulo_Servicio_Cejas h3,
 .Titulo_Servicio_Pestañas h3,
 .Titulo_Servicio_Microp h3 {
-    font-size: 2rem;
+    font-size: 2.5rem; 
     color: #422A3C;
+    
     margin: 0;
-    padding: 20px;
 }
 
 .serviciodcejas,
@@ -70,8 +100,6 @@ html {
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
-    width: 100%; /* Asegura que abarque todo el ancho */
-    margin: 0 auto; /* Centra el contenido */
 }
 
 .serviciosdetc,
@@ -99,7 +127,7 @@ html {
 .serviciosdetc img,
 .serviciosdetp img,
 .serviciosdm img {
-    width: 80%;
+    width: 100%;
     height: auto;
     border-radius: 10px;
     margin-bottom: 15px;
@@ -122,50 +150,59 @@ html {
 
 .button_s {
     color: #FCEBF2;
-    border: 1px solid #FCEBF2;
-    padding: 12px 30px;
+    border: 1px solid  #FCEBF2;
+    padding: 12px 30px 12px 30px;
     border-radius: 30px;
     background-color: #C98695;
     font-weight: bolder;
     font-size: 15px;
     box-shadow: 0px 0px 1px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.button_s:hover {
+    transform: all 2s esase;
+    transition-duration: .3s;
+  }
+  
+  .button_s:hover {
     transform: translateY(-10px);
-    box-shadow: 0px 7px 1px #000000;
-    border: 1px solid #C98695;
-}
-
-.button_s:active {
+    box-shadow: 0px 7px 1px  #000000;
+    border: 1px solid  #C98695;
+  }
+  
+  .button_s:active {
     transform: translateY(10px);
     box-shadow: 0px 0px 1px;
-}
+  }
+    
 
 /* Media Queries */
 @media (max-width: 1200px) {
     .tituloserviciosg h1 {
-        font-size: 2rem;
+        font-size: 2.5rem; 
     }
 
     .secciones_servicios {
+        padding: 0;
         gap: 15px;
     }
 }
 
 @media (max-width: 992px) {
     .tituloserviciosg h1 {
-        font-size: 1.8rem;
+        font-size: 2rem; 
+    }
+
+    .secciones_servicios {
+        flex-direction: column;
+        gap: 20px;
     }
 
     .serviciosdetc,
     .serviciosdetp,
     .serviciosdm {
+        width: 100%;
         max-width: 100%;
     }
 
-    .button_s {
+    .butonSs {
         font-size: 0.9rem;
         padding: 8px 16px;
     }
@@ -173,7 +210,7 @@ html {
 
 @media (max-width: 768px) {
     .tituloserviciosg h1 {
-        font-size: 1.5rem;
+        font-size: 1.8rem; 
     }
 
     .serviciosdetc h5,
@@ -182,7 +219,7 @@ html {
         font-size: 0.9rem;
     }
 
-    .button_s {
+    .butonSs {
         font-size: 0.8rem;
         padding: 6px 12px;
     }
@@ -190,27 +227,23 @@ html {
 
 @media (max-width: 480px) {
     .tituloserviciosg h1 {
-        font-size: 1.2rem;
+        font-size: 1.5rem; 
     }
 
     .secciones_servicios {
         gap: 10px;
     }
 
-    .serviciosdetc img,
-    .serviciosdetp img,
-    .serviciosdm img {
-        width: 50%;
+    .serviciosdetc h5,
+    .serviciosdetp h5,
+    .serviciosdm h5 {
+        font-size: 0.8rem;
     }
 
-    .serviciosdetc,
-    .serviciosdetp,
-    .serviciosdm {
-        width: 100%;
-    }
-
-    .button_s {
+    .butonSs {
         font-size: 0.7rem;
         padding: 5px 10px;
     }
 }
+
+
