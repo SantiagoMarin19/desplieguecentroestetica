@@ -6,6 +6,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import supabase from '../../supabase/supabaseconfig';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import moment from 'moment';
 
 export const Agendamiento = () => {
     const [profesionales, setProfesionales] = useState([]);
@@ -80,15 +81,15 @@ export const Agendamiento = () => {
                 const selectedDate = date.toISOString().split('T')[0];
                 const { data, error } = await supabase
                     .from('cita')
-                    .select('franja_horaria')
+                    .select('*')
                     .eq('profesional', selectedProfesional)
                     .eq('fecha', selectedDate)
                     .eq('servicio', servicio.id_servicios);
-
+        
                 if (error) {
                     console.error('Error fetching horarios ocupados:', error);
                 } else {
-                    setHorariosOcupados(data.map(cita => cita.franja_horaria) || []);
+                    setHorariosOcupados(data || []);
                 }
                 setLoadingHorarios(false);
             }
@@ -115,17 +116,44 @@ export const Agendamiento = () => {
     };
 
     const isOcupado = (franjaId) => {
-        return horariosOcupados.includes(franjaId);
+        return horariosOcupados.some(cita => cita.franja_horaria === franjaId);
     };
-
-    const handleReservarClick = (event) => {
+    
+    const handleReservarClick = async (event) => {
         event.preventDefault();
-
+    
         if (!selectedProfesional || !selectedHora) {
             window.alert('Por favor, selecciona un profesional y una hora.');
             return;
         }
-
+    
+        // Verificar nuevamente si la hora está disponible
+        const selectedFranja = franjasHorarias.find(franja => franja.hora === selectedHora);
+        if (!selectedFranja || isOcupado(selectedFranja.id_horario)) {
+            window.alert('Lo sentimos, esta hora ya no está disponible. Por favor, selecciona otra hora.');
+            return;
+        }
+    
+        // Aquí podrías hacer una inserción en la tabla de citas para "reservar" la hora
+        const { data, error } = await supabase
+            .from('cita')
+            .insert({
+                fecha: date.toISOString().split('T')[0],
+                duracion: selectedHora,
+                profesional: selectedProfesional,
+                servicio: servicio.id_servicios,
+                usuarios: userId,
+                franja_horaria: selectedFranja.id_horario,
+                estado: 'reservada'
+            });
+    
+        if (error) {
+            console.error('Error al reservar la cita:', error);
+            window.alert('Hubo un error al reservar la cita. Por favor, intenta de nuevo.');
+            return;
+        }
+    
+        // Si todo sale bien, navega a la página de facturación
         navigate('/Facturacion', {
             state: {
                 fecha: date,
@@ -195,26 +223,33 @@ export const Agendamiento = () => {
                                 tileDisabled={tileDisabled} 
                             />
 
-                            <div className='horarios-container'>
-                                <div className='titulo_horarios'>
-                                    <h3>Horarios Disponibles</h3>
-                                </div>
-                                
-                                <div className='horarios-grid'>
-                                    {loadingFranjas ? (
-                                        <Skeleton count={10} height={40} />
-                                    ) : (
-                                        franjasHorarias.map(franja => (
-                                            <div key={franja.id_horario}
-                                                 className={`cuadros ${isOcupado(franja.id_horario) ? 'ocupado' : 'libre'}`}
-                                                 onClick={() => handleHoraClick(franja.hora, franja.id_horario)}
-                                                 style={{ cursor: isOcupado(franja.id_horario) ? 'not-allowed' : 'pointer', opacity: isOcupado(franja.id_horario) ? 0.5 : 1 }}>
-                                                {franja.hora}
-                                            </div>
-                                        ))
-                                    )}
-                                </div>
-                            </div>
+                           <div className='horarios-container'>
+    <div className='titulo_horarios'>
+        <h3>Horarios Disponibles</h3>
+    </div>
+    
+    <div className='horarios-grid'>
+        {loadingFranjas ? (
+            <Skeleton count={10} height={40} />
+        ) : franjasHorarias.length === 0 ? (
+            <p>No hay citas disponibles para este día. Por favor, intenta con otra fecha.</p>
+        ) : (
+            franjasHorarias.map(franja => {
+                const estaOcupado = isOcupado(franja.id_horario);
+                return (
+                    <div 
+                        key={franja.id_horario}
+                        className={`cuadros ${estaOcupado ? 'ocupado' : 'libre'}`}
+                        onClick={() => !estaOcupado && handleHoraClick(franja.hora, franja.id_horario)}
+                        style={{ cursor: estaOcupado ? 'not-allowed' : 'pointer' }}
+                    >
+                        {franja.hora}
+                    </div>
+                );
+            })
+        )}
+    </div>
+</div>
                         </div>
                     </div>
                 </div>
@@ -242,8 +277,8 @@ export const Agendamiento = () => {
                                     <td>{servicio.nombre_servicio}</td>
                                 </tr>
                                 <tr>
-                                    <th>Duración</th>
-                                    <td>{selectedHora ? selectedHora : <Skeleton width={100} height={20} />}</td>
+                                <th>Hora</th>
+                                <td>{moment(selectedHora, 'HH:mm').format('h:mm A')}</td>
                                 </tr>
                                 <tr>
                                     <th>Costo</th>

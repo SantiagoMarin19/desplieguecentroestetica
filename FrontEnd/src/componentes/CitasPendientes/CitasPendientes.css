@@ -1,201 +1,199 @@
-/* Estilos globales */
-* {
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Urbanist:wght@300;400;600&display=swap');
+
+:root {
+  --primary-color: #BF6A8C;
+  --secondary-color: #FCEBF2;
+  --text-color: #333;
+  --background-color: #fff;
+  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: "Urbanist", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-html, body {
-  width: 100%;
-  overflow-x: hidden; /* Evita el desplazamiento horizontal */
-  background-color: #FFFFFF;
-}
-
-button:disabled {
-  background-color: #e0e0e0; /* Color de fondo cuando está deshabilitado */
-  color: #a0a0a0; /* Color del texto cuando está deshabilitado */
-  cursor: not-allowed; /* Cambia el cursor para indicar que está deshabilitado */
-  border: 1px solid #ccc; /* Borde cuando está deshabilitado */
-}
-
-/* Estilos específicos para los estados */
-.status-pendiente {
-  color: #ffc107; /* Amarillo */
-}
-
-.status-confirmada {
-  color: #28a745; /* Verde */
-}
-
-.estado-text {
-  font-weight: bold;
-  margin-right: 5px;
-}
-
-.estado-pendiente {
-  color: #ffc107; /* Amarillo */
-}
-
-.estado-confirmada {
-  color: #28a745; /* Verde */
-}
-
-
-/* Contenedor principal para centrar el contenido */
 .citaspendientesbody {
-  font-family: "Manrope", sans-serif;
-  background-color: #ffffff;
-  height: max-content;
-  width: 100%;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 1200px; /* Limita el ancho máximo del contenedor */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
-.citaspendientesbody.container {
-  font-family: "Manrope", sans-serif;
-  background-color: #ffffff;
-  height: max-content;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Títulos */
 .citaspendientestitulo {
-  font-size: 2rem; /* Ajusta el tamaño del título */
-  font-weight: bold;
-  padding-bottom: 20px; /* Espacio debajo del título */
-  border-bottom: 2px solid #ccc; /* Línea inferior opcional */
-  text-align: center; /* Centra el texto del título */
-  width: 100%;
-}
-
-
-/* Carta completa de citas */
-.cartacompletacitas {
-  width: 80%;
-  display: flex;
-  align-items: center;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-
-  gap: 40px;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-}
-
-/* Subcarta */
-.subcarta {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px; /* Ajusta según sea necesario */
-}
-
-.subcarta button {
-  width: 160px;
-  font-size: 15px;
+  font-family: "Playfair Display", serif;
+  font-size: 3rem;
+  color: var(--primary-color);
   text-align: center;
-  border-radius: 5px;
-  background-color: #e9cbd5;
-  border-color: #e9cbd5;
-}
-.main-container {
-  flex: 1; /* Permite que el contenedor principal ocupe el espacio restante */
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; /* Centra verticalmente el contenido */
-  min-height: 80vh; /* Ajuste para centrar verticalmente */
-  min-height: 0; /* Permite que el contenedor se ajuste a su contenido */
+  margin-bottom: 2rem;
+  position: relative;
+  animation: fadeInUp 1s ease-out;
 }
 
-/* Contenedor de cada carta */
+.citaspendientestitulo::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease-in-out;
+}
+
+.citaspendientestitulo:hover::after {
+  width: 150px;
+}
+
+.cartacompletacitas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
 .contenedorcarta {
-  width: 40%;
-  height: 85%;
-  border-radius: 35px;
-  transition: 400ms all ease;
-  box-shadow: 10px 10px 16px -5px rgba(0, 0, 0, 0.75);
-  margin-bottom: 20px;
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: calc(33.333% - 1.33rem);
+  min-width: 280px;
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
 }
 
 .contenedorcarta:hover {
-  transform: translateY(-4%);
-  box-shadow: 10px 10px 16px -5px rgba(0, 0, 0, 0.75);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.contenedorcarta img {
-  width: 80%;
-  height: 300px;
+.subcarta {
+  padding: 1.5rem;
+}
+
+.imagen-servicio {
+  width: 100%;
+  height: 200px;
   object-fit: cover;
-  border-top-left-radius: 35px;
-  border-top-right-radius: 35px;
-}
-
-/* Títulos y subtítulos */
-.contenedorTitulo,
-.contenedorsubtitulo {
-  width: 80%;
-  font-weight: bold;
-  font-family: "Urbanist", sans-serif;
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
 }
 
 .contenedorTitulo {
-  font-size: 35px;
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
 }
 
 .contenedorsubtitulo {
-  color: rgb(85, 84, 84);
-  font-size: 20px;
+  font-family: "Urbanist", sans-serif;
+  margin-bottom: 0.5rem;
 }
 
-/* Media Queries */
-@media (max-width: 1400px) {
-  .contenedorTitulo {
-    font-size: 30px;
+.fechaAgendadaSubtitulo {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.status-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.status-pendiente .status-indicator {
+  background-color: #ffc107;
+}
+
+.status-confirmada .status-indicator {
+  background-color: #28a745;
+}
+
+.estado-text {
+  font-weight: 600;
+}
+
+button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-family: "Urbanist", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+button:hover:not(:disabled) {
+  background-color: #a85775;
+}
+
+button:disabled {
+  background-color: #e0e0e0;
+  color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  .contenedorsubtitulo {
-    font-size: 18px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 @media (max-width: 1200px) {
-  .contenedorTitulo {
-    font-size: 24px;
-  }
-  .contenedorsubtitulo {
-    font-size: 16px;
+  .contenedorcarta {
+    width: calc(50% - 1rem);
   }
 }
 
-@media (max-width: 990px) {
-  .cartacompletacitas {
-    flex-direction: column;
+@media (max-width: 768px) {
+  .citaspendientestitulo {
+    font-size: 2.5rem;
   }
+  
   .contenedorcarta {
     width: 100%;
   }
-  .contenedorTitulo {
-    font-size: 28px;
+}
+
+@media (max-width: 480px) {
+  .citaspendientestitulo {
+    font-size: 2rem;
   }
-  .contenedorsubtitulo {
-    font-size: 18px;
+  
+  .contenedorTitulo {
+    font-size: 1.3rem;
   }
 }
 
-@media (max-width: 500px) {
-  .contenedorTitulo {
-    font-size: 24px;
-  }
-  .contenedorsubtitulo {
-    font-size: 15px;
-  }
+.status-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px; 
+  border-radius: 50%; 
+  margin-right: 5px; 
+}
+
+.status-confirmada {
+  background-color: green; 
+}
+
+.status-pendiente {
+  background-color: red; 
 }

@@ -6,6 +6,7 @@ import { Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import moment from 'moment';
 
 const CitasPendientes = ({ token }) => {
     const [appointments, setAppointments] = useState([]);
@@ -89,44 +90,46 @@ const CitasPendientes = ({ token }) => {
                     <p>No tienes citas programadas. Por favor inicia sesión para verificar tus citas.</p>
                 ) : (
                     <div className='cartacompletacitas'>
-                        {appointments.map((citas, index) => (
-                            <div key={index} className='contenedorcarta'>
-                                <div className='subcarta'>
-                                    {loading ? (
-                                        <Skeleton height={100} width={100} />
-                                    ) : (
-                                        <img src={citas.servicio.url_img} alt={citas.servicio.nombre_servicio} className="imagen-servicio" />
-                                    )}
-                                    {loading ? (
-                                        <>
-                                            <Skeleton width={200} height={20} />
-                                            <Skeleton width={300} height={20} />
-                                            <Skeleton width={250} height={20} />
-                                            <Skeleton width={250} height={20} />
-                                            <Skeleton width={150} height={20} />
-                                        </>
-                                    ) : (
-                                        <>
-                                            <p className='contenedorTitulo'>{citas.servicio.nombre_servicio}</p>
-                                            <p className='contenedorsubtitulo'><b className='fechaAgendadaSubtitulo'>Fecha:</b> {new Date(citas.fecha).toLocaleDateString()}</p>
-                                            <p className='contenedorsubtitulo'><b className='fechaAgendadaSubtitulo'>Duración:</b> {citas.duracion}</p>
-                                            <p className='contenedorsubtitulo'><b className='fechaAgendadaSubtitulo'>Profesional:</b> {citas.profesional.nombre_profesional}</p>
-                                            <p className='contenedorsubtitulo'>
-                                                <span className={`status-indicator ${getStatusClass(citas.estado)}`}></span>
-                                                <b className={`estado-text ${getStatusClass(citas.estado)}`}>Estado:</b>
-                                                <span className={`estado-text ${getStatusClass(citas.estado)}`}>{getStatusText(citas.estado)}</span>
-                                            </p>
-                                            <button
-                                                onClick={() => handleButtonClick(citas.servicio)}
-                                                disabled={!isPending(citas.estado)} // Deshabilita el botón si no está pendiente
-                                            >
-                                                VER ABONO
-                                            </button>
-                                        </>
-                                    )}
-                                </div>
-                            </div>
-                        ))}
+                       {appointments.map((citas, index) => (
+    <div key={index} className='contenedorcarta'>
+        <div className='subcarta'>
+            {loading ? (
+                <Skeleton height={100} width={100} />
+            ) : (
+                <img src={citas.servicio.url_img} alt={citas.servicio.nombre_servicio} className="imagen-servicio" />
+            )}
+            {loading ? (
+                <>
+                    <Skeleton width={200} height={20} />
+                    <Skeleton width={300} height={20} />
+                    <Skeleton width={250} height={20} />
+                    <Skeleton width={250} height={20} />
+                    <Skeleton width={150} height={20} />
+                </>
+            ) : (
+                <>
+                    <p className='contenedorTitulo'>{citas.servicio.nombre_servicio}</p>
+                    <p className='contenedorsubtitulo'><b className='fechaAgendadaSubtitulo'>Fecha:</b> {new Date(citas.fecha).toLocaleDateString()}</p>
+                    <p className='contenedorsubtitulo'><b className='fechaAgendadaSubtitulo'>Hora:</b> {moment(citas.duracion, 'HH:mm').format('h:mm A')}</p>
+                    <p className='contenedorsubtitulo'><b className='fechaAgendadaSubtitulo'>Profesional:</b> {citas.profesional.nombre_profesional}</p>
+                    <p className='contenedorsubtitulo'>
+                        <span className={`status-indicator ${getStatusClass(citas.estado)}`}></span>
+                        <b className={`estado-text ${getStatusClass(citas.estado)}`}>Estado:</b>
+                        <span className={`estado-text ${getStatusClass(citas.estado)}`}>{getStatusText(citas.estado)}</span>
+                    </p>
+                    <button
+                        onClick={() => handleButtonClick(citas.servicio)}
+                        disabled={!isPending(citas.estado)} // Deshabilita el botón si no está pendiente
+                    >
+                        VER ABONO
+                    </button>
+                </>
+            )}
+        </div>
+    </div>
+))}
+
+                 
                     </div>
                 )
             )}

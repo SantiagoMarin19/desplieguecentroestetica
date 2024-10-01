@@ -43,12 +43,13 @@ th, td {
 }
 
 .cuadros.libre {
-    background-color: rgb(184, 118, 223);
+    background-color: #BF6A8C; /* Rosa */
 }
 
 .cuadros.ocupado {
-    background-color: rgb(126, 121, 121);
+    background-color: rgb(126, 121, 121); /* Gris */
 }
+
 
 .react-calendar__tile {
     color: #000000 !important;
