@@ -127,7 +127,7 @@ const CitasPendientes = ({ token }) => {
                                         <b className={`estado-text ${getStatusClass(citas.estado)}`}>Estado:</b>
                                         <span className={`estado-text ${getStatusClass(citas.estado)}`}>{getStatusText(citas.estado)}</span>
                                     </p>
-                                    <button
+                                    <button className='Verabono'
                                         onClick={() => handleButtonClick(citas.servicio)}
                                         disabled={!isPending(citas.estado)} // Deshabilita el botón si no está pendiente
                                     >

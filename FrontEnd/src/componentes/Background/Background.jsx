@@ -56,9 +56,10 @@ export const Background = () => {
                             {loading ? (
                                 <Skeleton height={50} width={150} />
                             ) : (
-                                <button className='btn-primary'>
-                                    <a className="agendarYa" href="/servicios">AGENDAR AHORA</a>
-                                </button>
+                                <div className='contenedor_boton_agendar'>
+                                <NavLink to="/Servicios"> 
+                                <button class="btn_Background">Agendar Ahora</button>
+                           </NavLink></div>
                             )}
                         </div>
                     </div>
@@ -112,9 +113,10 @@ export const Background = () => {
                     {loading ? (
                         <Skeleton height={40} width={150} />
                     ) : (
-                        <NavLink to="/servicios">
-                            <button type="button" className="buttonservi">SERVICIOS</button>
-                        </NavLink>
+                        <div className='contenedor_boton_agendar'>
+                        <NavLink to="/Servicios"> 
+                                <button class="btn_Background">Servicios</button>
+                           </NavLink> </div>
                     )}
                 </div>
             </div>
@@ -144,8 +146,8 @@ export const Background = () => {
                             <Skeleton height={40} width={150} />
                         ) : (
                             <NavLink to="/politicas"> 
-                                <button className="Boton_Politicas" type="button">CONOCE MÁS</button>
-                            </NavLink>
+                                <button class="btn_Background">Ver las Politicas</button>
+                           </NavLink>
                         )}
                     </div>
                 </div>

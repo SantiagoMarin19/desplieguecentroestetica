@@ -1,4 +1,4 @@
-/* Estilos generales */
+
 html, body {
   margin: 0;
   padding: 0;
@@ -6,34 +6,34 @@ html, body {
   width: 100%;
 }
 
-/* Estilo del contenedor principal */
+
 .conteinergeneral {
   display: flex;
   flex-direction: column;
 }
 
-/* Ajustes para la sección .iconos */
+
 .iconos {
-  flex: 1; /* Permite que esta sección ocupe el espacio restante disponible */
+  flex: 1;
 }
 
-/* Estilo para la imagen de fondo */
+
 .background {
   position: relative;
   overflow: hidden;
   width: 100%;
-  height: 100vh; /* Asegura que el fondo cubra la altura completa de la vista */
+  height: 100vh;
 }
 
 .foto img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Asegura que la imagen cubra el área sin distorsión */
+  object-fit: cover;
   border: none;
   border-radius: 10px;
 }
 
-/* Estilos para el texto y botones */
+
 .Frase-background {
   text-align: center;
   padding: 20px;
@@ -44,40 +44,17 @@ html, body {
   text-align: -webkit-auto;
 }
 
-/* Botón primario */
-.btn-primary {
-  background-color: #007bff;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  font-size: 1em;
-  cursor: pointer;
-  display: block;
-  margin: 20px auto;
-}
 
-/* Estilo para la sección de imágenes de servicios */
+
 .imgservices {
   text-align: center;
   margin: 20px 0;
 }
 
-/* Botón de navegación */
-.bottoncentrado {
-  text-align: center;
-  margin: 20px 0;
-}
 
-.buttonservi {
-  background-color: #007bff;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  font-size: 1em;
-  cursor: pointer;
-}
 
-/* Estilos para el mapa */
+
+
 .backgroundtercero {
   padding: 20px;
 }
@@ -94,58 +71,6 @@ html, body {
   border: 0;
 }
 
-/* Media queries para responsive design */
-@media (max-width: 768px) {
-  .Frase-background h1 {
-    font-size: 1.5em;
-  }
-
-  .Frase-background p {
-    font-size: 0.9em;
-  }
-
-  .imgservices img {
-    max-width: 150px;
-  }
-
-  .backgroundtercero h2 {
-    font-size: 1.2em;
-  }
-
-  .backgroundtercero h3 {
-    font-size: 1em;
-  }
-}
-
-@media (max-width: 480px) {
-  .Frase-background h2 {
-    font-size: 1.2em;
-  }
-
-  .Frase-background h1 {
-    font-size: 1.2em;
-  }
-
-  .Frase-background p {
-    font-size: 0.8em;
-  }
-
-  .imgservices img {
-    max-width: 120px;
-  }
-
-  .backgroundtercero h2 {
-    font-size: 1em;
-  }
-
-  .backgroundtercero h3 {
-    font-size: 0.9em;
-  }
-
-  .mapa iframe {
-    height: 200px;
-  }
-}
 
 .background {
   background-color: #FCEBF2;
@@ -170,8 +95,7 @@ a {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  box-sizing: border-box; /* Asegura que el padding no incremente el tamaño total */
-  padding: 50px; /* Añadido para espacio interior */
+  box-sizing: border-box; 
 }
 
 .Frase-background {
@@ -216,53 +140,6 @@ a {
   color: #fff;
 }
 
-.buttonservi {
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-}
-
-.boton {
-  margin-left: 40% !important;
-  background-color: #C98695;
-  font-size: 20px;
-}
-
-.btn-primary {
-  display: flex !important;
-  background-color: #BF6A8C !important;
-  color: white !important;
-  padding: 10px;
-  width: 25%;
-  justify-content: center;
-  border-radius: 10px;
-}
-
-
-.servicios {
-  --bs-btn-color: #000000;
-  --bs-btn-bg: #BF6A8C;
-  --bs-btn-border-color: #BF6A8C;
-  --bs-btn-hover-color: #ff0000;
-  --bs-btn-hover-bg: #BF6A8C;
-  --bs-btn-hover-border-color: #BF6A8C;
-  --bs-btn-focus-shadow-rgb: 49, 132, 253;
-  --bs-btn-active-color: #ff0000;
-  --bs-btn-active-bg: #BF6A8C;
-  --bs-btn-active-border-color: #BF6A8C;
-  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #ff0000;
-  --bs-btn-disabled-bg: #BF6A8C;
-  --bs-btn-disabled-border-color: #BF6A8C;
-}
-
-.bottoncentrado {
-  display: flex;
-  justify-content: center;
-  margin-top: 100px;
-  margin-bottom: 50px;
-}
-
 .mapa {
   text-align: center; /* Centra el mapa y el botón */
   margin-top: 30px; /* Espacio superior */
@@ -276,30 +153,6 @@ a {
   border-radius: 10px; /* Borde redondeado */
   margin-bottom: 20px; /* Espacio inferior */
 }
-
-.mapa button {
-  background-color: #ffffff; /* Color de fondo del botón */
-  color: #BF6A8C; /* Color del texto del botón */
-  border: none; /* Sin borde */
-  border-radius: 5px;
-  padding: 10px 20px; /* Espaciado interno */
-  font-size: 18px; /* Tamaño de fuente */
-  cursor: pointer; /* Cursor de puntero */
-  transition: background-color 0.3s ease; /* Transición suave */
-}
-
-.mapa button:hover {
-  background-color: rgba(255, 255, 255, 0.8); /* Cambia el fondo al pasar el mouse */
-
- }
-
- .Boton_Politicas{
-  border: transparent;
-  border-radius: 10px;
- }
- 
-
-
 
 .herr-von-muellerhoff-regular {
   font-family: "Herr Von Muellerhoff", cursive;
@@ -395,32 +248,130 @@ a {
   color: #422A3C;
 }
 
-.btn-servicios {
-  background-color: transparent;
-  padding-right: 50px;
-  padding-left: 50px;
-  border-radius: 2px;
-  border-color: black;
-  border-width: thin;
-  font-size: 20px;
-  font-family: 'Urbanist';
-}
-
 .redirigirserv {
   padding: 20px;
   display: flex;
   justify-content: center;
 }
 
-.buttonservi {
-  display: flex !important;
-  background-color: #BF6A8C !important;
-  color: white !important;
-  padding: 10px;
-  width: 200%;
-  justify-content: center;
-  border-radius: 10px;
+.agendarYa {
+  text-decoration: none;
+  color: inherit;
 }
+
+.btn_Background {
+  position: relative;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1em 2.5em;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 6em;
+  transition: all 0.2s;
+  border: none;
+  font-family: inherit;
+  font-weight: 500;
+  color: #FCEBF2;
+  background-color:  #C98695;
+  font-size: 15px;
+  font-family: "Urbanist", sans-serif;
+  text-align: center;
+
+}
+
+.btn_Background:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn_Background:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn_Background::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.btn_Background::after {
+  background-color: #FCEBF2;
+}
+
+.btn_Background:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+.contenedor_boton_agendar{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+
+
+@media (max-width: 768px) {
+  .Frase-background h1 {
+    font-size: 1.5em;
+  }
+
+  .Frase-background p {
+    font-size: 0.9em;
+  }
+
+  .imgservices img {
+    max-width: 150px;
+  }
+
+  .backgroundtercero h2 {
+    font-size: 1.2em;
+  }
+
+  .backgroundtercero h3 {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .Frase-background h2 {
+    font-size: 1.2em;
+  }
+
+  .Frase-background h1 {
+    font-size: 1.2em;
+  }
+
+  .Frase-background p {
+    font-size: 0.8em;
+  }
+
+  .imgservices img {
+    max-width: 120px;
+  }
+
+  .backgroundtercero h2 {
+    font-size: 1em;
+  }
+
+  .backgroundtercero h3 {
+    font-size: 0.9em;
+  }
+
+  .mapa iframe {
+    height: 200px;
+  }
+}
+
+
 
 @media (max-width: 1315px) {
   .foto {
@@ -482,18 +433,5 @@ a {
   .oaa {
     margin-right: 20px;
   }
-  .buttonservi {
-    display: flex !important;
-    background-color: #BF6A8C !important;
-    color: white !important;
-    padding: 10px;
-    width: 100%;
-    justify-content: center;
-    border-radius: 10px;
-  }
-}
 
-.agendarYa {
-  text-decoration: none;
-  color: inherit;
 }

@@ -123,7 +123,7 @@ body {
   font-weight: 600;
 }
 
-button {
+.Verabono button {
   background-color: var(--primary-color);
   color: white;
   border: none;
@@ -136,51 +136,14 @@ button {
   margin-top: 1rem;
 }
 
-button:hover:not(:disabled) {
+.Verabono button:hover:not(:disabled) {
   background-color: #a85775;
 }
 
-button:disabled {
+.Verabono button:disabled {
   background-color: #e0e0e0;
   color: #a0a0a0;
   cursor: not-allowed;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 1200px) {
-  .contenedorcarta {
-    width: calc(50% - 1rem);
-  }
-}
-
-@media (max-width: 768px) {
-  .citaspendientestitulo {
-    font-size: 2.5rem;
-  }
-  
-  .contenedorcarta {
-    width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .citaspendientestitulo {
-    font-size: 2rem;
-  }
-  
-  .contenedorTitulo {
-    font-size: 1.3rem;
-  }
 }
 
 .status-indicator {
@@ -229,4 +192,44 @@ button:disabled {
 .filter_citas select:focus {
   border-color: #FCEBF2;
   box-shadow: 0 0 5px rgba(191, 106, 140, 0.5);
+}
+
+
+
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1200px) {
+  .contenedorcarta {
+    width: calc(50% - 1rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .citaspendientestitulo {
+    font-size: 2.5rem;
+  }
+  
+  .contenedorcarta {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .citaspendientestitulo {
+    font-size: 2rem;
+  }
+  
+  .contenedorTitulo {
+    font-size: 1.3rem;
+  }
 }

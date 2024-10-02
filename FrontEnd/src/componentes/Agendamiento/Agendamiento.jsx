@@ -182,7 +182,7 @@ export const Agendamiento = () => {
     return (
         <div className='agendamiento-container'>
             <div className='header_agendamiento'>
-                <h3>Agenda Tu Cita</h3>
+                <h3>Agenda Tu Cita para {servicio.nombre_servicio}</h3>
             </div>
 
             <div className='main-content'>
@@ -297,7 +297,7 @@ export const Agendamiento = () => {
                                 </tr>
                                 <tr>
                                     <td colSpan={2}>
-                                        <button onClick={handleReservarClick}>Reservar</button>
+                                        <button class="btn_agendamiento"  onClick={handleReservarClick}>Continuar</button>
                                     </td>
                                 </tr>
                             </tbody>
