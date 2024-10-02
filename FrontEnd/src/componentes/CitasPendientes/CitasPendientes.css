@@ -8,6 +8,7 @@
   --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+
 body {
   font-family: "Urbanist", sans-serif;
   background-color: var(--background-color);
@@ -196,4 +197,36 @@ button:disabled {
 
 .status-pendiente {
   background-color: red; 
+}
+
+.filter_citas {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.filter_citas label {
+  font-size: 16px;
+  margin-right: 10px;
+  color: #BF6A8C;
+}
+
+.filter_citas select {
+  padding: 8px;
+  border: 2px solid #BF6A8C;
+  border-radius: 4px;
+  background-color: transparent;
+  color: #333; /* Cambia el color según sea necesario */
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.filter_citas select:hover {
+  border-color: #C98695;
+}
+
+.filter_citas select:focus {
+  border-color: #FCEBF2;
+  box-shadow: 0 0 5px rgba(191, 106, 140, 0.5);
 }
