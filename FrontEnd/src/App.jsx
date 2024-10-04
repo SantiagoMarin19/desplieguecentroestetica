@@ -31,6 +31,8 @@ import SignUp from './pages/SignUp';
 import AbonoInfo from './componentes/AbonoInfo/AbonoInfo';
 import Abono from './pages/Abonos';
 
+
+
 function AdminLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   

@@ -21,6 +21,7 @@ export default function Nosotros() {
                 {loading ? <Skeleton width={300} height={40} /> : <h1>Acerca de Nosotros</h1>}
             </div>
 
+            <div className='contenedor_nosotros'>
             <div className='section'>
                 {loading ? <Skeleton width={200} height={30} /> : <h2>Quienes Somos</h2>}
                 {loading ? <Skeleton count={3} /> : (
@@ -103,7 +104,7 @@ export default function Nosotros() {
                     <p>
                         La satisfacción de nuestras clientas es nuestra máxima prioridad. Nos esforzamos por ofrecer un servicio personalizado y de calidad, utilizando productos de primera línea y técnicas innovadoras para garantizar resultados que superen las expectativas. En Natalia Salazar Artist, tu belleza es nuestra pasión.
                     </p>
-                )}
+                )}</div>
             </div>
         </div>
     );
