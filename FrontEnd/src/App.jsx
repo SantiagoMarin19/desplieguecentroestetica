@@ -30,6 +30,9 @@ import LoginUser from './pages/Login';
 import SignUp from './pages/SignUp';
 import AbonoInfo from './componentes/AbonoInfo/AbonoInfo';
 import Abono from './pages/Abonos';
+import RecoverPassword from './componentes/Recuperarcontraseña/Recuperarcontraseña';
+import ScrollToTop from './componentes/ScrollTop/ScrollToTop';
+import { Piedepagina } from './componentes/Footer/footer';
 
 function AdminLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -64,15 +67,20 @@ function Main() {
             <Pageloader />
             <ThemeContext.Provider value={{ setTheme, theme }}>
                 <ThemeProvider theme={themeStyle}>
+
                     <Routes>
                         {/* Rutas de cliente */}
+                        <Route path="/CitaPend" element={<CitaPend />} />
+
                         <Route path="/" element={<Home />} />
                         <Route path='/Facturacion' element={<Facturaelectronica />} />
                         <Route path='/Registrar' element={<button onClick={() => openModal('SignUp')}>Regístrate</button>} />
                         <Route path="/loginsupa" element={<button onClick={() => openModal('LoginUser')}>Inicia Sesión</button>} />
                         <Route path="/servicios" element={<Servicios />} />
                         <Route path="/VistaDetalle" element={<VistaServicios />} />
-                        <Route path="/CitaPend" element={<CitaPend />} />
+                        <Route path="/RecuperarContraseña" element={<RecoverPassword />} />
+
+
                         <Route path="/acerca" element={<Acerca_de />} />
                         <Route path="/politicas" element={<Condiciones />} />
                         <Route path="/Agendarcita" element={<Agendar />} />

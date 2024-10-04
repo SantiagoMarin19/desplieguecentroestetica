@@ -105,6 +105,7 @@ body {
 
 .detalle_ds p {
   font-size: 1.2rem;
+  text-align: justify;
   color: var(--text-color);
   line-height: 1.8;
 }

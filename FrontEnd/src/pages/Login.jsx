@@ -47,7 +47,7 @@ const LoginUser = ({ closeModal }) => {
 
     function handleForgotPasswordClick() {
         closeModal();
-        navigate('/recover');
+        navigate('/RecuperarContraseña');
     }
 
     return (
