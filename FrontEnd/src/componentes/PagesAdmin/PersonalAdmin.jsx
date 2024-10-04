@@ -1,12 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import supabase from '../../supabase/supabaseconfig';
-// import jsPDF from 'jspdf';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { ThemeContext } from '../../App';
+
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export function PersonalAdmin() {
   const [personalList, setPersonalList] = useState([]);
   const [editingProfesional, setEditingProfesional] = useState(null);
+  const [isFormComplete, setIsFormComplete] = useState(false);
+  const [isPdfDownloaded, setIsPdfDownloaded] = useState(false);
   const [newProfesional, setNewProfesional] = useState({
     nombre_profesional: '',
     especialidad: '',
@@ -18,22 +24,42 @@ export function PersonalAdmin() {
   const [pdfGenerated, setPdfGenerated] = useState(false);
   const { theme } = useContext(ThemeContext);
 
+  // Nuevos estados para las mejoras
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
+  const [totalCount, setTotalCount] = useState(0);
+  const [notification, setNotification] = useState(null);
+
+  
+
   useEffect(() => {
-    const fetchProfesionales = async () => {
-      const { data, error } = await supabase.from('profesional').select('*');
-      if (error) {
-        console.log('Error fetching data: ', error);
-      } else {
-        // Asegúrate de que data sea un array antes de usarlo
-        if (Array.isArray(data)) {
-          setPersonalList(data);
-        } else {
-          console.log('Unexpected data format: ', data);
-        }
-      }
-    };
     fetchProfesionales();
-  }, []);
+  }, [currentPage, searchTerm]);
+
+  const fetchProfesionales = async () => {
+    const from = (currentPage - 1) * itemsPerPage;
+    const to = from + itemsPerPage - 1;
+
+    let query = supabase
+      .from('profesional')
+      .select('*', { count: 'exact' })
+      .range(from, to);
+
+    if (searchTerm) {
+      query = query.ilike('nombre_profesional', `%${searchTerm}%`);
+    }
+
+    const { data, error, count } = await query;
+
+    if (error) {
+      console.error('Error fetching data: ', error);
+      showNotification('Error al cargar los profesionales', 'error');
+    } else {
+      setPersonalList(data || []);
+      setTotalCount(count || 0);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,38 +70,54 @@ export function PersonalAdmin() {
     const { nombre_profesional, celular } = newProfesional;
     const password = `${nombre_profesional.substr(0, 3)}${celular.substr(-4)}`;
     setNewProfesional({ ...newProfesional, password });
-    setPdfGenerated(false); // Ensure PDF has to be generated again
+    setPdfGenerated(false);
   };
 
   const addProfesional = async () => {
     if (!newProfesional.nombre_profesional || !newProfesional.password) {
-      alert('Por favor complete todos los campos requeridos.');
-      return;
+        showNotification('Por favor complete todos los campos requeridos.', 'error');
+        return;
     }
 
-    console.log('Datos que se van a enviar: ', newProfesional); // Añadido para depuración
+    const isDuplicate = await checkForDuplicate(newProfesional.nombre_profesional);
+    if (isDuplicate) {
+        showNotification('Ya existe un profesional con ese nombre.', 'error');
+        return;
+    }
 
     try {
-      const { data, error } = await supabase
-        .from('profesional')
-        .insert([newProfesional]);
+        const { data, error } = await supabase
+            .from('profesional')
+            .insert([newProfesional])
+            .select();
 
-      if (error) {
-        console.error('Error adding professional: ', error.message);
-        alert('Ocurrió un error al agregar el profesional. Revisa la consola para más detalles.');
-      } else {
-        if (Array.isArray(data)) {
-          setPersonalList([...personalList, ...data]);
-          resetForm();
-        } else {
-          console.log('Unexpected data format on insert: ', data);
+        if (error) throw error;
+
+        if (data && data.length > 0) {
+            setPersonalList([...personalList, ...data]);
+            resetForm();
+            showNotification('Profesional añadido con éxito', 'success');
         }
-      }
     } catch (err) {
-      console.error('Unexpected error: ', err.message);
-      alert('Ocurrió un error inesperado. Revisa la consola para más detalles.');
+        console.error('Error adding professional: ', err.message);
+        showNotification('Ocurrió un error al agregar el profesional.', 'error');
     }
-  };
+};
+
+const checkForDuplicate = async (nombre_profesional) => {
+  const { data, error } = await supabase
+      .from('profesional')
+      .select('id_profesional')
+      .eq('nombre_profesional', nombre_profes<ional);
+  
+  if (error) {
+      console.error('Error checking for duplicates: ', error);
+      return false;
+  }
+
+  return data.length > 0; // Devuelve true si hay duplicados
+};
+
 
   const resetForm = () => {
     setNewProfesional({
@@ -88,112 +130,83 @@ export function PersonalAdmin() {
     });
     setPdfGenerated(false);
   };
-
-  const generatePDF = (profesional) => {
-    const doc = new jsPDF();
-
-    // Fondo
-    doc.setFillColor(240, 240, 240); // Color de fondo
-    doc.rect(0, 0, 210, 297, 'F'); // Tamaño A4
-
-    // Encabezado
-    doc.setFillColor(255, 192, 203); // Rosa claro
-    doc.rect(0, 0, 210, 40, 'F'); // Encabezado
-
-    // Título
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(26);
-    doc.setTextColor(0, 0, 0);
-    doc.text("Natalia Salazar Artist", 10, 25);
-
-    // Línea debajo del título
-    doc.setLineWidth(1);
-    doc.setDrawColor(255, 215, 0); // Dorado
-    doc.line(10, 35, 200, 35);
-
-    // Información del profesional
-    doc.setFontSize(16);
-    doc.setTextColor(0, 0, 0);
-    doc.text("Datos del Profesional Registrado", 10, 50);
-
-    doc.setFontSize(14);
-    const details = [
-      `Nombre: ${profesional.nombre_profesional}`,
-      `Especialidad: ${profesional.especialidad}`,
-      `Celular: ${profesional.celular}`,
-      `Correo: ${profesional.correo}`,
-      `Contraseña: ${profesional.password}`
-    ];
-
-    details.forEach((detail, index) => {
-      doc.text(detail, 10, 60 + (index * 10));
-    });
-
-    // Pie de página
-    doc.setFontSize(10);
-    doc.setTextColor(150, 150, 150); // Gris claro
-    doc.text("Confidencial - Natalia Salazar Artist", 10, 280);
-
-    // Guardar el PDF
-    doc.save(`${profesional.nombre_profesional}_datos.pdf`);
-    setPdfGenerated(true);
-  };
-
+ 
   const handleEdit = (profesional) => {
     setEditingProfesional(profesional);
     setNewProfesional(profesional);
   };
 
   const updateProfesional = async () => {
-    const { data, error } = await supabase
-      .from('profesional')
-      .update({
-        nombre_profesional: newProfesional.nombre_profesional,
-        especialidad: newProfesional.especialidad,
-        celular: newProfesional.celular,
-        correo: newProfesional.correo,
-        estado: newProfesional.estado,
-      })
-      .eq('id', editingProfesional.id);
+    if (!confirmAction('¿Estás seguro de que quieres actualizar este profesional?')) return;
 
-    if (error) {
-      console.log('Error updating professional: ', error);
-    } else {
-      if (Array.isArray(data)) {
+    try {
+      const { data, error } = await supabase
+        .from('profesional')
+        .update({
+          nombre_profesional: newProfesional.nombre_profesional,
+          especialidad: newProfesional.especialidad,
+          celular: newProfesional.celular,
+          correo: newProfesional.correo,
+          estado: newProfesional.estado,
+        })
+        .eq('id_profesional', editingProfesional.id_profesional)
+        .select();
+
+      if (error) throw error;
+
+      if (data && data.length > 0) {
         setPersonalList((prevList) =>
           prevList.map((p) =>
-            p.id === editingProfesional.id ? { ...data[0] } : p
+            p.id_profesional === editingProfesional.id_profesional ? { ...data[0] } : p
           )
         );
         setEditingProfesional(null);
         resetForm();
-      } else {
-        console.log('Unexpected data format on update: ', data);
+        showNotification('Profesional actualizado con éxito', 'success');
       }
+    } catch (err) {
+      console.error('Error updating professional: ', err.message);
+      showNotification('Ocurrió un error al actualizar el profesional.', 'error');
     }
   };
 
   const toggleEstado = async (profesional) => {
     const newState = !profesional.estado;
-    const { data, error } = await supabase
-      .from('profesional')
-      .update({ estado: newState })
-      .eq('id', profesional.id);
+    if (!confirmAction(`¿Estás seguro de que quieres ${newState ? 'activar' : 'desactivar'} a ${profesional.nombre_profesional}?`)) return;
 
-    if (error) {
-      console.log('Error toggling state: ', error);
-    } else {
-      if (Array.isArray(data)) {
+    try {
+      const { data, error } = await supabase
+        .from('profesional')
+        .update({ estado: newState })
+        .eq('id_profesional', profesional.id_profesional)
+        .select();
+
+      if (error) throw error;
+
+      if (data && data.length > 0) {
         setPersonalList((prevList) =>
           prevList.map((p) =>
-            p.id === profesional.id ? { ...data[0] } : p
+            p.id_profesional === profesional.id_profesional ? { ...p, estado: newState } : p
           )
         );
-      } else {
-        console.log('Unexpected data format on toggle: ', data);
+        showNotification(`${profesional.nombre_profesional} ha sido ${newState ? 'activado' : 'desactivado'}`, 'success');
       }
+    } catch (err) {
+      console.error('Error toggling professional state: ', err.message);
+      showNotification('Ocurrió un error al cambiar el estado del profesional.', 'error');
     }
   };
+
+  const confirmAction = (message) => {
+    return window.confirm(message);
+  };
+
+  const showNotification = (message, type = 'info') => {
+    setNotification({ message, type });
+    setTimeout(() => setNotification(null), 3000);
+  };
+
+
 
   return (
     <Container theme={theme}>
@@ -202,9 +215,16 @@ export function PersonalAdmin() {
           <h1>Sección Personal</h1>
         </Header>
 
+        <SearchBar theme={theme}
+          type="text"
+          placeholder="Buscar profesional..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+
         <ListaPersonal theme={theme}>
           {personalList.map((profesional) => (
-            <PersonalItem key={profesional.id} theme={theme} professionalStatus={profesional.estado}>
+            <PersonalItem key={profesional.id_profesional} theme={theme} professionalStatus={profesional.estado}>
               <button
                 className="boton_nombre_profesional_calendario"
                 onClick={() => handleEdit(profesional)}
@@ -216,70 +236,75 @@ export function PersonalAdmin() {
               <p>{profesional.celular}</p>
               <p>{profesional.correo}</p>
               <p>{profesional.estado ? "Activo" : "Inactivo"}</p>
-              <button onClick={() => toggleEstado(profesional)}>
+              <button  theme={theme} onClick={() => toggleEstado(profesional)}>
                 {profesional.estado ? "Marcar como Inactivo" : "Marcar como Activo"}
               </button>
             </PersonalItem>
           ))}
         </ListaPersonal>
 
+        <Pagination theme={theme}>
+          <button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1}>
+            Anterior
+          </button>
+          <span>Página {currentPage} de {Math.ceil(totalCount / itemsPerPage)}</span>
+          <button onClick={() => setCurrentPage(prev => prev + 1)} disabled={currentPage >= Math.ceil(totalCount / itemsPerPage)}>
+            Siguiente
+          </button>
+        </Pagination>
+
         <Header theme={theme}>
           <h2>{editingProfesional ? "Editar Personal" : "Añadir Personal"}</h2>
         </Header>
 
         <FormContainer theme={theme}>
-  <input
-    type="text"
-    name="nombre_profesional"
-    value={newProfesional.nombre_profesional}
-    placeholder="Nombre Profesional"
-    onChange={handleChange}
-  />
-  <input
-    type="text"
-    name="especialidad"
-    value={newProfesional.especialidad}
-    placeholder="Especialidad"
-    onChange={handleChange}
-  />
-  <input
-    type="text"
-    name="celular"
-    value={newProfesional.celular}
-    placeholder="Celular"
-    onChange={handleChange}
-  />
-  <input
-    type="email"
-    name="correo"
-    value={newProfesional.correo}
-    placeholder="Correo"
-    onChange={handleChange}
-  />
-  
-  <Button  theme={theme} onClick={generatePassword}>Generar Contraseña</Button>
-  
-  <PasswordDisplay theme={theme}>
-    Contraseña: {newProfesional.password}
-  </PasswordDisplay>
-  
-  <Button theme={theme} onClick={editingProfesional ? updateProfesional : addProfesional}>
-    {editingProfesional ? "Actualizar" : "Agregar"}
-  </Button>
+          <input
+            type="text" name="nombre_profesional"
+            value={newProfesional.nombre_profesional}
+            placeholder="Nombre Profesional" onChange={handleChange}
+          />
+          <input
+            type="text" name="especialidad"
+            value={newProfesional.especialidad}
+            placeholder="Especialidad" onChange={handleChange}
+          />
+          <input
+            type="text"  name="celular"
+            value={newProfesional.celular}
+            placeholder="Celular" onChange={handleChange}
+          />
+          <input
+            type="email"  name="correo"
+            value={newProfesional.correo}
+            placeholder="Correo" onChange={handleChange}
+          />
+          
+          <Button theme={theme} onClick={generatePassword}>Generar Contraseña</Button>
+          
+          <PasswordDisplay theme={theme}>
+            Contraseña: {newProfesional.password}
+          </PasswordDisplay>
+          
+          <Button theme={theme} onClick={editingProfesional ? updateProfesional : addProfesional}>
+            {editingProfesional ? "Actualizar" : "Agregar"}
+          </Button>
 
-  <Button  theme={theme} onClick={() => generatePDF(newProfesional)}>
-    Generar PDF
-  </Button>
-  
-  {pdfGenerated && <SuccessMessage>PDF generado exitosamente.</SuccessMessage>}
-</FormContainer>
+          <Button theme={theme} onClick={() => generatePDF(newProfesional)}>
+            Generar PDF
+          </Button>
+          
+          {pdfGenerated && <SuccessMessage>PDF generado exitosamente.</SuccessMessage>}
+        </FormContainer>
 
-
+        {notification && (
+          <Notification type={notification.type}>
+            {notification.message}
+          </Notification>
+        )}
       </div>
     </Container>
   );
 }
-
 
 const Container = styled.div`
   min-height: 100vh;
@@ -289,6 +314,16 @@ const Container = styled.div`
   color: ${props => props.theme === 'light' ? '#202020' : '#fff'};
   transition: all 0.3s ease;
   border-radius: 10px;
+     @media (max-width: 768px) {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 5px;
+    font-size: 12px;
+  }
+
 `;
 
 const Header = styled.div`
@@ -348,6 +383,12 @@ const PersonalItem = styled.div`
       cursor: not-allowed;
     }
   }
+
+  button { background-color: ${props => props.theme === 'light' ? '#ffffff' : '#424242'};
+  border: 1px solid ${props => props.theme === 'light' ? '#c98695' : '#9247FC'};
+  color: ${props => props.theme === 'light' ? '#31708f' : '#fff'};
+  border-radius: 10px;
+  }
 `;
 
 const FormContainer = styled.div`
@@ -380,18 +421,17 @@ const Button = styled.button`
   padding: 12px;
   border: none;
   border-radius: 5px;
-  background-color: ${props => props.theme === 'light' ? '#c98695' : '#9247FC'}; /* Rosa en tema claro y morado en tema oscuro */
+  background-color: ${props => props.theme === 'light' ? '#c98695' : '#9247FC'};
   color: white;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin: 10px 0; /* Añadir margen para separar los botones */
-  width: 100%; /* Hacer que el botón ocupe el ancho completo del contenedor */
+  margin: 10px 0;
+  width: 100%;
 
   &:hover {
-    background-color: ${props => props.theme === 'light' ? '#a75d53' : '#7522e6'}; /* Rosa más oscuro en tema claro y morado más oscuro en tema oscuro */
+    background-color: ${props => props.theme === 'light' ? '#a75d53' : '#7522e6'};
   }
 `;
-
 
 const PasswordDisplay = styled.p`
   background-color: ${props => props.theme === 'light' ? '#e7f3fe' : '#424242'};
@@ -406,4 +446,64 @@ const SuccessMessage = styled.p`
   color: green;
   font-weight: bold;
   margin-top: 10px;
+`;
+
+const SearchBar = styled.input`
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid ${props => props.theme === 'light' ? '#c98695' : '#9247FC'};
+  border-radius: 5px;
+  font-size: 16px;
+  color: ${props => props.theme === 'light' ? '#202020' : '#fff'};
+  background-color: ${props => props.theme === 'light' ? '#ffffff' : '#21252B'};
+
+  &::placeholder {
+    color: ${props => props.theme === 'light' ? '#969593' : '#a6a6a6'};
+  }
+`;
+
+const Pagination = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+
+  button {
+    margin: 0 10px;
+    padding: 5px 10px;
+    background-color: ${props => props.theme === 'light' ? '#c98695' : '#9247FC'};
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: ${props => props.theme === 'light' ? '#a75d53' : '#7522e6'};
+    }
+
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+
+  span {
+    font-size: 14px;
+    color: ${props => props.theme === 'light' ? '#202020' : '#fff'};
+  }
+`;
+
+const Notification = styled.div`
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: ${props => props.type === 'error' ? '#ff6b6b' : '#51cf66'};
+  color: white;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease-in-out;
 `;

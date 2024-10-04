@@ -10,6 +10,7 @@ const CitasAdmin = ({ token }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState('asc');
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
   const citasPerPage = 5;
   const { theme } = React.useContext(ThemeContext);
 
@@ -38,14 +39,14 @@ const CitasAdmin = ({ token }) => {
           .from('cita')
           .select('id_cita, fecha, estado, usuarios, servicio(nombre_servicio), profesional, duracion')
           .eq('profesional', 1)
-          .gte('fecha', startOfMonth.toISOString()) // Filtra desde el inicio del mes actual
+          .gte('fecha', startOfMonth.toISOString())
           .order('fecha', { ascending: true });
         
         if (error) throw error;
 
         const citasConEstadoPorDefecto = data.map(cita => ({
           ...cita,
-          estado: cita.estado ?? false // Establece el estado por defecto como pendiente
+          estado: cita.estado ?? false
         }));
 
         setCitas(citasConEstadoPorDefecto);
@@ -59,7 +60,19 @@ const CitasAdmin = ({ token }) => {
     fetchCitas();
   }, [user]);
 
-  const sortedCitas = [...citas].sort((a, b) => {
+  const filteredCitas = citas.filter(cita => {
+    const searchLower = searchTerm.toLowerCase();
+    const fecha = moment(cita.fecha).format('DD/MM/YYYY');
+    const hora = moment(cita.duracion, 'HH:mm').format('h:mm A');
+    return (
+      cita.usuarios.toLowerCase().includes(searchLower) ||
+      fecha.includes(searchLower) ||
+      hora.toLowerCase().includes(searchLower) ||
+      cita.servicio.nombre_servicio.toLowerCase().includes(searchLower)
+    );
+  });
+
+  const sortedCitas = [...filteredCitas].sort((a, b) => {
     const dateA = new Date(a.fecha);
     const dateB = new Date(b.fecha);
     return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
@@ -70,6 +83,11 @@ const CitasAdmin = ({ token }) => {
   const currentCitas = sortedCitas.slice(indexOfFirstCita, indexOfLastCita);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+    setCurrentPage(1);
+  };
 
   const handleAcceptCita = async (cita) => {
     const confirmMessage = `¿Estás seguro de ${cita.estado ? 'cancelar' : 'aprobar'} la cita de ${cita.usuarios} para el ${moment(cita.fecha).format('DD/MM/YYYY HH:mm')}?`;
@@ -108,6 +126,14 @@ const CitasAdmin = ({ token }) => {
           <p>En esta sección encontrarás todas las citas registradas por los clientes para el mes actual y los meses futuros.</p>
           <p><b>Nota:</b> Confirma el Estado de la cita por medio del Checklist <b>SOLO</b> si la cita fue abonada exitosamente con el 50%.</p>
         </Content>
+
+        <SearchBar 
+          type="text" 
+          placeholder="Buscar por fecha, hora, cliente o servicio..." 
+          value={searchTerm}
+          onChange={handleSearchChange}
+          theme={theme}
+        />
         
         <SortControl theme={theme}>
           <Button onClick={toggleSortOrder} theme={theme}>
@@ -116,44 +142,44 @@ const CitasAdmin = ({ token }) => {
         </SortControl>
 
         <Table theme={theme}>
-        <thead>
-          <tr>
-            <th>Cliente</th>
-            <th>Fecha</th>
-            <th>Hora</th>
-            <th>Servicio</th>
-            <th>Estado</th>
-            <th>Control</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentCitas.map((cita) => (
-            <tr key={cita.id_cita}>
-              <td>{cita.usuarios}</td>
-              <td>{cita.fecha}</td>
-              <td>{moment(cita.duracion, 'HH:mm').format('h:mm A')}</td>
-              <td>{cita.servicio.nombre_servicio}</td>
-              <td className={cita.estado ? 'aprobada' : 'pendiente'}>
-                {cita.estado ? 'Aprobada' : 'Pendiente'}
-              </td>
-              <td>
-                <CheckboxContainer>
-                  <Checkbox 
-                    type="checkbox" 
-                    id={`estado-${cita.id_cita}`}
-                    checked={cita.estado}
-                    onChange={() => handleAcceptCita(cita)}
-                  />
-                  <Label htmlFor={`estado-${cita.id_cita}`} estado={cita.estado} />
-                </CheckboxContainer>
-              </td>
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Servicio</th>
+              <th>Estado</th>
+              <th>Control</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {currentCitas.map((cita) => (
+              <tr key={cita.id_cita}>
+                <td>{cita.usuarios}</td>
+                <td>{moment(cita.fecha).format('DD/MM/YYYY')}</td>
+                <td>{moment(cita.duracion, 'HH:mm').format('h:mm A')}</td>
+                <td>{cita.servicio.nombre_servicio}</td>
+                <td className={cita.estado ? 'aprobada' : 'pendiente'}>
+                  {cita.estado ? 'Aprobada' : 'Pendiente'}
+                </td>
+                <td>
+                  <CheckboxContainer>
+                    <Checkbox 
+                      type="checkbox" 
+                      id={`estado-${cita.id_cita}`}
+                      checked={cita.estado}
+                      onChange={() => handleAcceptCita(cita)}
+                    />
+                    <Label htmlFor={`estado-${cita.id_cita}`} estado={cita.estado} />
+                  </CheckboxContainer>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
 
         <Pagination theme={theme}>
-          {[...Array(Math.ceil(citas.length / citasPerPage))].map((_, i) => (
+          {[...Array(Math.ceil(sortedCitas.length / citasPerPage))].map((_, i) => (
             <Button key={i} onClick={() => paginate(i + 1)} theme={theme}>
               {i + 1}
             </Button>
@@ -164,6 +190,7 @@ const CitasAdmin = ({ token }) => {
   );
 }
 
+
 const Container = styled.div`
   min-height: 100vh;
   padding: 20px;
@@ -172,6 +199,7 @@ const Container = styled.div`
   color: ${props => props.theme === 'light' ? '#202020' : '#fff'};
   transition: all 0.3s ease;
 `;
+
 
 const Header = styled.div`
   border: 10px solid ${props => props.theme === 'light' ? '#c98695' : '#9247FC'};
@@ -293,6 +321,21 @@ const Label = styled.label`
   cursor: pointer;
   transition: background-color 0.3s;
   background-color: ${props => props.estado ? '#4CAF50' : '#f44336'}; /* Verde si está aprobado, rojo si está pendiente */
+`;
+
+const SearchBar = styled.input`
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid ${props => props.theme === 'light' ? '#c98695' : '#9247FC'};
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: ${props => props.theme === 'light' ? '#fff' : '#2e2e2e'};
+  color: ${props => props.theme === 'light' ? '#202020' : '#fff'};
+
+  &::placeholder {
+    color: ${props => props.theme === 'light' ? '#999' : '#bbb'};
+  }
 `;
 
 export default CitasAdmin;

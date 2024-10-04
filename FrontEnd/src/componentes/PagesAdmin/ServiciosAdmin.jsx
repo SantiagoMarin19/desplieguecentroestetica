@@ -271,15 +271,9 @@ export function ServiciosAdmin() {
               <h3>Calendario Citas</h3>
             </div>
             <div className='calendario-container'>
-              <Calendar
-                onChange={handleDateChange}
-                value={null}
-                tileClassName={tileClassName}
-                prevLabel={null}
-                nextLabel={null}
-                showNeighboringMonth={false}
-              />
-            </div>
+              <Calendar onChange={handleDateChange} value={null}
+                tileClassName={tileClassName} prevLabel={null} nextLabel={null} showNeighboringMonth={false}/></div>
+
             <div className='escogerhora'>
               <form action='#' method='post'>
                 <p className='datosfecha'>
@@ -288,14 +282,11 @@ export function ServiciosAdmin() {
                       <div>
                         {date.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' })}
                       </div>
+
                       <div>
                         {serviceTimes[date.toDateString()] && serviceTimes[date.toDateString()].map((time, index) => (
                           <div key={index}>
-                            <input
-                              type="time"
-                              value={time}
-                              onChange={(e) => handleTimeChange(date, index, e.target.value)}
-                            />
+                            <input type="time" value={time} onChange={(e) => handleTimeChange(date, index, e.target.value)}/>
                             <button type="button" onClick={() => removeTime(date, index)}>Eliminar Hora</button>
                           </div>
                         ))}
