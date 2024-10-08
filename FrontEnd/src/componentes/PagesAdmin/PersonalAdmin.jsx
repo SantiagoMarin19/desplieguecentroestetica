@@ -1,18 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import supabase from '../../supabase/supabaseconfig';
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { ThemeContext } from '../../App';
-
-
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export function PersonalAdmin() {
   const [personalList, setPersonalList] = useState([]);
   const [editingProfesional, setEditingProfesional] = useState(null);
-  const [isFormComplete, setIsFormComplete] = useState(false);
-  const [isPdfDownloaded, setIsPdfDownloaded] = useState(false);
   const [newProfesional, setNewProfesional] = useState({
     nombre_profesional: '',
     especialidad: '',
@@ -21,17 +14,13 @@ export function PersonalAdmin() {
     estado: true,
     password: '',
   });
-  const [pdfGenerated, setPdfGenerated] = useState(false);
   const { theme } = useContext(ThemeContext);
 
-  // Nuevos estados para las mejoras
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   const [totalCount, setTotalCount] = useState(0);
   const [notification, setNotification] = useState(null);
-
-  
 
   useEffect(() => {
     fetchProfesionales();
@@ -70,54 +59,52 @@ export function PersonalAdmin() {
     const { nombre_profesional, celular } = newProfesional;
     const password = `${nombre_profesional.substr(0, 3)}${celular.substr(-4)}`;
     setNewProfesional({ ...newProfesional, password });
-    setPdfGenerated(false);
   };
 
   const addProfesional = async () => {
     if (!newProfesional.nombre_profesional || !newProfesional.password) {
-        showNotification('Por favor complete todos los campos requeridos.', 'error');
-        return;
+      showNotification('Por favor complete todos los campos requeridos.', 'error');
+      return;
     }
-
+  
     const isDuplicate = await checkForDuplicate(newProfesional.nombre_profesional);
     if (isDuplicate) {
-        showNotification('Ya existe un profesional con ese nombre.', 'error');
-        return;
+      showNotification('Ya existe un profesional con ese nombre.', 'error');
+      return;
     }
-
+  
     try {
-        const { data, error } = await supabase
-            .from('profesional')
-            .insert([newProfesional])
-            .select();
+      const { data, error } = await supabase
+        .from('profesional')
+        .insert([{ ...newProfesional, rol: 'profesional' }])
+        .select();
 
-        if (error) throw error;
-
-        if (data && data.length > 0) {
-            setPersonalList([...personalList, ...data]);
-            resetForm();
-            showNotification('Profesional añadido con éxito', 'success');
-        }
+      if (error) throw error;
+  
+      if (data && data.length > 0) {
+        setPersonalList([...personalList, ...data]);
+        resetForm();
+        showNotification('Profesional añadido con éxito', 'success');
+      }
     } catch (err) {
-        console.error('Error adding professional: ', err.message);
-        showNotification('Ocurrió un error al agregar el profesional.', 'error');
+      console.error('Error adding professional: ', err.message);
+      showNotification('Ocurrió un error al agregar el profesional.', 'error');
     }
-};
+  };
 
-const checkForDuplicate = async (nombre_profesional) => {
-  const { data, error } = await supabase
+  const checkForDuplicate = async (nombre_profesional) => {
+    const { data, error } = await supabase
       .from('profesional')
       .select('id_profesional')
-      .eq('nombre_profesional', nombre_profes<ional);
+      .eq('nombre_profesional', nombre_profesional);
   
-  if (error) {
+    if (error) {
       console.error('Error checking for duplicates: ', error);
       return false;
-  }
+    }
 
-  return data.length > 0; // Devuelve true si hay duplicados
-};
-
+    return data.length > 0;
+  };
 
   const resetForm = () => {
     setNewProfesional({
@@ -128,9 +115,8 @@ const checkForDuplicate = async (nombre_profesional) => {
       estado: true,
       password: '',
     });
-    setPdfGenerated(false);
   };
- 
+
   const handleEdit = (profesional) => {
     setEditingProfesional(profesional);
     setNewProfesional(profesional);
@@ -206,8 +192,6 @@ const checkForDuplicate = async (nombre_profesional) => {
     setTimeout(() => setNotification(null), 3000);
   };
 
-
-
   return (
     <Container theme={theme}>
       <div className="contenedor_personal_Admin">
@@ -236,7 +220,7 @@ const checkForDuplicate = async (nombre_profesional) => {
               <p>{profesional.celular}</p>
               <p>{profesional.correo}</p>
               <p>{profesional.estado ? "Activo" : "Inactivo"}</p>
-              <button  theme={theme} onClick={() => toggleEstado(profesional)}>
+              <button theme={theme} onClick={() => toggleEstado(profesional)}>
                 {profesional.estado ? "Marcar como Inactivo" : "Marcar como Activo"}
               </button>
             </PersonalItem>
@@ -269,12 +253,12 @@ const checkForDuplicate = async (nombre_profesional) => {
             placeholder="Especialidad" onChange={handleChange}
           />
           <input
-            type="text"  name="celular"
+            type="text" name="celular"
             value={newProfesional.celular}
             placeholder="Celular" onChange={handleChange}
           />
           <input
-            type="email"  name="correo"
+            type="email" name="correo"
             value={newProfesional.correo}
             placeholder="Correo" onChange={handleChange}
           />
@@ -289,11 +273,7 @@ const checkForDuplicate = async (nombre_profesional) => {
             {editingProfesional ? "Actualizar" : "Agregar"}
           </Button>
 
-          <Button theme={theme} onClick={() => generatePDF(newProfesional)}>
-            Generar PDF
-          </Button>
-          
-          {pdfGenerated && <SuccessMessage>PDF generado exitosamente.</SuccessMessage>}
+          {/* Botón de Generar PDF eliminado */}
         </FormContainer>
 
         {notification && (
@@ -305,6 +285,7 @@ const checkForDuplicate = async (nombre_profesional) => {
     </Container>
   );
 }
+
 
 const Container = styled.div`
   min-height: 100vh;
