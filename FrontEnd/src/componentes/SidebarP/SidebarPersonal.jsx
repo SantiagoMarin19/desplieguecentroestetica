@@ -82,12 +82,12 @@ const linksArray = [
   {
     label: "Citas",
     icon: <AiOutlineApartment />,
-    to: "/admin/citas",
+    to: "/personal/citas",
   },
   {
     label: "Servicios",
     icon: <MdOutlineAnalytics />,
-    to: "/admin/servicios",
+    to: "/personal/servicios",
   },
 ];
 

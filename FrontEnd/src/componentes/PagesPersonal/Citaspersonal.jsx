@@ -4,7 +4,7 @@ import supabase from '../../supabase/supabaseconfig';
 import moment from 'moment';
 import { ThemeContext } from "../../App";
 
-const CitasPersonal = ({ token }) => {
+const CitasProfesional = ({ token }) => {
   const [citas, setCitas] = useState([]);
   const [user, setUser] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,10 +38,10 @@ const CitasPersonal = ({ token }) => {
         const { data, error } = await supabase
           .from('cita')
           .select('id_cita, fecha, estado, usuarios, servicio(nombre_servicio), profesional, duracion')
-          .eq('profesional', 1)
+          .eq('profesional', user?.id) // Filtra por el ID del profesional
           .gte('fecha', startOfMonth.toISOString())
           .order('fecha', { ascending: true });
-        
+
         if (error) throw error;
 
         const citasConEstadoPorDefecto = data.map(cita => ({
@@ -57,7 +57,9 @@ const CitasPersonal = ({ token }) => {
       }
     };
 
-    fetchCitas();
+    if (user) {
+      fetchCitas();
+    }
   }, [user]);
 
   const filteredCitas = citas.filter(cita => {
@@ -149,46 +151,30 @@ const CitasPersonal = ({ token }) => {
               <th>Hora</th>
               <th>Servicio</th>
               <th>Estado</th>
-              <th>Control</th>
+              <th>Acción</th>
             </tr>
           </thead>
           <tbody>
-            {currentCitas.map((cita) => (
+            {currentCitas.map(cita => (
               <tr key={cita.id_cita}>
                 <td>{cita.usuarios}</td>
                 <td>{moment(cita.fecha).format('DD/MM/YYYY')}</td>
                 <td>{moment(cita.duracion, 'HH:mm').format('h:mm A')}</td>
                 <td>{cita.servicio.nombre_servicio}</td>
-                <td className={cita.estado ? 'aprobada' : 'pendiente'}>
-                  {cita.estado ? 'Aprobada' : 'Pendiente'}
-                </td>
+                <td>{cita.estado ? 'Aprobada' : 'Pendiente'}</td>
                 <td>
-                  <CheckboxContainer>
-                    <Checkbox 
-                      type="checkbox" 
-                      id={`estado-${cita.id_cita}`}
-                      checked={cita.estado}
-                      onChange={() => handleAcceptCita(cita)}
-                    />
-                    <Label htmlFor={`estado-${cita.id_cita}`} estado={cita.estado} />
-                  </CheckboxContainer>
+                  <button onClick={() => handleAcceptCita(cita)}>
+                    {cita.estado ? 'Cancelar' : 'Aprobar'}
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </Table>
-
-        <Pagination theme={theme}>
-          {[...Array(Math.ceil(sortedCitas.length / citasPerPage))].map((_, i) => (
-            <Button key={i} onClick={() => paginate(i + 1)} theme={theme}>
-              {i + 1}
-            </Button>
-          ))}
-        </Pagination>
       </div>
     </Container>
   );
-}
+};
 
 
 const Container = styled.div`
@@ -338,4 +324,4 @@ const SearchBar = styled.input`
   }
 `;
 
-export default CitasPersonal;
+export default  CitasProfesional;

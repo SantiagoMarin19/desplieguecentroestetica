@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import  Citas from '../CitasAdmin';
-import { ServiciosAdmin } from "../ServiciosAdmin";
+import  CitasProfesional from '../Citaspersonal';
+import { ServiciosProfesional } from "../ServicioPersonal";
 
 export function MyRoutesPersonal() {
   return (
    
       <Routes>
-        <Route path="/AdminCitas" element={< Citas/>}/>
-        <Route path="/ServiciosAdmin" element={<ServiciosAdmin/>}/>
+        <Route path="/personal/citas" element={< CitasProfesional/>}/>
+        <Route path="/personal/servicios" element={<ServiciosProfesional/>}/>
       </Routes>
     
   );
