@@ -1,65 +1,68 @@
-// LoginUser.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import supabase from '../supabase/supabaseconfig';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import flechaizq from "../assets/images/decoración.png";
 import or from "../assets/images/OR.png";
 import flechader from "../assets/images/decor.png";
-import { useModal } from '../componentes/modal/ContextModal'; 
+import { useModal } from '../componentes/modal/ContextModal';
 import "./Estilos/Login.css";
-
-const ADMIN_EMAIL = "davidochoa772@gmail.com";
 
 const LoginUser = ({ closeModal }) => {
     let navigate = useNavigate();
-    const [formData, setFormData] = useState({ email: '', password: '' });
+    let location = useLocation();
+
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    });
+
     const { openModal } = useModal();
 
     function handleChange(event) {
         const { name, value } = event.target;
-        setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: value
+        }));
     }
 
     async function handleSubmit(e) {
         e.preventDefault();
+
         try {
             const { data, error } = await supabase.auth.signInWithPassword({
                 email: formData.email,
                 password: formData.password,
             });
 
-            if (error) throw error;
+            if (error) {
+                console.error("Supabase error:", error);
+                throw error;
+            }
 
-            // Verifica si es el admin
-            const isAdmin = formData.email === ADMIN_EMAIL;
-            
-            // Almacena la información en sessionStorage
             sessionStorage.setItem('token', JSON.stringify(data.session.access_token));
             sessionStorage.setItem('user', JSON.stringify(data.user.user_metadata.full_name));
-            sessionStorage.setItem('isAdmin', JSON.stringify(isAdmin));
 
-            // Muestra mensaje de bienvenida
-            toast.success(`Bienvenido de nuevo, ${data.user.user_metadata.full_name}${isAdmin ? ' (Administrador)' : ''}`);
-
-            // Redirige según el tipo de usuario
-            if (isAdmin) {
-                navigate('/admin/citasAdmin');
+            // Check email and navigate accordingly
+            if (formData.email === "davidochoa772@gmail.com") {
+                navigate('/admin');
+            } else if (formData.email === "santiago192506@gmail.com") {
+                navigate('/AgendaPersonal');
             } else {
-                navigate('/');
+                const redirectTo = location.state?.from || '/';
+                navigate(redirectTo);
             }
             
             closeModal();
         } catch (error) {
-            console.error("Error:", error);
-            toast.error(error.message);
+            console.error("Caught error:", error);
+            alert(error.message);
         }
     }
 
     function handleForgotPasswordClick() {
         closeModal();
-        navigate('/RecuperarContraseña');
+        navigate('/recover');
     }
 
     return (
@@ -91,7 +94,7 @@ const LoginUser = ({ closeModal }) => {
                             className="hover-pointer" 
                             onClick={handleForgotPasswordClick}
                         >
-                            ¿Has olvidado la contraseña?
+                            Haz olvidado contraseña?
                         </span>
                     </div>
                 </div>
