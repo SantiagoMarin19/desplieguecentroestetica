@@ -137,8 +137,7 @@ function App() {
                 sessionStorage.setItem('welcomeShown', 'true');
             }
         } else {
-            // Si no hay token ni nombre de usuario, muestra el mensaje de cierre de sesión
-            toast.info("Sesión Finalizada");
+            
         }
     }, []);
 
