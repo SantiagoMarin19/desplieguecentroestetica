@@ -34,6 +34,8 @@ import RecoverPassword from './componentes/Recuperarcontraseña/Recuperarcontras
 import ScrollToTop from './componentes/ScrollTop/ScrollToTop';
 import { Piedepagina } from './componentes/Footer/footer';
 
+
+
 function AdminLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   
