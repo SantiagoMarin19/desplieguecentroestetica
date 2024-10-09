@@ -68,7 +68,7 @@ export function ServiciosAdmin() {
       .eq('nombre_servicio', service.nombre_servicio)
       .eq('id_profesional', 1);
 
-    if (error) console.error('Error fetching service times:', error);
+    if (error) console.error('Error al obtener los tiempos de servicio:', error);
     else {
       const serviceTimes = data.reduce((acc, item) => {
         const date = new Date(item.fecha);
@@ -99,7 +99,7 @@ export function ServiciosAdmin() {
 
     if (error) {
       console.error('Error al actualizar servicio:', error);
-      alert(`Error actualizando el servicio: ${error.message}`);
+        setNotification({ message: `Error actualizando el servicio: ${error.message}` });
     } else {
       setServicios(prevServicios =>
         prevServicios.map(service =>
@@ -181,7 +181,7 @@ export function ServiciosAdmin() {
       const newServiceTimes = { ...serviceTimes };
 
       if (newServiceTimes[dateString].includes(value)) {
-        alert('Esta hora ya está seleccionada.');
+       setNotification({ message: 'Esta hora ya está seleccionada.'});
         return;
       }
 
@@ -196,7 +196,7 @@ export function ServiciosAdmin() {
       const newServiceTimes = { ...serviceTimes };
 
       if (newServiceTimes[dateString] && newServiceTimes[dateString].includes('00:00')) {
-        alert('Esta hora ya está seleccionada.');
+        setNotification({ message: 'Esta hora ya está seleccionada.'});
         return;
       }
 
@@ -246,12 +246,12 @@ export function ServiciosAdmin() {
 
       if (checkError) {
         console.error('Error verificando duplicados:', checkError);
-        alert(`Error verificando duplicados: ${checkError.message}`);
+         setNotification({ message:`Error verificando duplicados: ${checkError.message}`});
         return;
       }
 
       if (existingRecords.length > 0) {
-        alert(`Ya existe una franja horaria para la fecha ${update.fecha} a las ${update.hora}. No se guardará.`);
+         setNotification({ message:`Ya existe una franja horaria para la fecha ${update.fecha} a las ${update.hora}. No se guardará.`});
         continue;
       }
 
@@ -259,12 +259,12 @@ export function ServiciosAdmin() {
 
       if (insertError) {
         console.error('Error al actualizar horarios de servicios:', insertError);
-        alert(`Error actualizando horarios de servicios: ${insertError.message}`);
+       setNotification({ message:`Error actualizando horarios de servicios: ${insertError.message}`});
         return;
       }
     }
 
-    alert('Horarios actualizados correctamente.');
+   setNotification({ message:'Horarios actualizados correctamente.'});
     setServiceTimes({});
   };
 
@@ -284,7 +284,7 @@ export function ServiciosAdmin() {
 
     if (error) {
       console.error('Error al habilitar/deshabilitar servicio:', error);
-      alert(`Error habilitando/deshabilitando el servicio: ${error.message}`);
+     setNotification({ message:`Error habilitando/deshabilitando el servicio: ${error.message}`});
 
     } else {
       setEditableService(updatedService);
