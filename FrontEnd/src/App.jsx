@@ -31,7 +31,6 @@ import SignUp from './pages/SignUp';
 import AbonoInfo from './componentes/AbonoInfo/AbonoInfo';
 import Abono from './pages/Abonos';
 import RecoverPassword from './componentes/Recuperarcontraseña/Recuperarcontraseña';
-import ScrollToTop from './componentes/ScrollTop/ScrollToTop';
 import { Piedepagina } from './componentes/Footer/footer';
 
 

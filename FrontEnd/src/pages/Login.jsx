@@ -1,4 +1,3 @@
-// LoginUser.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../supabase/supabaseconfig';
@@ -30,7 +29,7 @@ const LoginUser = ({ closeModal }) => {
                 password: formData.password,
             });
 
-            if (error) throw error;
+            if (error) throw error; // Lanza el error si existe
 
             // Verifica si es el admin
             const isAdmin = formData.email === ADMIN_EMAIL;
@@ -53,7 +52,13 @@ const LoginUser = ({ closeModal }) => {
             closeModal();
         } catch (error) {
             console.error("Error:", error);
-            toast.error(error.message);
+            
+            // Manejo de errores específicos
+            if (error.message.includes('Invalid login credentials')) {
+                toast.error('Credenciales Incorrectas Intente Nuevamente'); // Mensaje específico
+            } else {
+                toast.error('Error: ' + error.message); // Mensaje genérico para otros errores
+            }
         }
     }
 

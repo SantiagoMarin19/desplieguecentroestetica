@@ -10,6 +10,18 @@ h1, h2, h3, h4, h5, h6 {
     font-family: "Playfair Display", serif;
 }
 
+.go-home-button-reserva{
+    background-color: #BF6A8C; /* Color de fondo del botón */
+    color: #ffffff; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    border-radius: 6px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor de puntero */
+    font-size: 20px;
+    text-align: center; /* Centrar el texto dentro del botón */
+    display: block; /* Asegurarse de que el botón sea un bloque */
+    margin: 20px auto;
+
+}
 .agendamiento-container {
     max-width: 1200px;
     margin: 0 auto;
