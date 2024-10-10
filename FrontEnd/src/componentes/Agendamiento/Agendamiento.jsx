@@ -81,7 +81,7 @@ export const Agendamiento = () => {
                 const { data, error } = await supabase
                     .from('cita')
                     .select('franja_horaria')
-                    .eq('profesional', selectedProfesional)
+                    .eq('profesional', selectedProfesional , nombre_profesional)
                     .eq('fecha', selectedDate)
                     .eq('servicio', servicio.id_servicios);
 
@@ -99,11 +99,14 @@ export const Agendamiento = () => {
 
     const handleProfesionalChange = (event) => {
         const selectedId = event.target.value;
-        setSelectedProfesional(selectedId);
-        localStorage.setItem('selectedProfesional', selectedId);
+        const profesional = profesionales.find(p => p.id_profesional === parseInt(selectedId));
+        setSelectedProfesional(profesional); // Guardamos el objeto completo
+        localStorage.setItem('selectedProfesional', JSON.stringify(profesional)); // Guardamos el objeto en localStorage
         setSelectedHora('');
-        setHorariosOcupados([]); // Reset horarios ocupados cuando se cambia el profesional
+        setHorariosOcupados([]); // Reseteamos los horarios ocupados al cambiar de profesional
     };
+    ;
+    
 
     const handleHoraClick = (hora, franjaId) => {
         if (isOcupado(franjaId)) {
@@ -165,14 +168,15 @@ export const Agendamiento = () => {
                             {loadingProfesionales ? (
                                 <Skeleton height={40} />
                             ) : (
-                                <select className="select_profesional" onChange={handleProfesionalChange} value={selectedProfesional}>
-                                    <option value=''>--Escoge profesional--</option>
-                                    {profesionales.map(profesional => (
-                                        <option key={profesional.id_profesional} value={profesional.id_profesional}>
-                                            {profesional.nombre_profesional}
-                                        </option>
-                                    ))}
-                                </select>
+                                <select className="select_profesional" onChange={handleProfesionalChange} value={selectedProfesional?.id_profesional || ''}>
+                                <option value=''>--Escoge profesional--</option>
+                                {profesionales.map(profesional => (
+                                    <option key={profesional.id_profesional} value={profesional.id_profesional}>
+                                        {profesional.nombre_profesional}
+                                    </option>
+                                ))}
+                            </select>
+                            
                             )}
                         </div>
                     </div>
@@ -201,9 +205,7 @@ export const Agendamiento = () => {
                                 </div>
                                 
                                 <div className='horarios-grid'>
-                                    {loadingFranjas ? (
-                                        <Skeleton count={10} height={40} />
-                                    ) : (
+                                    {
                                         franjasHorarias.map(franja => (
                                             <div key={franja.id_horario}
                                                  className={`cuadros ${isOcupado(franja.id_horario) ? 'ocupado' : 'libre'}`}
@@ -212,7 +214,7 @@ export const Agendamiento = () => {
                                                 {franja.hora}
                                             </div>
                                         ))
-                                    )}
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -233,7 +235,8 @@ export const Agendamiento = () => {
                                 </tr>
                                 <tr>
                                     <th>Profesional</th>
-                                    <td>{loadingProfesionales ? <Skeleton width={100} height={20} /> : selectedProfesional}</td>
+                                    <td>{selectedProfesional ? selectedProfesional.nombre_profesional : ''}</td>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -243,7 +246,7 @@ export const Agendamiento = () => {
                                 </tr>
                                 <tr>
                                     <th>Duración</th>
-                                    <td>{selectedHora ? selectedHora : <Skeleton width={100} height={20} />}</td>
+                                    <td>{selectedHora }</td>
                                 </tr>
                                 <tr>
                                     <th>Costo</th>
@@ -261,8 +264,8 @@ export const Agendamiento = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colSpan={2}>
-                                        <button onClick={handleReservarClick}>Reservar</button>
+                                    <td  colSpan={2}>
+                                        <button className='go-home-button-reserva' onClick={handleReservarClick}>Reservar</button>
                                     </td>
                                 </tr>
                             </tbody>

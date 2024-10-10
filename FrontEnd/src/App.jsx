@@ -5,14 +5,12 @@ import styled, { ThemeProvider } from "styled-components";
 import { LoadingProvider, useLoading } from './componentes/Animación/Loadingcontext';
 import { ModalProvider } from './componentes/modal/ContextModal';
 import { Light, Dark } from "./Styles/Themes";
-// import '@fortawesome/fontawesome-free/css/all.min.css';
-
-import { toast, ToastContainer } from 'react-toastify'; // Importa react-toastify para notificaciones globales
-import 'react-toastify/dist/ReactToastify.css'; // Asegúrate de importar los estilos de react-toastify
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const ThemeContext = React.createContext(null);
 
-// Importa todos los componentes necesarios
+// Importaciones de componentes (mantener las existentes)
 import Home from './pages/Home';
 import { Servicios } from './pages/Servicios';
 import { Acerca_de } from './pages/Acerca_de';
@@ -30,21 +28,33 @@ import LoginUser from './pages/Login';
 import SignUp from './pages/SignUp';
 import AbonoInfo from './componentes/AbonoInfo/AbonoInfo';
 import Abono from './pages/Abonos';
+import RecoverPassword from './componentes/Recuperarcontraseña/Recuperarcontraseña';
+import { Piedepagina } from './componentes/Footer/footer';
 
+// Componente para proteger rutas de admin
+const AdminRoute = ({ children }) => {
+    const isAdmin = JSON.parse(sessionStorage.getItem('isAdmin'));
+    
+    if (!isAdmin) {
+        toast.error('Acceso denegado: No tienes permisos de administrador');
+        return <Navigate to="/" replace />;
+    }
 
+    return children;
+};
 
 function AdminLayout({ children }) {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  
-  return (
-    <Container className={sidebarOpen ? "sidebarState active" : ""}>
-      <Sidebar
-        sidebarOpen={sidebarOpen}
-        setSidebarOpen={setSidebarOpen}
-      />
-      {children}
-    </Container>
-  );
+    const [sidebarOpen, setSidebarOpen] = useState(true);
+    
+    return (
+        <Container className={sidebarOpen ? "sidebarState active" : ""}>
+            <Sidebar
+                sidebarOpen={sidebarOpen}
+                setSidebarOpen={setSidebarOpen}
+            />
+            {children}
+        </Container>
+    );
 }
 
 function Main() {
@@ -52,13 +62,13 @@ function Main() {
     const location = useLocation();
     const [theme, setTheme] = useState("light");
     const themeStyle = theme === "light" ? Light : Dark;
-    const [isAdmin, setIsAdmin] = useState(false); // Determina si el usuario es admin
+    const [isAdmin, setIsAdmin] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
         setLoading(true);
-        // Aquí puedes agregar lógica para determinar si el usuario es admin
-        // Por ejemplo, basado en el token o en algún estado global
+        const isAdminUser = JSON.parse(sessionStorage.getItem('isAdmin')) || false;
+        setIsAdmin(isAdminUser);
     }, [location, setLoading]);
 
     return (
@@ -67,28 +77,35 @@ function Main() {
             <ThemeContext.Provider value={{ setTheme, theme }}>
                 <ThemeProvider theme={themeStyle}>
                     <Routes>
-                        {/* Rutas de cliente */}
+                        {/* Rutas públicas */}
                         <Route path="/" element={<Home />} />
                         <Route path='/Facturacion' element={<Facturaelectronica />} />
                         <Route path='/Registrar' element={<button onClick={() => openModal('SignUp')}>Regístrate</button>} />
                         <Route path="/loginsupa" element={<button onClick={() => openModal('LoginUser')}>Inicia Sesión</button>} />
                         <Route path="/servicios" element={<Servicios />} />
                         <Route path="/VistaDetalle" element={<VistaServicios />} />
-                        <Route path="/CitaPend" element={<CitaPend />} />
+                        <Route path="/RecuperarContraseña" element={<RecoverPassword />} />
                         <Route path="/acerca" element={<Acerca_de />} />
                         <Route path="/politicas" element={<Condiciones />} />
-                        <Route path="/Agendarcita" element={<Agendar />} />
-                        <Route path="/abono-info" element={<Abono />} />
+
+                        {/* Rutas que requieren autenticación */}
+                        <Route path="/CitaPend" element={
+                            sessionStorage.getItem('token') ? <CitaPend /> : <Navigate to="/" />
+                        } />
+                        <Route path="/Agendarcita" element={
+                            sessionStorage.getItem('token') ? <Agendar /> : <Navigate to="/" />
+                        } />
+                        <Route path="/abono-info" element={
+                            sessionStorage.getItem('token') ? <Abono /> : <Navigate to="/" />
+                        } />
 
                         {/* Rutas de administrador */}
                         <Route path="/admin/*" element={
-                            isAdmin ? (
+                            <AdminRoute>
                                 <AdminLayout>
                                     <MyRoutes />
                                 </AdminLayout>
-                            ) : (
-                                <Navigate to="/loginsupa" replace />
-                            )
+                            </AdminRoute>
                         } />
                     </Routes>
                 </ThemeProvider>
@@ -117,20 +134,17 @@ function App() {
     useEffect(() => {
         const storedToken = sessionStorage.getItem('token');
         const storedUser = sessionStorage.getItem('user');
+        const isAdmin = JSON.parse(sessionStorage.getItem('isAdmin')) || false;
         const welcomeShown = sessionStorage.getItem('welcomeShown');
 
         if (storedToken && storedUser) {
             setToken(JSON.parse(storedToken));
             setUserName(JSON.parse(storedUser));
 
-            // Muestra el mensaje de bienvenida si no se ha mostrado previamente
             if (!welcomeShown) {
-                toast.success(`Bienvenido de nuevo, ${storedUser}`);
+                toast.success(`Bienvenido de nuevo, ${JSON.parse(storedUser)}${isAdmin ? ' (Administrador)' : ''}`);
                 sessionStorage.setItem('welcomeShown', 'true');
             }
-        } else {
-            // Si no hay token ni nombre de usuario, muestra el mensaje de cierre de sesión
-            toast.info("Sesión Finalizada");
         }
     }, []);
 

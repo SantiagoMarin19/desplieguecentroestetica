@@ -36,6 +36,8 @@
     font-size: 32px; /* Tamaño de fuente aumentado */
     color: #333;
     font-weight: bold;
+    font-family: "Urbanist", sans-serif;
+
 }
 
 .card-subtitle {
@@ -43,20 +45,35 @@
     font-size: 22px; /* Tamaño de fuente aumentado */
     color: #666;
     font-weight: 500;
+    font-family: "Urbanist", sans-serif;
+ 
 }
 
 .service-info, .payment-info, .cost-details {
     margin-bottom: 30px; /* Espaciado incrementado */
     text-align: left; /* Alineación del texto a la izquierda */
 }
+.service-info h5{
+    font-weight: bold;
+}
 
 .service-info p, .payment-info p, .cost-details p {
-    margin-bottom: 20px; /* Espaciado incrementado */
-    font-size: 18px;
+    font-size: 22px;
     color: #444;
 }
 
+.payment-info h3{
+    font-weight: bold;
+    font-family: "Urbanist", sans-serif;
+    justify-content: center;
+
+
+}
+
+
 .service-info h5, .payment-info h5 {
+    font-family: "Urbanist", sans-serif;
+
     margin-bottom: 20px; /* Espaciado incrementado */
     font-size: 22px; /* Tamaño de fuente aumentado */
     color: #007bff; /* Color del título para resaltar */
@@ -99,7 +116,7 @@
     border: none; /* Sin borde */
     border-radius: 6px; /* Bordes redondeados */
     cursor: pointer; /* Cursor de puntero */
-    font-size: 18px;
+    font-size: 25px;
     text-align: center; /* Centrar el texto dentro del botón */
     display: block; /* Asegurarse de que el botón sea un bloque */
     margin: 20px auto; /* Margen superior e inferior, auto para centrar horizontalmente */
@@ -114,6 +131,11 @@
     text-align: left; /* Alineación del texto a la izquierda */
 }
 
+.consideraciones p{
+    font-size: 22px;
+    text-align: justify;
+}
+
 .qr-code {
     margin-top: 20px; /* Espaciado superior para el código QR */
     max-width: 100%; /* Ajuste automático al contenedor */
@@ -122,7 +144,12 @@
 }
 
 .bancolombia-logo {
-    margin-top: 20px; /* Espaciado superior para el logo de Bancolombia */
-    max-width: 100%; /* Ajuste automático al contenedor */
+    width: 240px;
+ 
     height: auto; /* Altura automática para mantener la proporción */
+}
+.consideraciones h2{
+    font-family: "Urbanist", sans-serif;
+    font-weight: bold;
+
 }

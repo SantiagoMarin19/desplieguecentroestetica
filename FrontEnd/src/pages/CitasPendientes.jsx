@@ -1,8 +1,9 @@
 import React from "react";
-import { Piedepagina } from "../componentes/Footer/footer";
 import Navbar from "../componentes/Navbar/Navbar";
 import Promociones from "../componentes/Promociones/Promociones";
 import CitasPendientes from "../componentes/CitasPendientes/CitasPendientes";
+import { Piedepagina } from "../componentes/Footer/footer";
+
 
 
 export const CitaPend = ({ token }) => {

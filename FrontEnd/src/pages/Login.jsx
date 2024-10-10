@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../supabase/supabaseconfig';
-import { toast } from 'react-toastify';  // Importa react-toastify para mostrar notificaciones
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import flechaizq from "../assets/images/decoración.png";
 import or from "../assets/images/OR.png";
 import flechader from "../assets/images/decor.png";
 import { useModal } from '../componentes/modal/ContextModal'; 
 import "./Estilos/Login.css";
+
+const ADMIN_EMAIL = "davidochoa772@gmail.com";
 
 const LoginUser = ({ closeModal }) => {
     let navigate = useNavigate();
@@ -27,27 +29,42 @@ const LoginUser = ({ closeModal }) => {
                 password: formData.password,
             });
 
-            if (error) throw error;
+            if (error) throw error; // Lanza el error si existe
 
-            // Almacena el token y el nombre de usuario
+            // Verifica si es el admin
+            const isAdmin = formData.email === ADMIN_EMAIL;
+            
+            // Almacena la información en sessionStorage
             sessionStorage.setItem('token', JSON.stringify(data.session.access_token));
             sessionStorage.setItem('user', JSON.stringify(data.user.user_metadata.full_name));
+            sessionStorage.setItem('isAdmin', JSON.stringify(isAdmin));
 
-            // Muestra la notificación de inicio de sesión exitoso
-            toast.success(`Bienvenido de nuevo, ${data.user.user_metadata.full_name}`);
+            // Muestra mensaje de bienvenida
+            toast.success(`Bienvenido de nuevo, ${data.user.user_metadata.full_name}${isAdmin ? ' (Administrador)' : ''}`);
 
-            const redirectTo = location.state?.from || '/';
-            navigate(redirectTo);
-            closeModal();  // Cierra el modal después de la redirección
+            // Redirige según el tipo de usuario
+            if (isAdmin) {
+                navigate('/admin/citasAdmin');
+            } else {
+                navigate('/');
+            }
+            
+            closeModal();
         } catch (error) {
             console.error("Error:", error);
-            toast.error(error.message);  // Muestra una notificación en caso de error
+            
+            // Manejo de errores específicos
+            if (error.message.includes('Invalid login credentials')) {
+                toast.error('Credenciales Incorrectas Intente Nuevamente'); // Mensaje específico
+            } else {
+                toast.error('Error: ' + error.message); // Mensaje genérico para otros errores
+            }
         }
     }
 
     function handleForgotPasswordClick() {
         closeModal();
-        navigate('/recover');
+        navigate('/RecuperarContraseña');
     }
 
     return (
@@ -103,5 +120,3 @@ const LoginUser = ({ closeModal }) => {
 }
 
 export default LoginUser;
-
-

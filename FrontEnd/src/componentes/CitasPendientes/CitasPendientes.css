@@ -19,6 +19,7 @@ body {
 }
 
 .citaspendientesbody {
+  flex: 1;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
@@ -54,7 +55,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
+  gap: 1.9rem;
 }
 
 .contenedorcarta {
@@ -155,11 +156,11 @@ body {
 }
 
 .status-confirmada {
-  background-color: green; 
+  color:  green; 
 }
 
 .status-pendiente {
-  background-color: red; 
+  color: rgb(184, 181, 23); 
 }
 
 .filter_citas {
