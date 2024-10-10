@@ -3,153 +3,239 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Ocupa toda la altura de la ventana */
-    background-color: #f0f4f8; /* Color de fondo más claro */
+    min-height: 100vh;
+    background-color: #f0f4f8;
     padding: 20px;
 }
 
 .abono-info-card {
-    background-color: #ffffff; /* Fondo blanco para la tarjeta */
-    border-radius: 12px; /* Bordes más redondeados */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más prominente */
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     padding: 30px;
     display: flex;
-    flex-direction: row; /* Disposición horizontal de las secciones */
-    justify-content: space-between; /* Espacio entre las columnas */
-    flex-wrap: wrap; /* Permite ajustar el diseño en pantallas más pequeñas */
-    max-width: 1200px; /* Ancho máximo para mantener la disposición en pantallas grandes */
-    width: 100%; /* Ajustar al 100% del contenedor padre */
-    box-sizing: border-box; /* Incluir padding en el ancho total */
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .info-column {
-    flex: 1; /* Ocupa el mismo espacio en la fila */
-    margin-right: 20px; /* Espacio entre columnas */
+    flex: 1;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    min-width: 300px;
 }
 
 .info-column:last-child {
-    margin-right: 0; /* Sin margen derecho en la última columna */
+    margin-right: 0;
 }
 
 .card-title {
-    margin-bottom: 25px; /* Espaciado incrementado */
-    font-size: 32px; /* Tamaño de fuente aumentado */
-    color: #333;
-    font-weight: bold;
+    margin-bottom: 25px;
+    font-size: 32px;
+    color: #000;
+    font-weight: 800;
     font-family: "Urbanist", sans-serif;
-
 }
 
 .card-subtitle {
-    margin-bottom: 30px; /* Espaciado incrementado */
-    font-size: 22px; /* Tamaño de fuente aumentado */
-    color: #666;
-    font-weight: 500;
+    margin-bottom: 30px;
+    font-size: 22px;
+    color: #333;
+    font-weight: 600;
     font-family: "Urbanist", sans-serif;
- 
 }
 
 .service-info, .payment-info, .cost-details {
-    margin-bottom: 30px; /* Espaciado incrementado */
-    text-align: left; /* Alineación del texto a la izquierda */
-}
-.service-info h5{
-    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: left;
 }
 
-.service-info p, .payment-info p, .cost-details p {
-    font-size: 22px;
-    color: #444;
+.service-info, .bank-info {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 5px solid #ff69b4;
+    margin-bottom: 20px;
 }
 
-.payment-info h3{
-    font-weight: bold;
+.service-info h5, .bank-info h5 {
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #000;
+}
+
+.service-info p, .payment-info p, .cost-details p, .bank-info p {
+    font-size: 18px;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.payment-info h3 {
+    font-weight: 700;
     font-family: "Urbanist", sans-serif;
-    justify-content: center;
-
-
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 26px;
+    color: #000;
 }
 
-
-.service-info h5, .payment-info h5 {
-    font-family: "Urbanist", sans-serif;
-
-    margin-bottom: 20px; /* Espaciado incrementado */
-    font-size: 22px; /* Tamaño de fuente aumentado */
-    color: #007bff; /* Color del título para resaltar */
-    display: flex;
-    align-items: center;
-}
-
-.service-info i, .payment-info i {
-    margin-right: 10px; /* Espacio entre el icono y el texto */
-    color: #007bff; /* Color del icono */
-    font-size: 24px; /* Tamaño del icono aumentado */
+.service-info i, .payment-info i, .bank-info i {
+    margin-right: 10px;
+    color: #ff69b4;
+    font-size: 24px;
 }
 
 .cost-details p {
-    font-size: 22px; /* Tamaño de fuente aumentado */
-    font-weight: bold; /* Negrita para destacar */
-    color: #333; /* Color de texto para mayor contraste */
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
 }
 
 .cost-details .price {
-    color: #007bff; /* Color para destacar los precios y abonos */
-    font-size: 24px; /* Tamaño de fuente más grande para resaltar */
+    color: #000;
+    font-size: 22px;
+    font-weight: 700;
 }
 
 .status-info {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 30px; /* Espaciado superior incrementado */
+    margin-top: 30px;
 }
 
 .status-info i {
-    margin-left: 10px; /* Espaciado entre el texto y el ícono */
-    font-size: 22px; /* Tamaño del ícono aumentado */
+    margin-left: 10px;
+    font-size: 20px;
+    color: #ff69b4;
 }
 
-.go-home-button {
-    background-color: #007bff; /* Color de fondo del botón */
-    color: #ffffff; /* Color del texto del botón */
-    border: none; /* Sin borde */
-    border-radius: 6px; /* Bordes redondeados */
-    cursor: pointer; /* Cursor de puntero */
-    font-size: 25px;
-    text-align: center; /* Centrar el texto dentro del botón */
-    display: block; /* Asegurarse de que el botón sea un bloque */
-    margin: 20px auto; /* Margen superior e inferior, auto para centrar horizontalmente */
+.go-home-button, button {
+    background-color: #ff69b4;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 12px 24px;
+    text-align: center;
+    display: block;
+    margin: 20px auto;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
 }
 
-.go-home-button:hover {
-    background-color: #0056b3; /* Color de fondo al pasar el cursor */
+.go-home-button:hover, button:hover {
+    background-color: #ff1493;
 }
 
 .consideraciones {
     width: 100%;
-    text-align: left; /* Alineación del texto a la izquierda */
+    text-align: left;
 }
 
-.consideraciones p{
-    font-size: 22px;
+.consideraciones p {
+    font-size: 18px;
     text-align: justify;
+    color: #000;
 }
 
 .qr-code {
-    margin-top: 20px; /* Espaciado superior para el código QR */
-    max-width: 100%; /* Ajuste automático al contenedor */
-    height: auto; /* Altura automática para mantener la proporción */
-    margin-left: 40px;
+    margin-top: 20px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .bancolombia-logo {
-    width: 240px;
- 
-    height: auto; /* Altura automática para mantener la proporción */
+    width: 200px;
+    height: auto;
+    display: block;
+    margin: 20px auto;
 }
-.consideraciones h2{
-    font-family: "Urbanist", sans-serif;
-    font-weight: bold;
 
+.consideraciones h2 {
+    font-family: "Urbanist", sans-serif;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #000;
+}
+
+.bank-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bank-info img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.bank-info .account-number {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+    .abono-info-card {
+        flex-direction: column;
+    }
+
+    .info-column {
+        margin-right: 0;
+        margin-bottom: 30px;
+    }
+
+    .card-title {
+        font-size: 28px;
+    }
+
+    .card-subtitle {
+        font-size: 20px;
+    }
+
+    .service-info p, .payment-info p, .cost-details p, .bank-info p {
+        font-size: 16px;
+    }
+
+    .cost-details .price {
+        font-size: 18px;
+    }
+
+    .go-home-button, button {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+
+    .service-info h5, .bank-info h5 {
+        font-size: 22px;
+    }
+
+    .payment-info h3 {
+        font-size: 24px;
+    }
+
+    .consideraciones h2 {
+        font-size: 26px;
+    }
+
+    .bank-info img {
+        width: 120px;
+    }
+
+    .bank-info .account-number {
+        font-size: 18px;
+    }
 }
