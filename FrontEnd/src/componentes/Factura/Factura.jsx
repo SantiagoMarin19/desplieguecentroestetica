@@ -35,7 +35,7 @@ const FacturacionModal = ({ token }) => {
                 const { data, error } = await supabase
                     .from('profesional')
                     .select('nombre_profesional')
-                    .eq('id_profesional', idProfesional)
+                    .eq('id_profesional', idProfesional) // Añadir condición para buscar por ID
                     .single();
 
                 if (error) {
@@ -45,6 +45,7 @@ const FacturacionModal = ({ token }) => {
                 }
             }
         };
+
 
         const fetchIdHorario = async () => {
             if (duracion) {
@@ -73,14 +74,14 @@ const FacturacionModal = ({ token }) => {
             window.alert('Por favor, inicie sesión para continuar.');
             return;
         }
-    
+
         if (!idHorario) {
             console.error('No se pudo obtener el id_horario para la duración.');
             setModalMessage('No se pudo obtener el id_horario para la duración.');
             setShowModal(true);
             return;
         }
-    
+
         const { data, error } = await supabase
             .from('cita')
             .insert([{
@@ -91,7 +92,7 @@ const FacturacionModal = ({ token }) => {
                 duracion: duracion,
                 estado: 'FALSE'
             }]);
-    
+
         if (error) {
             setModalMessage(`Error al guardar la cita: ${error.message}`);
         } else {
@@ -101,7 +102,7 @@ const FacturacionModal = ({ token }) => {
             setTimeout(() => navigate('/abono-info', { state: { servicio } }), 3000);
         }
     };
-    
+
     return (
         <div className='contenedor_facturacion'>
             <div className="facturacion-container">
@@ -132,7 +133,7 @@ const FacturacionModal = ({ token }) => {
                         ) : (
                             <>
                                 <p><strong>Hora:</strong> {duracion}</p>
-                                <p><strong>Profesional:</strong> {nombreProfesional}</p>
+                                <p><strong>Profesional:</strong> {nombreProfesional || 'Nombre no disponible'}</p>
                                 <p><strong>Servicio:</strong> {servicio?.nombre_servicio}</p>
                                 <p><strong>Costo:</strong> <b>{new Intl.NumberFormat('es-CO', {
                                     style: 'currency',
@@ -143,6 +144,7 @@ const FacturacionModal = ({ token }) => {
                                 <p><strong>Cliente:</strong> {user ? user.user_metadata.full_name : 'No disponible'}</p>
                             </>
                         )}
+    
                     </div>
                 </div>
 

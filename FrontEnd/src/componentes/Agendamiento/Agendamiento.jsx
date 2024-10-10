@@ -100,10 +100,10 @@ export const Agendamiento = () => {
     const handleProfesionalChange = (event) => {
         const selectedId = event.target.value;
         const profesional = profesionales.find(p => p.id_profesional === parseInt(selectedId));
-        setSelectedProfesional(profesional); // Guardamos el objeto completo
-        localStorage.setItem('selectedProfesional', JSON.stringify(profesional)); // Guardamos el objeto en localStorage
+        setSelectedProfesional(profesional); 
+        localStorage.setItem('selectedProfesional', JSON.stringify(profesional)); 
         setSelectedHora('');
-        setHorariosOcupados([]); // Reseteamos los horarios ocupados al cambiar de profesional
+        setHorariosOcupados([]); 
     };
     ;
     
@@ -133,12 +133,13 @@ export const Agendamiento = () => {
             state: {
                 fecha: date,
                 duracion: selectedHora,
-                idProfesional: selectedProfesional,
+                idProfesional: selectedProfesional.id_profesional,
+                nombre_profesional: selectedProfesional.nombre_profesional,
                 servicio: {
                     id_servicios: servicio.id_servicios,
                     nombre_servicio: servicio.nombre_servicio,
                     precio: servicio.precio
-                }
+                },
             }
         });
     };
