@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import "./Navbar.css";
 import { useModal } from '../modal/ContextModal';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Navbar = ({ token, handleLogout }) => {
     const { openModal } = useModal();
@@ -21,15 +23,30 @@ export const Navbar = ({ token, handleLogout }) => {
     };
 
     const handleLogoutClick = () => {
+        const logoutToast = toast(
+            <div className="toast-confirmation">
+                <span>¿Estás seguro de que deseas cerrar sesión?</span>
+                <button onClick={confirmLogout} className="btn btn-danger" style={{ marginLeft: '10px' }}>Sí</button>
+                <button onClick={cancelLogout} className="btn btn-secondary" style={{ marginLeft: '5px' }}>No</button>
+            </div>,
+            { autoClose: false } // Mantiene el toast visible hasta que el usuario tome una acción
+        );
+    };
+
+    const confirmLogout = () => {
         localStorage.removeItem('userName');
         localStorage.removeItem("sb-gdgzbxlcnemmcxpgnowg-auth-token");
         sessionStorage.removeItem('user');
         setUserName('');
         setShowLogout(false);
         window.location.reload();
-
-
         handleLogout();
+        toast.success('Has cerrado sesión correctamente'); // Mensaje de éxito
+    };
+
+    const cancelLogout = () => {
+        setShowLogout(false); // Cierra el menú si el usuario cancela
+        toast.info('Cierre de sesión cancelado'); // Mensaje informativo
     };
 
     return (

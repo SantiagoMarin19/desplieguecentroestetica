@@ -30,6 +30,7 @@ import AbonoInfo from './componentes/AbonoInfo/AbonoInfo';
 import Abono from './pages/Abonos';
 import RecoverPassword from './componentes/Recuperarcontraseña/Recuperarcontraseña';
 import { Piedepagina } from './componentes/Footer/footer';
+import ResetPassword from './componentes/Recuperarcontraseña/Nuevacontraseña';
 
 // Componente para proteger rutas de admin
 const AdminRoute = ({ children }) => {
@@ -85,6 +86,11 @@ function Main() {
                         <Route path="/servicios" element={<Servicios />} />
                         <Route path="/VistaDetalle" element={<VistaServicios />} />
                         <Route path="/RecuperarContraseña" element={<RecoverPassword />} />
+                        <Route path="/NuevaContraseña" element={<ResetPassword />} />
+
+
+
+
                         <Route path="/acerca" element={<Acerca_de />} />
                         <Route path="/politicas" element={<Condiciones />} />
 

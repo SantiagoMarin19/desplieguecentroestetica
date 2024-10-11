@@ -35,6 +35,48 @@
     flex-direction: column; /* Apila verticalmente el nombre y el botón */
     align-items: flex-end; /* Alinea los elementos al final del contenedor */
 }
+/* Navbar.css */
+
+.toast-confirmation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f8f9fa; /* Color de fondo claro */
+    border: 1px solid #ced4da; /* Borde gris */
+    border-radius: 0.25rem; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.button-group {
+    display: flex; /* Alinea los botones en línea */
+    gap: 5px; /* Espaciado entre los botones */
+}
+
+.toast-confirmation button {
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.toast-confirmation .btn-danger {
+    background-color: #dc3545; /* Rojo */
+    color: white;
+}
+
+.toast-confirmation .btn-secondary {
+    background-color: #6c757d; /* Gris */
+    color: white;
+}
+
+.toast-confirmation .btn-danger:hover {
+    background-color: #c82333; /* Rojo más oscuro */
+}
+
+.toast-confirmation .btn-secondary:hover {
+    background-color: #5a6268; /* Gris más oscuro */
+}
 
 /* Contenedor para el contenido de inicio de sesión */
 .iniciosesion-content {
