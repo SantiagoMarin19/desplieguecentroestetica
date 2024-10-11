@@ -110,6 +110,7 @@ function Main() {
                     </Routes>
                 </ThemeProvider>
             </ThemeContext.Provider>
+            
             <Modalinicio />
             <ModalRegistro />
             <ToastContainer

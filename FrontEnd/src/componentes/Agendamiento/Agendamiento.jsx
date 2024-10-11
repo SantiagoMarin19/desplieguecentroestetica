@@ -141,6 +141,7 @@ export const Agendamiento = () => {
                 }
             }
         });
+        
     };
 
     const tileDisabled = ({ date }) => {
