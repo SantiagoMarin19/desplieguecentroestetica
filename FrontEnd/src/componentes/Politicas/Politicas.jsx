@@ -14,9 +14,13 @@ export const Politicases = () => {
     }, []);
 
     const handlePrint = useReactToPrint({
-        content: () => componentRef.current,
+        content: () => {
+            console.log(componentRef.current); // Verifica que esto no sea null
+            return componentRef.current;
+        },
         documentTitle: 'Terminos_y_Condiciones_Natalia_Salazar_Artist',
     });
+    
 
     const PoliticasContent = React.forwardRef((props, ref) => (
         <div ref={ref} className='politicas-printable'>

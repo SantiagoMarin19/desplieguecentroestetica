@@ -6,6 +6,7 @@ import { LoadingProvider, useLoading } from './componentes/Animación/Loadingcon
 import { ModalProvider } from './componentes/modal/ContextModal';
 import { Light, Dark } from "./Styles/Themes";
 import { toast, ToastContainer } from 'react-toastify';
+import TestPrint  from "./pages/Prueba";
 import 'react-toastify/dist/ReactToastify.css';
 
 export const ThemeContext = React.createContext(null);
@@ -86,6 +87,7 @@ function Main() {
                         <Route path="/VistaDetalle" element={<VistaServicios />} />
                         <Route path="/RecuperarContraseña" element={<RecoverPassword />} />
                         <Route path="/acerca" element={<Acerca_de />} />
+                        <Route path="/testeo" element={<TestPrint/>}/>
                         <Route path="/politicas" element={<Condiciones />} />
 
                         {/* Rutas que requieren autenticación */}
