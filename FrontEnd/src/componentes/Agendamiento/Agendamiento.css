@@ -336,6 +336,49 @@ tr:hover td {
     opacity: 0;
 }
 
+.notification {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 15px;
+    background-color: #f44336; /* Color rojo para la notificación */
+    color: white;
+    border-radius: 5px;
+    z-index: 1000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.5s ease;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.notification.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+.horario-btn {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s ease;
+}
+
+.horario-btn.ocupado {
+    background-color: gray;
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.horario-btn.disponible:hover {
+    background-color: lightgreen;
+}
+
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .main-content {

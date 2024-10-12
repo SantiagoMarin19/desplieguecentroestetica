@@ -18,26 +18,28 @@ export const Agendamiento = () => {
     const [loadingProfesionales, setLoadingProfesionales] = useState(true);
     const [loadingFranjas, setLoadingFranjas] = useState(false);
     const [loadingHorarios, setLoadingHorarios] = useState(false);
-
+    const [notification, setNotification] = useState(null);
     const navigate = useNavigate();
     const { servicio } = useLocation().state || { servicio: { nombre_servicio: "Servicio no especificado", precio: "$0.00" } };
-
+    
     // Fetch user and professionals data
     useEffect(() => {
         const fetchUser = async () => {
             const { data, error } = await supabase.auth.getUser();
+            console.log('Usuario autenticado:', data); // <-- Agrega log
             if (data) {
                 setUserId(data.user.id);
             } else {
                 console.error('Error fetching user:', error);
             }
         };
-
+    
         const fetchProfesionales = async () => {
             setLoadingProfesionales(true);
             const { data, error } = await supabase
                 .from('profesional')
                 .select('id_profesional, nombre_profesional');
+            console.log('Profesionales fetch:', data); // <-- Agrega log
             if (error) {
                 console.error('Error fetching profesionales:', error);
             } else {
@@ -45,22 +47,24 @@ export const Agendamiento = () => {
             }
             setLoadingProfesionales(false);
         };
-
+    
         fetchUser();
         fetchProfesionales();
     }, []);
-
-    // Fetch franjas horarias whenever date changes
+    
     useEffect(() => {
         const fetchFranjasHorarias = async () => {
-            if (date) {
+            if (date && selectedProfesional && servicio) {
                 setLoadingFranjas(true);
                 const selectedDate = date.toISOString().split('T')[0];
                 const { data, error } = await supabase
                     .from('franja_horaria')
                     .select('id_horario, hora, estado, fecha')
-                    .eq('fecha', selectedDate);
-
+                    .eq('fecha', selectedDate)
+                    .eq('id_profesional', selectedProfesional.id_profesional) // Filtra por el profesional seleccionado
+                    .eq('nombre_servicio', servicio.nombre_servicio); // Filtra por el servicio seleccionado
+    
+                console.log('Franjas horarias fetch:', data);
                 if (error) {
                     console.error('Error fetching franjas horarias:', error);
                 } else {
@@ -69,10 +73,11 @@ export const Agendamiento = () => {
                 setLoadingFranjas(false);
             }
         };
-
+    
         fetchFranjasHorarias();
-    }, [date]);
-
+    }, [date, selectedProfesional, servicio]);
+    
+    
     useEffect(() => {
         const fetchHorariosOcupados = async () => {
             if (selectedProfesional && date && servicio) {
@@ -80,47 +85,48 @@ export const Agendamiento = () => {
                 const selectedDate = date.toISOString().split('T')[0];
                 const { data, error } = await supabase
                     .from('cita')
-                    .select('franja_horaria')
-                    .eq('profesional', selectedProfesional , nombre_profesional)
+                    .select('duracion')
+                    .eq('profesional', selectedProfesional.id_profesional)
                     .eq('fecha', selectedDate)
                     .eq('servicio', servicio.id_servicios);
-
+    
+                console.log('Horarios ocupados fetch:', data); // <-- Agrega log
                 if (error) {
-                    console.error('Error fetching horarios ocupados:', error);
+                    console.error('Error fetching horarios ocupados:', error.message);
                 } else {
-                    setHorariosOcupados(data.map(cita => cita.franja_horaria) || []);
+                    setHorariosOcupados(data.map(cita => cita.duracion) || []);
                 }
                 setLoadingHorarios(false);
             }
         };
-
+    
         fetchHorariosOcupados();
     }, [selectedProfesional, date, servicio]);
-
+    
     const handleProfesionalChange = (event) => {
         const selectedId = event.target.value;
         const profesional = profesionales.find(p => p.id_profesional === parseInt(selectedId));
-        setSelectedProfesional(profesional); // Guardamos el objeto completo
-        localStorage.setItem('selectedProfesional', JSON.stringify(profesional)); // Guardamos el objeto en localStorage
+        setSelectedProfesional(profesional);
+        localStorage.setItem('selectedProfesional', JSON.stringify(profesional));
         setSelectedHora('');
-        setHorariosOcupados([]); // Reseteamos los horarios ocupados al cambiar de profesional
-    };
-    ;
-    
-
-    const handleHoraClick = (hora, franjaId) => {
-        if (isOcupado(franjaId)) {
-            alert('Esta hora ya está ocupada. Por favor, elige otra.');
-            return;
-        }
-        setSelectedHora(hora);
-        localStorage.setItem('selectedHora', hora);
+        setHorariosOcupados([]);
     };
 
     const isOcupado = (franjaId) => {
         return horariosOcupados.includes(franjaId);
     };
-
+    
+    const handleHorarioClick = (horario) => {
+        if (horariosOcupados.includes(horario.hora)) {
+            // Mostrar notificación de hora ocupada
+            showNotification('Este horario ya está ocupado.');
+        } else {
+            // Seleccionar el horario normalmente
+            setSelectedHora(horario.hora);  // Cambié 'setSelectedHorario' por 'setSelectedHora'
+        }
+    };
+    
+    
     const handleReservarClick = (event) => {
         event.preventDefault();
 
@@ -133,15 +139,15 @@ export const Agendamiento = () => {
             state: {
                 fecha: date,
                 duracion: selectedHora,
-                idProfesional: selectedProfesional,
+                idProfesional: selectedProfesional.id_profesional,
+                nombre_profesional: selectedProfesional.nombre_profesional,
                 servicio: {
                     id_servicios: servicio.id_servicios,
                     nombre_servicio: servicio.nombre_servicio,
                     precio: servicio.precio
-                }
+                },
             }
         });
-        
     };
 
     const tileDisabled = ({ date }) => {
@@ -155,6 +161,14 @@ export const Agendamiento = () => {
         return date < today;
     };
 
+     // Función para mostrar notificación y desaparecerla automáticamente
+    const showNotification = (message) => {
+        setNotification(message);
+        setTimeout(() => {
+            setNotification(null); // Limpiar la notificación después de 3 segundos
+        }, 3000);
+    };
+    
     return (
         <div className='agendamiento-container'>
             <div className='header_agendamiento'>
@@ -204,19 +218,30 @@ export const Agendamiento = () => {
                                 <div className='titulo_horarios'>
                                     <h3>Horarios Disponibles</h3>
                                 </div>
+
+
                                 
-                                <div className='horarios-grid'>
-                                    {
-                                        franjasHorarias.map(franja => (
-                                            <div key={franja.id_horario}
-                                                 className={`cuadros ${isOcupado(franja.id_horario) ? 'ocupado' : 'libre'}`}
-                                                 onClick={() => handleHoraClick(franja.hora, franja.id_horario)}
-                                                 style={{ cursor: isOcupado(franja.id_horario) ? 'not-allowed' : 'pointer', opacity: isOcupado(franja.id_horario) ? 0.5 : 1 }}>
-                                                {franja.hora}
-                                            </div>
-                                        ))
-                                    }
-                                </div>
+                                <div className="horarios-disponibles">
+    {loadingFranjas ? (
+        <Skeleton height={40} count={5} />
+    ) : (
+        franjasHorarias.map(franja => (
+            <button
+    key={franja.id_horario}
+    onClick={() => handleHorarioClick(franja)}
+    disabled={horariosOcupados.includes(franja.hora)}
+    className={`horario-btn ${horariosOcupados.includes(franja.hora) ? 'ocupado' : 'disponible'}`}
+>
+    {franja.hora}
+</button>
+
+
+
+        ))
+    )}
+</div>
+
+
                             </div>
                         </div>
                     </div>
