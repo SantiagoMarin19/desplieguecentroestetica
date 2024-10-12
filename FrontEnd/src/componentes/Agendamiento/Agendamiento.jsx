@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import './Agendamiento.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -23,34 +23,37 @@ export const Agendamiento = () => {
     const { servicio } = useLocation().state || { servicio: { nombre_servicio: "Servicio no especificado", precio: "$0.00" } };
     
     // Fetch user and professionals data
+    const fetchProfesionales = useCallback(async () => {
+        setLoadingProfesionales(true);
+        const { data, error } = await supabase
+            .from('profesional')
+            .select('id_profesional, nombre_profesional, especialidad')
+            .eq('estado', true) // Solo selecciona profesionales activos
+            .order('nombre_profesional', { ascending: true }); // Ordena alfabéticamente
+
+        if (error) {
+            console.error('Error fetching profesionales:', error);
+            showNotification('Error al cargar profesionales. Por favor, intente más tarde.');
+        } else {
+            setProfesionales(data || []);
+        }
+        setLoadingProfesionales(false);
+    }, []);
+
     useEffect(() => {
         const fetchUser = async () => {
             const { data, error } = await supabase.auth.getUser();
-            console.log('Usuario autenticado:', data); // <-- Agrega log
             if (data) {
                 setUserId(data.user.id);
             } else {
                 console.error('Error fetching user:', error);
+                showNotification('Error al obtener información del usuario. Por favor, inicie sesión nuevamente.');
             }
         };
-    
-        const fetchProfesionales = async () => {
-            setLoadingProfesionales(true);
-            const { data, error } = await supabase
-                .from('profesional')
-                .select('id_profesional, nombre_profesional');
-            console.log('Profesionales fetch:', data); // <-- Agrega log
-            if (error) {
-                console.error('Error fetching profesionales:', error);
-            } else {
-                setProfesionales(data || []);
-            }
-            setLoadingProfesionales(false);
-        };
-    
+
         fetchUser();
         fetchProfesionales();
-    }, []);
+    }, [fetchProfesionales]);
     
     useEffect(() => {
         const fetchFranjasHorarias = async () => {
@@ -110,6 +113,8 @@ export const Agendamiento = () => {
         localStorage.setItem('selectedProfesional', JSON.stringify(profesional));
         setSelectedHora('');
         setHorariosOcupados([]);
+        setDate(null); // Resetea la fecha seleccionada
+        setFranjasHorarias([]); // Limpia las franjas horarias
     };
 
     const isOcupado = (franjaId) => {
@@ -183,15 +188,18 @@ export const Agendamiento = () => {
                             {loadingProfesionales ? (
                                 <Skeleton height={40} />
                             ) : (
-                                <select className="select_profesional" onChange={handleProfesionalChange} value={selectedProfesional?.id_profesional || ''}>
-                                <option value=''>--Escoge profesional--</option>
-                                {profesionales.map(profesional => (
-                                    <option key={profesional.id_profesional} value={profesional.id_profesional}>
-                                        {profesional.nombre_profesional}
-                                    </option>
-                                ))}
-                            </select>
-                            
+                                <select 
+                                    className="select_profesional" 
+                                    onChange={handleProfesionalChange} 
+                                    value={selectedProfesional?.id_profesional || ''}
+                                >
+                                    <option value=''>--Escoge profesional--</option>
+                                    {profesionales.map(profesional => (
+                                        <option key={profesional.id_profesional} value={profesional.id_profesional}>
+                                            {profesional.nombre_profesional} - {profesional.especialidad}
+                                        </option>
+                                    ))}
+                                </select>
                             )}
                         </div>
                     </div>
@@ -222,38 +230,26 @@ export const Agendamiento = () => {
 
                                 
                                 <div className="horarios-disponibles">
-    {loadingFranjas ? (
-        <Skeleton height={40} count={5} />
-    ) : (
-        franjasHorarias.map(franja => (
-            <button
-    key={franja.id_horario}
-    onClick={() => handleHorarioClick(franja)}
-    disabled={horariosOcupados.includes(franja.hora)}
-    className={`horario-btn ${horariosOcupados.includes(franja.hora) ? 'ocupado' : 'disponible'}`}
->
-    {franja.hora}
-</button>
-
-
-
-        ))
-    )}
-</div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='right-section'>
-                    <div className='Resumendecompra_Agendamiento'>
-                        <div className='titulo_Resumendecompra_Agendamiento'>
-                            <h3>Resumen de Compra</h3>
-                        </div>
-                        <table>
-                            <thead>
+                                    {loadingFranjas ? ( <Skeleton height={40} count={5} />) : (
+                                        franjasHorarias.map(franja => (
+                                        <button key={franja.id_horario} onClick={() => handleHorarioClick(franja)}
+                                        disabled={horariosOcupados.includes(franja.hora)} className={`horario-btn ${horariosOcupados.includes(franja.hora) ? 'ocupado' : 'disponible'}`}>
+                                            {franja.hora}                                            
+                                            </button>
+                                            ))
+                                            )}
+                                            </div>
+                                             </div>
+                                              </div>
+                                               </div>
+                                                </div>
+                                                
+                        <div className='right-section'>
+                            <div className='Resumendecompra_Agendamiento'>
+                                <div className='titulo_Resumendecompra_Agendamiento'>
+                                    <h3>Resumen de Compra</h3></div>
+                                    <table>
+                                        <thead>
                                 <tr>
                                     <th colSpan={2}>
                                         {date ? `${date.getDate()} ${date.toLocaleDateString('default', { month: 'short' })} ${date.getFullYear()} - ${selectedHora}` : 'Selecciona una fecha'}
@@ -262,8 +258,7 @@ export const Agendamiento = () => {
                                 <tr>
                                     <th>Profesional</th>
                                     <td>{selectedProfesional ? selectedProfesional.nombre_profesional : ''}</td>
-
-                                </tr>
+                                    </tr>
                             </thead>
                             <tbody>
                                 <tr>
