@@ -18,7 +18,9 @@ export const Agendamiento = () => {
     const [loadingProfesionales, setLoadingProfesionales] = useState(true);
     const [loadingFranjas, setLoadingFranjas] = useState(false);
     const [loadingHorarios, setLoadingHorarios] = useState(false);
-    const [notification, setNotification] = useState(null);
+    const [notification, setNotification] = useState({ message: '', type: 'success' });
+    const [isModalOpen, setIsModalOpen] = useState(false); // Controla el modal
+    const [modalMessage, setModalMessage] = useState(''); // Mensaje del modal
     const navigate = useNavigate();
     const { servicio } = useLocation().state || { servicio: { nombre_servicio: "Servicio no especificado", precio: "$0.00" } };
     
@@ -31,9 +33,9 @@ export const Agendamiento = () => {
             .eq('estado', true) // Solo selecciona profesionales activos
             .order('nombre_profesional', { ascending: true }); // Ordena alfabéticamente
 
-        if (error) {
-            console.error('Error fetching profesionales:', error);
-            showNotification('Error al cargar profesionales. Por favor, intente más tarde.');
+            if (error) {
+                setModalMessage('Error al cargar profesionales. Por favor, intente más tarde.');
+                setIsModalOpen(true);
         } else {
             setProfesionales(data || []);
         }
@@ -45,9 +47,9 @@ export const Agendamiento = () => {
             const { data, error } = await supabase.auth.getUser();
             if (data) {
                 setUserId(data.user.id);
-            } else {
-                console.error('Error fetching user:', error);
-                showNotification('Error al obtener información del usuario. Por favor, inicie sesión nuevamente.');
+            }else {
+                setModalMessage('Error al obtener información del usuario. Por favor, inicie sesión nuevamente.');
+                setIsModalOpen(true);
             }
         };
 
@@ -69,7 +71,8 @@ export const Agendamiento = () => {
     
                 console.log('Franjas horarias fetch:', data);
                 if (error) {
-                    console.error('Error fetching franjas horarias:', error);
+                    setModalMessage('Error buscando las horas disponibles.');
+                    setIsModalOpen(true);
                 } else {
                     setFranjasHorarias(data || []);
                 }
@@ -95,7 +98,8 @@ export const Agendamiento = () => {
     
                 console.log('Horarios ocupados fetch:', data); // <-- Agrega log
                 if (error) {
-                    console.error('Error fetching horarios ocupados:', error.message);
+                    setModalMessage('Error buscando los horarios ocupados.');
+                    setIsModalOpen(true);
                 } else {
                     setHorariosOcupados(data.map(cita => cita.duracion) || []);
                 }
@@ -123,8 +127,8 @@ export const Agendamiento = () => {
     
     const handleHorarioClick = (horario) => {
         if (horariosOcupados.includes(horario.hora)) {
-            // Mostrar notificación de hora ocupada
-            showNotification('Este horario ya está ocupado.');
+            setModalMessage('Este horario ya está ocupado.');
+            setIsModalOpen(true);
         } else {
             // Seleccionar el horario normalmente
             setSelectedHora(horario.hora);  // Cambié 'setSelectedHorario' por 'setSelectedHora'
@@ -136,7 +140,8 @@ export const Agendamiento = () => {
         event.preventDefault();
 
         if (!selectedProfesional || !selectedHora) {
-            window.alert('Por favor, selecciona un profesional y una hora.');
+            setModalMessage('Por favor, selecciona un profesional y una hora.');
+            setIsModalOpen(true);
             return;
         }
 
@@ -166,6 +171,11 @@ export const Agendamiento = () => {
         return date < today;
     };
 
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setModalMessage('');
+    };
+
      // Función para mostrar notificación y desaparecerla automáticamente
     const showNotification = (message) => {
         setNotification(message);
@@ -176,6 +186,16 @@ export const Agendamiento = () => {
     
     return (
         <div className='agendamiento-container'>
+
+{isModalOpen && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={closeModal}>&times;</span>
+                        <p>{modalMessage}</p>
+                    </div>
+                </div>
+            )}
+
             <div className='header_agendamiento'>
                 <h3>Agenda Tu Cita</h3>
             </div>
