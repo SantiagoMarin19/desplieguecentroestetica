@@ -419,6 +419,11 @@ export function ServiciosAdmin() {
     </option>
   ))}
 </select>
+<input type="file" multiple="multiple" id="photo"
+placeholder='Pulse aquí para añadir archivos'
+value={newService.url_img}
+onChange={(e) => setNewService({ ...newService, url_img: e.target.value })}
+/>
         </ServiceInput>
         <HandleAddServiceButton onClick={handleAddService} theme={theme}>
           Añadir Servicio
@@ -445,6 +450,16 @@ export function ServiciosAdmin() {
                     <p>Precio:
                       <input type="number" value={editableService.precio} onChange={(e) => setEditableService({ ...editableService, precio: e.target.value })} />
                     </p>
+                    <p>
+                    <div classname="drag-drop">
+            <input type="file" multiple="multiple" id="photo" />
+            <span classname="fa-stack fa-2x">
+                <i classname="fa fa-cloud fa-stack-2x bottom pulsating"></i>
+                <i classname="fa fa-circle fa-stack-1x top medium"></i>
+                <i classname="fa fa-arrow-circle-up fa-stack-1x top"></i>
+            </span>
+            <span classname="desc">Pulse aquí para añadir archivos</span>
+        </div></p>
                     <p>
                       <label>
                         Habilitado:
