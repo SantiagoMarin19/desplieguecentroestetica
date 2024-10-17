@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import './Agendamiento.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -18,61 +18,72 @@ export const Agendamiento = () => {
     const [loadingProfesionales, setLoadingProfesionales] = useState(true);
     const [loadingFranjas, setLoadingFranjas] = useState(false);
     const [loadingHorarios, setLoadingHorarios] = useState(false);
-
+    const [notification, setNotification] = useState({ message: '', type: 'success' });
+    const [isModalOpen, setIsModalOpen] = useState(false); // Controla el modal
+    const [modalMessage, setModalMessage] = useState(''); // Mensaje del modal
     const navigate = useNavigate();
     const { servicio } = useLocation().state || { servicio: { nombre_servicio: "Servicio no especificado", precio: "$0.00" } };
-
+    
     // Fetch user and professionals data
+    const fetchProfesionales = useCallback(async () => {
+        setLoadingProfesionales(true);
+        const { data, error } = await supabase
+            .from('profesional')
+            .select('id_profesional, nombre_profesional, especialidad')
+            .eq('estado', true) // Solo selecciona profesionales activos
+            .order('nombre_profesional', { ascending: true }); // Ordena alfabéticamente
+
+            if (error) {
+                setModalMessage('Error al cargar profesionales. Por favor, intente más tarde.');
+                setIsModalOpen(true);
+        } else {
+            setProfesionales(data || []);
+        }
+        setLoadingProfesionales(false);
+    }, []);
+
     useEffect(() => {
         const fetchUser = async () => {
             const { data, error } = await supabase.auth.getUser();
             if (data) {
                 setUserId(data.user.id);
-            } else {
-                console.error('Error fetching user:', error);
+            }else {
+                setModalMessage('Error al obtener información del usuario. Por favor, inicie sesión nuevamente.');
+                setIsModalOpen(true);
             }
-        };
-
-        const fetchProfesionales = async () => {
-            setLoadingProfesionales(true);
-            const { data, error } = await supabase
-                .from('profesional')
-                .select('id_profesional, nombre_profesional');
-            if (error) {
-                console.error('Error fetching profesionales:', error);
-            } else {
-                setProfesionales(data || []);
-            }
-            setLoadingProfesionales(false);
         };
 
         fetchUser();
         fetchProfesionales();
-    }, []);
-
-    // Fetch franjas horarias whenever date changes
+    }, [fetchProfesionales]);
+    
     useEffect(() => {
         const fetchFranjasHorarias = async () => {
-            if (date) {
+            if (date && selectedProfesional && servicio) {
                 setLoadingFranjas(true);
                 const selectedDate = date.toISOString().split('T')[0];
                 const { data, error } = await supabase
                     .from('franja_horaria')
                     .select('id_horario, hora, estado, fecha')
-                    .eq('fecha', selectedDate);
-
+                    .eq('fecha', selectedDate)
+                    .eq('id_profesional', selectedProfesional.id_profesional) // Filtra por el profesional seleccionado
+                    .eq('nombre_servicio', servicio.nombre_servicio); // Filtra por el servicio seleccionado
+    
+                console.log('Franjas horarias fetch:', data);
                 if (error) {
-                    console.error('Error fetching franjas horarias:', error);
+                    setModalMessage('Error buscando las horas disponibles.');
+                    setIsModalOpen(true);
                 } else {
                     setFranjasHorarias(data || []);
                 }
                 setLoadingFranjas(false);
             }
         };
-
+    
         fetchFranjasHorarias();
-    }, [date]);
-
+    }, [date, selectedProfesional, servicio]);
+    
+    
     useEffect(() => {
         const fetchHorariosOcupados = async () => {
             if (selectedProfesional && date && servicio) {
@@ -80,52 +91,57 @@ export const Agendamiento = () => {
                 const selectedDate = date.toISOString().split('T')[0];
                 const { data, error } = await supabase
                     .from('cita')
-                    .select('franja_horaria')
-                    .eq('profesional', selectedProfesional , nombre_profesional)
+                    .select('duracion')
+                    .eq('profesional', selectedProfesional.id_profesional)
                     .eq('fecha', selectedDate)
                     .eq('servicio', servicio.id_servicios);
-
+    
+                console.log('Horarios ocupados fetch:', data); // <-- Agrega log
                 if (error) {
-                    console.error('Error fetching horarios ocupados:', error);
+                    setModalMessage('Error buscando los horarios ocupados.');
+                    setIsModalOpen(true);
                 } else {
-                    setHorariosOcupados(data.map(cita => cita.franja_horaria) || []);
+                    setHorariosOcupados(data.map(cita => cita.duracion) || []);
                 }
                 setLoadingHorarios(false);
             }
         };
-
+    
         fetchHorariosOcupados();
     }, [selectedProfesional, date, servicio]);
-
+    
     const handleProfesionalChange = (event) => {
         const selectedId = event.target.value;
         const profesional = profesionales.find(p => p.id_profesional === parseInt(selectedId));
-        setSelectedProfesional(profesional); 
-        localStorage.setItem('selectedProfesional', JSON.stringify(profesional)); 
+        setSelectedProfesional(profesional);
+        localStorage.setItem('selectedProfesional', JSON.stringify(profesional));
         setSelectedHora('');
-        setHorariosOcupados([]); 
-    };
-    ;
-    
-
-    const handleHoraClick = (hora, franjaId) => {
-        if (isOcupado(franjaId)) {
-            alert('Esta hora ya está ocupada. Por favor, elige otra.');
-            return;
-        }
-        setSelectedHora(hora);
-        localStorage.setItem('selectedHora', hora);
+        setHorariosOcupados([]);
+        setDate(null); // Resetea la fecha seleccionada
+        setFranjasHorarias([]); // Limpia las franjas horarias
     };
 
     const isOcupado = (franjaId) => {
         return horariosOcupados.includes(franjaId);
     };
-
+    
+    const handleHorarioClick = (horario) => {
+        if (horariosOcupados.includes(horario.hora)) {
+            setModalMessage('Este horario ya está ocupado.');
+            setIsModalOpen(true);
+        } else {
+            // Seleccionar el horario normalmente
+            setSelectedHora(horario.hora);  // Cambié 'setSelectedHorario' por 'setSelectedHora'
+        }
+    };
+    
+    
     const handleReservarClick = (event) => {
         event.preventDefault();
 
         if (!selectedProfesional || !selectedHora) {
-            window.alert('Por favor, selecciona un profesional y una hora.');
+            setModalMessage('Por favor, selecciona un profesional y una hora.');
+            setIsModalOpen(true);
             return;
         }
 
@@ -155,8 +171,31 @@ export const Agendamiento = () => {
         return date < today;
     };
 
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setModalMessage('');
+    };
+
+     // Función para mostrar notificación y desaparecerla automáticamente
+    const showNotification = (message) => {
+        setNotification(message);
+        setTimeout(() => {
+            setNotification(null); // Limpiar la notificación después de 3 segundos
+        }, 3000);
+    };
+    
     return (
         <div className='agendamiento-container'>
+
+{isModalOpen && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={closeModal}>&times;</span>
+                        <p>{modalMessage}</p>
+                    </div>
+                </div>
+            )}
+
             <div className='header_agendamiento'>
                 <h3>Agenda Tu Cita</h3>
             </div>
@@ -169,15 +208,18 @@ export const Agendamiento = () => {
                             {loadingProfesionales ? (
                                 <Skeleton height={40} />
                             ) : (
-                                <select className="select_profesional" onChange={handleProfesionalChange} value={selectedProfesional?.id_profesional || ''}>
-                                <option value=''>--Escoge profesional--</option>
-                                {profesionales.map(profesional => (
-                                    <option key={profesional.id_profesional} value={profesional.id_profesional}>
-                                        {profesional.nombre_profesional}
-                                    </option>
-                                ))}
-                            </select>
-                            
+                                <select 
+                                    className="select_profesional" 
+                                    onChange={handleProfesionalChange} 
+                                    value={selectedProfesional?.id_profesional || ''}
+                                >
+                                    <option value=''>--Escoge profesional--</option>
+                                    {profesionales.map(profesional => (
+                                        <option key={profesional.id_profesional} value={profesional.id_profesional}>
+                                            {profesional.nombre_profesional} - {profesional.especialidad}
+                                        </option>
+                                    ))}
+                                </select>
                             )}
                         </div>
                     </div>
@@ -204,31 +246,30 @@ export const Agendamiento = () => {
                                 <div className='titulo_horarios'>
                                     <h3>Horarios Disponibles</h3>
                                 </div>
-                                
-                                <div className='horarios-grid'>
-                                    {
-                                        franjasHorarias.map(franja => (
-                                            <div key={franja.id_horario}
-                                                 className={`cuadros ${isOcupado(franja.id_horario) ? 'ocupado' : 'libre'}`}
-                                                 onClick={() => handleHoraClick(franja.hora, franja.id_horario)}
-                                                 style={{ cursor: isOcupado(franja.id_horario) ? 'not-allowed' : 'pointer', opacity: isOcupado(franja.id_horario) ? 0.5 : 1 }}>
-                                                {franja.hora}
-                                            </div>
-                                        ))
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div className='right-section'>
-                    <div className='Resumendecompra_Agendamiento'>
-                        <div className='titulo_Resumendecompra_Agendamiento'>
-                            <h3>Resumen de Compra</h3>
-                        </div>
-                        <table>
-                            <thead>
+
+                                
+                                <div className="horarios-disponibles">
+                                    {loadingFranjas ? ( <Skeleton height={40} count={5} />) : (
+                                        franjasHorarias.map(franja => (
+                                        <button key={franja.id_horario} onClick={() => handleHorarioClick(franja)}
+                                        disabled={horariosOcupados.includes(franja.hora)} className={`horario-btn ${horariosOcupados.includes(franja.hora) ? 'ocupado' : 'disponible'}`}>
+                                            {franja.hora}                                            
+                                            </button>
+                                            ))
+                                            )}
+                                            </div>
+                                             </div>
+                                              </div>
+                                               </div>
+                                                </div>
+                                                
+                        <div className='right-section'>
+                            <div className='Resumendecompra_Agendamiento'>
+                                <div className='titulo_Resumendecompra_Agendamiento'>
+                                    <h3>Resumen de Compra</h3></div>
+                                    <table>
+                                        <thead>
                                 <tr>
                                     <th colSpan={2}>
                                         {date ? `${date.getDate()} ${date.toLocaleDateString('default', { month: 'short' })} ${date.getFullYear()} - ${selectedHora}` : 'Selecciona una fecha'}
@@ -237,8 +278,7 @@ export const Agendamiento = () => {
                                 <tr>
                                     <th>Profesional</th>
                                     <td>{selectedProfesional ? selectedProfesional.nombre_profesional : ''}</td>
-
-                                </tr>
+                                    </tr>
                             </thead>
                             <tbody>
                                 <tr>

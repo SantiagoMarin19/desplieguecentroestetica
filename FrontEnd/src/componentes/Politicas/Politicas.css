@@ -152,3 +152,85 @@ body {
     font-size: 1.3rem;
   }
 }
+
+/* Agregar estos estilos a tu archivo Politicas.css existente */
+
+.politicas-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.btn-politicas {
+  background-color: #BF6A8C;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-family: "Urbanist", sans-serif;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(191, 106, 140, 0.2);
+}
+
+.btn-politicas:hover {
+  background-color: #a85677;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(191, 106, 140, 0.3);
+}
+
+/* Estilos para impresión */
+@media print {
+  .politicas-actions {
+      display: none !important;
+  }
+
+  .politicas {
+      padding: 0;
+      margin: 0;
+  }
+
+  .politicas-printable {
+      padding: 2cm;
+  }
+
+  .banner {
+      margin-bottom: 1cm;
+  }
+
+  .titulo h2 {
+      font-size: 24pt;
+      margin-bottom: 0.5cm;
+  }
+
+  .informacion p {
+      font-size: 12pt;
+      line-height: 1.5;
+  }
+
+  .contenido_info {
+      page-break-inside: avoid;
+  }
+
+  .info ul {
+      padding-left: 0;
+  }
+
+  .info li {
+      page-break-inside: avoid;
+      margin-bottom: 0.5cm;
+  }
+
+  .info p {
+      font-size: 11pt;
+      line-height: 1.4;
+  }
+}
+
+/* Configuración de página para impresión */
+@page {
+  margin: 0.5cm;
+  size: auto;
+}

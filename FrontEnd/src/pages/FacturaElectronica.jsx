@@ -1,14 +1,13 @@
-import React, { useContext, useState } from "react";
-import Facturaser from "../componentes/Factura/Factura";
-
+import react from "react";
+import FacturacionModal from "../componentes/Factura/Factura";
+import { Navbar } from "../componentes/Navbar/Navbar";
 
 export const Agendar = () => {
-
   return (
     <>
-
-      <Facturaser></Facturaser>    
-
+      <FacturacionModal>
+        </FacturacionModal>    
+        <Navbar />
     </>
   );
 };

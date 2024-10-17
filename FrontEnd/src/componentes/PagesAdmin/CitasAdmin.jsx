@@ -7,6 +7,7 @@ import { ThemeContext } from "../../App";
 const CitasAdmin = ({ token }) => {
   const [citas, setCitas] = useState([]);
   const [user, setUser] = useState(null);
+  const [userName, setUserName] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState('asc');
   const [loading, setLoading] = useState(true);
@@ -14,22 +15,6 @@ const CitasAdmin = ({ token }) => {
   const citasPerPage = 5;
   const { theme } = React.useContext(ThemeContext);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      if (token?.user) {
-        setUser(token.user);
-      } else {
-        const { data, error } = await supabase.auth.getUser();
-        if (error) {
-          console.error('Error fetching user:', error);
-        } else {
-          setUser(data.user);
-        }
-      }
-    };
-
-    fetchUser();
-  }, [token]);
 
   useEffect(() => {
     const fetchCitas = async () => {
@@ -58,7 +43,34 @@ const CitasAdmin = ({ token }) => {
     };
 
     fetchCitas();
-  }, [user]);
+  }, [user]); 
+  
+  useEffect(() => {
+    const fetchUser = async () => {
+        let currentUser;
+        if (token && token.user) {
+            currentUser = token.user;
+        } else {
+            const { data, error } = await supabase.auth.getUser();
+            if (error) {
+                console.error('Error fetching user:', error);
+                setLoading(false);
+                return;
+            } else {
+                currentUser = data.user;
+            }
+        }
+        if (currentUser) {
+            setUser(currentUser);
+            setUserName(currentUser.user_metadata.full_name);
+            localStorage.setItem('userName', currentUser.user_metadata.full_name);
+        }
+        setLoading(false);
+    };
+
+    fetchUser();
+}, [token]);
+
 
   const filteredCitas = citas.filter(cita => {
     const searchLower = searchTerm.toLowerCase();
@@ -155,7 +167,7 @@ const CitasAdmin = ({ token }) => {
           <tbody>
             {currentCitas.map((cita) => (
               <tr key={cita.id_cita}>
-                <td>{cita.usuarios}</td>
+                <td>{userName}</td>
                 <td>{moment(cita.fecha).format('DD/MM/YYYY')}</td>
                 <td>{moment(cita.duracion, 'HH:mm').format('h:mm A')}</td>
                 <td>{cita.servicio.nombre_servicio}</td>
