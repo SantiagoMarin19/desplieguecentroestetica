@@ -1,39 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useReactToPrint } from 'react-to-print';
 import '../Politicas/Politicas.css';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 export const Politicases = () => {
     const [loading, setLoading] = useState(true);
+    const componentRef = useRef();
 
-    // Simulate data fetching
     useEffect(() => {
         const timer = setTimeout(() => setLoading(false), 1500);
         return () => clearTimeout(timer);
     }, []);
 
-    return (
-        <div className='politicas'>
+    const handlePrint = useReactToPrint({
+        content: () => {
+            console.log(componentRef.current); // Verifica que esto no sea null
+            return componentRef.current;
+        },
+        documentTitle: 'Terminos_y_Condiciones_Natalia_Salazar_Artist',
+    });
+    
+
+    const PoliticasContent = React.forwardRef((props, ref) => (
+        <div ref={ref} className='politicas-printable'>
             <div className='banner'>
                 <div className='titulo'>
-                    {loading ? <Skeleton width={300} height={30} /> : <h2>Términos y Condiciones de Servicios</h2>}
+                    <h2>Términos y Condiciones de Servicios</h2>
                 </div>
 
                 <div className='informacion'>
-                    {loading ? <Skeleton count={3} /> : 
                     <p>Bienvenido/a a Natalia Salazar. A continuación, se detallan los términos y condiciones bajo los cuales ofrecemos 
-                    nuestros servicios. Al reservar una cita con nosotros, aceptas estos términos y condiciones en su totalidad.</p>}
+                    nuestros servicios. Al reservar una cita con nosotros, aceptas estos términos y condiciones en su totalidad.</p>
                 </div>
             </div>
 
             <div className='contenido'>
                 <div className='titulo_conten'>
-                    {loading ? <Skeleton width={200} height={25} /> : <h3>Nuestros Métodos:</h3>}
+                    <h3>Nuestros Métodos:</h3>
                 </div>
 
                 <div className='contenido_info'>
                     <div className='info'>
-                        {loading ? <Skeleton count={5} /> : 
                         <ul>
                             <li> <b>Puntualidad y Asistencia</b></li>
                             <p> <b>Puntualidad:</b> Es fundamental que acudas puntualmente a tu cita. La puntualidad garantiza un excelente servicio. Si llegas más de 10 minutos tarde a la hora acordada, tu cita será cancelada automáticamente.</p>
@@ -45,21 +53,55 @@ export const Politicases = () => {
                             
                             <li> <b>Política de Reembolsos</b></li>
                             <p> <b>No Reembolsable:</b> El depósito del 50% del servicio no es reembolsable si no asistes, llegas tarde o no cancelas con la debida anticipación (24 horas antes de la cita).</p>
-                            <p> <b>Excepciones:</b> En casos excepcionales y a discreción de la empresa, se puede considerar un reembolso parcial o reprogramación de la cita.</p>
+                            <p> <b>Excepciones:</b> En casos excepcionales y de las politicas aqui mencionadas, se puede considerar un reembolso parcial o reprogramación de la cita.</p>
                             
                             <li> <b>Ubicación y Contacto</b></li>
                             <p> <b>Dirección: </b>Nos encontramos en Calle 33B # 7-53, Barrio Urbanización El Bosque, Palmira Valle.</p>
-                            <p> <b>Contacto:</b> Para cualquier consulta o modificación de tu cita, contáctanos a través de nuestras redes sociales @nataliasalazarartist o directamente en nuestro local.</p>
+                            <p> <b>Contacto:</b> Para cualquier consulta o modificación de tu cita, contáctanos a través de nuestras redes sociales @nataliasalazarartist.</p>
                             
                             <li> <b>Derechos de la Empresa</b></li>
                             <p> <b>No Reembolsable:</b> El depósito del 50% del servicio no es reembolsable si no asistes, llegas tarde o no cancelas con la debida anticipación (24 horas antes de la cita).</p>
                             
                             <li> <b>Aceptación de Términos</b></li>
                             <p>Al reservar una cita con nosotros, confirmas que has leído, entendido y aceptado estos términos y condiciones en su totalidad.</p>
-                        </ul>}
+                        </ul>
                     </div>
                 </div>
             </div>
+        </div>
+    ));
+
+    return (
+        <div className='politicas'>
+            {loading ? (
+                <div className='politicas-skeleton'>
+                    <div className='banner'>
+                        <div className='titulo'>
+                            <Skeleton width={300} height={30} />
+                        </div>
+                        <div className='informacion'>
+                            <Skeleton count={3} />
+                        </div>
+                    </div>
+                    <div className='contenido'>
+                        <div className='titulo_conten'>
+                            <Skeleton width={200} height={25} />
+                        </div>
+                        <div className='contenido_info'>
+                            <Skeleton count={15} />
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                <>
+                    <PoliticasContent ref={componentRef} />
+                    <div className='politicas-actions'>
+                        <button onClick={handlePrint} className='btn-politicas'>
+                            Descargar Términos y Condiciones
+                        </button>
+                    </div>
+                </>
+            )}
         </div>
     );
 };

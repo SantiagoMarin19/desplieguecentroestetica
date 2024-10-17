@@ -6,6 +6,7 @@ import { LoadingProvider, useLoading } from './componentes/Animación/Loadingcon
 import { ModalProvider } from './componentes/modal/ContextModal';
 import { Light, Dark } from "./Styles/Themes";
 import { toast, ToastContainer } from 'react-toastify';
+import TestPrint  from "./pages/Prueba";
 import 'react-toastify/dist/ReactToastify.css';
 
 export const ThemeContext = React.createContext(null);
@@ -28,9 +29,7 @@ import LoginUser from './pages/Login';
 import SignUp from './pages/SignUp';
 import AbonoInfo from './componentes/AbonoInfo/AbonoInfo';
 import Abono from './pages/Abonos';
-import RecoverPassword from './componentes/Recuperarcontraseña/Recuperarcontraseña';
 import { Piedepagina } from './componentes/Footer/footer';
-import ResetPassword from './componentes/Recuperarcontraseña/Nuevacontraseña';
 
 // Componente para proteger rutas de admin
 const AdminRoute = ({ children }) => {
@@ -85,13 +84,12 @@ function Main() {
                         <Route path="/loginsupa" element={<button onClick={() => openModal('LoginUser')}>Inicia Sesión</button>} />
                         <Route path="/servicios" element={<Servicios />} />
                         <Route path="/VistaDetalle" element={<VistaServicios />} />
-                        <Route path="/RecuperarContraseña" element={<RecoverPassword />} />
-                        <Route path="/NuevaContraseña" element={<ResetPassword />} />
 
 
 
 
                         <Route path="/acerca" element={<Acerca_de />} />
+                        <Route path="/testeo" element={<TestPrint/>}/>
                         <Route path="/politicas" element={<Condiciones />} />
 
                         {/* Rutas que requieren autenticación */}

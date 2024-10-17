@@ -14,13 +14,16 @@ export function PersonalAdmin() {
     estado: true,
     password: '',
   });
-  const { theme } = useContext(ThemeContext);
 
+  const { theme } = useContext(ThemeContext);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(10);
+  const [itemsPerPage] = useState(5);
   const [totalCount, setTotalCount] = useState(0);
-  const [notification, setNotification] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState({ title: '', message: '', onConfirm: null });
+  const [notification, setNotification] = useState({ message: '', type: 'success' });
+  
 
   useEffect(() => {
     fetchProfesionales();
@@ -63,13 +66,13 @@ export function PersonalAdmin() {
 
   const addProfesional = async () => {
     if (!newProfesional.nombre_profesional || !newProfesional.password) {
-      showNotification('Por favor complete todos los campos requeridos.', 'error');
+      setNotification({ message:'Por favor complete todos los campos requeridos.', type: 'error' });
       return;
     }
   
     const isDuplicate = await checkForDuplicate(newProfesional.nombre_profesional);
     if (isDuplicate) {
-      showNotification('Ya existe un profesional con ese nombre.', 'error');
+      setNotification({message:'Ya existe un profesional con ese nombre.', type: 'error' });
       return;
     }
   
@@ -84,11 +87,11 @@ export function PersonalAdmin() {
       if (data && data.length > 0) {
         setPersonalList([...personalList, ...data]);
         resetForm();
-        showNotification('Profesional añadido con éxito', 'success');
+        setNotification({message:'Profesional añadido con éxito', type: 'success' });
       }
     } catch (err) {
       console.error('Error adding professional: ', err.message);
-      showNotification('Ocurrió un error al agregar el profesional.', 'error');
+     setNotification({message:'Ocurrió un error al agregar el profesional, revise el formulario.', type: 'error' });
     }
   };
 
@@ -148,18 +151,17 @@ export function PersonalAdmin() {
         );
         setEditingProfesional(null);
         resetForm();
-        showNotification('Profesional actualizado con éxito', 'success');
+       setNotification({message:'Profesional actualizado con éxito', type: 'success'});
       }
     } catch (err) {
       console.error('Error updating professional: ', err.message);
-      showNotification('Ocurrió un error al actualizar el profesional.', 'error');
+      setNotification({message:'Ocurrió un error al actualizar el profesional.', type: 'error' });
     }
   };
 
   const toggleEstado = async (profesional) => {
     const newState = !profesional.estado;
-    if (!confirmAction(`¿Estás seguro de que quieres ${newState ? 'activar' : 'desactivar'} a ${profesional.nombre_profesional}?`)) return;
-
+   
     try {
       const { data, error } = await supabase
         .from('profesional')
@@ -179,7 +181,7 @@ export function PersonalAdmin() {
       }
     } catch (err) {
       console.error('Error toggling professional state: ', err.message);
-      showNotification('Ocurrió un error al cambiar el estado del profesional.', 'error');
+       setNotification({message:'Ocurrió un error al cambiar el estado del profesional.', type: 'error' });
     }
   };
 
@@ -190,6 +192,11 @@ export function PersonalAdmin() {
   const showNotification = (message, type = 'info') => {
     setNotification({ message, type });
     setTimeout(() => setNotification(null), 3000);
+  };
+  const paginate = (pageNumber) => {
+    if (pageNumber > 0 && pageNumber <= Math.ceil(totalCount / itemsPerPage)) {
+      setCurrentPage(pageNumber);
+    }
   };
 
   return (
@@ -209,13 +216,10 @@ export function PersonalAdmin() {
         <ListaPersonal theme={theme}>
           {personalList.map((profesional) => (
             <PersonalItem key={profesional.id_profesional} theme={theme} professionalStatus={profesional.estado}>
-              <button
-                className="boton_nombre_profesional_calendario"
-                onClick={() => handleEdit(profesional)}
-                disabled={!profesional.estado}
-              >
+              <button className="boton_nombre_profesional_calendario" onClick={() => handleEdit(profesional)} disabled={!profesional.estado}>
                 {profesional.nombre_profesional}
               </button>
+
               <p>{profesional.especialidad}</p>
               <p>{profesional.celular}</p>
               <p>{profesional.correo}</p>
@@ -228,14 +232,13 @@ export function PersonalAdmin() {
         </ListaPersonal>
 
         <Pagination theme={theme}>
-          <button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1}>
-            Anterior
-          </button>
-          <span>Página {currentPage} de {Math.ceil(totalCount / itemsPerPage)}</span>
-          <button onClick={() => setCurrentPage(prev => prev + 1)} disabled={currentPage >= Math.ceil(totalCount / itemsPerPage)}>
-            Siguiente
-          </button>
+          {[...Array(Math.ceil(totalCount / itemsPerPage))].map((_, i) => (
+            <Button key={i} onClick={() => paginate(i + 1)} theme={theme} active={currentPage === i + 1}>
+              {i + 1}
+            </Button>
+          ))}
         </Pagination>
+
 
         <Header theme={theme}>
           <h2>{editingProfesional ? "Editar Personal" : "Añadir Personal"}</h2>
@@ -263,13 +266,13 @@ export function PersonalAdmin() {
             placeholder="Correo" onChange={handleChange}
           />
           
-          <Button theme={theme} onClick={generatePassword}>Generar Contraseña</Button>
+          <Button className='ACT' theme={theme} onClick={generatePassword}>Generar Contraseña</Button>
           
           <PasswordDisplay theme={theme}>
             Contraseña: {newProfesional.password}
           </PasswordDisplay>
           
-          <Button theme={theme} onClick={editingProfesional ? updateProfesional : addProfesional}>
+          <Button className='ACT' theme={theme} onClick={editingProfesional ? updateProfesional : addProfesional}>
             {editingProfesional ? "Actualizar" : "Agregar"}
           </Button>
 
@@ -398,7 +401,7 @@ const FormContainer = styled.div`
   }
 `;
 
-const Button = styled.button`
+const Button  = styled.button`
   padding: 12px;
   border: none;
   border-radius: 5px;
@@ -407,8 +410,7 @@ const Button = styled.button`
   cursor: pointer;
   transition: background-color 0.3s;
   margin: 10px 0;
-  width: 100%;
-
+ 
   &:hover {
     background-color: ${props => props.theme === 'light' ? '#a75d53' : '#7522e6'};
   }
@@ -447,34 +449,14 @@ const SearchBar = styled.input`
 const Pagination = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-
-  button {
-    margin: 0 10px;
-    padding: 5px 10px;
-    background-color: ${props => props.theme === 'light' ? '#c98695' : '#9247FC'};
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-
-    &:hover {
-      background-color: ${props => props.theme === 'light' ? '#a75d53' : '#7522e6'};
-    }
-
-    &:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
-  }
-
-  span {
-    font-size: 14px;
-    color: ${props => props.theme === 'light' ? '#202020' : '#fff'};
-  }
+  gap: 10px; ${({ active }) => active && `
+  font-weight: bold;
+  background-color: #999; /* Cambia el color de fondo cuando está activo */
+`}
 `;
+
+
+
 
 const Notification = styled.div`
   position: fixed;

@@ -68,9 +68,9 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Seleccion container styles */
 .seleccion-container {
-    background-color: #422A3C;
+    background-color: #FCEBF2;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    color: #ffffff;
+    color: #BF6A8C;
     padding: 1.5rem;
     border-radius: 10px;
     margin-bottom: 2rem;
@@ -78,7 +78,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .seleccion-container:hover {
-    background-color: #5c3f5d;
+    background-color: #ffdceb;
 }
 
 .seleccion-container h3 {
@@ -106,35 +106,39 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Calendar container styles */
 .titulo_calendario_escoger_fecha {
-    background-color: #422A3C;
-    color: #ffffff;
+    background-color: #FCEBF2;
+    color: #422A3C;
     border-radius: 10px;
     padding: 1.5rem;
     margin-bottom: 1rem;
-    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(191, 106, 140, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .titulo_calendario_escoger_fecha:hover {
-    transform: scale(1.02);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(191, 106, 140, 0.2);
 }
 
 .titulo_calendario_escoger_fecha h3 {
     text-align: center;
     font-size: 1.8rem;
     margin: 0 0 0.5rem 0;
+    color: #BF6A8C;
 }
 
 .titulo_calendario_escoger_fecha p {
     font-size: 1rem;
     text-align: center;
     margin: 0;
+    color: #422A3C;
 }
 
 .calendario-container {
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
-    border: 2px solid #422a3c36;
+    border: 2px solid rgba(191, 106, 140, 0.2);
     border-radius: 10px;
     padding: 1.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -142,33 +146,131 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .calendario-container:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 12px rgba(191, 106, 140, 0.15);
 }
 
-/* React Calendar styles */
-.react-calendar {
+
+/* Estilos mejorados para el calendario */
+.react-calendar.react_calendar_fecha {
+    align-self: center;
     width: 100%;
-    max-width: 100%;
+    max-width: 350px;
     background: white;
-    border: none;
+    border: 1px solid #BF6A8C;
     font-family: "Urbanist", sans-serif;
     line-height: 1.125em;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(191, 106, 140, 0.1);
+}Z
+
+/* Estilos para la navegación del calendario */
+.react-calendar__navigation {
+    display: flex;
+    height: 44px;
+    margin-bottom: 1em;
 }
 
-.react-calendar__navigation {
-    background-color: #ffdceb;
-    margin-bottom: 1rem;
+.react-calendar__navigation button {
+    min-width: 44px;
+    background: none;
+    font-family: "Playfair Display", serif;
+    font-size: 1.2em;
+    color: #422A3C;
+    border: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+    background-color: #FCEBF2;
+    color: #BF6A8C;
+}
+
+.react-calendar__navigation button[disabled] {
+    background-color: #f0f0f0;
+    color: #999;
+}
+/* Estilos para los días del calendario */
+.react-calendar__month-view__weekdays {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.75em;
+    color: #BF6A8C;
+}
+
+.react-calendar__month-view__days__day {
+    padding: 0.5em;
+    background: none;
+    border: none;
+    outline: none;
+    font-family: "Urbanist", sans-serif;
+    font-size: 1em;
+    color: #422A3C;
+    transition: all 0.2s ease;
 }
 
 .react-calendar__tile {
-    color: #000000 !important;
+    max-width: 100%;
+    padding: 10px 6.6667px;
+    background: #FCEBF2;
+    color: #BF6A8C;
+    text-align: center;
+    line-height: 16px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+.react-calendar__navigation__label{
+    width: 50%;
+    padding: 2%;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+    background-color: #FCEBF2;
+    color: #BF6A8C;
+    transform: scale(1.1);
+}
+
+.react-calendar__tile--now {
+    background: #ffdceb;
+    color: #BF6A8C;
+    font-weight: bold;
+}
+
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+    background: #ffbad5;
+}
+
+.react-calendar__tile--active {
+    background: #BF6A8C;
+    color: white;
+}
+
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+    background: #d27a9d;
+}
+
+.react-calendar__tile:disabled {
+    background-color: #f0f0f0;
+    color: #999;
+    cursor: not-allowed;
+}
+
+/* Estilos para los meses y años en la vista de año */
+.react-calendar__year-view .react-calendar__tile,
+.react-calendar__decade-view .react-calendar__tile,
+.react-calendar__century-view .react-calendar__tile {
     padding: 1em 0.5em;
-    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .react-calendar__tile--active {
     background: #ffdceb !important;
-    color: #422A3C !important;
+    color: #BF6A8C !important;
 }
 
 .react-calendar__tile:hover {
@@ -176,54 +278,54 @@ h1, h2, h3, h4, h5, h6 {
     transform: scale(1.1);
 }
 
-/* Horarios container styles */
+/* Horarios container styles (mejorados) */
 .horarios-container {
     margin-top: 2rem;
 }
 
 .titulo_horarios h3 {
     text-align: center;
-    color: #422A3C;
+    color: #BF6A8C;
     font-size: 1.5rem;
     margin-bottom: 1rem;
 }
 
-.horarios-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 1rem;
+.horarios-disponibles {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 1rem;
 }
 
-.cuadros {
-    padding: 0.8rem;
+.horario-btn {
+    background-color: #FCEBF2;
+    color: #422A3C;
+    border: none;
+    padding: 0.75rem 1rem;
     border-radius: 5px;
-    text-align: center;
-    color: #fff;
-    font-weight: bold;
     cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+    transition: all 0.3s ease;
+    font-family: "Urbanist", sans-serif;
+    font-size: 1rem;
+    box-shadow: 0 2px 4px rgba(191, 106, 140, 0.1);
 }
 
-.cuadros:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.cuadros.libre {
+.horario-btn:hover {
     background-color: #BF6A8C;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(191, 106, 140, 0.2);
 }
 
-.cuadros.libre:hover {
-    background-color: #d27a9d;
-}
-
-.cuadros.ocupado {
-    background-color: rgb(126, 121, 121);
+.horario-btn.ocupado {
+    background-color: #f0f0f0;
+    color: #999;
     cursor: not-allowed;
 }
 
-.cuadros.ocupado:hover {
+.horario-btn.ocupado:hover {
+    background-color: #f0f0f0;
+    color: #999;
     transform: none;
     box-shadow: none;
 }
@@ -242,8 +344,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .titulo_Resumendecompra_Agendamiento {
-    background-color: #422A3C;
-    color: #ffffff;
+    background-color: #FCEBF2;
+    color: #BF6A8C;
     padding: 1rem;
     border-radius: 10px;
     margin-bottom: 1rem;
@@ -336,6 +438,79 @@ tr:hover td {
     opacity: 0;
 }
 
+.notificacion{
+    position: 'fixed';
+    top: '20px';
+    right: '20px';
+    background-color: '#f44336';
+    color: 'white';
+    padding: '10px 20px';
+    border-radius: '5px';
+    box-shadow: '0px 4px 6px rgba(0, 0, 0, 0.1)';
+    z-index: 1000;
+    transition: 'opacity 0.5s';
+}
+
+.horario-btn {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s ease;
+}
+
+.horario-btn.ocupado {
+    background-color: gray;
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.horario-btn.disponible:hover {
+    background-color: lightgreen;
+}
+
+/* Modal CSS */
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .main-content {
@@ -394,5 +569,36 @@ tr:hover td {
     .btn_agendamiento {
         font-size: 0.9rem;
         padding: 0.8em 1.6em;
+    }
+}
+
+@media (max-width: 768px) {
+    .titulo_calendario_escoger_fecha h3 {
+        font-size: 1.5rem;
+    }
+
+    .horarios-disponibles {
+        justify-content: space-around;
+    }
+
+    .horario-btn {
+        font-size: 0.9rem;
+        padding: 0.6rem 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .titulo_calendario_escoger_fecha h3 {
+        font-size: 1.3rem;
+    }
+
+    .horarios-disponibles {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .horario-btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
     }
 }
