@@ -161,8 +161,7 @@ export function PersonalAdmin() {
 
   const toggleEstado = async (profesional) => {
     const newState = !profesional.estado;
-    if (!confirmAction(`¿Estás seguro de que quieres ${newState ? 'activar' : 'desactivar'} a ${profesional.nombre_profesional}?`)) return;
-
+   
     try {
       const { data, error } = await supabase
         .from('profesional')

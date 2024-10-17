@@ -162,7 +162,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 1rem;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(191, 106, 140, 0.1);
-}
+}Z
 
 /* Estilos para la navegación del calendario */
 .react-calendar__navigation {
@@ -215,12 +215,18 @@ h1, h2, h3, h4, h5, h6 {
 .react-calendar__tile {
     max-width: 100%;
     padding: 10px 6.6667px;
-    background: none;
+    background: #FCEBF2;
+    color: #BF6A8C;
     text-align: center;
     line-height: 16px;
     border-radius: 5px;
     transition: all 0.3s ease;
 }
+.react-calendar__navigation__label{
+    width: 50%;
+    padding: 2%;
+}
+
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
     background-color: #FCEBF2;
@@ -465,6 +471,44 @@ tr:hover td {
 .horario-btn.disponible:hover {
     background-color: lightgreen;
 }
+
+/* Modal CSS */
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 
 
 /* Responsive adjustments */
