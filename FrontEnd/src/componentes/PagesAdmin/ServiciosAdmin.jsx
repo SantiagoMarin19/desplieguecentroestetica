@@ -419,6 +419,11 @@ export function ServiciosAdmin() {
     </option>
   ))}
 </select>
+<input type="url" name="photo" 
+placeholder='Ingresa la URL de la imagen'
+value={newService.url_img}
+onChange={(e) => setNewService({ ...newService, url_img: e.target.value })}
+/>
         </ServiceInput>
         <HandleAddServiceButton onClick={handleAddService} theme={theme}>
           Añadir Servicio
@@ -444,6 +449,10 @@ export function ServiciosAdmin() {
                     </p>
                     <p>Precio:
                       <input type="number" value={editableService.precio} onChange={(e) => setEditableService({ ...editableService, precio: e.target.value })} />
+                    </p>
+                    <p>
+                      Imagen:
+                      <input type="url" value={editableService.url_img} onChange={(e) => setNewService({ ...newService, url_img: e.target.value })}/>
                     </p>
                     <p>
                       <label>

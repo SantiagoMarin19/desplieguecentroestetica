@@ -29,7 +29,6 @@ import LoginUser from './pages/Login';
 import SignUp from './pages/SignUp';
 import AbonoInfo from './componentes/AbonoInfo/AbonoInfo';
 import Abono from './pages/Abonos';
-import RecoverPassword from './componentes/Recuperarcontraseña/Recuperarcontraseña';
 import { Piedepagina } from './componentes/Footer/footer';
 
 // Componente para proteger rutas de admin
@@ -85,7 +84,10 @@ function Main() {
                         <Route path="/loginsupa" element={<button onClick={() => openModal('LoginUser')}>Inicia Sesión</button>} />
                         <Route path="/servicios" element={<Servicios />} />
                         <Route path="/VistaDetalle" element={<VistaServicios />} />
-                        <Route path="/RecuperarContraseña" element={<RecoverPassword />} />
+
+
+
+
                         <Route path="/acerca" element={<Acerca_de />} />
                         <Route path="/testeo" element={<TestPrint/>}/>
                         <Route path="/politicas" element={<Condiciones />} />

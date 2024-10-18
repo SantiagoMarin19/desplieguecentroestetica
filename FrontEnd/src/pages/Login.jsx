@@ -21,8 +21,24 @@ const LoginUser = ({ closeModal }) => {
         setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
     }
 
+    const isValidEmail = (email) => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    };
+
     async function handleSubmit(e) {
         e.preventDefault();
+
+        // Validaciones
+        if (!formData.email || !formData.password) {
+            toast.error('Por favor, complete todos los campos.');
+            return;
+        }
+        if (!isValidEmail(formData.email)) {
+            toast.error('Ingrese un correo electrónico válido.');
+            return;
+        }
+
         try {
             const { data, error } = await supabase.auth.signInWithPassword({
                 email: formData.email,
@@ -33,7 +49,7 @@ const LoginUser = ({ closeModal }) => {
 
             // Verifica si es el admin
             const isAdmin = formData.email === ADMIN_EMAIL;
-            
+
             // Almacena la información en sessionStorage
             sessionStorage.setItem('token', JSON.stringify(data.session.access_token));
             sessionStorage.setItem('user', JSON.stringify(data.user.user_metadata.full_name));
@@ -48,14 +64,14 @@ const LoginUser = ({ closeModal }) => {
             } else {
                 navigate('/');
             }
-            
+
             closeModal();
         } catch (error) {
             console.error("Error:", error);
-            
+
             // Manejo de errores específicos
             if (error.message.includes('Invalid login credentials')) {
-                toast.error('Credenciales Incorrectas Intente Nuevamente'); // Mensaje específico
+                toast.error('Correo o contraseña incorrectos'); // Mensaje específico
             } else {
                 toast.error('Error: ' + error.message); // Mensaje genérico para otros errores
             }

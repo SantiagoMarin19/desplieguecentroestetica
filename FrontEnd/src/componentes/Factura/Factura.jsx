@@ -158,6 +158,7 @@ const FacturacionModal = ({ token }) => {
                                 <p><strong>Cliente:</strong> <span>{user?.user_metadata?.full_name || 'No disponible'}</span></p>
                             </>
                         )}
+    
                     </div>
                 </div>
 
