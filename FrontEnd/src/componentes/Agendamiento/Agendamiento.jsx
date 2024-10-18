@@ -197,7 +197,7 @@ export const Agendamiento = () => {
             )}
 
             <div className='header_agendamiento'>
-                <h3>Agenda Tu Cita</h3>
+                <h3>Agenda Tu Cita Para: {servicio.nombre_servicio} </h3>
             </div>
 
             <div className='main-content'>
@@ -286,7 +286,7 @@ export const Agendamiento = () => {
                                     <td>{servicio.nombre_servicio}</td>
                                 </tr>
                                 <tr>
-                                    <th>Duración</th>
+                                    <th>Hora</th>
                                     <td>{selectedHora }</td>
                                 </tr>
                                 <tr>

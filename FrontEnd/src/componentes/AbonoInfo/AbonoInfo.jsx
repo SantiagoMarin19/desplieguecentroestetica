@@ -15,8 +15,7 @@ const AbonoInfo = () => {
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(true);
-    const [selectedBank, setSelectedBank] = useState(null);
-    const [showAccountNumber, setShowAccountNumber] = useState(false);
+    const [selectedBank, setSelectedBank] = useState(null);  // Solo necesitamos este estado
 
     useEffect(() => {
         const timer = setTimeout(() => setLoading(false), 2000);
@@ -30,12 +29,7 @@ const AbonoInfo = () => {
     const abono = servicio.precio * 0.5;
 
     const handleBankSelection = (bank) => {
-        setSelectedBank(bank);
-        setShowAccountNumber(false);
-    };
-
-    const handleShowAccountNumber = () => {
-        setShowAccountNumber(true);
+        setSelectedBank(bank);  // Actualizamos el banco seleccionado
     };
 
     const getAccountNumber = () => {
@@ -52,9 +46,10 @@ const AbonoInfo = () => {
             <img src={logo} alt={`Logo ${bank}`} className="bank-logo" />
             <p className="account-number">
                 <i className="fas fa-credit-card"></i> <strong>{`Cuenta ${accountType}:`}</strong> 
-                {showAccountNumber && selectedBank === bank ? getAccountNumber() : '**** **** **** ' + getAccountNumber().slice(-2)}
+                {/* Aquí mostramos el número de cuenta solo si el banco está seleccionado */}
+                {selectedBank === bank ? getAccountNumber() : '**** **** **** ' + getAccountNumber().slice(-2)}
             </p>
-            <button onClick={() => handleBankSelection(bank)}>{`Seleccionar ${bank}`}</button>
+            <button  onClick={() => handleBankSelection(bank)}>{`Seleccionar ${bank}`}</button>
         </div>
     );
 
@@ -134,7 +129,6 @@ const AbonoInfo = () => {
                                 <BankInfo bank="Nequi" logo={nequi} accountType="Nequi" />
                                 <BankInfo bank="Daviplata" logo={daviplata} accountType="Daviplata" />
                                 <br />
-                                <button onClick={handleShowAccountNumber}>Aceptar y Ver Número</button>
                                 <button className='go-home-button' onClick={() => navigate('/CitaPend')}>Ver Mis citas</button>
                             </>
                         )}

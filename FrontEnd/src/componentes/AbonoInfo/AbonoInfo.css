@@ -130,10 +130,6 @@
     font-weight: 600;
 }
 
-.go-home-button:hover, button:hover {
-    background-color: #ff1493;
-}
-
 .consideraciones {
     width: 100%;
     text-align: left;
