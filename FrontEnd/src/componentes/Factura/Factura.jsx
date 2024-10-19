@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { useReactToPrint } from 'react-to-print';
+import React, { useEffect, useState } from 'react';
+import { PDFDownloadLink, Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 import supabase from '../../supabase/supabaseconfig';
 import { Modal } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -13,37 +13,20 @@ const FacturacionModal = ({ token }) => {
     const { state } = location;
     const { fecha, duracion, idProfesional, servicio, idUsuario } = state;
     const parsedFecha = fecha ? new Date(fecha) : null;
-    const formattedFecha = parsedFecha && !isNaN(parsedFecha) 
+    const formattedFecha = parsedFecha && !isNaN(parsedFecha)
         ? parsedFecha.toLocaleDateString('es-CO', {
             year: 'numeric',
             month: 'long',
             day: 'numeric'
-        }) 
+        })
         : 'Fecha no disponible';
-    
+
     const [user, setUser] = useState(null);
     const [nombreProfesional, setNombreProfesional] = useState('');
     const [idHorario, setIdHorario] = useState(null);
     const [modalMessage, setModalMessage] = useState('');
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(true);
-    
-    const facturaRef = useRef();
-    
-    const handlePrintFactura = () => {
-        console.log(facturaRef.current); // Verifica el contenido
-        if (facturaRef.current) {
-            handlePrint();
-        } else {
-            alert("No hay contenido para imprimir");
-        }
-    };
-
-    const handlePrint = useReactToPrint({
-        content: () => facturaRef.current,
-        documentTitle: `Factura_${user?.user_metadata?.full_name || 'Cliente'}_${formattedFecha}`,
-        onAfterPrint: () => console.log("Print successful"),
-    });
 
     useEffect(() => {
         const fetchData = async () => {
@@ -119,9 +102,62 @@ const FacturacionModal = ({ token }) => {
         }
     };
 
+    const FacturaPDF = () => (
+        <Document>
+          <Page style={pdfStyles.body}>
+            {/* Header */}
+            <View style={pdfStyles.header}>
+              <Text style={pdfStyles.title}>Natalia Salazar Artist</Text>
+            </View>
+            
+            {/* Sección de detalles */}
+            <View style={pdfStyles.section}>
+              <Text style={pdfStyles.sectionTitle}>Detalles de la Factura</Text>
+              <View style={pdfStyles.textRow}>
+                <Text>Fecha:</Text>
+                <Text style={pdfStyles.textRowBold}>{formattedFecha}</Text>
+              </View>
+              <View style={pdfStyles.textRow}>
+                <Text>Cliente:</Text>
+                <Text style={pdfStyles.textRowBold}>{user?.user_metadata?.full_name || 'No disponible'}</Text>
+              </View>
+              <View style={pdfStyles.textRow}>
+                <Text>Servicio:</Text>
+                <Text style={pdfStyles.textRowBold}>{servicio?.nombre_servicio}</Text>
+              </View>
+              <View style={pdfStyles.textRow}>
+                <Text>Profesional:</Text>
+                <Text style={pdfStyles.textRowBold}>{nombreProfesional}</Text>
+              </View>
+              <View style={pdfStyles.textRow}>
+                <Text>Hora:</Text>
+                <Text style={pdfStyles.textRowBold}>{duracion}</Text>
+              </View>
+              <View style={pdfStyles.textRow}>
+                <Text>Costo:</Text>
+                <Text style={pdfStyles.textRowBold}>
+                  {new Intl.NumberFormat('es-CO', {
+                    style: 'currency',
+                    currency: 'COP',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                  }).format(servicio.precio)}
+                </Text>
+              </View>
+            </View>
+            
+            {/* Footer */}
+            <View style={pdfStyles.footer}>
+              <Text>¡Gracias por tu compra!</Text>
+            </View>
+          </Page>
+        </Document>
+      );
+      
+
     return (
         <div className="contenedor_facturacion">
-            <div className="facturacion-container" ref={facturaRef}>
+            <div className="facturacion-container">
                 <div className="invoice-header">
                     <h1>Natalia Salazar Artist</h1>
                 </div>
@@ -158,7 +194,7 @@ const FacturacionModal = ({ token }) => {
                                 <p><strong>Cliente:</strong> <span>{user?.user_metadata?.full_name || 'No disponible'}</span></p>
                             </>
                         )}
-    
+
                     </div>
                 </div>
 
@@ -170,16 +206,84 @@ const FacturacionModal = ({ token }) => {
                     >
                         Confirmar Cita
                     </button>
-                    <button 
-                        className="btn-factura secundario" 
-                        onClick={handlePrintFactura} 
-                        disabled={loading || !facturaRef.current}
+                    <PDFDownloadLink
+                        document={<FacturaPDF />}
+                        fileName={`Factura_${user?.user_metadata?.full_name || 'Cliente'}_${formattedFecha}.pdf`}
                     >
-                        Imprimir Factura
-                    </button>
+                        {({ loading }) => (
+                            <button 
+                                className="btn-factura secundario" 
+                                disabled={loading}
+                            >
+                                {loading ? 'Generando PDF...' : 'Descargar Factura'}
+                            </button>
+                        )}
+                    </PDFDownloadLink>
                 </div>
             </div>
         </div>
     );
 };
+
+const pdfStyles = StyleSheet.create({
+    body: {
+      padding: 20,
+   
+      backgroundColor: '#FCEBF2',
+    },
+    header: {
+      backgroundColor: '#BF6A8C',
+      color: '#fff',
+      padding: 20,
+      textAlign: 'center',
+      borderRadius: 8,
+    },
+    title: {
+      fontSize: 24,
+     
+      letterSpacing: 1,
+    },
+    section: {
+      margin: '20px 0',
+      padding: 10,
+      fontSize: 12,
+      backgroundColor: '#fff',
+      borderRadius: 8,
+      boxShadow: '0 4px 15px rgba(191, 106, 140, 0.15)',
+    },
+    sectionTitle: {
+      fontSize: 18,
+  
+      color: '#BF6A8C',
+      borderBottom: '2px solid #BF6A8C',
+      marginBottom: 10,
+    },
+    textRow: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      marginBottom: 10,
+      fontSize: 12,
+    },
+    textRowBold: {
+      fontWeight: 'bold',
+      color: '#BF6A8C',
+    },
+    footer: {
+      textAlign: 'center',
+      padding: 20,
+      fontSize: 12,
+      backgroundColor: '#fff',
+      borderRadius: 8,
+    },
+    button: {
+      backgroundColor: '#BF6A8C',
+      color: '#fff',
+      padding: '10px 20px',
+      borderRadius: 8,
+      textAlign: 'center',
+      marginTop: 20,
+    },
+  });
+  
+
 export default FacturacionModal;
