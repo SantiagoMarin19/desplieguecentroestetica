@@ -66,34 +66,53 @@ export function PersonalAdmin() {
 
   const addProfesional = async () => {
     if (!newProfesional.nombre_profesional || !newProfesional.password) {
-      setNotification({ message:'Por favor complete todos los campos requeridos.', type: 'error' });
+      setNotification({ message: 'Por favor complete todos los campos requeridos.', type: 'error' });
       return;
     }
   
     const isDuplicate = await checkForDuplicate(newProfesional.nombre_profesional);
     if (isDuplicate) {
-      setNotification({message:'Ya existe un profesional con ese nombre.', type: 'error' });
+      setNotification({ message: 'Ya existe un profesional con ese nombre.', type: 'error' });
       return;
     }
   
     try {
+      // 1. Registrar al profesional en la autenticación de Supabase.
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: newProfesional.correo,
+        password: newProfesional.password,
+      });
+  
+      if (authError) throw authError;
+  
+      // 2. Insertar el profesional en la tabla personalizada.
       const { data, error } = await supabase
         .from('profesional')
-        .insert([{ ...newProfesional, rol: 'profesional' }])
+        .insert([{
+          nombre_profesional: newProfesional.nombre_profesional,
+          especialidad: newProfesional.especialidad,
+          celular: newProfesional.celular,
+          correo: newProfesional.correo,
+          estado: newProfesional.estado,
+          rol: 'profesional',
+          password: newProfesional.password,
+        }])
         .select();
-
+  
       if (error) throw error;
   
+      // Si se registra correctamente, actualizar el estado y mostrar notificación.
       if (data && data.length > 0) {
         setPersonalList([...personalList, ...data]);
         resetForm();
-        setNotification({message:'Profesional añadido con éxito', type: 'success' });
+        setNotification({ message: 'Profesional añadido con éxito', type: 'success' });
       }
     } catch (err) {
       console.error('Error adding professional: ', err.message);
-     setNotification({message:'Ocurrió un error al agregar el profesional, revise el formulario.', type: 'error' });
+      setNotification({ message: 'Ocurrió un error al agregar el profesional.', type: 'error' });
     }
   };
+  
 
   const checkForDuplicate = async (nombre_profesional) => {
     const { data, error } = await supabase
