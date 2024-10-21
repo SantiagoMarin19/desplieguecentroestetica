@@ -24,5 +24,5 @@ export const CitaAdmin = () => {
     
     );
 }
-
+export default CitaAdmin;
 
