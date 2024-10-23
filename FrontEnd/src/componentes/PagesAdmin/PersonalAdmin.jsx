@@ -23,7 +23,6 @@ export function PersonalAdmin() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState({ title: '', message: '', onConfirm: null });
   const [notification, setNotification] = useState({ message: '', type: 'success' });
-  
 
   useEffect(() => {
     fetchProfesionales();
@@ -69,22 +68,27 @@ export function PersonalAdmin() {
       setNotification({ message: 'Por favor complete todos los campos requeridos.', type: 'error' });
       return;
     }
-  
+
     const isDuplicate = await checkForDuplicate(newProfesional.nombre_profesional);
     if (isDuplicate) {
       setNotification({ message: 'Ya existe un profesional con ese nombre.', type: 'error' });
       return;
     }
-  
+
     try {
       // 1. Registrar al profesional en la autenticación de Supabase.
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: newProfesional.correo,
         password: newProfesional.password,
+        options: {
+          data: {
+            display_name: newProfesional.nombre_profesional // Agregar el nombre en display_name
+          }
+        }
       });
-  
+
       if (authError) throw authError;
-  
+
       // 2. Insertar el profesional en la tabla personalizada.
       const { data, error } = await supabase
         .from('profesional')
@@ -98,9 +102,9 @@ export function PersonalAdmin() {
           password: newProfesional.password,
         }])
         .select();
-  
+
       if (error) throw error;
-  
+
       // Si se registra correctamente, actualizar el estado y mostrar notificación.
       if (data && data.length > 0) {
         setPersonalList([...personalList, ...data]);
@@ -112,14 +116,13 @@ export function PersonalAdmin() {
       setNotification({ message: 'Ocurrió un error al agregar el profesional.', type: 'error' });
     }
   };
-  
 
   const checkForDuplicate = async (nombre_profesional) => {
     const { data, error } = await supabase
       .from('profesional')
       .select('id_profesional')
       .eq('nombre_profesional', nombre_profesional);
-  
+
     if (error) {
       console.error('Error checking for duplicates: ', error);
       return false;
@@ -170,17 +173,17 @@ export function PersonalAdmin() {
         );
         setEditingProfesional(null);
         resetForm();
-       setNotification({message:'Profesional actualizado con éxito', type: 'success'});
+        setNotification({ message: 'Profesional actualizado con éxito', type: 'success' });
       }
     } catch (err) {
       console.error('Error updating professional: ', err.message);
-      setNotification({message:'Ocurrió un error al actualizar el profesional.', type: 'error' });
+      setNotification({ message: 'Ocurrió un error al actualizar el profesional.', type: 'error' });
     }
   };
 
   const toggleEstado = async (profesional) => {
     const newState = !profesional.estado;
-   
+
     try {
       const { data, error } = await supabase
         .from('profesional')
@@ -200,7 +203,7 @@ export function PersonalAdmin() {
       }
     } catch (err) {
       console.error('Error toggling professional state: ', err.message);
-       setNotification({message:'Ocurrió un error al cambiar el estado del profesional.', type: 'error' });
+      setNotification({ message: 'Ocurrió un error al cambiar el estado del profesional.', type: 'error' });
     }
   };
 
@@ -212,6 +215,7 @@ export function PersonalAdmin() {
     setNotification({ message, type });
     setTimeout(() => setNotification(null), 3000);
   };
+
   const paginate = (pageNumber) => {
     if (pageNumber > 0 && pageNumber <= Math.ceil(totalCount / itemsPerPage)) {
       setCurrentPage(pageNumber);
@@ -244,70 +248,37 @@ export function PersonalAdmin() {
               <p>{profesional.correo}</p>
               <p>{profesional.estado ? "Activo" : "Inactivo"}</p>
               <button theme={theme} onClick={() => toggleEstado(profesional)}>
-                {profesional.estado ? "Marcar como Inactivo" : "Marcar como Activo"}
+                {profesional.estado ? "Desactivar" : "Activar"}
               </button>
             </PersonalItem>
           ))}
         </ListaPersonal>
 
-        <Pagination theme={theme}>
-          {[...Array(Math.ceil(totalCount / itemsPerPage))].map((_, i) => (
-            <Button key={i} onClick={() => paginate(i + 1)} theme={theme} active={currentPage === i + 1}>
+        <Pagination>
+          {Array.from({ length: Math.ceil(totalCount / itemsPerPage) }, (_, i) => (
+            <button key={i} onClick={() => paginate(i + 1)} disabled={currentPage === i + 1}>
               {i + 1}
-            </Button>
+            </button>
           ))}
         </Pagination>
 
-
-        <Header theme={theme}>
-          <h2>{editingProfesional ? "Editar Personal" : "Añadir Personal"}</h2>
-        </Header>
-
-        <FormContainer theme={theme}>
-          <input
-            type="text" name="nombre_profesional"
-            value={newProfesional.nombre_profesional}
-            placeholder="Nombre Profesional" onChange={handleChange}
-          />
-          <input
-            type="text" name="especialidad"
-            value={newProfesional.especialidad}
-            placeholder="Especialidad" onChange={handleChange}
-          />
-          <input
-            type="text" name="celular"
-            value={newProfesional.celular}
-            placeholder="Celular" onChange={handleChange}
-          />
-          <input
-            type="email" name="correo"
-            value={newProfesional.correo}
-            placeholder="Correo" onChange={handleChange}
-          />
-          
-          <Button className='ACT' theme={theme} onClick={generatePassword}>Generar Contraseña</Button>
-          
-          <PasswordDisplay theme={theme}>
-            Contraseña: {newProfesional.password}
-          </PasswordDisplay>
-          
-          <Button className='ACT' theme={theme} onClick={editingProfesional ? updateProfesional : addProfesional}>
-            {editingProfesional ? "Actualizar" : "Agregar"}
-          </Button>
-
-          {/* Botón de Generar PDF eliminado */}
+        <FormContainer>
+          <h2>{editingProfesional ? 'Editar Profesional' : 'Agregar Profesional'}</h2>
+          <input type="text" name="nombre_profesional" placeholder="Nombre" value={newProfesional.nombre_profesional} onChange={handleChange} />
+          <input type="text" name="especialidad" placeholder="Especialidad" value={newProfesional.especialidad} onChange={handleChange} />
+          <input type="text" name="celular" placeholder="Celular" value={newProfesional.celular} onChange={handleChange} />
+          <input type="email" name="correo" placeholder="Correo" value={newProfesional.correo} onChange={handleChange} />
+          <button onClick={generatePassword}>Generar Contraseña</button>
+          <input type="text" name="password" placeholder="Contraseña" value={newProfesional.password} onChange={handleChange} />
+          <button onClick={editingProfesional ? updateProfesional : addProfesional}>
+            {editingProfesional ? 'Actualizar' : 'Agregar'}
+          </button>
+          {notification.message && <Notification type={notification.type}>{notification.message}</Notification>}
         </FormContainer>
-
-        {notification && (
-          <Notification type={notification.type}>
-            {notification.message}
-          </Notification>
-        )}
       </div>
     </Container>
   );
 }
-
 
 const Container = styled.div`
   min-height: 100vh;
