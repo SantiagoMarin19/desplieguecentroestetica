@@ -1,45 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Home from './pages/Home';
-import { Servicios } from './pages/Servicios';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation, Navigate, useNavigate } from 'react-router-dom';
-import { Pageloader } from './componentes/Animación/Carga';
-import { LoadingProvider, useLoading } from './componentes/Animación/Loadingcontext';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import styled, { ThemeProvider } from "styled-components";
-import { Sidebar } from "./componentes/Sidebar/Sidebar";
-import { MyRoutes } from "./componentes/PagesAdmin/routers/Route";
-import { Light, Dark } from "./Styles/Themes";
+import { LoadingProvider, useLoading } from './componentes/Animación/Loadingcontext';
 import { ModalProvider } from './componentes/modal/ContextModal';
+import { Light, Dark } from "./Styles/Themes";
 import { toast, ToastContainer } from 'react-toastify';
-import TestPrint from "./pages/Prueba";
+import TestPrint  from "./pages/Prueba";
 import 'react-toastify/dist/ReactToastify.css';
 
-// Importaciones de componentes
-import SignUp from './pages/SignUp';
-import LoginUser from './pages/Login';
-import { CitaAdmin } from "./componentes/Dahsboard/Citas";
-import Facturaelectronica from './pages/FacturaElectronica';
-import Acerca_de from './pages/Acerca_de';
+export const ThemeContext = React.createContext(null);
+
+// Importaciones de componentes (mantener las existentes)
+import Home from './pages/Home';
+import { Servicios } from './pages/Servicios';
+import { Acerca_de } from './pages/Acerca_de';
 import { Condiciones } from "./pages/Terminos";
+import { Pageloader } from './componentes/Animación/Carga';
 import { Agendar } from "./pages/Agendar";
-import CitaPend from './pages/CitasPendientes';
-import Abono from './pages/Abonos';
 import Modalinicio from './componentes/modal/Modalinicio';
 import ModalRegistro from './componentes/modal/ModalRegistro';
+import Facturaelectronica from './pages/FacturaElectronica';
+import { VistaServicios } from './pages/VistaServicios';
+import CitaPend from './pages/CitasPendientes';
+import { Sidebar } from "./componentes/Sidebar/Sidebar";
+import { MyRoutes } from "./componentes/PagesAdmin/routers/Route";
+import LoginUser from './pages/Login';
+import SignUp from './pages/SignUp';
+import AbonoInfo from './componentes/AbonoInfo/AbonoInfo';
+import Abono from './pages/Abonos';
 import { Piedepagina } from './componentes/Footer/footer';
-
-import { PersonalAdmin } from '../src/componentes/PagesAdmin/PersonalAdmin';
-import Citas from '../src/componentes/PagesAdmin/CitasAdmin';
-import { ServiciosAdmin } from "../src/componentes/PagesAdmin/ServiciosAdmin";
-import AdministradorComponente from './pages/Administrador';
-
-// Contexto de tema
-export const ThemeContext = React.createContext(null);
 
 // Componente para proteger rutas de admin
 const AdminRoute = ({ children }) => {
     const isAdmin = JSON.parse(sessionStorage.getItem('isAdmin'));
-
+    
     if (!isAdmin) {
         toast.error('Acceso denegado: No tienes permisos de administrador');
         return <Navigate to="/" replace />;
@@ -50,7 +45,7 @@ const AdminRoute = ({ children }) => {
 
 function AdminLayout({ children }) {
     const [sidebarOpen, setSidebarOpen] = useState(true);
-
+    
     return (
         <Container className={sidebarOpen ? "sidebarState active" : ""}>
             <Sidebar
@@ -67,9 +62,13 @@ function Main() {
     const location = useLocation();
     const [theme, setTheme] = useState("light");
     const themeStyle = theme === "light" ? Light : Dark;
+    const [isAdmin, setIsAdmin] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLoading(true);
+        const isAdminUser = JSON.parse(sessionStorage.getItem('isAdmin')) || false;
+        setIsAdmin(isAdminUser);
     }, [location, setLoading]);
 
     return (
@@ -80,30 +79,28 @@ function Main() {
                     <Routes>
                         {/* Rutas públicas */}
                         <Route path="/" element={<Home />} />
+                        <Route path='/Facturacion' element={<Facturaelectronica />} />
+                        <Route path='/Registrar' element={<button onClick={() => openModal('SignUp')}>Regístrate</button>} />
+                        <Route path="/loginsupa" element={<button onClick={() => openModal('LoginUser')}>Inicia Sesión</button>} />
                         <Route path="/servicios" element={<Servicios />} />
-                        <Route path="/acerca" element={<Acerca_de />} />
-                        <Route path="/testeo" element={<TestPrint />} />
-                        <Route path="/politicas" element={<Condiciones />} />
-                        <Route path="/Facturacion" element={<Facturaelectronica />} />
-                        <Route path="/loginsupa" element={<LoginUser />} />
-                        <Route path="/registro" element={<SignUp />} />
-                        <Route path="/Admini" element={<AdministradorComponente />} />
-                        <Route path='/Dahsboard' element={<Sidebar />} />
-                        <Route path='/CITA' element={<CitaAdmin />} />
-                        <Route path="/PersonalAdmin" element={<PersonalAdmin />} />
-                        <Route path="/AdminCitas" element={< Citas />} />
-                        <Route path="/ServiciosAdmin" element={<ServiciosAdmin />} />
+                        <Route path="/VistaDetalle" element={<VistaServicios />} />
 
+
+
+
+                        <Route path="/acerca" element={<Acerca_de />} />
+                        <Route path="/testeo" element={<TestPrint/>}/>
+                        <Route path="/politicas" element={<Condiciones />} />
 
                         {/* Rutas que requieren autenticación */}
                         <Route path="/CitaPend" element={
-                            sessionStorage.getItem('token') ? <CitaPend /> : <Navigate to="/CitaPend" />
+                            sessionStorage.getItem('token') ? <CitaPend /> : <Navigate to="/" />
                         } />
                         <Route path="/Agendarcita" element={
-                            sessionStorage.getItem('token') ? <Agendar /> : <Navigate to="/Agendarcita" />
+                            sessionStorage.getItem('token') ? <Agendar /> : <Navigate to="/" />
                         } />
                         <Route path="/abono-info" element={
-                            sessionStorage.getItem('token') ? <Abono /> : <Navigate to="/abono-info" />
+                            sessionStorage.getItem('token') ? <Abono /> : <Navigate to="/" />
                         } />
 
                         {/* Rutas de administrador */}
@@ -133,7 +130,6 @@ function Main() {
         </>
     );
 }
-
 
 function App() {
     const [token, setToken] = useState(null);

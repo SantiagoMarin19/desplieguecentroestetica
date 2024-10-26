@@ -4,8 +4,6 @@ import '../Servicio_detalle/Serviciocejas';
 import "./VistaDetalleservi.css";
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import { toast } from 'react-toastify'; // Importar toast para las alertas
-import 'react-toastify/dist/ReactToastify.css'; // Importar estilos de toast
 
 export const VistaDetalle = () => {
   const location = useLocation();
@@ -21,15 +19,7 @@ export const VistaDetalle = () => {
   }, [location]);
 
   const handleReservar = () => {
-    const token = sessionStorage.getItem('token');
-
-    if (!token) {
-      // Si no hay token (usuario no logueado), muestra una alerta y no permite continuar
-      toast.error('Por favor inicia sesión para continuar o regístrate');
-    } else {
-      // Si está logueado, redirigir a la página de agendar cita
-      navigate('/Agendarcita', { state: { servicio } });
-    }
+    navigate('/Agendarcita', { state: { servicio } });
   };
 
   return (
