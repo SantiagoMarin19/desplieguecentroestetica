@@ -6,11 +6,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import flechaizq from "../assets/images/decoración.png";
 import or from "../assets/images/OR.png";
 import flechader from "../assets/images/decor.png";
-import { useModal } from '../componentes/modal/ContextModal';
-import './Estilos/Login.css';
+import { useModal } from '../componentes/modal/ContextModal'; 
+import "./Estilos/Login.css";
+
+const ADMIN_EMAIL = "davidochoa772@gmail.com";
 
 const LoginUser = ({ closeModal }) => {
-    const navigate = useNavigate();
+    let navigate = useNavigate();
     const [formData, setFormData] = useState({ email: '', password: '' });
     const { openModal } = useModal();
 
@@ -19,11 +21,15 @@ const LoginUser = ({ closeModal }) => {
         setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
     }
 
-    const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const isValidEmail = (email) => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    };
 
     async function handleSubmit(e) {
         e.preventDefault();
 
+        // Validaciones
         if (!formData.email || !formData.password) {
             toast.error('Por favor, complete todos los campos.');
             return;
@@ -39,45 +45,36 @@ const LoginUser = ({ closeModal }) => {
                 password: formData.password,
             });
 
-            if (error) throw error;
-            const { user } = data;
+            if (error) throw error; // Lanza el error si existe
 
-            // Obtener rol desde la tabla 'profesional'
-            const { data: profile, error: profileError } = await supabase
-                .from('profesional')
-                .select('rol')
-                .eq('correo', user.email)
-                .single();
+            // Verifica si es el admin
+            const isAdmin = formData.email === ADMIN_EMAIL;
 
-            if (profileError) {
-                // Si no se encuentra el rol, no es un profesional, así que consideramos al cliente
-                if (profileError.code !== 'PGRST116') { // Código de error para "no encontrado"
-                    throw profileError;
-                }
-            }
-
-            const rol = profile ? profile.rol : 'cliente'; // Asigna 'cliente' si no hay perfil
-
-            // Guardar datos en sessionStorage
+            // Almacena la información en sessionStorage
             sessionStorage.setItem('token', JSON.stringify(data.session.access_token));
-            sessionStorage.setItem('user', JSON.stringify(user.email));
-            sessionStorage.setItem('rol', rol);
+            sessionStorage.setItem('user', JSON.stringify(data.user.user_metadata.full_name));
+            sessionStorage.setItem('isAdmin', JSON.stringify(isAdmin));
 
-            // Redirigir según el rol
-            if (rol === 'admin') {
-                navigate('/admin');
-            } else if (rol === 'profesional') {
-                navigate('/personal');
-            } else if (rol === 'cliente') {
-                navigate('/'); // Ruta para clientes
+            // Muestra mensaje de bienvenida
+            toast.success(`Bienvenido de nuevo, ${data.user.user_metadata.full_name}${isAdmin ? ' (Administrador)' : ''}`);
+
+            // Redirige según el tipo de usuario
+            if (isAdmin) {
+                navigate('/admin/citasAdmin');
             } else {
-                toast.error('Rol no autorizado.');
+                navigate('/');
             }
 
             closeModal();
-        } catch (err) {
-            console.error('Error al iniciar sesión:', err.message);
-            toast.error('Error al iniciar sesión. Verifique sus credenciales.');
+        } catch (error) {
+            console.error("Error:", error);
+
+            // Manejo de errores específicos
+            if (error.message.includes('Invalid login credentials')) {
+                toast.error('Correo o contraseña incorrectos'); // Mensaje específico
+            } else {
+                toast.error('Error: ' + error.message); // Mensaje genérico para otros errores
+            }
         }
     }
 
