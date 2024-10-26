@@ -49,8 +49,11 @@ const LoginUser = ({ closeModal }) => {
                 .eq('correo', user.email)
                 .single();
 
-            if (profileError && profileError.code !== 'PGRST116') { // Código de error para "no encontrado"
-                throw profileError;
+            if (profileError) {
+                // Si no se encuentra el rol, no es un profesional, así que consideramos al cliente
+                if (profileError.code !== 'PGRST116') { // Código de error para "no encontrado"
+                    throw profileError;
+                }
             }
 
             const rol = profile ? profile.rol : 'cliente'; // Asigna 'cliente' si no hay perfil
@@ -62,11 +65,13 @@ const LoginUser = ({ closeModal }) => {
 
             // Redirigir según el rol
             if (rol === 'admin') {
-                navigate('/admin'); // Asegúrate de que esta ruta esté configurada en tu router
+                navigate('/admin');
             } else if (rol === 'profesional') {
                 navigate('/personal');
-            } else {
+            } else if (rol === 'cliente') {
                 navigate('/'); // Ruta para clientes
+            } else {
+                toast.error('Rol no autorizado.');
             }
 
             closeModal();

@@ -58,7 +58,7 @@ export const Background = () => {
                             ) : (
                                 <div className='contenedor_boton_agendar'>
                                 <NavLink to="/Servicios"> 
-                                <button className="btn_Background">Agendar Ahora</button>
+                                <button class="btn_Background">Agendar Ahora</button>
                            </NavLink></div>
                             )}
                         </div>
@@ -115,7 +115,7 @@ export const Background = () => {
                     ) : (
                         <div className='contenedor_boton_agendar'>
                         <NavLink to="/Servicios"> 
-                                <button className="btn_Background">Servicios</button>
+                                <button class="btn_Background">Servicios</button>
                            </NavLink> </div>
                     )}
                 </div>
@@ -146,7 +146,7 @@ export const Background = () => {
                             <Skeleton height={40} width={150} />
                         ) : (
                             <NavLink to="/politicas"> 
-                                <button className="btn_Background">Ver las Politicas</button>
+                                <button class="btn_Background">Ver las Politicas</button>
                            </NavLink>
                         )}
                     </div>
