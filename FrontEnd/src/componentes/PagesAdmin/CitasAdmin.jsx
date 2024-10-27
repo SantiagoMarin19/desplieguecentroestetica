@@ -15,7 +15,6 @@ const CitasAdmin = ({ token }) => {
   const citasPerPage = 5;
   const { theme } = React.useContext(ThemeContext);
 
-
   useEffect(() => {
     const fetchCitas = async () => {
       try {
@@ -47,30 +46,29 @@ const CitasAdmin = ({ token }) => {
   
   useEffect(() => {
     const fetchUser = async () => {
-        let currentUser;
-        if (token && token.user) {
-            currentUser = token.user;
+      let currentUser;
+      if (token && token.user) {
+        currentUser = token.user;
+      } else {
+        const { data, error } = await supabase.auth.getUser();
+        if (error) {
+          console.error('Error fetching user:', error);
+          setLoading(false);
+          return;
         } else {
-            const { data, error } = await supabase.auth.getUser();
-            if (error) {
-                console.error('Error fetching user:', error);
-                setLoading(false);
-                return;
-            } else {
-                currentUser = data.user;
-            }
+          currentUser = data.user;
         }
-        if (currentUser) {
-            setUser(currentUser);
-            setUserName(currentUser.user_metadata.full_name);
-            localStorage.setItem('userName', currentUser.user_metadata.full_name);
-        }
-        setLoading(false);
+      }
+      if (currentUser) {
+        setUser(currentUser);
+        setUserName(currentUser.user_metadata.full_name);
+        localStorage.setItem('userName', currentUser.user_metadata.full_name);
+      }
+      setLoading(false);
     };
 
     fetchUser();
-}, [token]);
-
+  }, [token]);
 
   const filteredCitas = citas.filter(cita => {
     const searchLower = searchTerm.toLowerCase();
@@ -200,7 +198,7 @@ const CitasAdmin = ({ token }) => {
       </div>
     </Container>
   );
-}
+};
 
 
 const Container = styled.div`

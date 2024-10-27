@@ -60,7 +60,7 @@ const LoginUser = ({ closeModal }) => {
 
             // Redirige según el tipo de usuario
             if (isAdmin) {
-                navigate('/admin/citasAdmin');
+                navigate('/ServiciosAdmin');
             } else {
                 navigate('/');
             }

@@ -5,6 +5,7 @@ import { MdOutlineAnalytics, MdLogout } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { ThemeContext } from "../../App";
+import { Placeholder } from "react-bootstrap";
 
 
 
@@ -78,35 +79,30 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
 //#region Data links
 const linksArray = [
-  // {
-  //   label: "Home",
-  //   icon: <AiOutlineHome />,
-  //   to: "/HomeAdmin",
-  // },
-  
   {
     label: "Citas",
     icon: <AiOutlineApartment />,
-    to: "/AdminCitas",
+    to: "/CitasAdmin", // Asegúrate de que esta ruta coincida con la definida en Main
   },
   {
     label: "Servicios",
     icon: <MdOutlineAnalytics />,
-    to: "/ServiciosAdmin",
+    to: "/ServiciosAdmin", // Asegúrate de que esta ruta coincida con la definida en Main
   },
   {
     label: "Personal",
     icon: <MdOutlineAnalytics />,
-    to: "/PersonalAdmin",
+    to: "/PersonalAdmin", // Asegúrate de que esta ruta coincida con la definida en Main
   },
 ];
+
 
 const secondarylinksArray = [
  
   {
     label: "Salir",
     icon: <MdLogout />,
-    to: "/null",
+    to: "/",
   },
 ];
 //#endregion
@@ -158,9 +154,7 @@ const Container = styled.div`
       transition: all 0.3s;
       transform: ${({ isOpen }) => (isOpen ? `scale(0.7)` : `scale(1.5)`)};
     }
-    h2 {
-      display: ${({ isOpen }) => (isOpen ? `block` : `none`)};
-    }
+
   }
   .LinkContainer {
     margin: 8px 0;
